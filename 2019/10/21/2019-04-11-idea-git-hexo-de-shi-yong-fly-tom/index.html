@@ -460,7 +460,7 @@ git commit：将库跟踪区改变的代码提交到本地代码库">
 <p>突然线上出现 bug，需要我们紧急进行修改，于是我们要基于最新的 master 分支新建一个 bug 分支 bug-12，需要先切换到 master 分支，但是当前分支的代码没有commit， 如果直接切换到 master 分支的话，dev-101 分支上的新增代码就会跑到 master 分支，而代码又不能此时 commit ，于是就轮到 stash 出场了。<br><img src="http://img12345.5-project.com/blog/20181102180427.png" alt="img"><br>Stash 会保存当前工作进度，会把暂存区和工作区的改动保存起来。<br><img src="http://img12345.5-project.com/20181103154120204424605.png" alt="img"><br>添加备注，选择 <strong>CREATE STASH</strong>。你会发现当前工作区内的代码被恢复成了原样。<br><img src="http://img12345.5-project.com/2018110315412022049329.png" alt="img"></p>
 <h2 id="代码暂存还原"><a href="#代码暂存还原" class="headerlink" title="代码暂存还原"></a>代码暂存还原</h2><p>此刻切换到 master 分支，并创建 bug-12 分支进行修复 bug，修复完成后合并到 master 分支并 push 到远程仓库，上文已经演示如何合并，在此不再赘述。</p>
 <p>将 bug-12 与 master 合并完成之后，现在要接着写 dev-101 需求代码，首先先切换到 dev-101 分支；<br>但是之前的代码已经被我们放到了 git 的 stash 当中，我们现在要把代码还原到工作区当中。<br>选择 Unstash Changes<br><img src="http://img12345.5-project.com/20181103154120268155941.png" alt="img"><br><img src="http://img12345.5-project.com/20181103154120276883579.png" alt="img"><br>选择之前保存的，同时勾选 Pop stash（还原完成后，会自动删除这个 stash），确定后，工作区之前写的代码就又回来了。<br><img src="http://img12345.5-project.com/blog/20181102180114.png" alt="img"></p>
-<script>
+<h2 id="Hexo-博客发布流程"><a href="#Hexo-博客发布流程" class="headerlink" title="Hexo 博客发布流程"></a>Hexo 博客发布流程</h2><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
