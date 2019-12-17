@@ -5,10 +5,11 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Vue笔记, Tom Blog">
-    <meta name="description" content="什么是Vue.js
-Vue.js 是目前最火的一个前端框架，React是最流行的一个前端框架（React除了开发网站，还可以开发手机App， Vue语法也是可以用于进行手机App开发的，需要借助于Weex）
+    <meta name="description" content="vue文章
+https://www.cnblogs.com/sweetbetter/p/11950763.html
+https://www.cnblogs.com/yanghongtao/p/10928071.html
 
-Vue.js 是前端的主流框架">
+什么是Vue.js">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -398,7 +399,11 @@ Vue.js 是前端的主流框架">
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="什么是Vue-js"><a href="#什么是Vue-js" class="headerlink" title="什么是Vue.js"></a>什么是Vue.js</h3><ul>
+                <h2 id="vue文章"><a href="#vue文章" class="headerlink" title="vue文章"></a>vue文章</h2><ul>
+<li><a href="https://www.cnblogs.com/sweetbetter/p/11950763.html" target="_blank" rel="noopener">https://www.cnblogs.com/sweetbetter/p/11950763.html</a></li>
+<li><a href="https://www.cnblogs.com/yanghongtao/p/10928071.html" target="_blank" rel="noopener">https://www.cnblogs.com/yanghongtao/p/10928071.html</a></li>
+</ul>
+<h3 id="什么是Vue-js"><a href="#什么是Vue-js" class="headerlink" title="什么是Vue.js"></a>什么是Vue.js</h3><ul>
 <li><p>Vue.js 是目前最火的一个前端框架，React是最流行的一个前端框架（React除了开发网站，还可以开发手机App， Vue语法也是可以用于进行手机App开发的，需要借助于Weex）</p>
 </li>
 <li><p>Vue.js 是前端的<strong>主流框架之一</strong>，和Angular.js、React.js 一起，并称为前端三大主流框架！</p>
@@ -406,17 +411,6 @@ Vue.js 是前端的主流框架">
 <li><p>Vue.js 是一套构建用户界面的框架，<strong>只关注视图层</strong>，它不仅易于上手，还便于与第三方库或既有项目整合。（Vue有配套的第三方类库，可以整合起来做大型项目的开发）</p>
 </li>
 <li><p>前端的主要工作？主要负责MVC中的V这一层；主要工作就是和界面打交道，来制作前端页面效果；</p>
-</li>
-</ul>
-<h2 id="为什么要学习流行框架"><a href="#为什么要学习流行框架" class="headerlink" title="为什么要学习流行框架"></a>为什么要学习流行框架</h2><ul>
-<li><p>企业为了提高开发效率：在企业中，时间就是效率，效率就是金钱；</p>
-<ul>
-<li>企业中，使用框架，能够提高开发的效率；</li>
-</ul>
-</li>
-<li><p>提高开发效率的发展历程：原生JS -&gt; Jquery之类的类库 -&gt; 前端模板引擎 -&gt; Angular.js / Vue.js（能够帮助我们减少不必要的DOM操作；提高渲染效率；双向数据绑定的概念【通过框架提供的指令，我们前端程序员只需要关心数据的业务逻辑，不再关心DOM是如何渲染的了】）</p>
-</li>
-<li><p>在Vue中，一个核心的概念，就是让用户不再操作DOM元素，解放了用户的双手，让程序员可以更多的时间去关注业务逻辑；</p>
 </li>
 </ul>
 <h2 id="框架和库的区别"><a href="#框架和库的区别" class="headerlink" title="框架和库的区别"></a>框架和库的区别</h2><ul>
@@ -446,7 +440,100 @@ Vue.js 是前端的主流框架">
 <li><p>为什么有了MVC还要有MVVM</p>
 </li>
 </ul>
-<h2 id="Vue-基本语法"><a href="#Vue-基本语法" class="headerlink" title="Vue 基本语法"></a>Vue 基本语法</h2><h3 id="基本的代码结构和插值表达式、v-cloak"><a href="#基本的代码结构和插值表达式、v-cloak" class="headerlink" title="基本的代码结构和插值表达式、v-cloak`"></a>基本的代码结构<code>和</code>插值表达式<code>、</code>v-cloak`</h3><p>当网络较慢，网页还在加载 Vue.js ，而导致 Vue 来不及渲染，这时页面就会显示出 Vue 源代码。我们可以使用 v-cloak 指令来解决这一问题。</p>
+<h2 id="vue实例的生命周期"><a href="#vue实例的生命周期" class="headerlink" title="vue实例的生命周期"></a><a href="https://cn.vuejs.org/v2/guide/instance.html#实例生命周期" target="_blank" rel="noopener">vue实例的生命周期</a></h2><ul>
+<li><p>什么是生命周期：从Vue实例创建、运行、到销毁期间，总是伴随着各种各样的事件，这些事件，统称为生命周期！</p>
+</li>
+<li><p><a href="https://cn.vuejs.org/v2/api/#选项-生命周期钩子" target="_blank" rel="noopener">生命周期钩子</a>：就是生命周期事件的别名而已；</p>
+</li>
+<li><p>生命周期钩子 = 生命周期函数 = 生命周期事件</p>
+</li>
+<li><p>主要的生命周期函数分类：</p>
+<ul>
+<li>创建期间的生命周期函数：<ul>
+<li>beforeCreate：实例刚在内存中被创建出来，此时，还没有初始化好 data 和 methods 属性</li>
+<li>created：实例已经在内存中创建OK，此时 data 和 methods 已经创建OK，此时还没有开始 编译模板</li>
+<li>beforeMount：此时已经完成了模板的编译，但是还没有挂载到页面中</li>
+<li>mounted：此时，已经将编译好的模板，挂载到了页面指定的容器中显示</li>
+</ul>
+</li>
+<li>运行期间的生命周期函数：<ul>
+<li>beforeUpdate：状态更新之前执行此函数， 此时 data 中的状态值是最新的，但是界面上显示的 数据还是旧的，因为此时还没有开始重新渲染DOM节点</li>
+<li>updated：实例更新完毕之后调用此函数，此时 data 中的状态值 和 界面上显示的数据，都已经完成了更新，界面已经被重新渲染好了！</li>
+</ul>
+</li>
+<li>销毁期间的生命周期函数：<ul>
+<li>beforeDestroy：实例销毁之前调用。在这一步，实例仍然完全可用。</li>
+<li>destroyed：Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。<pre class=" language-js"><code class="language-js"><span class="token operator">&lt;</span>script type<span class="token operator">=</span><span class="token string">"text/javascript"</span><span class="token operator">></span>
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>var app = new Vue({</p>
+<pre><code>el: '#app',
+data: {
+    message : "xuxiao is boy" 
+},
+ beforeCreate: function () {
+          console.group('beforeCreate 创建前状态===============》');
+         console.log("%c%s", "color:red" , "el     : " + this.$el); //undefined
+         console.log("%c%s", "color:red","data   : " + this.$data); //undefined 
+         console.log("%c%s", "color:red","message: " + this.message)  
+  },
+  created: function () {
+      console.group('created 创建完毕状态===============》');
+      console.log("%c%s", "color:red","el     : " + this.$el); //undefined
+         console.log("%c%s", "color:red","data   : " + this.$data); //已被初始化 
+         console.log("%c%s", "color:red","message: " + this.message); //已被初始化
+  },
+  beforeMount: function () {
+      console.group('beforeMount 挂载前状态===============》');
+      console.log("%c%s", "color:red","el     : " + (this.$el)); //已被初始化
+      console.log(this.$el);
+         console.log("%c%s", "color:red","data   : " + this.$data); //已被初始化  
+         console.log("%c%s", "color:red","message: " + this.message); //已被初始化  
+  },
+  mounted: function () {
+      console.group('mounted 挂载结束状态===============》');
+      console.log("%c%s", "color:red","el     : " + this.$el); //已被初始化
+      console.log(this.$el);    
+         console.log("%c%s", "color:red","data   : " + this.$data); //已被初始化
+         console.log("%c%s", "color:red","message: " + this.message); //已被初始化 
+  },
+  beforeUpdate: function () {
+      console.group('beforeUpdate 更新前状态===============》');
+      console.log("%c%s", "color:red","el     : " + this.$el);
+      console.log(this.$el);   
+         console.log("%c%s", "color:red","data   : " + this.$data); 
+         console.log("%c%s", "color:red","message: " + this.message); 
+  },
+  updated: function () {
+      console.group('updated 更新完成状态===============》');
+      console.log("%c%s", "color:red","el     : " + this.$el);
+      console.log(this.$el); 
+         console.log("%c%s", "color:red","data   : " + this.$data); 
+         console.log("%c%s", "color:red","message: " + this.message); 
+  },
+  beforeDestroy: function () {
+      console.group('beforeDestroy 销毁前状态===============》');
+      console.log("%c%s", "color:red","el     : " + this.$el);
+      console.log(this.$el);    
+         console.log("%c%s", "color:red","data   : " + this.$data); 
+         console.log("%c%s", "color:red","message: " + this.message); 
+  },
+  destroyed: function () {
+      console.group('destroyed 销毁完成状态===============》');
+      console.log("%c%s", "color:red","el     : " + this.$el);
+      console.log(this.$el);  
+         console.log("%c%s", "color:red","data   : " + this.$data); 
+         console.log("%c%s", "color:red","message: " + this.message)
+  }</code></pre><p>  })<br></p>
+<pre><code>## Vue 基本语法
+###  v-cloak
+当网络较慢，网页还在加载 `Vue.js` ，而导致 `Vue` 来不及渲染，这时页面就会显示出 `Vue` 源代码。我们可以使用 `v-cloak` 指令来解决这一问题。
+</code></pre></li>
+</ul>
+<h3 id="Vue指令之v-model和双向数据绑定"><a href="#Vue指令之v-model和双向数据绑定" class="headerlink" title="Vue指令之v-model和双向数据绑定"></a>Vue指令之<code>v-model</code>和<code>双向数据绑定</code></h3><p>v-model使用了双向绑定之后，就不需要操作dom，进行获取或者设置</p>
 <h3 id="Vue指令之v-text和v-html"><a href="#Vue指令之v-text和v-html" class="headerlink" title="Vue指令之v-text和v-html"></a>Vue指令之<code>v-text</code>和<code>v-html</code></h3><p>实现效果和jquery中的相同</p>
 <h3 id="Vue指令之v-bind的三种用法"><a href="#Vue指令之v-bind的三种用法" class="headerlink" title="Vue指令之v-bind的三种用法"></a>Vue指令之<code>v-bind</code>的三种用法</h3><ol>
 <li><p>直接使用指令<code>v-bind</code></p>
@@ -456,6 +543,30 @@ Vue.js 是前端的主流框架">
 <li><p>在绑定的时候，拼接绑定内容：<code>:title="btnTitle + ', 这是追加的内容'"</code></p>
 </li>
 </ol>
+<p><code>&lt;a v-bind:[attributeName]="url"&gt; ... &lt;/a&gt;</code></p>
+<p><code>&lt;div v-bind:id="dynamicId"&gt;&lt;/div&gt;</code></p>
+<blockquote>
+<p>注意，参数表达式的写法存在一些约束，如之后的“对动态参数表达式的约束”章节所述。</p>
+</blockquote>
+<p><code>&lt;a v-bind:[attributeName]="url"&gt; ... &lt;/a&gt;</code></p>
+<p>这里的 attributeName 会被作为一个 JavaScript 表达式进行动态求值，求得的值将会作为最终的参数来使用。例如，如果你的 Vue 实例有一个 data 属性 attributeName，其值为 “href”，那么这个绑定将等价于 v-bind:href。</p>
+<p>同样地，你可以使用动态参数为一个动态的事件名绑定处理函数：</p>
+<p><code>&lt;a v-on:[eventName]="doSomething"&gt; ... &lt;/a&gt;</code></p>
+<p>在这个示例中，当 eventName 的值为 “focus” 时，<code>v-on:[eventName]</code> 将等价于 <code>v-on:focus</code>。</p>
+<h4 id="缩写"><a href="#缩写" class="headerlink" title="缩写"></a>缩写</h4><p><code>v-</code> 前缀作为一种视觉提示，用来识别模板中 <code>Vue</code> 特定的特性。当你在使用 <code>Vue.js</code> 为现有标签添加动态行为 (dynamic behavior) 时，<code>v-</code> 前缀很有帮助，然而，对于一些频繁用到的指令来说，就会感到使用繁琐。同时，在构建由 Vue 管理所有模板的单页面应用程序 (SPA - single page application) 时，<code>v-</code> 前缀也变得没那么重要了。因此，<code>Vue</code> 为 <code>v-bind</code> 和 <code>v-on</code> 这两个最常用的指令，提供了特定简写：</p>
+<p>v-bind 缩写</p>
+<pre><code>&lt;!-- 完整语法 --&gt;
+&lt;a v-bind:href="url"&gt;...&lt;/a&gt;
+
+&lt;!-- 缩写 --&gt;
+&lt;a :href="url"&gt;...&lt;/a&gt;</code></pre><ul>
+<li>v-on 缩写</li>
+</ul>
+<pre><code>&lt;!-- 完整语法 --&gt;
+&lt;a v-on:click="doSomething"&gt;...&lt;/a&gt;
+
+&lt;!-- 缩写 --&gt;
+&lt;a @click="doSomething"&gt;...&lt;/a&gt;</code></pre><p>它们看起来可能与普通的 HTML 略有不同，但 : 与 @ 对于特性名来说都是合法字符，在所有支持 Vue 的浏览器都能被正确地解析。而且，它们不会出现在最终渲染的标记中。缩写语法是完全可选的。</p>
 <blockquote>
 <p>注意：在 VM实例中，如果想要获取 data 上的数据，或者 想要调用 methods 中的 方法，必须通过 this.数据属性名  或  this.方法名 来进行访问，这里的this，就表示 我们 new 出来的  VM 实例对象</p>
 </blockquote>
@@ -503,8 +614,25 @@ Vue.js 是前端的主流框架">
 <li><p>.once       事件只触发一次</p>
 </li>
 </ul>
-<h3 id="Vue指令之v-model和双向数据绑定"><a href="#Vue指令之v-model和双向数据绑定" class="headerlink" title="Vue指令之v-model和双向数据绑定"></a>Vue指令之<code>v-model</code>和<code>双向数据绑定</code></h3><p>v-model使用了双向绑定之后，就不需要操作dom，进行获取或者设置</p>
-<h2 id="在Vue中使用样式"><a href="#在Vue中使用样式" class="headerlink" title="在Vue中使用样式"></a>在Vue中使用样式</h2><h3 id="使用class样式"><a href="#使用class样式" class="headerlink" title="使用class样式"></a>使用class样式</h3><ol>
+<pre><code>&lt;!-- 阻止单击事件继续传播 --&gt;
+&lt;a v-on:click.stop="doThis"&gt;&lt;/a&gt;
+
+&lt;!-- 提交事件不再重载页面 --&gt;
+&lt;form v-on:submit.prevent="onSubmit"&gt;&lt;/form&gt;
+
+&lt;!-- 修饰符可以串联 --&gt;
+&lt;a v-on:click.stop.prevent="doThat"&gt;&lt;/a&gt;
+
+&lt;!-- 只有修饰符 --&gt;
+&lt;form v-on:submit.prevent&gt;&lt;/form&gt;
+
+&lt;!-- 添加事件监听器时使用事件捕获模式 --&gt;
+&lt;!-- 即内部元素触发的事件先在此处理，然后才交由内部元素进行处理 --&gt;
+&lt;div v-on:click.capture="doThis"&gt;...&lt;/div&gt;
+
+&lt;!-- 只当在 event.target 是当前元素自身时触发处理函数 --&gt;
+&lt;!-- 即事件不是从内部元素触发的 --&gt;
+&lt;div v-on:click.self="doThat"&gt;...&lt;/div&gt;</code></pre><h2 id="在Vue中使用样式"><a href="#在Vue中使用样式" class="headerlink" title="在Vue中使用样式"></a>在Vue中使用样式</h2><h3 id="使用class样式"><a href="#使用class样式" class="headerlink" title="使用class样式"></a>使用class样式</h3><ol>
 <li><p>数组</p>
 <pre><code>&lt;h1 :class="['red', 'thin']"&gt;这是一个邪恶的H1&lt;/h1&gt;</code></pre></li>
 <li><p>数组中使用三元表达式</p>
@@ -535,24 +663,62 @@ Vue.js 是前端的主流框架">
 </ul>
 </li>
 </ol>
-<h3 id="Vue指令之v-for和key属性"><a href="#Vue指令之v-for和key属性" class="headerlink" title="Vue指令之v-for和key属性"></a>Vue指令之<code>v-for</code>和<code>key</code>属性</h3><ol>
+<h3 id="Vue指令之v-for和key属性"><a href="#Vue指令之v-for和key属性" class="headerlink" title="Vue指令之v-for和key属性"></a>Vue指令之<code>v-for</code>和<code>key</code>属性</h3><blockquote>
+<p>我们可以用 v-for 指令基于一个数组来渲染一个列表。v-for 指令需要使用 item in items 形式的特殊语法，其中 items 是源数据数组，而 item 则是被迭代的数组元素的别名。</p>
+</blockquote>
+<ol>
 <li>迭代数组</li>
 </ol>
-<pre><code>&lt;ul&gt;
-  &lt;li v-for="(item, i) in list"&gt;索引：{{i}} --- 姓名：{{item.name}} --- 年龄：{{item.age}}&lt;/li&gt;
-&lt;/ul&gt;</code></pre><ol start="2">
-<li>迭代对象中的属性</li>
-</ol>
-<pre><code>
-    &lt;!-- 循环遍历对象身上的属性 --&gt;
-
-    &lt;div v-for="(val, key, i) in userInfo"&gt;{{val}} --- {{key}} --- {{i}}&lt;/div&gt;
-</code></pre><ol start="3">
-<li>迭代数字</li>
-</ol>
-<pre><code>
-&lt;p v-for="i in 10"&gt;这是第 {{i}} 个P标签&lt;/p&gt;
-</code></pre><blockquote>
+<pre><code>&lt;ul id="example-1"&gt;
+  &lt;li v-for="item in items"&gt;
+    {{ item.message }}
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script type="text/javascript"&gt;
+    var example1 = new Vue({
+      el: '#example-1',
+      data: {
+        items: [
+          { message: 'Foo' },
+          { message: 'Bar' }
+        ]
+      }
+    })
+&lt;/script&gt;</code></pre><p>在 v-for 块中，我们可以访问所有父作用域的属性。v-for 还支持一个可选的第二个参数，即当前项的索引。</p>
+<pre><code>&lt;ul id="example-2"&gt;
+  &lt;li v-for="(item, index) in items"&gt;
+    {{ parentMessage }} - {{ index }} - {{ item.message }}
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script type="text/javascript"&gt;
+    var example2 = new Vue({
+      el: '#example-2',
+      data: {
+        parentMessage: 'Parent',
+        items: [
+          { message: 'Foo' },
+          { message: 'Bar' }
+        ]
+      }
+    })
+&lt;/script&gt;</code></pre><p>在 v-for 里使用对象<br>你也可以用 v-for 来遍历一个对象的属性。</p>
+<pre><code>&lt;ul id="v-for-object" class="demo"&gt;
+  &lt;li v-for="value in object"&gt;
+    {{ value }}
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;script type="text/javascript"&gt;
+    new Vue({
+      el: '#v-for-object',
+      data: {
+        object: {
+          title: 'How to do lists in Vue',
+          author: 'Jane Doe',
+          publishedAt: '2016-04-10'
+        }
+      }
+    })
+&lt;/script&gt;</code></pre><blockquote>
 <p>2.2.0+ 的版本里，<strong>当在组件中使用</strong> v-for 时，key 现在是必须的。</p>
 </blockquote>
 <p>当 Vue.js 用 v-for 正在更新已渲染过的元素列表时，它默认用 “<strong>就地复用</strong>” 策略。如果数据项的顺序被改变，Vue将<strong>不是移动 DOM 元素来匹配数据项的顺序</strong>， 而是<strong>简单复用此处每个元素</strong>，并且确保它在特定索引下显示已被渲染过的每个元素。</p>
@@ -724,31 +890,6 @@ Vue.config.keyCodes.f2 = 113;
 <li><a href="http://www.cnblogs.com/wuhua1/p/6686237.html" target="_blank" rel="noopener">js 里面的键盘事件对应的键码</a></li>
 <li><a href="http://www.cnblogs.com/kidney/p/6052935.html" target="_blank" rel="noopener">Vue.js双向绑定的实现原理</a></li>
 </ol>
-<h2 id="vue实例的生命周期"><a href="#vue实例的生命周期" class="headerlink" title="vue实例的生命周期"></a><a href="https://cn.vuejs.org/v2/guide/instance.html#实例生命周期" target="_blank" rel="noopener">vue实例的生命周期</a></h2><ul>
-<li>什么是生命周期：从Vue实例创建、运行、到销毁期间，总是伴随着各种各样的事件，这些事件，统称为生命周期！</li>
-<li><a href="https://cn.vuejs.org/v2/api/#选项-生命周期钩子" target="_blank" rel="noopener">生命周期钩子</a>：就是生命周期事件的别名而已；</li>
-<li>生命周期钩子 = 生命周期函数 = 生命周期事件</li>
-<li>主要的生命周期函数分类：<ul>
-<li>创建期间的生命周期函数：<ul>
-<li>beforeCreate：实例刚在内存中被创建出来，此时，还没有初始化好 data 和 methods 属性</li>
-<li>created：实例已经在内存中创建OK，此时 data 和 methods 已经创建OK，此时还没有开始 编译模板</li>
-<li>beforeMount：此时已经完成了模板的编译，但是还没有挂载到页面中</li>
-<li>mounted：此时，已经将编译好的模板，挂载到了页面指定的容器中显示</li>
-</ul>
-</li>
-<li>运行期间的生命周期函数：<ul>
-<li>beforeUpdate：状态更新之前执行此函数， 此时 data 中的状态值是最新的，但是界面上显示的 数据还是旧的，因为此时还没有开始重新渲染DOM节点</li>
-<li>updated：实例更新完毕之后调用此函数，此时 data 中的状态值 和 界面上显示的数据，都已经完成了更新，界面已经被重新渲染好了！</li>
-</ul>
-</li>
-<li>销毁期间的生命周期函数：<ul>
-<li>beforeDestroy：实例销毁之前调用。在这一步，实例仍然完全可用。</li>
-<li>destroyed：Vue 实例销毁后调用。调用后，Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <h2 id="vue-resource-实现-get-post-jsonp请求"><a href="#vue-resource-实现-get-post-jsonp请求" class="headerlink" title="vue-resource 实现 get, post, jsonp请求"></a><a href="https://github.com/pagekit/vue-resource" target="_blank" rel="noopener">vue-resource 实现 get, post, jsonp请求</a></h2><p>除了 vue-resource 之外，还可以使用 <code>axios</code> 的第三方包实现实现数据的请求</p>
 <ol>
 <li><p>常见的数据请求类型？  get  post jsonp</p>
@@ -925,7 +1066,7 @@ transition: all 0.8s ease;
 position: absolute;
 }</code></pre></li>
 </ul>
-<script>
+<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
