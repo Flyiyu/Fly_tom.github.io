@@ -4,8 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="分类: 线程池队列, Tom Blog">
-    <meta name="description" content="分类: 线程池队列 | Tom Blog">
+    <meta name="keywords" content="contact, Tom Blog">
+    <meta name="description" content="contact | Tom Blog">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>分类: 线程池队列 | Tom Blog</title>
+    <title>contact | Tom Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -237,278 +237,451 @@
 
 </header>
 
-    <div class="bg-cover pd-header about-cover">
-    <div class="container">
-    <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                subtitle
-                
-            </div>
+    
 
-            <div class="description center-align">
-                
-                <span id="typed"></span>
-                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.9"></script>
-                <script>
-                    var typed = new Typed("#typed", {
-                        strings: ['从来没有真正的绝境, 只有心灵的迷途', 'Never really desperate, only the lost of the soul'],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        contact
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 
-<script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    $('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
-</script>
 
 
-    </div>
-</div>
-
-<main class="content">
+<main class="post-container content">
 
     
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
 
-<div id="category-cloud" class="container chip-container">
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
     <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
-            </div>
-            <div class="tag-chips">
-                
-                
-                
-                <a href="/categories/Dubbo/" title="Dubbo: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9EBEA;">Dubbo
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Spring/" title="Spring: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F5EEF8;">Spring
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/quartz/" title="quartz: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D5F5E3;">quartz
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Git-Hexo/" title="Git Hexo: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #E8F8F5;">Git Hexo
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/SQL/" title="SQL: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #FEF9E7;">SQL
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/kafka/" title="kafka: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8F9F9;">kafka
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/myIdea/" title="myIdea: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #82E0AA;">myIdea
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Java/" title="Java: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D7BDE2;">Java
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Mybatis/" title="Mybatis: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #A3E4D7;">Mybatis
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/RabbitMQ/" title="RabbitMQ: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #85C1E9;">RabbitMQ
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Logstash/" title="Logstash: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8C471;">Logstash
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Linux/" title="Linux: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9E79F;">Linux
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Maven/" title="Maven: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9E79F;">Maven
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/线程池队列/" title="线程池队列: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            style="background-color: #F5EEF8;">线程池队列
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Redis/" title="Redis: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F9EBEA;">Redis
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Elasticsearch/" title="Elasticsearch: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #85C1E9;">Elasticsearch
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/前端/" title="前端: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #FEF9E7;">前端
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-
-    <article id="articles" class="container articles">
-        <div class="row tags-posts">
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2019/10/21/2019-06-16-xian-cheng-chi-dui-lie/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="线程池队列">
-                            
-                            <span class="card-title">线程池队列</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                Queue： 基本上，一个队列就是一个先入先出（FIFO）的数据结构
-Queue接口与List、Set同一级别，都是继承了Collection接口。LinkedList实现了Deque接 口。
-队列的实现Java中对于队列的实现分为非阻塞和
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2019-10-21
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/线程池队列/" class="post-category">
-                                    线程池队列
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
                     
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/java/">
-                            <span class="chip bg-color">java</span>
-                        </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
                     
                 </div>
             </div>
-            
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-12-26
+                </div>
+
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
         </div>
-    </article>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/contact/index-1.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="contact">
+                        
+                        <span class="card-title">contact</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            FlyTom
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
+            </div>
+            <div class="card">
+                <a href="/contact/index-1.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="contact">
+                        
+                        <span class="card-title">contact</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            FlyTom
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
 </main>
 
 
 
+<link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: null,
+        id: '2019-12-26T10-10-56',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
 
     <footer class="page-footer bg-color">
     <div class="container row center-align">
