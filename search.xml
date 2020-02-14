@@ -111,25 +111,6 @@
     
     
     <entry>
-      <title>个人计划</title>
-      <link href="/2020/02/08/2019-11-05-ge-ren-ji-hua/"/>
-      <url>/2020/02/08/2019-11-05-ge-ren-ji-hua/</url>
-      
-        <content type="html"><![CDATA[<ol><li>首先是在1月左右走</li><li>离职之后就需要为找工作做准备，需要学习和巩固之前的技术<ul><li>第一个 “需要学习的技术”（公司中使用的一些技术框架）<ul><li>ELK</li><li>Kafka</li><li>Vue</li><li>Quartz</li></ul></li><li>第二个 “需要巩固的技术”<ul><li>java基础<blockquote><p>看（java基础笔记、需要为面试准备大纲）文章就好</p></blockquote></li></ul></li></ul></li></ol><ol start="3"><li>备忘录<ol><li>需要将微信中的文章转化到自己的博客中</li><li>需要将java基础笔记里面的笔记完善（io流，日期工具）</li><li>针对上面的框架写好比较保存到博客中方便学习</li></ol></li></ol><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
-      
-      
-      <categories>
-          
-          <category> myIdea </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>java多线程基础笔记</title>
       <link href="/2020/02/08/2019-07-21-java-duo-xian-cheng-bi-ji/"/>
       <url>/2020/02/08/2019-07-21-java-duo-xian-cheng-bi-ji/</url>
