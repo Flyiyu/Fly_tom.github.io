@@ -343,14 +343,14 @@ Java语言概述请描述一下javajava是一个面向对象的编程语言，�
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        43.7k
+                        43.6k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        163 分
+                        162 分
                     </div>
                     
                 
@@ -2494,7 +2494,8 @@ java.io.BufferedOutputStream不直接写入输出流，先写入缓冲区，当�
         e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p><a href="https://www.cnblogs.com/yjd_hycf_space/p/7526608.html" target="_blank" rel="noopener">https://www.cnblogs.com/yjd_hycf_space/p/7526608.html</a></p>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p><strong>详看java多线程基础笔记 和 线程池队列文章 （包含 线程 线程池 队列）</strong> </p>
+<p><a href="https://www.cnblogs.com/yjd_hycf_space/p/7526608.html" target="_blank" rel="noopener">https://www.cnblogs.com/yjd_hycf_space/p/7526608.html</a></p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc19.png" alt="image"></p>
 <h3 id="术语定义"><a href="#术语定义" class="headerlink" title="术语定义"></a>术语定义</h3><table>
 <thead>
@@ -2601,268 +2602,166 @@ java.io.BufferedOutputStream不直接写入输出流，先写入缓冲区，当�
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 继承Thread的线程：</span>
 Typer  t <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Typer</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
 t<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<span class="token comment" spellcheck="true">// 实现Runnable接口的线程：</span>
+Runnable  mt <span class="token operator">=</span>   <span class="token keyword">new</span> <span class="token class-name">Typer</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+Thread    t  <span class="token operator">=</span>   <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span>mt<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 父类的类型子类的对象</span>
+t<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 </li>
 </ul>
-<p>// 实现Runnable接口的线程：<br>Runnable  mt =   new Typer ( );<br>Thread    t  =   new Thread(mt);// 父类的类型子类的对象<br>t.start( );</p>
-<pre><code>
-**线程执行过程**
-- 调用start( )方法时，将创建一个新的线程，并为线程分配系统资源，如内存。接着它将调用 run( ) 方法。
-
-- run( ) 方法中的代码定义执行线程所需的功能。
-    - run()方法能够调用其他方法，引用其他的类，申明变量。
-    - run()方法在程序中确定另一个并发线程的执行入口。
-- 当run()方法中的任务完成返回时，该线程也将结束。
-
-**注意：start()方法的调用后并不是立即执行多线程代码，而是使得该线程变为可运行态（Runnable），什么时候运行是由操作系统决定的。
-从程序运行的结果可以发现，多线程程序是乱序执行。**
-
-### Thread和Runnable的区别
-
-实现Runnable接口比继承Thread类所具有的优势：
-
-- 适合多个相同的程序代码的线程去处理同一个资源
-- 可以避免java中的单继承的限制
-- 增加程序的健壮性，代码可以被多个线程共享，代码和数据独立
-- 线程池只能放入实现Runable或callable类线程，不能直接放入继承Thread的类
-
-### 线程状态
-
-下面的这个图非常重要!
-
-![](https://raw.githubusercontent.com/Flyiyu/use/master/jc18.jpg)
-
-
-1. 新建状态（New）：新创建了一个线程对象。
-2. 就绪状态（Runnable）：线程对象创建后，其他线程调用了该对象的start()方法。该状态的线程位于可运行线程池中，变得可运行，等待获取CPU的使用权。
-3. 运行状态（Running）：就绪状态的线程获取了CPU，执行程序代码。
-4. 阻塞状态（Blocked）：阻塞状态是线程因为某种原因放弃CPU使用权，暂时停止运行。直到线程进入就绪状态，才有机会转到运行状态。阻塞的情况分三种：
-    - 等待阻塞：运行的线程执行wait()方法，JVM会把该线程放入等待池中。(wait会释放持    有的锁)
-    - 同步阻塞：运行的线程在获取对象的同步锁时，若该同步锁被别的线程占用，则JVM会把该线程放入锁池中。
-    - 其他阻塞：运行的线程执行sleep()或join()方法，或者发出了I/O请求时，JVM会把该线程置为阻塞状态。当sleep()状态超时、join()等待线程终止或者超时、或者I/O处理完毕时，线程重新转入就绪状态。（注意,sleep是不会释放持有的锁）
-5. 死亡状态（Dead）：线程执行完了或者因异常退出了run()方法，该线程结束生命周期。
-
-
-### 线程调度
-线程的调度
-
-1、调整线程优先级：Java线程有优先级，优先级高的线程会获得较多的运行机会。
-
-Java线程的优先级用整数表示，取值范围是1~10，Thread类有以下三个静态常量：
-static int MAX_PRIORITY
-    线程可以具有的最高优先级，取值为10。
-static int MIN_PRIORITY
-    线程可以具有的最低优先级，取值为1。
-static int NORM_PRIORITY
-          分配给线程的默认优先级，取值为5。
-
-Thread类的setPriority()和getPriority()方法分别用来设置和获取线程的优先级。
-
-每个线程都有默认的优先级。主线程的默认优先级为Thread.NORM_PRIORITY。
-线程的优先级有继承关系，比如A线程中创建了B线程，那么B将和A具有相同的优先级。
-JVM提供了10个线程优先级，但与常见的操作系统都不能很好的映射。如果希望程序能移植到各个操作系统中，应该仅仅使用Thread类有以下三个静态常量作为优先级，这样能保证同样的优先级采用了同样的调度方式。
-
-2、线程睡眠：Thread.sleep(long millis)方法，使线程转到阻塞状态。millis参数设定睡眠的时间，以毫秒为单位。当睡眠结束后，就转为就绪（Runnable）状态。sleep()平台移植性好。
-
-3、线程等待：Object类中的wait()方法，导致当前的线程等待，直到其他线程调用此对象的 notify() 方法或 notifyAll() 唤醒方法。这个两个唤醒方法也是Object类中的方法，行为等价于调用 wait(0) 一样。
-
-4、线程让步：Thread.yield() 方法，暂停当前正在执行的线程对象，把执行机会让给相同或者更高优先级的线程。
-
-5、线程加入：join()方法，等待其他线程终止。在当前线程中调用另一个线程的join()方法，则当前线程转入阻塞状态，直到另一个进程运行结束，当前线程再由阻塞转为就绪状态。
-
-6、线程唤醒：Object类中的notify()方法，唤醒在此对象监视器上等待的单个线程。如果所有线程都在此对象上等待，则会选择唤醒其中一个线程。选择是任意性的，并在对实现做出决定时发生。线程通过调用其中一个 wait 方法，在对象的监视器上等待。 直到当前的线程放弃此对象上的锁定，才能继续执行被唤醒的线程。被唤醒的线程将以常规方式与在该对象上主动同步的其他所有线程进行竞争；例如，唤醒的线程在作为锁定此对象的下一个线程方面没有可靠的特权或劣势。类似的方法还有一个notifyAll()，唤醒在此对象监视器上等待的所有线程。
- 注意：Thread中suspend()和resume()两个方法在JDK1.5中已经废除，不再介绍。因为有死锁倾向。
-
-### 守护线程
-1. 定义：守护线程--也称“服务线程”，他是后台线程，它有一个特性，即为用户线程 提供 公
-共服务，在没有用户线程可服务时会自动离开。
-2. 优先级：守护线程的优先级比较低，用于为系统中的其它对象和线程提供服务。
-3. 设置：通过 setDaemon(true)来设置线程为“守护线程”；将一个用户线程设置为守护线程
-的方式是在 线程对象创建 之前 用线程对象的 setDaemon 方法。
-4. 在 Daemon 线程中产生的新线程也是 Daemon 的。
-5. 线程则是 JVM 级别的，以 Tomcat 为例，如果你在 Web 应用中启动一个线程，这个线程的
-生命周期并不会和 Web 应用程序保持同步。也就是说，即使你停止了 Web 应用，这个线程
-依旧是活跃的。
-6. example: 垃圾回收线程就是一个经典的守护线程，当我们的程序中不再有任何运行的Thread,
-程序就不会再产生垃圾，垃圾回收器也就无事可做，所以当垃圾回收线程是 JVM 上仅剩的线
-程时，垃圾回收线程会自动离开。它始终在低级别的状态中运行，用于实时监控和管理系统
-中的可回收资源。
-7. 生命周期：守护进程（Daemon）是运行在后台的一种特殊进程。它独立于控制终端并且周
-期性地执行某种任务或等待处理某些发生的事件。也就是说守护线程不依赖于终端，但是依
-赖于系统，与系统“同生共死”。当 JVM 中所有的线程都是守护线程的时候，JVM 就可以退
-出了；如果还有一个或以上的非守护线程则 JVM 不会退出。
-
-
-
-
-### yield()、sleep()、join()和interrupt()方法   
-
-1、yield()　
-
-　　&amp;ensp;&amp;ensp;yield()是Thread类的静态方法。它能让当前线程暂停，但不会阻塞该线程，而是由“运行状态”进入到“就绪状态”，从而让 其它具有相同优先级的等待线程获取执行权；但是，并不能保证在当前线程调用yield()之后，其它具有相同优先级的线程就一定能获得执行权；也有可能是 当前线程又进入到“运行状态”继续运行！
-
-　　值得注意的是，yield()方法不会释放锁。
-
-
-
-2、sleep()
-
-　　&amp;ensp;&amp;ensp;sleep()是Thread类的静态方法。该方法声明抛出了InterrupedException异常。所以使用时，要么捕捉，要么声明抛出。
-
-　　有2种重载方式：
-
-——static void sleep(long millis)　　:　　让当前正在执行的线程暂停millis毫秒，并进入阻塞状态，该方法受到系统计时器和线程调度器的精度和准度的影响。
-
-——static void sleep(long millis , int nanos)　　：　　让当前正在执行的线程暂停millis毫秒加nanos微秒，并进入阻塞状态，该方法受到系统计时器和线程调度器的精度和准度的影响。
-
-　　sleep() 的作用是让当前线程休眠，即当前线程会从“运行状态”进入到“休眠(阻塞)状态”。sleep()会指定休眠时间，线程休眠的时间会大于/等于该休眠时间；在线程重新被唤醒时，它会由“阻塞状态”变成“就绪状态”，从而等待cpu的调度执行。常用来暂停程序的运行。　　
-
-　　同时注意，sleep()方法不会释放锁。
-
-
-
-3、join()
-
-　　join() 是Thread的一个实例方法。表示，当某个程序执行流中调用其他线程的join方法时，调用线程将被阻塞，直到被join的线程执行完毕。
-
-有3种重载的形式：
-
-——join()　　:　　等待被join的线程执行完成
-
-——join(long millis)　　：　　等待被join的线程的时间最长为millis毫秒，若在millis毫秒内，被join的线程还未执行结束，则不等待。
-
-——join(long millis , int nanos)　　:　　等待被join的线程的时间最长为millis毫秒加nanos微秒，若在此时间内，被join的线程还未执行结束，则不等待。
-
-&amp;ensp;&amp;ensp;即当前线程内，用某个线程对象调用join()后，会使当前线程等待，直到该线程对象的线程运行完毕，原线程才会继续运行。
-
-
-
-4、interrupt()　　　
-
-　　我们经常通过判断线程的中断标记来控制线程。　 　
-
-　　&amp;ensp;&amp;ensp;interrupt()是Thread类的一个实例方法，用于中断本线程。这个方法被调用时，会立即将线程的中断标志设置为“true”。所以当中断处于“阻塞状态”的线程时，由于处于阻塞状态，中断标记会被设置为“false”，抛出一个 InterruptedException。所以我们在线程的循环外捕获这个异常，就可以退出线程了。
-
-　&amp;ensp;&amp;ensp;interrupt()并不会中断处于“运行状态”的线程，它会把线程的“中断标记”设置为true，所以我们可以不断通过isInterrupted()来检测中断标记，从而在调用了interrupt()后终止线程，这也是通常我们对interrupt()的用法。
-
-　　&amp;ensp;&amp;ensp;Interrupted()是Thread类的一个静态方法，它返回一个布尔类型指明当前线程是否已经被中断，isInterrupted()是Thread类的实例方法，返回一个布尔类型来判断线程是否已经被中断。它们都能够用于检测对象的“中断标记”。区别是，interrupted()除了返回中断标记之外，它还会清除中断标记(即将中断标记设为false)；而isInterrupted()仅仅返回中断标记。
+<p><strong>线程执行过程</strong></p>
+<ul>
+<li><p>调用start( )方法时，将创建一个新的线程，并为线程分配系统资源，如内存。接着它将调用 run( ) 方法。</p>
+</li>
+<li><p>run( ) 方法中的代码定义执行线程所需的功能。</p>
+<ul>
+<li>run()方法能够调用其他方法，引用其他的类，申明变量。</li>
+<li>run()方法在程序中确定另一个并发线程的执行入口。</li>
+</ul>
+</li>
+<li><p>当run()方法中的任务完成返回时，该线程也将结束。</p>
+</li>
+</ul>
+<p><strong>注意：start()方法的调用后并不是立即执行多线程代码，而是使得该线程变为可运行态（Runnable），什么时候运行是由操作系统决定的。<br>从程序运行的结果可以发现，多线程程序是乱序执行。</strong></p>
+<h3 id="Thread和Runnable的区别"><a href="#Thread和Runnable的区别" class="headerlink" title="Thread和Runnable的区别"></a>Thread和Runnable的区别</h3><p>实现Runnable接口比继承Thread类所具有的优势：</p>
+<ul>
+<li>适合多个相同的程序代码的线程去处理同一个资源</li>
+<li>可以避免java中的单继承的限制</li>
+<li>增加程序的健壮性，代码可以被多个线程共享，代码和数据独立</li>
+<li>线程池只能放入实现Runable或callable类线程，不能直接放入继承Thread的类</li>
+</ul>
+<h3 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h3><p>下面的这个图非常重要!</p>
+<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc18.jpg" alt=""></p>
+<ol>
+<li>新建状态（New）：新创建了一个线程对象。</li>
+<li>就绪状态（Runnable）：线程对象创建后，其他线程调用了该对象的start()方法。该状态的线程位于可运行线程池中，变得可运行，等待获取CPU的使用权。</li>
+<li>运行状态（Running）：就绪状态的线程获取了CPU，执行程序代码。</li>
+<li>阻塞状态（Blocked）：阻塞状态是线程因为某种原因放弃CPU使用权，暂时停止运行。直到线程进入就绪状态，才有机会转到运行状态。阻塞的情况分三种：<ul>
+<li>等待阻塞：运行的线程执行wait()方法，JVM会把该线程放入等待池中。(wait会释放持    有的锁)</li>
+<li>同步阻塞：运行的线程在获取对象的同步锁时，若该同步锁被别的线程占用，则JVM会把该线程放入锁池中。</li>
+<li>其他阻塞：运行的线程执行sleep()或join()方法，或者发出了I/O请求时，JVM会把该线程置为阻塞状态。当sleep()状态超时、join()等待线程终止或者超时、或者I/O处理完毕时，线程重新转入就绪状态。（注意,sleep是不会释放持有的锁）</li>
+</ul>
+</li>
+<li>死亡状态（Dead）：线程执行完了或者因异常退出了run()方法，该线程结束生命周期。</li>
+</ol>
+<h3 id="线程调度"><a href="#线程调度" class="headerlink" title="线程调度"></a>线程调度</h3><p>线程的调度</p>
+<p>1、调整线程优先级：Java线程有优先级，优先级高的线程会获得较多的运行机会。</p>
+<p>Java线程的优先级用整数表示，取值范围是1~10，Thread类有以下三个静态常量：<br>static int MAX_PRIORITY<br>    线程可以具有的最高优先级，取值为10。<br>static int MIN_PRIORITY<br>    线程可以具有的最低优先级，取值为1。<br>static int NORM_PRIORITY<br>          分配给线程的默认优先级，取值为5。</p>
+<p>Thread类的setPriority()和getPriority()方法分别用来设置和获取线程的优先级。</p>
+<p>每个线程都有默认的优先级。主线程的默认优先级为Thread.NORM_PRIORITY。<br>线程的优先级有继承关系，比如A线程中创建了B线程，那么B将和A具有相同的优先级。<br>JVM提供了10个线程优先级，但与常见的操作系统都不能很好的映射。如果希望程序能移植到各个操作系统中，应该仅仅使用Thread类有以下三个静态常量作为优先级，这样能保证同样的优先级采用了同样的调度方式。</p>
+<p>2、线程睡眠：Thread.sleep(long millis)方法，使线程转到阻塞状态。millis参数设定睡眠的时间，以毫秒为单位。当睡眠结束后，就转为就绪（Runnable）状态。sleep()平台移植性好。</p>
+<p>3、线程等待：Object类中的wait()方法，导致当前的线程等待，直到其他线程调用此对象的 notify() 方法或 notifyAll() 唤醒方法。这个两个唤醒方法也是Object类中的方法，行为等价于调用 wait(0) 一样。</p>
+<p>4、线程让步：Thread.yield() 方法，暂停当前正在执行的线程对象，把执行机会让给相同或者更高优先级的线程。</p>
+<p>5、线程加入：join()方法，等待其他线程终止。在当前线程中调用另一个线程的join()方法，则当前线程转入阻塞状态，直到另一个进程运行结束，当前线程再由阻塞转为就绪状态。</p>
+<p>6、线程唤醒：Object类中的notify()方法，唤醒在此对象监视器上等待的单个线程。如果所有线程都在此对象上等待，则会选择唤醒其中一个线程。选择是任意性的，并在对实现做出决定时发生。线程通过调用其中一个 wait 方法，在对象的监视器上等待。 直到当前的线程放弃此对象上的锁定，才能继续执行被唤醒的线程。被唤醒的线程将以常规方式与在该对象上主动同步的其他所有线程进行竞争；例如，唤醒的线程在作为锁定此对象的下一个线程方面没有可靠的特权或劣势。类似的方法还有一个notifyAll()，唤醒在此对象监视器上等待的所有线程。<br> 注意：Thread中suspend()和resume()两个方法在JDK1.5中已经废除，不再介绍。因为有死锁倾向。</p>
+<h3 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h3><ol>
+<li>定义：守护线程–也称“服务线程”，他是后台线程，它有一个特性，即为用户线程 提供 公<br>共服务，在没有用户线程可服务时会自动离开。</li>
+<li>优先级：守护线程的优先级比较低，用于为系统中的其它对象和线程提供服务。</li>
+<li>设置：通过 setDaemon(true)来设置线程为“守护线程”；将一个用户线程设置为守护线程<br>的方式是在 线程对象创建 之前 用线程对象的 setDaemon 方法。</li>
+<li>在 Daemon 线程中产生的新线程也是 Daemon 的。</li>
+<li>线程则是 JVM 级别的，以 Tomcat 为例，如果你在 Web 应用中启动一个线程，这个线程的<br>生命周期并不会和 Web 应用程序保持同步。也就是说，即使你停止了 Web 应用，这个线程<br>依旧是活跃的。</li>
+<li>example: 垃圾回收线程就是一个经典的守护线程，当我们的程序中不再有任何运行的Thread,<br>程序就不会再产生垃圾，垃圾回收器也就无事可做，所以当垃圾回收线程是 JVM 上仅剩的线<br>程时，垃圾回收线程会自动离开。它始终在低级别的状态中运行，用于实时监控和管理系统<br>中的可回收资源。</li>
+<li>生命周期：守护进程（Daemon）是运行在后台的一种特殊进程。它独立于控制终端并且周<br>期性地执行某种任务或等待处理某些发生的事件。也就是说守护线程不依赖于终端，但是依<br>赖于系统，与系统“同生共死”。当 JVM 中所有的线程都是守护线程的时候，JVM 就可以退<br>出了；如果还有一个或以上的非守护线程则 JVM 不会退出。</li>
+</ol>
+<h3 id="yield-、sleep-、join-和interrupt-方法"><a href="#yield-、sleep-、join-和interrupt-方法" class="headerlink" title="yield()、sleep()、join()和interrupt()方法"></a>yield()、sleep()、join()和interrupt()方法</h3><p>1、yield()　</p>
+<p>　　  yield()是Thread类的静态方法。它能让当前线程暂停，但不会阻塞该线程，而是由“运行状态”进入到“就绪状态”，从而让 其它具有相同优先级的等待线程获取执行权；但是，并不能保证在当前线程调用yield()之后，其它具有相同优先级的线程就一定能获得执行权；也有可能是 当前线程又进入到“运行状态”继续运行！</p>
+<p>　　值得注意的是，yield()方法不会释放锁。</p>
+<p>2、sleep()</p>
+<p>　　  sleep()是Thread类的静态方法。该方法声明抛出了InterrupedException异常。所以使用时，要么捕捉，要么声明抛出。</p>
+<p>　　有2种重载方式：</p>
+<p>——static void sleep(long millis)　　:　　让当前正在执行的线程暂停millis毫秒，并进入阻塞状态，该方法受到系统计时器和线程调度器的精度和准度的影响。</p>
+<p>——static void sleep(long millis , int nanos)　　：　　让当前正在执行的线程暂停millis毫秒加nanos微秒，并进入阻塞状态，该方法受到系统计时器和线程调度器的精度和准度的影响。</p>
+<p>　　sleep() 的作用是让当前线程休眠，即当前线程会从“运行状态”进入到“休眠(阻塞)状态”。sleep()会指定休眠时间，线程休眠的时间会大于/等于该休眠时间；在线程重新被唤醒时，它会由“阻塞状态”变成“就绪状态”，从而等待cpu的调度执行。常用来暂停程序的运行。　　</p>
+<p>　　同时注意，sleep()方法不会释放锁。</p>
+<p>3、join()</p>
+<p>　　join() 是Thread的一个实例方法。表示，当某个程序执行流中调用其他线程的join方法时，调用线程将被阻塞，直到被join的线程执行完毕。</p>
+<p>有3种重载的形式：</p>
+<p>——join()　　:　　等待被join的线程执行完成</p>
+<p>——join(long millis)　　：　　等待被join的线程的时间最长为millis毫秒，若在millis毫秒内，被join的线程还未执行结束，则不等待。</p>
+<p>——join(long millis , int nanos)　　:　　等待被join的线程的时间最长为millis毫秒加nanos微秒，若在此时间内，被join的线程还未执行结束，则不等待。</p>
+<p>  即当前线程内，用某个线程对象调用join()后，会使当前线程等待，直到该线程对象的线程运行完毕，原线程才会继续运行。</p>
+<p>4、interrupt()　　　</p>
+<p>　　我们经常通过判断线程的中断标记来控制线程。　 　</p>
+<p>　　  interrupt()是Thread类的一个实例方法，用于中断本线程。这个方法被调用时，会立即将线程的中断标志设置为“true”。所以当中断处于“阻塞状态”的线程时，由于处于阻塞状态，中断标记会被设置为“false”，抛出一个 InterruptedException。所以我们在线程的循环外捕获这个异常，就可以退出线程了。</p>
+<p>　  interrupt()并不会中断处于“运行状态”的线程，它会把线程的“中断标记”设置为true，所以我们可以不断通过isInterrupted()来检测中断标记，从而在调用了interrupt()后终止线程，这也是通常我们对interrupt()的用法。</p>
+<p>　　  Interrupted()是Thread类的一个静态方法，它返回一个布尔类型指明当前线程是否已经被中断，isInterrupted()是Thread类的实例方法，返回一个布尔类型来判断线程是否已经被中断。它们都能够用于检测对象的“中断标记”。区别是，interrupted()除了返回中断标记之外，它还会清除中断标记(即将中断标记设为false)；而isInterrupted()仅仅返回中断标记。
 　　
 　　
-　　
-### start 与 run 区别
-1. start（）方法来启动线程，真正实现了多线程运行。这时无需等待 run 方法体代码执行完毕，可以直接继续执行下面的代码。
-2. 通过调用 Thread 类的 start()方法来启动一个线程， 这时此线程是处于就绪状态， 并没有运
-行。
-3. 方法 run()称为线程体，它包含了要执行的这个线程的内容，线程就进入了运行状态，开始运
-行 run 函数当中的代码。 Run 方法运行结束， 此线程终止。然后 CPU 再调度其它线程。
-
-### Synchronized关键字
-
-synchronized是一个重量级锁，相对于Lock，它会显得那么笨重 诚然，随着Javs SE 1.6对synchronized进行的各种优化后，synchronized并不会显得那么重了。
-
-  1、同步和异步的区别和联系
-
- 　　&amp;ensp;&amp;ensp;所谓同步，可以理解为在执行完一个函数或方法之后，一直等待系统返回值或消息，这时程序是出于阻塞的，只有接收到返回的值或消息后才往下执行其它的命令。
-
-&amp;ensp;&amp;ensp;异步，执行完函数或方法后，不必阻塞性地等待返回值或消息，只需要向系统委托一个异步过程，那么当系统接收到返回值或消息时，系统会自动触发委托的异步过程，从而完成一个完整的流程。
-
- &amp;ensp;&amp;ensp;同步在一定程度上可以看做是单线程，这个线程请求一个方法后就待这个方法给他回复，否则他不往下执行(死心眼)。
-
-异步在一定程度上可以看做是多线程的，请求一个方法后，就不管了，继续执行其他的方法。
-
-
-
-1、原理
-
-**在java中，每一个对象有且仅有一个同步锁。这也意味着，同步锁是依赖于对象而存在。**
-
-　　&amp;ensp;&amp;ensp;当当前线程调用某对象的synchronized方法时，就获取了该对象的同步锁。例如，synchronized(obj)，当前线程就获取了“obj这个对象”的同步锁。
-
-　　&amp;ensp;&amp;ensp;不同线程对同步锁的访问是互斥的。也就是说，某时间点，对象的同步锁只能被一个线程获取到！通过同步锁，我们就能在多线程中，实现对“对象/方法”的互斥访问。
-例如，现在有个线程A和线程B，它们都会访问“对象obj的同步锁”。假设，在某一时刻，线程A获取到“obj的同步锁”并在执行一些操作；而此时，线程B也企图获取“obj的同步锁” —— 线程B会获取失败，它必须等待，直到线程A释放了“该对象的同步锁”之后线程B才能获取到“obj的同步锁”从而才可以运行。
-
-
-
-2、基本规则
-
-　　&amp;ensp;&amp;ensp;第一条 :  当一个线程访问“某对象”的“synchronized方法”或者“synchronized代码块”时，其他线程对“该对象”的该“synchronized方法”或者“synchronized代码块”的访问将被阻塞。
-
-　　&amp;ensp;&amp;ensp;第二条 :  当一个线程访问“某对象”的“synchronized方法”或者“synchronized代码块”时，其他线程仍然可以访问“该对象”的非同步代码块。
-
-　&amp;ensp;&amp;ensp;第三条 :  当一个线程访问“某对象”的“synchronized方法”或者“synchronized代码块”时，其他线程对“该对象”的其他的“synchronized方法”或者“synchronized代码块”的访问将被阻塞。
-
-1、普通同步方法，锁是当前实例对象
-
-2、静态同步方法，锁是当前类的class对象
-
-3、同步方法块，锁是括号里面的对象
-
-
-
-
-3、实例锁和全局锁
-
-&amp;ensp;&amp;ensp;实例锁 -- 锁在某一个实例对象上。如果该类是单例，那么该锁也具有全局锁的概念。
-               实例锁对应的就是synchronized关键字。
-
-&amp;ensp;&amp;ensp;全局锁 -- 该锁针对的是类，无论实例多少个对象，那么线程都共享该锁。
-               全局锁对应的就是static synchronized（或者是锁在该类的class或者classloader对象上）。
-
-&amp;ensp;&amp;ensp;就是说，一个非静态方法上的synchronized关键字，代表该方法依赖其所属对象。一个静态方法上synchronized关键字，代表该方法依赖这个类本身。
-
-
-
-#### synchronized, wait, notify结合:典型场景生产者消费者问题
-
-```java
-/**
+　　</p>
+<h3 id="start-与-run-区别"><a href="#start-与-run-区别" class="headerlink" title="start 与 run 区别"></a>start 与 run 区别</h3><ol>
+<li>start（）方法来启动线程，真正实现了多线程运行。这时无需等待 run 方法体代码执行完毕，可以直接继续执行下面的代码。</li>
+<li>通过调用 Thread 类的 start()方法来启动一个线程， 这时此线程是处于就绪状态， 并没有运<br>行。</li>
+<li>方法 run()称为线程体，它包含了要执行的这个线程的内容，线程就进入了运行状态，开始运<br>行 run 函数当中的代码。 Run 方法运行结束， 此线程终止。然后 CPU 再调度其它线程。</li>
+</ol>
+<h3 id="Synchronized关键字"><a href="#Synchronized关键字" class="headerlink" title="Synchronized关键字"></a>Synchronized关键字</h3><p>synchronized是一个重量级锁，相对于Lock，它会显得那么笨重 诚然，随着Javs SE 1.6对synchronized进行的各种优化后，synchronized并不会显得那么重了。</p>
+<p>  1、同步和异步的区别和联系</p>
+<p> 　　  所谓同步，可以理解为在执行完一个函数或方法之后，一直等待系统返回值或消息，这时程序是出于阻塞的，只有接收到返回的值或消息后才往下执行其它的命令。</p>
+<p>  异步，执行完函数或方法后，不必阻塞性地等待返回值或消息，只需要向系统委托一个异步过程，那么当系统接收到返回值或消息时，系统会自动触发委托的异步过程，从而完成一个完整的流程。</p>
+<p>   同步在一定程度上可以看做是单线程，这个线程请求一个方法后就待这个方法给他回复，否则他不往下执行(死心眼)。</p>
+<p>异步在一定程度上可以看做是多线程的，请求一个方法后，就不管了，继续执行其他的方法。</p>
+<p>1、原理</p>
+<p><strong>在java中，每一个对象有且仅有一个同步锁。这也意味着，同步锁是依赖于对象而存在。</strong></p>
+<p>　　  当当前线程调用某对象的synchronized方法时，就获取了该对象的同步锁。例如，synchronized(obj)，当前线程就获取了“obj这个对象”的同步锁。</p>
+<p>　　  不同线程对同步锁的访问是互斥的。也就是说，某时间点，对象的同步锁只能被一个线程获取到！通过同步锁，我们就能在多线程中，实现对“对象/方法”的互斥访问。<br>例如，现在有个线程A和线程B，它们都会访问“对象obj的同步锁”。假设，在某一时刻，线程A获取到“obj的同步锁”并在执行一些操作；而此时，线程B也企图获取“obj的同步锁” —— 线程B会获取失败，它必须等待，直到线程A释放了“该对象的同步锁”之后线程B才能获取到“obj的同步锁”从而才可以运行。</p>
+<p>2、基本规则</p>
+<p>　　  第一条 :  当一个线程访问“某对象”的“synchronized方法”或者“synchronized代码块”时，其他线程对“该对象”的该“synchronized方法”或者“synchronized代码块”的访问将被阻塞。</p>
+<p>　　  第二条 :  当一个线程访问“某对象”的“synchronized方法”或者“synchronized代码块”时，其他线程仍然可以访问“该对象”的非同步代码块。</p>
+<p>　  第三条 :  当一个线程访问“某对象”的“synchronized方法”或者“synchronized代码块”时，其他线程对“该对象”的其他的“synchronized方法”或者“synchronized代码块”的访问将被阻塞。</p>
+<p>1、普通同步方法，锁是当前实例对象</p>
+<p>2、静态同步方法，锁是当前类的class对象</p>
+<p>3、同步方法块，锁是括号里面的对象</p>
+<p>3、实例锁和全局锁</p>
+<p>  实例锁 – 锁在某一个实例对象上。如果该类是单例，那么该锁也具有全局锁的概念。<br>               实例锁对应的就是synchronized关键字。</p>
+<p>  全局锁 – 该锁针对的是类，无论实例多少个对象，那么线程都共享该锁。<br>               全局锁对应的就是static synchronized（或者是锁在该类的class或者classloader对象上）。</p>
+<p>  就是说，一个非静态方法上的synchronized关键字，代表该方法依赖其所属对象。一个静态方法上synchronized关键字，代表该方法依赖这个类本身。</p>
+<h4 id="synchronized-wait-notify结合-典型场景生产者消费者问题"><a href="#synchronized-wait-notify结合-典型场景生产者消费者问题" class="headerlink" title="synchronized, wait, notify结合:典型场景生产者消费者问题"></a>synchronized, wait, notify结合:典型场景生产者消费者问题</h4><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
    * 生产者生产出来的产品交给店员
-   */
-  public synchronized void produce()
-  {
-      if(this.product &gt;= MAX_PRODUCT)
-      {
-          try
-          {
-              wait();  
-              System.out.println("产品已满,请稍候再生产");
-          }
-          catch(InterruptedException e)
-          {
-              e.printStackTrace();
-          }
-          return;
-      }
+   */</span>
+  <span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">void</span> <span class="token function">produce</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>product <span class="token operator">>=</span> MAX_PRODUCT<span class="token punctuation">)</span>
+      <span class="token punctuation">{</span>
+          <span class="token keyword">try</span>
+          <span class="token punctuation">{</span>
+              <span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
+              System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"产品已满,请稍候再生产"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+          <span class="token keyword">catch</span><span class="token punctuation">(</span>InterruptedException e<span class="token punctuation">)</span>
+          <span class="token punctuation">{</span>
+              e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+          <span class="token keyword">return</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
 
-      this.product++;
-      System.out.println("生产者生产第" + this.product + "个产品.");
-      notifyAll();   //通知等待区的消费者可以取出产品了
-  }
+      <span class="token keyword">this</span><span class="token punctuation">.</span>product<span class="token operator">++</span><span class="token punctuation">;</span>
+      System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"生产者生产第"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>product <span class="token operator">+</span> <span class="token string">"个产品."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">notifyAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//通知等待区的消费者可以取出产品了</span>
+  <span class="token punctuation">}</span>
 
-  /**
+  <span class="token comment" spellcheck="true">/**
    * 消费者从店员取产品
-   */
-  public synchronized void consume()
-  {
-      if(this.product &lt;= MIN_PRODUCT)
-      {
-          try 
-          {
-              wait(); 
-              System.out.println("缺货,稍候再取");
-          } 
-          catch (InterruptedException e) 
-          {
-              e.printStackTrace();
-          }
-          return;
-      }
+   */</span>
+  <span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">void</span> <span class="token function">consume</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">{</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>product <span class="token operator">&lt;=</span> MIN_PRODUCT<span class="token punctuation">)</span>
+      <span class="token punctuation">{</span>
+          <span class="token keyword">try</span> 
+          <span class="token punctuation">{</span>
+              <span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+              System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"缺货,稍候再取"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span> 
+          <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> 
+          <span class="token punctuation">{</span>
+              e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+          <span class="token keyword">return</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
 
-      System.out.println("消费者取走了第" + this.product + "个产品.");
-      this.product--;
-      notifyAll();   //通知等待去的生产者可以生产产品了
-  }
-</code></pre><h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><h4 id="Volatile的官方定义"><a href="#Volatile的官方定义" class="headerlink" title="Volatile的官方定义"></a>Volatile的官方定义</h4><p>  Java语言规范第三版中对volatile的定义如下：<br>java编程语言允许线程访问共享变量，为了确保共享变量能被准确和一致的更新，线程应该确保通过排他锁单独获得这个变量。Java语言提供了volatile，在某些情况下比锁更加方便。如果一个字段被声明成volatile，java线程内存模型确保所有线程看到这个变量的值是一致的。</p>
+      System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"消费者取走了第"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>product <span class="token operator">+</span> <span class="token string">"个产品."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>product<span class="token operator">--</span><span class="token punctuation">;</span>
+      <span class="token function">notifyAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//通知等待去的生产者可以生产产品了</span>
+  <span class="token punctuation">}</span>
+</code></pre>
+<h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><h4 id="Volatile的官方定义"><a href="#Volatile的官方定义" class="headerlink" title="Volatile的官方定义"></a>Volatile的官方定义</h4><p>  Java语言规范第三版中对volatile的定义如下：<br>java编程语言允许线程访问共享变量，为了确保共享变量能被准确和一致的更新，线程应该确保通过排他锁单独获得这个变量。Java语言提供了volatile，在某些情况下比锁更加方便。如果一个字段被声明成volatile，java线程内存模型确保所有线程看到这个变量的值是一致的。</p>
 <p>  volatile这个关键字。其实这个关键字有两层语义。第一层语义就是可见性。可见性指的是在一个线程中对该变量的修改会马上由工作内存（Work Memory）写回主内存（Main Memory），所以会马上反应在其它线程的读取操作中。顺便一提，工作内存和主内存可以近似理解为实际电脑中的高速缓存和主存，工作内存是线程独享的，主存是线程共享的。volatile的第二层语义是禁止指令重排序优化。我们写的代码（尤其是多线程代码），由于编译器优化，在实际执行的时候可能与我们编写的顺序不同。编译器只保证程序执行结果与源代码相同，却不保证实际指令的顺序与源代码相同。</p>
 <p><strong>Volatile变量修饰符如果使用恰当的话，它比synchronized的使用和执行成本会更低，因为它不会引起线程上下文的切换和调度。</strong></p>
 <h4 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h4><p>　　为什么出现这种情况呢，我们需要先了解一下JMM（java内存模型）</p>
@@ -3683,7 +3582,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">207.3k</span>&nbsp;字
+                class="white-color">203.8k</span>&nbsp;字
              -->
             <!-- 
             

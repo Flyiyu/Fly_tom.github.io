@@ -4,7 +4,7 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="java多线程基础笔记, Tom Blog">
+    <meta name="keywords" content="java多线程基础, Tom Blog">
     <meta name="description" content="关于线程的文章https://www.javazhiyin.com/32391.html
 
 单核 CPU 和多核 CPU来思考一个问题吧。假如 CPU 只有一个，核数也只有一个，多线程还会有优势吗？
@@ -17,7 +17,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>java多线程基础笔记 | Tom Blog</title>
+    <title>java多线程基础 | Tom Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -207,7 +207,7 @@
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        java多线程基础笔记
+                        java多线程基础
                     </div>
                 </div>
             </div>
@@ -346,14 +346,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        20.4k
+                        16.9k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        74 分
+                        62 分
                     </div>
                     
                 
@@ -369,16 +369,16 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="关于线程的文章"><a href="#关于线程的文章" class="headerlink" title="关于线程的文章"></a>关于线程的文章</h3><p><a href="https://www.javazhiyin.com/32391.html" target="_blank" rel="noopener">https://www.javazhiyin.com/32391.html</a></p>
+                <h2 id="关于线程的文章"><a href="#关于线程的文章" class="headerlink" title="关于线程的文章"></a>关于线程的文章</h2><p><a href="https://www.javazhiyin.com/32391.html" target="_blank" rel="noopener">https://www.javazhiyin.com/32391.html</a></p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/thread2.png" alt=""></p>
-<h3 id="单核-CPU-和多核-CPU"><a href="#单核-CPU-和多核-CPU" class="headerlink" title="单核 CPU 和多核 CPU"></a>单核 CPU 和多核 CPU</h3><p>来思考一个问题吧。假如 CPU 只有一个，核数也只有一个，多线程还会有优势吗？</p>
+<h2 id="单核-CPU-和多核-CPU"><a href="#单核-CPU-和多核-CPU" class="headerlink" title="单核 CPU 和多核 CPU"></a>单核 CPU 和多核 CPU</h2><p>来思考一个问题吧。假如 CPU 只有一个，核数也只有一个，多线程还会有优势吗？</p>
 <p>闭上眼，让思维旋转跳跃会。</p>
 <p>来看答案吧。</p>
 <p>单核 CPU 上运行的多线程程序，同一时间只有一个线程在跑，系统帮忙进行线程切换；系统给每个线程分配时间片（大概 10ms）来执行，看起来像是在同时跑，但实际上是每个线程跑一点点就换到其它线程继续跑。所以效率不会有所提高，线程的切换反到增加了系统开销。</p>
 <p>那多核 CPU 呢？</p>
 <p>当然有优势了！多核需要多线程才能发挥优势（不然巧妇难为无米之炊啊），同样，多线程要在多核上才能有所发挥（好马配好鞍啊）。</p>
 <p>多核 CPU 多线程不仅善于处理 IO 密集型的任务（减少阻塞时间），还善于处理计算密集型的任务，比如加密解密、数据压缩解压缩（视频、音频、普通数据等），让每个核心都物尽其用。</p>
-<h3 id="应该了解的概念"><a href="#应该了解的概念" class="headerlink" title="应该了解的概念"></a>应该了解的概念</h3><ol>
+<h2 id="应该了解的概念"><a href="#应该了解的概念" class="headerlink" title="应该了解的概念"></a>应该了解的概念</h2><ol>
 <li>同步VS异步<blockquote>
 <p>同步和异步通常用来形容一次方法调用。同步方法调用一开始，调用者必须等待被调用的方法结束后，调用者后面的代码才能执行。而异步调用，指的是，调用者不用管被调用方法是否完成，都会继续执行后面的代码，当被调用的方法完成后会通知调用者。比如，在超时购物，如果一件物品没了，你得等仓库人员跟你调货，直到仓库人员跟你把货物送过来，你才能继续去收银台付款，这就类似同步调用。而异步调用了，就像网购，你在网上付款下单后，什么事就不用管了，该干嘛就干嘛去了，当货物到达后你收到通知去取就好。</p>
 </blockquote>
@@ -401,7 +401,7 @@
 </blockquote>
 </li>
 </ol>
-<h3 id="进程-线程"><a href="#进程-线程" class="headerlink" title="进程 线程"></a>进程 线程</h3><p><strong>什么是进程</strong></p>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><h3 id="进程-线程"><a href="#进程-线程" class="headerlink" title="进程 线程"></a>进程 线程</h3><p><strong>什么是进程</strong></p>
 <p>进程是指在系统中正在运行的一个应用程序；程序一旦运行就是进程，或者更专业化来说：进程是指程序执行时的一个实例。</p>
 <p><strong>进程时间片的概念</strong></p>
 <pre><code>一个操作系统中，如果同时运行着多个进程，他们是一定交替运行的。每个进程不管有没有运行完毕，都只占据一段时间的CPU。
@@ -470,7 +470,7 @@ QPS：每秒响应请求数。在互联网领域，这个指标和吞吐量区�
 2.    并发：通过cpu调度算法，让用户看上去同时执行，实际上从cpu操作层面不是真正的同时。并发往往在场景中有公用的资源，
 那么针对这个公用的资源往往产生瓶颈，我们会用TPS或者QPS来反应这个系统的处理能力。
 并发性（concurrency）和并行性（parallel）
-</code></pre><h4 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h4><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc25.png" alt=""></p>
+</code></pre><h3 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h3><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc25.png" alt=""></p>
 <p>java中的线程的生命周期大体可分为5种状态。</p>
 <ol>
 <li><p>新建(NEW)：新创建了一个线程对象。</p>
@@ -492,8 +492,11 @@ QPS：每秒响应请求数。在互联网领域，这个指标和吞吐量区�
 <p>因此需要记录线程A的运行状态，那么会记录哪些数据呢？因为下次恢复时需要知道在这之前当前线程已经执行到哪条指令了，所以需要记录程序计数器的值，另外比如说线程正在进行某个计算的时候被挂起了，那么下次继续执行的时候需要知道之前挂起时变量的值时多少，因此需要记录CPU寄存器的状态。所以一般来说，线程上下文切换过程中会记录程序计数器、CPU寄存器状态等数据。</p>
 <p>说简单点的：对于线程的上下文切换实际上就是 存储和恢复CPU状态的过程，它使得线程执行能够从中断点恢复执行。</p>
 <p>虽然多线程可以使得任务执行的效率得到提升，但是由于在线程切换时同样会带来一定的开销代价，并且多个线程会导致系统资源占用的增加，所以在进行多线程编程时要注意这些因素。</p>
-<h3 id="创建线程的方式"><a href="#创建线程的方式" class="headerlink" title="创建线程的方式"></a>创建线程的方式</h3><p>　　在java中如果要创建线程的话，一般有两种方式：1）继承Thread类；2）实现Runnable接口。</p>
-<p><strong>三种方法来创建线程：</strong></p>
+<h3 id="创建线程的方式"><a href="#创建线程的方式" class="headerlink" title="创建线程的方式"></a>创建线程的方式</h3><p>　　在java中如果要创建线程的话，一般有三种方式：1）继承Thread类；2）实现Runnable接口；3）Callable方式
+　　</p>
+<blockquote>
+<p>其实前两种面试说出即可</p>
+</blockquote>
 <p>继承Thread类创建</p>
 <p>继承Thread创建并启动多线程有三个步骤：</p>
 <ol>
@@ -531,7 +534,7 @@ class Mythread implements Runnable{
  thread.start();</code></pre><p>第三种：</p>
 <p>Callable是Runnable的增加版，主要是接口中的call()方法可以有返回值，并且可以申明抛出异常，使用Callable创建的步骤如下：</p>
 <ol>
-<li>定义类并继承Callable接口,重写call()方法,run()方法中为需要多线程执行的任务。</li>
+<li>定义类并实现Callable接口,重写call()方法,run()方法中为需要多线程执行的任务。</li>
 <li>创建类实例，使用FutureTask来包装对象实例，</li>
 <li>使用FutureTask对象作为Thread的target来创建多线程，并启动线程。</li>
 <li>调用FutureTask对象的get()方法来获取子线程结束后的返回值。</li>
@@ -561,7 +564,7 @@ class Mythread implements Runnable{
 
 /**
  * 相较于实现 Runnable 接口的方式，方法可以有返回值，并且可以抛出异常。
- * 执行 Callable 方式，需要 FutureTask 实现类的支持，用于接收运算结果。  FutureTask 是  Future 接口的实现类
+ * 执行 Callable 方式，需要 FutureTask 实现类的支持，用于接收运算结果，FutureTask 是  Future 接口的实现类
  * 运行Callable任务可拿到一个Future对象， Future表示异步计算的结果。 
  * 它提供了检查计算是否完成的方法，以等待计算的完成，并检索计算的结果。 
  * 通过Future对象可了解任务执行情况，可取消任务的执行，还可获取任务执行的结果。 
@@ -613,9 +616,7 @@ class Callss implements Callable&lt;Integer&gt; {
 </ul>
 <p>非线程安全：是指多个线程对同一个对象中的同一个实例变量进行操作时会出现值被更改、值不同步的情况，进而影响程序的执行流程。</p>
 <p>在run方法中加上synchronized关键字，使多个线程在执行run方法的时候，以队列的方式进行处理，当一个线程调用run方法前，先判断run方法有没有被上锁，如果上锁，说明有其他线程在调用run方法，必须等待其他线程对run方法调用结束才能执行run方法，这样实现了排队调用的目的，也就实现了对count依次–，synchronized可以对任意对象及方法加上锁，而枷锁的这段代码叫做 “互斥区”或“临界区”。</p>
-<h3 id="线程的常用方法"><a href="#线程的常用方法" class="headerlink" title="线程的常用方法"></a>线程的常用方法</h3><p>属于Thread的方法</p>
-<p>0 . </p>
-<ul>
+<h3 id="线程的常用方法"><a href="#线程的常用方法" class="headerlink" title="线程的常用方法"></a>线程的常用方法</h3><ul>
 <li><p>getName和setName</p>
 <p>  用来得到或者设置线程名称。</p>
 </li>
@@ -627,9 +628,9 @@ class Callss implements Callable&lt;Integer&gt; {
 <p>  守护线程和用户线程的区别在于：守护线程依赖于创建它的线程，而用户线程则不依赖。举个简单的例子：如果在main线程中创建了一个守护线程，当main方法运行完毕之后，守护线程也会随着消亡。而用户线程则不会，用户线程会一直运行直到其运行完毕。在JVM中，像垃圾收集器线程就是守护线程。</p>
 </li>
 </ul>
-<h4 id="1．start-："><a href="#1．start-：" class="headerlink" title="　　1．start() ："></a>　　1．start() ：</h4><p>线程调用该方法将启动线程，使之从新建状态进入就绪队列排队，一旦轮到它来享用CPU资源时，就可以脱离创建它的线程独立开始自己的生命周期了。</p>
-<p>####　　2．run():<br>Thread类的run()方法与Runnable接口中的run()方法的功能和作用相同，都用来定义线程对象被调度之后所执行的操作，都是系统自动调用而用户程序不得引用的方法。</p>
-<h4 id="3．线程休眠——sleep-int-millsecond"><a href="#3．线程休眠——sleep-int-millsecond" class="headerlink" title="　　3．线程休眠——sleep(int millsecond):"></a>　　3．线程休眠——sleep(int millsecond):</h4><p>（1）线程休眠会交出CPU，让CPU去执行其他的任务。</p>
+<h4 id="1．start-："><a href="#1．start-：" class="headerlink" title="1．start() ："></a>1．start() ：</h4><p>线程调用该方法将启动线程，使之从新建状态进入就绪队列排队，一旦轮到它来享用CPU资源时，就可以脱离创建它的线程独立开始自己的生命周期了。</p>
+<h4 id="2．run"><a href="#2．run" class="headerlink" title="2．run():"></a>2．run():</h4><p>Thread类的run()方法与Runnable接口中的run()方法的功能和作用相同，都用来定义线程对象被调度之后所执行的操作，都是系统自动调用而用户程序不得引用的方法。</p>
+<h4 id="3．线程休眠——sleep-int-millsecond"><a href="#3．线程休眠——sleep-int-millsecond" class="headerlink" title="3．线程休眠——sleep(int millsecond):"></a>3．线程休眠——sleep(int millsecond):</h4><p>（1）线程休眠会交出CPU，让CPU去执行其他的任务。</p>
 <p>（2）调用sleep()方法让线程进入休眠状态后，sleep()方法并不会释放锁，即当前线程持有某个对象锁时，即使调用sleep()方法其他线程也无法访问这个对象。</p>
 <p>（3）调用sleep()方法让线程从运行状态转换为阻塞状态；sleep()方法调用结束后，线程从阻塞状态转换为可执行状态。</p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 源码</span>
@@ -883,11 +884,10 @@ System.out.println("是否停止2？=" + Thread.interrupted());//false
 <li>一定在synchronized中使用wait()/notify()/notifyAll()，也就是说一定要先获取锁，这个前面我们讲过，因为只有加锁后，才能获得监视器。否则jvm也会抛出IllegalMonitorStateException异常。</li>
 <li>使用wait()时，判断线程是否进入wait状态的条件一定要使用while而不要使用if，因为等待线程可能会被错误地唤醒，所以应该使用while循环在等待前等待后都检查唤醒条件是否被满足，保证安全性。</li>
 <li>notify()或notifyAll()方法调用后，线程不会立即释放锁。调用只会将wait中的线程从等待队列移到同步队列，也就是线程状态从waitting变为blocked;</li>
-<li>从wait()方法返回的前提是线程重新获得了调用对象的锁。
-　　　　
-　　　　<h3 id="停止线程"><a href="#停止线程" class="headerlink" title="停止线程"></a>停止线程</h3></li>
+<li>从wait()方法返回的前提是线程重新获得了调用对象的锁。</li>
 </ol>
-<p>停止一个线程的执行有三种办法：</p>
+<p>　　　</p>
+<h3 id="停止线程"><a href="#停止线程" class="headerlink" title="停止线程"></a>停止线程</h3><p>停止一个线程的执行有三种办法：</p>
 <ol>
 <li>调用Thread对象的stop()方法，stop()和supend和resume已经被弃用</li>
 <li>interrupt()配合isInterrupt()使用 上面的代码</li>
@@ -961,26 +961,26 @@ System.out.println("是否停止2？=" + Thread.interrupted());//false
 <span class="token punctuation">}</span></code></pre>
 </li>
 </ol>
-<h3 id="Synchronized"><a href="#Synchronized" class="headerlink" title="Synchronized"></a>Synchronized</h3><p>造成线程安全问题的主要诱因有两点，一是存在共享数据(也称临界资源)，二是存在多条线程共同操作共享数据。因此为了解决这个问题，我们可能需要这样一个方案，当存在多个线程操作共享数据时，需要保证同一时刻有且只有一个线程在操作共享数据，其他线程必须等到该线程处理完数据后再进行，这种方式有个高尚的名称叫互斥锁，即能达到互斥访问目的的锁，也就是说当一个共享数据被当前正在访问的线程加上互斥锁后，在同一个时刻，其他线程只能处于等待的状态，直到当前线程处理完毕释放该锁。在 Java 中，关键字 synchronized可以保证在同一个时刻，只有一个线程可以执行某个方法或者某个代码块(主要是对方法或者代码块中存在共享数据的操作)，同时我们还应该注意到synchronized另外一个重要的作用，synchronized可保证一个线程的变化(主要是共享数据的变化)被其他线程所看到（保证可见性，完全可以替代Volatile功能），这点确实也是很重要的。</p>
+<h3 id="Synchronized-amp-Volatile-amp-ThreadLocal-amp-Lock"><a href="#Synchronized-amp-Volatile-amp-ThreadLocal-amp-Lock" class="headerlink" title="Synchronized &amp; Volatile &amp; ThreadLocal &amp; Lock"></a>Synchronized &amp; Volatile &amp; ThreadLocal &amp; Lock</h3><h4 id="Synchronized"><a href="#Synchronized" class="headerlink" title="Synchronized"></a>Synchronized</h4><p>造成线程安全问题的主要诱因有两点，一是存在共享数据(也称临界资源)，二是存在多条线程共同操作共享数据。因此为了解决这个问题，我们可能需要这样一个方案，当存在多个线程操作共享数据时，需要保证同一时刻有且只有一个线程在操作共享数据，其他线程必须等到该线程处理完数据后再进行，这种方式有个高尚的名称叫互斥锁，即能达到互斥访问目的的锁，也就是说当一个共享数据被当前正在访问的线程加上互斥锁后，在同一个时刻，其他线程只能处于等待的状态，直到当前线程处理完毕释放该锁。在 Java 中，关键字 synchronized可以保证在同一个时刻，只有一个线程可以执行某个方法或者某个代码块(主要是对方法或者代码块中存在共享数据的操作)，同时我们还应该注意到synchronized另外一个重要的作用，synchronized可保证一个线程的变化(主要是共享数据的变化)被其他线程所看到（保证可见性，完全可以替代Volatile功能），这点确实也是很重要的。</p>
 <p><strong>java的内置锁：</strong> 每个java对象都可以用做一个实现同步的锁，这些锁成为内置锁。线程进入同步代码块或方法的时候会自动获得该锁，在退出同步代码块或方法时会释放该锁。获得内置锁的唯一途径就是进入这个锁的保护的同步代码块或方法。</p>
 <p>java内置锁是一个互斥锁，这就是意味着最多只有一个线程能够获得该锁，当线程A尝试去获得线程B持有的内置锁时，线程A必须等待或者阻塞，知道线程B释放这个锁，如果B线程不释放这个锁，那么A线程将永远等待下去。</p>
 <p><strong>java的对象锁和类锁：</strong> java的对象锁和类锁在锁的概念上基本上和内置锁是一致的，但是，两个锁实际是有很大的区别的，对象锁是用于对象实例方法，或者一个对象实例上的，类锁是用于类的静态方法或者一个类的class对象上的。我们知道，类的对象实例可以有很多个，但是每个类只有一个class对象，所以不同对象实例的对象锁是互不干扰的，但是每个类只有一个类锁。但是有一点必须注意的是，其实类锁只是一个概念上的东西，并不是真实存在的，它只是用来帮助我们理解锁定实例方法和静态方法的区别的</p>
-<h4 id="synchronized的三种应用方式"><a href="#synchronized的三种应用方式" class="headerlink" title="synchronized的三种应用方式"></a>synchronized的三种应用方式</h4><p>synchronized关键字最主要有以下3种应用方式</p>
+<h5 id="synchronized的三种应用方式"><a href="#synchronized的三种应用方式" class="headerlink" title="synchronized的三种应用方式"></a>synchronized的三种应用方式</h5><p>synchronized关键字最主要有以下3种应用方式</p>
 <ul>
 <li>修饰实例方法，作用于当前实例加锁，进入同步代码前要获得当前实例的锁</li>
 <li>修饰静态方法，作用于当前类对象加锁，进入同步代码前要获得当前类对象的锁</li>
 <li>修饰代码块，指定加锁对象，对给定对象加锁，进入同步代码库前要获得给定对象的锁。</li>
 </ul>
-<h5 id="synchronized作用于静态方法"><a href="#synchronized作用于静态方法" class="headerlink" title="synchronized作用于静态方法"></a>synchronized作用于静态方法</h5><p>当synchronized作用于静态方法时，其锁就是当前类的class对象锁。由于静态成员不专属于任何一个实例对象，是类成员，因此通过class对象锁可以控制静态 成员的并发操作。需要注意的是如果一个线程A调用一个实例对象的非static synchronized方法，而线程B需要调用这个实例对象所属类的静态 synchronized方法，是允许的，不会发生互斥现象，因为访问静态 synchronized 方法占用的锁是当前类的class对象，而访问非静态 synchronized 方法占用的锁是当前实例对象锁</p>
-<h3 id="Volatile"><a href="#Volatile" class="headerlink" title="Volatile"></a>Volatile</h3><ul>
+<h6 id="synchronized作用于静态方法"><a href="#synchronized作用于静态方法" class="headerlink" title="synchronized作用于静态方法"></a>synchronized作用于静态方法</h6><p>当synchronized作用于静态方法时，其锁就是当前类的class对象锁。由于静态成员不专属于任何一个实例对象，是类成员，因此通过class对象锁可以控制静态 成员的并发操作。需要注意的是如果一个线程A调用一个实例对象的非static synchronized方法，而线程B需要调用这个实例对象所属类的静态 synchronized方法，是允许的，不会发生互斥现象，因为访问静态 synchronized 方法占用的锁是当前类的class对象，而访问非静态 synchronized 方法占用的锁是当前实例对象锁</p>
+<h4 id="Volatile"><a href="#Volatile" class="headerlink" title="Volatile"></a>Volatile</h4><ul>
 <li>内存可见性</li>
 <li>留意复合类操作</li>
 <li>解决num++操作的原子性问题</li>
 <li>禁止指令重排序</li>
 </ul>
-<h4 id="内存可见性"><a href="#内存可见性" class="headerlink" title="内存可见性"></a>内存可见性</h4><p>　　volatile是Java提供的一种轻量级的同步机制，在并发编程中，它也扮演着比较重要的角色。同synchronized相比（synchronized通常称为重量级锁），volatile更轻量级，相比使用synchronized所带来的庞大开销，倘若能恰当的合理的使用volatile，自然是美事一桩。</p>
+<h5 id="内存可见性"><a href="#内存可见性" class="headerlink" title="内存可见性"></a>内存可见性</h5><p>　　volatile是Java提供的一种轻量级的同步机制，在并发编程中，它也扮演着比较重要的角色。同synchronized相比（synchronized通常称为重量级锁），volatile更轻量级，相比使用synchronized所带来的庞大开销，倘若能恰当的合理的使用volatile，自然是美事一桩。</p>
 <p><strong>所谓可见性，是指当一条线程修改了共享变量的值，新值对于其他线程来说是可以立即得知的。</strong></p>
-<h4 id="禁止指令重排序"><a href="#禁止指令重排序" class="headerlink" title="禁止指令重排序"></a>禁止指令重排序</h4><p>volatile还有一个特性：禁止指令重排序优化。</p>
+<h5 id="禁止指令重排序"><a href="#禁止指令重排序" class="headerlink" title="禁止指令重排序"></a>禁止指令重排序</h5><p>volatile还有一个特性：禁止指令重排序优化。</p>
 <p>重排序是指编译器和处理器为了优化程序性能而对指令序列进行排序的一种手段。但是重排序也需要遵守一定规则：</p>
 <ol>
 <li>重排序操作不会对存在数据依赖关系的操作进行重排序。</li>
@@ -992,7 +992,7 @@ System.out.println("是否停止2？=" + Thread.interrupted());//false
 <p>　　　　比如：a=1;b=2;c=a+b这三个操作，第一步（a=1)和第二步(b=2)由于不存在数据依赖关系，所以可能会发生重排序，但是c=a+b这个操作是不会被重排序的，因为需要保证最终的结果一定是c=a+b=3。</p>
 <p>　　重排序在单线程模式下是一定会保证最终结果的正确性，但是在多线程环境下，问题就出来了</p>
 <p><strong>简单总结下，volatile是一种轻量级的同步机制，它主要有两个特性：一是保证共享变量对所有线程的可见性；二是禁止指令重排序优化。同时需要注意的是，volatile对于单个的共享变量的读/写具有原子性，但是像num++这种复合操作，volatile无法保证其原子性</strong></p>
-<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><p><a href="https://www.cnblogs.com/xzwblog/p/7227509.html" target="_blank" rel="noopener">https://www.cnblogs.com/xzwblog/p/7227509.html</a></p>
+<h4 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h4><p><a href="https://www.cnblogs.com/xzwblog/p/7227509.html" target="_blank" rel="noopener">https://www.cnblogs.com/xzwblog/p/7227509.html</a></p>
 <p><a href="https://www.jianshu.com/p/98b68c97df9b" target="_blank" rel="noopener">https://www.jianshu.com/p/98b68c97df9b</a></p>
 <p>变量值的共享可以使用public static的形式，所有线程都使用同一个变量，如果想实现每一个线程都有自己的共享变量该如何实现呢？JDK中的ThreadLocal类正是为了解决这样的问题。</p>
 <p>ThreadLocal底层相当于一个map数组，key用来存储当前线程，value用来存储当前线程下共享的数据。它里面有一些方法需要说明一下。</p>
@@ -1010,7 +1010,7 @@ System.out.println("是否停止2？=" + Thread.interrupted());//false
 <blockquote>
 <p>没有ThreadLocal的时候，一个线程在其声明周期内，可能穿过多个层级，多个方法，如果有个对象需要在此线程周期内多次调用，且是跨层级的（线程内共享），通常的做法是通过参数进行传递；而ThreadLocal将变量绑定在线程上，在一个线程周期内，无论“你身处何地”，只需通过其提供的get方法就可轻松获取到对象。极大地提高了对于“线程级变量”的访问便利性。</p>
 </blockquote>
-<h4 id="解决第一个get-返回null"><a href="#解决第一个get-返回null" class="headerlink" title="解决第一个get()返回null"></a>解决第一个get()返回null</h4><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ThreadLocalTest</span> <span class="token punctuation">{</span>
+<h5 id="解决第一个get-返回null"><a href="#解决第一个get-返回null" class="headerlink" title="解决第一个get()返回null"></a>解决第一个get()返回null</h5><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ThreadLocalTest</span> <span class="token punctuation">{</span>
     <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">MyThread</span> <span class="token keyword">extends</span> <span class="token class-name">Thread</span> <span class="token punctuation">{</span>
         <span class="token keyword">private</span> <span class="token keyword">static</span> ThreadLocal<span class="token operator">&lt;</span>Integer<span class="token operator">></span> threadLocal <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ThreadLocal</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
@@ -1040,16 +1040,16 @@ ThreadB threadLocal.get() = 0
 ThreadA threadLocal.get() = 1
 ThreadB threadLocal.get() = 1
 ThreadA threadLocal.get() = 2
-ThreadB threadLocal.get() = 2</code></pre><h4 id="ThreadLocal的内存泄露问题"><a href="#ThreadLocal的内存泄露问题" class="headerlink" title="ThreadLocal的内存泄露问题"></a>ThreadLocal的内存泄露问题</h4><p>&nbsp; &nbsp; &nbsp; &nbsp;根据上面Entry方法的源码，我们知道ThreadLocalMap是使用ThreadLocal的弱引用作为Key的。下图是本文介绍到的一些对象之间的引用关系图，实线表示强引用，虚线表示弱引用：</p>
+ThreadB threadLocal.get() = 2</code></pre><h5 id="ThreadLocal的内存泄露问题"><a href="#ThreadLocal的内存泄露问题" class="headerlink" title="ThreadLocal的内存泄露问题"></a>ThreadLocal的内存泄露问题</h5><p>&nbsp; &nbsp; &nbsp; &nbsp;根据上面Entry方法的源码，我们知道ThreadLocalMap是使用ThreadLocal的弱引用作为Key的。下图是本文介绍到的一些对象之间的引用关系图，实线表示强引用，虚线表示弱引用：</p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/xc1.png" alt="xc"></p>
 <p>&nbsp; &nbsp; &nbsp; &nbsp;如上图，ThreadLocalMap使用ThreadLocal的弱引用作为key，如果一个ThreadLocal没有外部强引用引用他，那么系统gc的时候，这个ThreadLocal势必会被回收，这样一来，ThreadLocalMap中就会出现key为null的Entry，就没有办法访问这些key为null的Entry的value，如果当前线程再迟迟不结束的话，这些key为null的Entry的value就会一直存在一条强引用链：<br>Thread Ref -&gt; Thread -&gt; ThreaLocalMap -&gt; Entry -&gt; value<br>永远无法回收，造成内存泄露。<br>　　<br>&nbsp; &nbsp; &nbsp; &nbsp;ThreadLocalMap设计时的对上面问题的对策：<br>ThreadLocalMap的getEntry函数的流程大概为：</p>
 <p>首先从ThreadLocal的直接索引位置(通过ThreadLocal.threadLocalHashCode &amp; (table.length-1)运算得到)获取Entry e，如果e不为null并且key相同则返回e；<br>如果e为null或者key不一致则向下一个位置查询，如果下一个位置的key和当前需要查询的key相等，则返回对应的Entry。否则，如果key值为null，则擦除该位置的Entry，并继续向下一个位置查询。在这个过程中遇到的key为null的Entry都会被擦除，那么Entry内的value也就没有强引用链，自然会被回收。仔细研究代码可以发现，set操作也有类似的思想，将key为null的这些Entry都删除，防止内存泄露。</p>
 <p>&nbsp; &nbsp; &nbsp; &nbsp;但是光这样还是不够的，上面的设计思路依赖一个前提条件：要调用ThreadLocalMap的getEntry函数或者set函数。这当然是不可能任何情况都成立的，所以很多情况下需要使用者手动调用ThreadLocal的remove函数，手动删除不再需要的ThreadLocal，防止内存泄露。所以JDK建议将ThreadLocal变量定义成private static的，这样的话ThreadLocal的生命周期就更长，由于一直存在ThreadLocal的强引用，所以ThreadLocal也就不会被回收，也就能保证任何时候都能根据ThreadLocal的弱引用访问到Entry的value值，然后remove它，防止内存泄露。<br>关于ThreadLocalMap内部类的简单介绍</p>
 <p><strong>初始容量16，负载因子2/3，解决冲突的方法是再hash法，也就是：在当前hash的基础上再自增一个常量。</strong></p>
-<h3 id="Lock锁"><a href="#Lock锁" class="headerlink" title="Lock锁"></a>Lock锁</h3><p><a href="https://www.cnblogs.com/lucky_dai/p/5498295.html" target="_blank" rel="noopener">https://www.cnblogs.com/lucky_dai/p/5498295.html</a></p>
+<h4 id="Lock锁"><a href="#Lock锁" class="headerlink" title="Lock锁"></a>Lock锁</h4><p><a href="https://www.cnblogs.com/lucky_dai/p/5498295.html" target="_blank" rel="noopener">https://www.cnblogs.com/lucky_dai/p/5498295.html</a></p>
 <p>从Java 5之后，在java.util.concurrent.locks包下提供了另外一种方式来实现同步访问，那就是Lock。</p>
 <p>既然都可以通过synchronized来实现同步访问了，那么为什么还需要提供Lock？这个问题将在下面进行阐述。</p>
-<h4 id="synchronized的缺陷"><a href="#synchronized的缺陷" class="headerlink" title="synchronized的缺陷"></a>synchronized的缺陷</h4><p>synchronized是java中的一个关键字，也就是说是Java语言内置的特性。那么为什么会出现Lock呢？</p>
+<h5 id="synchronized的缺陷"><a href="#synchronized的缺陷" class="headerlink" title="synchronized的缺陷"></a>synchronized的缺陷</h5><p>synchronized是java中的一个关键字，也就是说是Java语言内置的特性。那么为什么会出现Lock呢？</p>
 <p>如果一个代码块被synchronized修饰了，当一个线程获取了对应的锁，并执行该代码块时，其他线程便只能一直等待，等待获取锁的线程释放锁，而这里获取锁的线程释放锁只会有两种情况：</p>
 <p>1）获取锁的线程执行完了该代码块，然后线程释放对锁的占有；</p>
 <p>2）线程执行发生异常，此时JVM会让线程自动释放锁。</p>
@@ -1097,8 +1097,8 @@ lock<span class="token punctuation">.</span><span class="token function">lock</s
 <span class="token punctuation">}</span><span class="token keyword">finally</span><span class="token punctuation">{</span>
     lock<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//释放锁</span>
 <span class="token punctuation">}</span></code></pre>
-<h4 id="Lock接口方法"><a href="#Lock接口方法" class="headerlink" title="Lock接口方法"></a>Lock接口方法</h4><h5 id="lock"><a href="#lock" class="headerlink" title="lock()"></a>lock()</h5><p>先lock()方法是平常使用得最多的一个方法，就是用来获取锁。如果锁已被其他线程获取，则进行等待。</p>
-<h5 id="lockInterruptibly"><a href="#lockInterruptibly" class="headerlink" title="lockInterruptibly()"></a>lockInterruptibly()</h5><p>lockInterruptibly()方法比较特殊，当通过这个方法去获取锁时，如果线程正在等待获取锁，则这个线程能够响应中断，即中断线程的等待状态。也就使说，当两个线程同时通过lock.lockInterruptibly()想获取某个锁时，假若此时线程A获取到了锁，而线程B只有在等待，那么对线程B调用threadB.interrupt()方法能够中断线程B的等待过程。</p>
+<h5 id="Lock接口方法"><a href="#Lock接口方法" class="headerlink" title="Lock接口方法"></a>Lock接口方法</h5><h6 id="lock"><a href="#lock" class="headerlink" title="lock()"></a>lock()</h6><p>先lock()方法是平常使用得最多的一个方法，就是用来获取锁。如果锁已被其他线程获取，则进行等待。</p>
+<h6 id="lockInterruptibly"><a href="#lockInterruptibly" class="headerlink" title="lockInterruptibly()"></a>lockInterruptibly()</h6><p>lockInterruptibly()方法比较特殊，当通过这个方法去获取锁时，如果线程正在等待获取锁，则这个线程能够响应中断，即中断线程的等待状态。也就使说，当两个线程同时通过lock.lockInterruptibly()想获取某个锁时，假若此时线程A获取到了锁，而线程B只有在等待，那么对线程B调用threadB.interrupt()方法能够中断线程B的等待过程。</p>
 <p>由于lockInterruptibly()的声明中抛出了异常，所以lock.lockInterruptibly()必须放在try块中或者在调用lockInterruptibly()的方法外声明抛出InterruptedException。</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">method</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> InterruptedException <span class="token punctuation">{</span>
     lock<span class="token punctuation">.</span><span class="token function">lockInterruptibly</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1112,7 +1112,7 @@ lock<span class="token punctuation">.</span><span class="token function">lock</s
 <p>注意，当一个线程获取了锁之后，是不会被interrupt()方法中断的。因为本身在前面的文章中讲过单独调用interrupt()方法不能中断正在运行过程中的线程，只能中断阻塞过程中的线程。</p>
 <p>因此当通过lockInterruptibly()方法获取某个锁时，如果不能获取到，只有进行等待的情况下，是可以响应中断的。</p>
 <p>而用synchronized修饰的话，当一个线程处于等待某个锁的状态，是无法被中断的，只有一直等待下去。</p>
-<h5 id="tryLock"><a href="#tryLock" class="headerlink" title="tryLock()"></a>tryLock()</h5><p>tryLock()方法是有返回值的，它表示用来尝试获取锁，如果获取成功，则返回true，如果获取失败（即锁已被其他线程获取），则返回false，也就说这个方法无论如何都会立即返回。在拿不到锁时不会一直在那等待。</p>
+<h6 id="tryLock"><a href="#tryLock" class="headerlink" title="tryLock()"></a>tryLock()</h6><p>tryLock()方法是有返回值的，它表示用来尝试获取锁，如果获取成功，则返回true，如果获取失败（即锁已被其他线程获取），则返回false，也就说这个方法无论如何都会立即返回。在拿不到锁时不会一直在那等待。</p>
 <p>tryLock(long time, TimeUnit unit)方法和tryLock()方法是类似的，只不过区别在于这个方法在拿不到锁时会等待一定的时间，在时间期限之内如果还拿不到锁，就返回false。如果如果一开始拿到锁或者在等待期间内拿到了锁</p>
 <pre class=" language-java"><code class="language-java">Lock lock <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>
 <span class="token keyword">if</span><span class="token punctuation">(</span>lock<span class="token punctuation">.</span><span class="token function">tryLock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -1126,7 +1126,7 @@ lock<span class="token punctuation">.</span><span class="token function">lock</s
 <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">//如果不能获取锁，则直接做其他事情</span>
 <span class="token punctuation">}</span></code></pre>
-<h5 id="unlock"><a href="#unlock" class="headerlink" title="unlock()"></a>unlock()</h5><p>解锁 一旦产生异常，没有解锁就会造成当前无法解锁，其他线程一直等待获取锁，<br>所以：</p>
+<h6 id="unlock"><a href="#unlock" class="headerlink" title="unlock()"></a>unlock()</h6><p>解锁 一旦产生异常，没有解锁就会造成当前无法解锁，其他线程一直等待获取锁，<br>所以：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">try</span><span class="token punctuation">{</span>
  <span class="token comment" spellcheck="true">//处理任务</span>
 <span class="token punctuation">}</span><span class="token keyword">catch</span><span class="token punctuation">(</span>Exception ex<span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -1134,8 +1134,8 @@ lock<span class="token punctuation">.</span><span class="token function">lock</s
 <span class="token punctuation">}</span><span class="token keyword">finally</span><span class="token punctuation">{</span>
  lock<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//释放锁</span>
 <span class="token punctuation">}</span> <span class="token comment" spellcheck="true">//如果不能获取锁，则直接做其他事情</span></code></pre>
-<h5 id="newCondition"><a href="#newCondition" class="headerlink" title="newCondition()"></a>newCondition()</h5><pre class=" language-java"><code class="language-java">Condition <span class="token function">newCondition</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<h4 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h4><p>ReentrantLock中除了实现Lock中定义的一些标准函数外，同时提供其他的用于管理锁的public方法：</p>
+<h6 id="newCondition"><a href="#newCondition" class="headerlink" title="newCondition()"></a>newCondition()</h6><pre class=" language-java"><code class="language-java">Condition <span class="token function">newCondition</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h5 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h5><p>ReentrantLock中除了实现Lock中定义的一些标准函数外，同时提供其他的用于管理锁的public方法：</p>
 <p><strong>默认是非公平锁的</strong></p>
 <p><strong>ReentrantLock锁是完全排他锁,同一时间只有一个线程能执行lock.lock()和lock.unlock()之间的代码.</strong></p>
 <pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//传入boolean值,true时create一个公平锁，false为非公平锁</span>
@@ -1158,7 +1158,7 @@ lock<span class="token punctuation">.</span><span class="token function">lock</s
 
  <span class="token comment" spellcheck="true">//是否为公平锁</span>
 <span class="token keyword">boolean</span> <span class="token function">isFair</span><span class="token punctuation">(</span><span class="token punctuation">)</span> </code></pre>
-<h5 id="Condition"><a href="#Condition" class="headerlink" title="Condition"></a>Condition</h5><p>ReentrantLock中另一个重要的应用就是Condition，Condition是Lock上的一个条件，可以多次newCondition()获得多个条件，Condition可用于线程间通信，通过Condition能够更加精细的控制多线程的休眠与唤醒，而且在粒度和性能上都优于Object的通信方法（wait、notify 和 notifyAll）；</p>
+<h6 id="Condition"><a href="#Condition" class="headerlink" title="Condition"></a>Condition</h6><p>ReentrantLock中另一个重要的应用就是Condition，Condition是Lock上的一个条件，可以多次newCondition()获得多个条件，Condition可用于线程间通信，通过Condition能够更加精细的控制多线程的休眠与唤醒，而且在粒度和性能上都优于Object的通信方法（wait、notify 和 notifyAll）；</p>
 <p>Condition 接口的源码：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Condition</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">/**
@@ -1193,7 +1193,7 @@ lock<span class="token punctuation">.</span><span class="token function">lock</s
 <blockquote>
 <p>ReentrantLock.Condition线程通信注意点：<br>1.使用<strong>ReentrantLock.Condition的signal()、await()、signalAll()方法使用之前必须要先进行lock()操作</strong>[记得unlock()]，类似使用Object的notify()、wait()、notifyAll()之前必须要对Object对象进行synchronized操作；否则就会抛IllegalMonitorStateException；<br>2.注意在使用**ReentrantLock.Condition中使用signal()、await()、signalAll()方法，不能和Object的notify()、wait()、notifyAll()方法混用，否则抛出IllegalMonitorStateException`;</p>
 </blockquote>
-<h4 id="ReentrantReadWriteLock"><a href="#ReentrantReadWriteLock" class="headerlink" title="ReentrantReadWriteLock"></a>ReentrantReadWriteLock</h4><p>概述</p>
+<h5 id="ReentrantReadWriteLock"><a href="#ReentrantReadWriteLock" class="headerlink" title="ReentrantReadWriteLock"></a>ReentrantReadWriteLock</h5><p>概述</p>
 <p>&nbsp; &nbsp; &nbsp; &nbsp;ReentrantReadWriteLock是Lock的另一种实现方式，ReentrantLock是一个排他锁，同一时间只允许一个线程访问，而ReentrantReadWriteLock允许多个读线程同时访问，但不允许写线程和读线程、写线程和写线程同时访问。相对于排他锁，提高了并发性。在实际应用中，大部分情况下对共享数据（如缓存）的访问都是读操作远多于写操作，这时ReentrantReadWriteLock能够提供比排他锁更好的并发性和吞吐量。</p>
 <p>&nbsp; &nbsp; &nbsp; &nbsp;读写锁内部维护了两个锁，一个用于读操作，一个用于写操作。所有 ReadWriteLock实现都必须保证 writeLock操作的内存同步效果也要保持与相关 readLock的联系。也就是说，成功获取读锁的线程会看到写入锁之前版本所做的所有更新。</p>
 <p><strong>ReentrantReadWriteLock支持以下功能：</strong></p>
@@ -1202,15 +1202,7 @@ lock<span class="token punctuation">.</span><span class="token function">lock</s
 <p>　　　　3）还允许从写入锁降级为读取锁，其实现方式是：先获取写入锁，然后获取读取锁，最后释放写入锁。但是，从读取锁升级到写入锁是不允许的；</p>
 <p>　　　　4）读取锁和写入锁都支持锁获取期间的中断；</p>
 <p>　　　　5）Condition支持。仅写入锁提供了一个 Conditon 实现；读取锁不支持 Conditon ，readLock().newCondition() 会抛出 UnsupportedOperationException。 </p>
-<h4 id="Lock和synchronized的选择"><a href="#Lock和synchronized的选择" class="headerlink" title="Lock和synchronized的选择"></a>Lock和synchronized的选择</h4><p>总结来说，Lock和synchronized有以下几点不同：</p>
-<p>1）Lock是一个接口，而synchronized是Java中的关键字，synchronized是内置的语言实现；</p>
-<p>2）synchronized在发生异常时，会自动释放线程占有的锁，因此不会导致死锁现象发生；而Lock在发生异常时，如果没有主动通过unLock()去释放锁，则很可能造成死锁现象，因此使用Lock时需要在finally块中释放锁；</p>
-<p>3）Lock可以让等待锁的线程响应中断，而synchronized却不行，使用synchronized时，等待的线程会一直等待下去，不能够响应中断；</p>
-<p>1.可重入性<br>ReentrantLock和synchronized都具有可重入性，写代码synchronized更简单，ReentrantLock需要将lock()和unlock()进行一一对应否则有死锁的风险；</p>
-<p>2.锁的实现方式<br>Synchronized作为Java关键字是依赖于JVM实现的，而ReenTrantLock是JDK实现的，有什么区别，说白了就类似于操作系统来控制实现和用户自己敲代码实现的区别。前者的实现是比较难见到的，后者有直接的源码可供阅读。</p>
-<p>3.公平性<br>ReentrantLock提供了公平锁和非公平锁两种API，开发人员完全可以根据应用场景选择锁的公平性；<br>synchronized是作为Java关键字是依赖于JVM实现，Java团队应该是优先考虑性能问题，因此synchronized是非公平锁。</p>
-<p>在性能上来说，如果竞争资源不激烈，两者的性能是差不多的，而当竞争资源非常激烈时（即有大量线程同时竞争），此时Lock的性能要远远优于synchronized。所以说，在具体使用时要根据适当情况选择。</p>
-<h4 id="ReentrantLock实际开发中的应用场景"><a href="#ReentrantLock实际开发中的应用场景" class="headerlink" title="ReentrantLock实际开发中的应用场景"></a>ReentrantLock实际开发中的应用场景</h4><ol>
+<h5 id="ReentrantLock实际开发中的应用场景"><a href="#ReentrantLock实际开发中的应用场景" class="headerlink" title="ReentrantLock实际开发中的应用场景"></a>ReentrantLock实际开发中的应用场景</h5><ol>
 <li><p>公平锁，线程排序执行，防饿死应用场景；<br>公平锁原则必须按照锁申请时间上先到先得的原则分配机制场景；</p>
 <p> 1）. 实现逻辑 上(包括：软件中函数计算、业务先后流程；硬件中操作实现中顺序逻辑)的顺序排队机制的场景；<br> 软件场景：用户交互View中对用户输入结果分析类，分析过程后面算法依赖上一步结果的场景，例如：推荐算法实现[根据性别、年龄筛选]、阻塞队列的实现；<br> 硬件场景：需要先分析确认用户操作类型硬件版本或者厂家，然后发出操作指令；例如：自动售货机；</p>
 <p> 2）.现实 生活中 时间排序的 公平原则：例如：客服分配，必须是先到先服务，不能出现饿死现象；</p>
@@ -1306,7 +1298,15 @@ try {
     e.printStackTrace();
 } finally {
     lock.unlock();
-}</code></pre><h4 id="公平锁与非公平锁"><a href="#公平锁与非公平锁" class="headerlink" title="公平锁与非公平锁"></a>公平锁与非公平锁</h4><p><strong>公平锁：</strong> 是指多个线程竞争同一资源时[等待同一个锁时]，获取资源的顺序是按照申请锁的先后顺序的；公平锁保障了多线程下各线程获取锁的顺序，先到的线程优先获取锁，有点像早年买火车票一样排队早的人先买到火车票；<br>基本特点： 线程执行会严格按照顺序执行，等待锁的线程不会饿死，但 整体效率相对比较低；</p>
+}</code></pre><h4 id="Lock和synchronized的选择"><a href="#Lock和synchronized的选择" class="headerlink" title="Lock和synchronized的选择"></a>Lock和synchronized的选择</h4><p>总结来说，Lock和synchronized有以下几点不同：</p>
+<p>1）Lock是一个接口，而synchronized是Java中的关键字，synchronized是内置的语言实现；</p>
+<p>2）synchronized在发生异常时，会自动释放线程占有的锁，因此不会导致死锁现象发生；而Lock在发生异常时，如果没有主动通过unLock()去释放锁，则很可能造成死锁现象，因此使用Lock时需要在finally块中释放锁；</p>
+<p>3）Lock可以让等待锁的线程响应中断，而synchronized却不行，使用synchronized时，等待的线程会一直等待下去，不能够响应中断；</p>
+<p>1.可重入性<br>ReentrantLock和synchronized都具有可重入性，写代码synchronized更简单，ReentrantLock需要将lock()和unlock()进行一一对应否则有死锁的风险；</p>
+<p>2.锁的实现方式<br>Synchronized作为Java关键字是依赖于JVM实现的，而ReenTrantLock是JDK实现的，有什么区别，说白了就类似于操作系统来控制实现和用户自己敲代码实现的区别。前者的实现是比较难见到的，后者有直接的源码可供阅读。</p>
+<p>3.公平性<br>ReentrantLock提供了公平锁和非公平锁两种API，开发人员完全可以根据应用场景选择锁的公平性；<br>synchronized是作为Java关键字是依赖于JVM实现，Java团队应该是优先考虑性能问题，因此synchronized是非公平锁。</p>
+<p>在性能上来说，如果竞争资源不激烈，两者的性能是差不多的，而当竞争资源非常激烈时（即有大量线程同时竞争），此时Lock的性能要远远优于synchronized。所以说，在具体使用时要根据适当情况选择。</p>
+<h4 id="公平锁与非公平锁"><a href="#公平锁与非公平锁" class="headerlink" title="公平锁与非公平锁"></a>公平锁与非公平锁</h4><p><strong>公平锁：</strong> 是指多个线程竞争同一资源时[等待同一个锁时]，获取资源的顺序是按照申请锁的先后顺序的；公平锁保障了多线程下各线程获取锁的顺序，先到的线程优先获取锁，有点像早年买火车票一样排队早的人先买到火车票；<br>基本特点： 线程执行会严格按照顺序执行，等待锁的线程不会饿死，但 整体效率相对比较低；</p>
 <p><strong>非公平锁：</strong> 是指多个线程竞争同一资源时，获取资源的顺序是不确定的，一般是抢占式的；非公平锁相对公平锁是增加了获取资源的不确定性，但是整体效率得以提升；<br>基本特点： 整体效率高，线程等待时间片具有不确定性；</p>
 <p>公平锁与非公平锁的测试demo：<br>重入锁ReentrantLock实现公平锁和非公平锁很简单的，因为ReentrantLock构造函数中可以直接传入一个boolean值fair，对公平性进行设置。当fair为true时，表示此锁是公平的，当fair为false时，表示此锁是非公平的锁；<br>来个简单的demo；</p>
 <pre><code>public static void main(String[] args) {
@@ -1318,206 +1318,7 @@ try {
         threadPool.submit(new TestThread(unFairLock, i, "unFairLock"));
     }
 }</code></pre><h3 id="CountDownLatch-闭锁"><a href="#CountDownLatch-闭锁" class="headerlink" title="CountDownLatch 闭锁"></a>CountDownLatch 闭锁</h3><p><a href="https://www.cnblogs.com/liun1994/p/7396026.html" target="_blank" rel="noopener">https://www.cnblogs.com/liun1994/p/7396026.html</a></p>
-<h3 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h3><h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><p><a href="https://segmentfault.com/a/1190000014741369" target="_blank" rel="noopener">https://segmentfault.com/a/1190000014741369</a><br><a href="https://blog.csdn.net/u013541140/article/details/95225769" target="_blank" rel="noopener">https://blog.csdn.net/u013541140/article/details/95225769</a></p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc30.png" alt=""></p>
-<h4 id="1-线程池的优势"><a href="#1-线程池的优势" class="headerlink" title="1 线程池的优势"></a>1 线程池的优势</h4><p>总体来说，线程池有如下的优势：</p>
-<p>（1）降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。</p>
-<p>（2）提高响应速度。当任务到达时，任务可以不需要等到线程创建就能立即执行。</p>
-<p>（3）提高线程的可管理性。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控。</p>
-<h3 id="为什么要使用线程池？"><a href="#为什么要使用线程池？" class="headerlink" title="为什么要使用线程池？"></a>为什么要使用线程池？</h3><p>创建线程和销毁线程的花销是比较大的，这些时间有可能比处理业务的时间还要长。这样频繁的创建线程和销毁线程，再加上业务工作线程，消耗系统资源的时间，可能导致系统资源不足。（我们可以把创建和销毁的线程的过程去掉）</p>
-<h3 id="线程池的作用"><a href="#线程池的作用" class="headerlink" title="线程池的作用"></a>线程池的作用</h3><p>线程池作用就是限制系统中执行线程的数量。</p>
-<p>1、提高效率 创建好一定数量的线程放在池中，等需要使用的时候就从池中拿一个，这要比需要的时候创建一个线程对象要快的多。</p>
-<p>2、方便管理 可以编写线程池管理代码对池中的线程同一进行管理，比如说启动时有该程序创建100个线程，每当有请求的时候，就分配一个线程去工作，如果刚好并发有101个请求，那多出的这一个请求可以排队等候，避免因无休止的创建线程导致系统崩溃。</p>
-<ul>
-<li>线程池作用就是限制系统中执行线程的数量。 </li>
-<li>根据系统的环境情况，可以自动或手动设置线程数量，达到运行的最佳效果。 </li>
-<li>少了浪费了系统资源，多了造成系统拥挤效率不高。 </li>
-<li>用线程池控制线程数量，其他线程排 队等候。 </li>
-<li>一个任务执行完毕，再从队列的中取最前面的任务开始执行。 </li>
-<li>若队列中没有等待进程，线程池的这一资源处于等待。 </li>
-<li>当一个新任务需要运行时，如果线程池中有等待的工作线程，就可以开始运行了；否则进入等待队列。 </li>
-</ul>
-<h3 id="为什么要用线程池"><a href="#为什么要用线程池" class="headerlink" title="为什么要用线程池?"></a>为什么要用线程池?</h3><ol>
-<li>减少了创建和销毁线程的次数，每个工作线程都可以被重复利用，可执行多个任务。 </li>
-<li>可以根据系统的承受能力，调整线程池中工作线线程的数目，防止因为消耗过多的内存，而把服务器累趴下(每个线程需要大约1MB内存，线程开的越多，消耗的内存也就越大，最后死机)。<br>Java里面线程池的顶级接口是Executor，但是严格意义上讲Executor并不是一个线程池，而只是一个执行线程的工具。真正的线程池接口是ExecutorService。 </li>
-</ol>
-<h3 id="比较重要的几个类"><a href="#比较重要的几个类" class="headerlink" title="比较重要的几个类"></a>比较重要的几个类</h3><table>
-<thead>
-<tr>
-<th>类</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ExecutorService</td>
-<td>真正的线程池接口。</td>
-</tr>
-<tr>
-<td>ScheduledExecutorService</td>
-<td>能和Timer/TimerTask类似，解决那些需要任务重复执行的问题。</td>
-</tr>
-<tr>
-<td>ThreadPoolExecutor</td>
-<td>ExecutorService的默认实现。</td>
-</tr>
-<tr>
-<td>ScheduledThreadPoolExecutor</td>
-<td>继承ThreadPoolExecutor的ScheduledExecutorService接口实现，周期性任务调度的类实现。</td>
-</tr>
-</tbody></table>
-<h3 id="Executor和Executors的区别？"><a href="#Executor和Executors的区别？" class="headerlink" title="Executor和Executors的区别？"></a>Executor和Executors的区别？</h3><p>Executors 工具类的不同方法按照我们的需求创建了不同的线程池，来满足业务的需求。 </p>
-<p>Executor 接口对象能执行我们的线程任务。 </p>
-<p>ExecutorService接口继承了Executor接口并进行了扩展，提供了更多的方法我们能获得任务执行的状态并且可以获取任务的返回值。 </p>
-<p>使用ThreadPoolExecutor 可以创建自定义线程池。 </p>
-<p>Future 表示异步计算的结果，他提供了检查计算是否完成的方法，以等待计算的完成，并可以使用get()方法获取计算的结果。</p>
-<h3 id="new-Thread的弊端"><a href="#new-Thread的弊端" class="headerlink" title="new Thread的弊端"></a>new Thread的弊端</h3><pre><code>public class TestNewThread {
-
-    public static void main(String[] args) {
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                System.out.println("start");
-            }
-        }).start();
-    }
-}
-</code></pre><p>执行一个异步任务你还只是如下new Thread吗？ </p>
-<p>那你就out太多了，new Thread的弊端如下： </p>
-<ol>
-<li>每次new Thread新建对象性能差。 </li>
-<li>线程缺乏统一管理，可能无限制新建线程，相互之间竞争，及可能占用过多系统资源导致死机或oom。 </li>
-<li>缺乏更多功能，如定时执行、定期执行、线程中断。 </li>
-</ol>
-<p>相比new Thread，Java提供的四种线程池的好处在于： </p>
-<ol>
-<li>重用存在的线程，减少对象创建、消亡的开销，性能佳。 </li>
-<li>可有效控制最大并发线程数，提高系统资源的使用率，同时避免过多资源竞争，避免堵塞。 </li>
-<li>提供定时执行、定期执行、单线程、并发数控制等功能。</li>
-</ol>
-<h3 id="四种线程池"><a href="#四种线程池" class="headerlink" title="四种线程池"></a>四种线程池</h3><p>Java通过Executors提供四种线程池，分别为： </p>
-<ol>
-<li>newCachedThreadPoo<br>创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。 </li>
-<li>newFixedThreadPool<br>创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。 </li>
-<li>newScheduledThreadPool<br>创建一个定长线程池，支持定时及周期性任务执行。 </li>
-<li>newSingleThreadExecutor<br>创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。</li>
-</ol>
-<h3 id="Executors创建线程池"><a href="#Executors创建线程池" class="headerlink" title="Executors创建线程池"></a>Executors创建线程池</h3><p>Java中创建线程池很简单，只需要调用Executors中相应的便捷方法即可，比如Executors.newFixedThreadPool(int nThreads)，但是便捷不仅隐藏了复杂性，也为我们埋下了潜在的隐患（OOM，线程耗尽）。</p>
-<h4 id="线程池中的几种重要的参数"><a href="#线程池中的几种重要的参数" class="headerlink" title="线程池中的几种重要的参数"></a>线程池中的几种重要的参数</h4><p>corePoolSize就是线程池中的核心线程数量，这几个核心线程，只是在没有用的时候，也不会被回收</p>
-<p>maximumPoolSize就是线程池中可以容纳的最大线程的数量</p>
-<p>keepAliveTime，就是线程池中除了核心线程之外的其他的最长可以保留的时间，因为在线程池中，除了核心线程即使在无任务的情况下也不能被清除，其余的都是有存活时间的，意思就是非核心线程可以保留的最长的空闲时间，</p>
-<p>util，就是计算这个时间的一个单位。</p>
-<p>workQueue，就是等待队列，任务可以储存在任务队列中等待被执行，执行的是FIFIO原则（先进先出）。</p>
-<p>threadFactory，就是创建线程的线程工厂。</p>
-<p>handler,是一种拒绝策略，我们可以在任务满了之后，拒绝执行某些任务。</p>
-<p>Executors创建线程池便捷方法列表：</p>
-<table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>newFixedThreadPool(int nThreads)</td>
-<td>创建固定大小的线程池</td>
-</tr>
-<tr>
-<td>newSingleThreadExecutor()</td>
-<td>创建只有一个线程的线程池</td>
-</tr>
-<tr>
-<td>newCachedThreadPool()</td>
-<td>创建一个不限线程数上限的线程池，任何提交的任务都将立即执行</td>
-</tr>
-</tbody></table>
-<p><strong>小程序使用这些快捷方法没什么问题，对于服务端需要长期运行的程序，创建线程池应该直接使用ThreadPoolExecutor的构造方法。没错，上述Executors方法创建的线程池就是ThreadPoolExecutor。</strong></p>
-<h4 id="ThreadPoolExecutor"><a href="#ThreadPoolExecutor" class="headerlink" title="ThreadPoolExecutor"></a>ThreadPoolExecutor</h4><p>Executors中创建线程池的快捷方法，实际上是调用了ThreadPoolExecutor的构造方法（定时任务使用的是ScheduledThreadPoolExecutor），该类构造方法参数列表如下：</p>
-<pre><code>// Java线程池的完整构造函数
-public ThreadPoolExecutor(
-  int corePoolSize, // 线程池长期维持的线程数，即使线程处于Idle状态，也不会回收。
-  int maximumPoolSize, // 线程数的上限
-  long keepAliveTime, TimeUnit unit, // 超过corePoolSize的线程的idle时长，
-                                     // 超过这个时间，多余的线程会被回收。
-  BlockingQueue&lt;Runnable&gt; workQueue, // 任务的排队队列
-  ThreadFactory threadFactory, // 新线程的产生方式
-  RejectedExecutionHandler handler) // 拒绝策略</code></pre><p>竟然有7个参数，很无奈，构造一个线程池确实需要这么多参数。这些参数中，比较容易引起问题的有corePoolSize, maximumPoolSize, workQueue以及handler：</p>
-<p>corePoolSize和maximumPoolSize设置不当会影响效率，甚至耗尽线程；<br>workQueue设置不当容易导致OOM；<br>handler设置不当会导致提交任务时抛出异常。<br>正确的参数设置方式会在下文给出。</p>
-<p>corePoolSize -&gt; 任务队列 -&gt; maximumPoolSize -&gt; 拒绝策略</p>
-<h5 id="拒绝策略"><a href="#拒绝策略" class="headerlink" title="拒绝策略"></a>拒绝策略</h5><p>当队列满时，此时便是饱和策略发挥作用的时候了，JDK中定义了四种饱和策略：</p>
-<p>1、AbortPolicy：终止策略是默认的饱和策略，当队列满时，会抛出一个RejectExecutionException异常（第一段代码就是例子），客户可以捕获这个异常，根据需求编写自己的处理代码</p>
-<p>2、DiscardPolicy：策略会悄悄抛弃该任务。</p>
-<p>3、DiscardOldestPolicy：策略将会抛弃下一个将要执行的任务，如果此策略配合优先队列PriorityBlockingQueue，该策略将会抛弃优先级最高的任务</p>
-<p>4、CallerRunsPolicy：调用者运行策略，该策略不会抛出异常，不会抛弃任务，而是将任务回退给调用者线程执行（调用execute方法的线程），由于任务需要执行一段时间，所以在此期间不能提交任务，从而使工作线程有时间执行正在执行的任务。</p>
-<h4 id="线程池的关闭"><a href="#线程池的关闭" class="headerlink" title="线程池的关闭"></a>线程池的关闭</h4><p>关闭线程池可以调用shutdownNow和shutdown两个方法来实现</p>
-<p>shutdownNow：对正在执行的任务全部发出interrupt()，停止执行，对还未开始执行的任务全部取消，并且返回还没开始的任务列表。</p>
-<p>shutdown：当我们调用shutdown后，线程池将不再接受新的任务，但也不会去强制终止已经提交或者正在执行中的任务。</p>
-<h4 id="Runnable和Callable"><a href="#Runnable和Callable" class="headerlink" title="Runnable和Callable"></a>Runnable和Callable</h4><p>可以向线程池提交的任务有两种：Runnable和Callable，二者的区别如下：</p>
-<ol>
-<li>方法签名不同，void Runnable.run(), V Callable.call() throws Exception</li>
-<li>是否允许有返回值，Callable允许有返回值</li>
-<li>是否允许抛出异常，Callable允许抛出异常。</li>
-</ol>
-<p>Callable是JDK1.5时加入的接口，作为Runnable的一种补充，允许有返回值，允许抛出异常。</p>
-<p>三种提交任务的方式：<br>提交方式 |    是否关心返回结果<br>—|—<br>Future<t> submit(Callable<t> task) |    是<br>void execute(Runnable command) |    否<br>Future&lt;?&gt; submit(Runnable task)    | 否，虽然返回Future，但是其get()方法总是返回null</t></t></p>
-<h4 id="线程池都有哪几种工作队列"><a href="#线程池都有哪几种工作队列" class="headerlink" title="线程池都有哪几种工作队列"></a>线程池都有哪几种工作队列</h4><p>1、ArrayBlockingQueue</p>
-<p>是一个基于数组结构的有界阻塞队列，此队列按 FIFO（先进先出）原则对元素进行排序。</p>
-<p>2、LinkedBlockingQueue</p>
-<p>一个基于链表结构的阻塞队列，此队列按FIFO （先进先出） 排序元素，吞吐量通常要高于ArrayBlockingQueue。静态工厂方法Executors.newFixedThreadPool()使用了这个队列</p>
-<p>3、SynchronousQueue</p>
-<p>一个不存储元素的阻塞队列。每个插入操作必须等到另一个线程调用移除操作，否则插入操作一直处于阻塞状态，吞吐量通常要高于LinkedBlockingQueue，静态工厂方法Executors.newCachedThreadPool使用了这个队列。</p>
-<p>4、PriorityBlockingQueue</p>
-<p>一个具有优先级的无限阻塞队列。</p>
-<h3 id="如何正确使用线程池"><a href="#如何正确使用线程池" class="headerlink" title="如何正确使用线程池"></a>如何正确使用线程池</h3><p><strong>避免使用无界队列</strong></p>
-<p>不要使用Executors.newXXXThreadPool()快捷方法创建线程池，因为这种方式会使用无界的任务队列，为避免OOM，我们应该使用ThreadPoolExecutor的构造方法手动指定队列的最大长度：</p>
-<pre><code>ExecutorService executorService = new ThreadPoolExecutor(2, 2, 
-                0, TimeUnit.SECONDS, 
-                new ArrayBlockingQueue&lt;&gt;(512), // 使用有界队列，避免OOM
-                new ThreadPoolExecutor.DiscardPolicy());</code></pre><p>明确拒绝任务时的行为<br>任务队列总有占满的时候，这是再submit()提交新的任务会怎么样呢？RejectedExecutionHandler接口为我们提供了控制方式，接口定义如下：</p>
-<pre><code>public interface RejectedExecutionHandler {
-    void rejectedExecution(Runnable r, ThreadPoolExecutor executor);
-}</code></pre><table>
-<thead>
-<tr>
-<th>拒绝策略</th>
-<th>拒绝行为</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>AbortPolicy</td>
-<td>抛出RejectedExecutionException</td>
-</tr>
-<tr>
-<td>DiscardPolicy</td>
-<td>什么也不做，直接忽略</td>
-</tr>
-<tr>
-<td>DiscardOldestPolicy</td>
-<td>丢弃执行队列中最老的任务，尝试为当前提交的任务腾出位置</td>
-</tr>
-<tr>
-<td>CallerRunsPolicy</td>
-<td>直接由提交任务者执行这个任务</td>
-</tr>
-</tbody></table>
-<p>线程池默认的拒绝行为是AbortPolicy，也就是抛出RejectedExecutionHandler异常，该异常是非受检异常，很容易忘记捕获。如果不关心任务被拒绝的事件，可以将拒绝策略设置成DiscardPolicy，这样多余的任务会悄悄的被忽略。</p>
-<pre><code>ExecutorService executorService = new ThreadPoolExecutor(2, 2, 
-                0, TimeUnit.SECONDS, 
-                new ArrayBlockingQueue&lt;&gt;(512), 
-                new ThreadPoolExecutor.DiscardPolicy());// 指定拒绝策略</code></pre><h3 id="submit-和execute-的以及shutdown-和shutdownNow-的区别"><a href="#submit-和execute-的以及shutdown-和shutdownNow-的区别" class="headerlink" title="submit()和execute()的以及shutdown()和shutdownNow()的区别"></a>submit()和execute()的以及shutdown()和shutdownNow()的区别</h3><ul>
-<li>submit()，提交一个线程任务，可以接受回调函数的返回值吗，适用于需要处理返回着或者异常的业务场景 </li>
-<li>execute()，执行一个任务，没有返回值 </li>
-<li>shutdown()，表示不再接受新任务，但不会强行终止已经提交或者正在执行中的任务 </li>
-<li>shutdownNow()，对于尚未执行的任务全部取消，正在执行的任务全部发出interrupt()，停止执行 </li>
-</ul>
-<h3 id="五种线程池的适应场景"><a href="#五种线程池的适应场景" class="headerlink" title="五种线程池的适应场景"></a>五种线程池的适应场景</h3><ul>
-<li>newCachedThreadPool：用来创建一个可以无限扩大的线程池，适用于服务器负载较轻，执行很多短期异步任务。 </li>
-<li>newFixedThreadPool：创建一个固定大小的线程池，因为采用无界的阻塞队列，所以实际线程数量永远不会变化，适用于可以预测线程数量的业务中，或者服务器负载较重，对当前线程数量进行限制。 </li>
-<li>newSingleThreadExecutor：创建一个单线程的线程池，适用于需要保证顺序执行各个任务，并且在任意时间点，不会有多个线程是活动的场景。 </li>
-<li>newScheduledThreadPool：可以延时启动，定时启动的线程池，适用于需要多个后台线程执行周期任务的场景。 </li>
-<li>newWorkStealingPool：创建一个拥有多个任务队列的线程池，可以减少连接数，创建当前可用cpu数量的线程来并行执行，适用于大耗时的操作，可以并行来执行</li>
-</ul>
-<h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><script>
+<h3 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h3><h3 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h3><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -1669,8 +1470,8 @@ Queue接口与List、Set同一级别，都是继承了Collection接口。LinkedL
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/线程池队列/" class="post-category">
-                                    线程池队列
+                            <a href="/categories/java/" class="post-category">
+                                    java
                                 </a>
                             
                             
@@ -1680,8 +1481,8 @@ Queue接口与List、Set同一级别，都是继承了Collection接口。LinkedL
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
+                    <a href="/tags/Java基础/">
+                        <span class="chip bg-color">Java基础</span>
                     </a>
                     
                 </div>
@@ -1837,7 +1638,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">207.3k</span>&nbsp;字
+                class="white-color">203.8k</span>&nbsp;字
              -->
             <!-- 
             
