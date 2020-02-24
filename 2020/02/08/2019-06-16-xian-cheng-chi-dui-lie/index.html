@@ -495,14 +495,14 @@ Queue接口与List、Set同一级别，都是继承了Collection接口。LinkedL
 <li>newSingleThreadExecutor<br>创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。</li>
 </ol>
 <h3 id="Executors创建线程池"><a href="#Executors创建线程池" class="headerlink" title="Executors创建线程池"></a>Executors创建线程池</h3><p>Java中创建线程池很简单，只需要调用Executors中相应的便捷方法即可，比如Executors.newFixedThreadPool(int nThreads)，但是便捷不仅隐藏了复杂性，也为我们埋下了潜在的隐患（OOM，线程耗尽）。</p>
-<h4 id="线程池中的几种重要的参数"><a href="#线程池中的几种重要的参数" class="headerlink" title="线程池中的几种重要的参数"></a>线程池中的几种重要的参数</h4><p>corePoolSize就是线程池中的核心线程数量，这几个核心线程，只是在没有用的时候，也不会被回收</p>
-<p>maximumPoolSize就是线程池中可以容纳的最大线程的数量</p>
-<p>keepAliveTime，就是线程池中除了核心线程之外的其他的最长可以保留的时间，因为在线程池中，除了核心线程即使在无任务的情况下也不能被清除，其余的都是有存活时间的，意思就是非核心线程可以保留的最长的空闲时间，</p>
-<p>util，就是计算这个时间的一个单位。</p>
-<p>workQueue，就是等待队列，任务可以储存在任务队列中等待被执行，执行的是FIFIO原则（先进先出）。</p>
-<p>threadFactory，就是创建线程的线程工厂。</p>
-<p>handler,是一种拒绝策略，我们可以在任务满了之后，拒绝执行某些任务。</p>
-<p>Executors创建线程池便捷方法列表：</p>
+<h4 id="线程池中的几种重要的参数"><a href="#线程池中的几种重要的参数" class="headerlink" title="线程池中的几种重要的参数"></a>线程池中的几种重要的参数</h4><p>corePoolSize：就是线程池中的核心线程数量，这几个核心线程，<strong>只是在没有用的时候，也不会被回收</strong></p>
+<p>maximumPoolSize：就是线程池中可以容纳的最大线程的数量</p>
+<p>keepAliveTime：线程池中除了核心线程之外的其他的最长可以保留的时间，因为在线程池中，除了核心线程即使在无任务的情况下也不能被清除，其余的都是有存活时间的，意思就是非核心线程可以保留的最长的空闲时间，</p>
+<p>unit：计算这个时间的一个单位。</p>
+<p>workQueue：等待队列，任务可以储存在任务队列中等待被执行，执行的是FIFIO原则（先进先出）。</p>
+<p>threadFactory：创建线程的线程工厂。</p>
+<p>handler：是一种拒绝策略，我们可以在任务满了之后，拒绝执行某些任务。</p>
+<p><strong>Executors创建线程池便捷方法列表</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -749,11 +749,11 @@ public ThreadPoolExecutor(
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            关于线程的文章https://www.javazhiyin.com/32391.html
+                            关于线程的文章并发面试题https://www.javazhiyin.com/32391.html
 
 单核 CPU 和多核 CPU来思考一个问题吧。假如 CPU 只有一个，核数也只有一个，多线程还会有优势吗？
 闭上眼，让思维旋转跳跃会。
-来看答案吧。
+来
                         
                     </div>
                     <div class="publish-info">
@@ -974,7 +974,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">169.1k</span>&nbsp;字
+                class="white-color">173.6k</span>&nbsp;字
              -->
             <!-- 
             

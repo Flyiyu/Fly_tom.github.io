@@ -343,14 +343,14 @@ Java语言概述请描述一下javajava是一个面向对象的编程语言，�
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        43.6k
+                        45.4k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        162 分
+                        169 分
                     </div>
                     
                 
@@ -367,7 +367,7 @@ Java语言概述请描述一下javajava是一个面向对象的编程语言，�
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>包括内容：基础知识点，集合类，队列，线程（基础），io</p>
-<h2 id="Java语言概述"><a href="#Java语言概述" class="headerlink" title="Java语言概述"></a>Java语言概述</h2><h3 id="请描述一下java"><a href="#请描述一下java" class="headerlink" title="请描述一下java"></a>请描述一下java</h3><p>java是一个面向对象的编程语言，有继承 封装 多态的特性，同时java也是一开源的语言，一次编译到处运行，有很完善的生态系统，包括各种各样的企业级框架。</p>
+<h2 id="Java语言概述"><a href="#Java语言概述" class="headerlink" title="Java语言概述"></a>Java语言概述</h2><h3 id="请描述一下java"><a href="#请描述一下java" class="headerlink" title="请描述一下java"></a>请描述一下java</h3><p>java是一个面向对象的编程语言，有继承 封装 多态的特性，同时java也是一开源的语言，一次编译到处运行，有很完善的生态系统，包括各种各样的企业级框架，同时也不用我们自己管理内存问题（但是要注意内存分配），有完善的垃圾回收机制</p>
 <h3 id="jdk工具部分exe解释"><a href="#jdk工具部分exe解释" class="headerlink" title="jdk工具部分exe解释"></a><strong>jdk工具部分exe解释</strong></h3><pre><code>* jar.exe       jar包
 * javadoc.exe   文档生成器
 * Java.exe      解释器
@@ -393,7 +393,15 @@ Java语言概述请描述一下javajava是一个面向对象的编程语言，�
 <p>而我们所说的类加载过程即是指JVM虚拟机把.class文件中类信息加载进内存，并进行解析生成对应的class对象的过程。</p>
 <p>举个通俗点的例子来说，JVM在执行某段代码时，遇到了class A， 然而此时内存中并没有class A的相关信息，于是JVM就会到相应的class文件中去寻找class A的类信息，并加载进内存中，这就是我们所说的类加载过程。</p>
 <p>由此可见，JVM不是一开始就把所有的类都加载进内存中，而是只有第一次遇到某个需要运行的类时才会加载，且只加载一次。</p>
-<h2 id="基础知识点"><a href="#基础知识点" class="headerlink" title="基础知识点"></a>基础知识点</h2><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><hr>
+<h3 id="Java中New一个对象是个怎么样的过程？"><a href="#Java中New一个对象是个怎么样的过程？" class="headerlink" title="Java中New一个对象是个怎么样的过程？"></a>Java中New一个对象是个怎么样的过程？</h3><p><a href="https://blog.csdn.net/qq_27686779/article/details/102942215" target="_blank" rel="noopener">https://blog.csdn.net/qq_27686779/article/details/102942215</a></p>
+<h3 id="Java创建对象的几种方式"><a href="#Java创建对象的几种方式" class="headerlink" title="Java创建对象的几种方式"></a>Java创建对象的几种方式</h3><p>其实创建对象的方式有四种：</p>
+<ul>
+<li>用new关键字创建</li>
+<li>调用对象的clone方法</li>
+<li>利用反射，调用Class类的或者是Constructor类的newInstance（）方法</li>
+<li>用反序列化，调用ObjectInputStream类的readObject（）方法</li>
+</ul>
+<h3 id="JVM的垃圾回收机制"><a href="#JVM的垃圾回收机制" class="headerlink" title="JVM的垃圾回收机制"></a>JVM的垃圾回收机制</h3><h2 id="基础知识点"><a href="#基础知识点" class="headerlink" title="基础知识点"></a>基础知识点</h2><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><hr>
 <p>String是类类型，不是基本类型。</p>
 <p>基本类型 有八种：整型 （4种）字符型 （1种）浮点型 （2种）布尔型（1种）</p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ms0002.jpg" alt=""></p>
@@ -611,10 +619,26 @@ break语句终止某个循环，程序跳转到循环块外的下一条语句</c
         arr12[j++]=i;
     }
     System.out.println(Arrays.toString(arr12));
-}</code></pre><h3 id="继承-封装-多态-抽象"><a href="#继承-封装-多态-抽象" class="headerlink" title="继承 封装 多态 抽象"></a>继承 封装 多态 抽象</h3><h4 id="抽象"><a href="#抽象" class="headerlink" title="抽象"></a>抽象</h4><p>抽象就是将一类实体的共同特性抽象出来，封装在一个抽象类中，所以抽象在面向对象语言是由抽象类来体现的。</p>
+}</code></pre><h3 id="OOP-继承-封装-多态-抽象"><a href="#OOP-继承-封装-多态-抽象" class="headerlink" title="OOP 继承 封装 多态 抽象"></a>OOP 继承 封装 多态 抽象</h3><p><strong>笔试回答即可</strong></p>
+<p>多态</p>
+<blockquote>
+<p>多态是指程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定，主要体现在编译时的多态性（重载），运行时的多态性（重写）</p>
+</blockquote>
+<p>继承</p>
+<blockquote>
+<p>继承是从已有类创建新类的过程，子类可以拥有父类的方法和变量，同时可以添加自己的方法和变量，提高了代码的可重用性</p>
+</blockquote>
+<p>封装</p>
+<blockquote>
+<p>封装是指隐藏对象的属性，只对外提供访问的接口，提高了代码的安全性</p>
+</blockquote>
+<p>抽象</p>
+<blockquote>
+<p>抽象就是将一类实体的共同特性抽象出来，封装在一个抽象类中，所以抽象在面向对象语言是由抽象类来体现的。</p>
+</blockquote>
 <h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><h5 id="01-什么是封装"><a href="#01-什么是封装" class="headerlink" title="01.什么是封装"></a>01.什么是封装</h5><ul>
 <li>封装概述<ul>
-<li>是指隐藏对象的属性和实现细节，仅对外提供公共访问方式。</li>
+<li>是指隐藏对象的属性和实现细节，仅对外提供公共访问方式，提高了代码的安全性</li>
 </ul>
 </li>
 </ul>
@@ -626,8 +650,7 @@ break语句终止某个循环，程序跳转到循环块外的下一条语句</c
 </ul>
 </li>
 </ul>
-<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>目的：实现代码的复用和维护性。</p>
-<p><code>继承</code>：<code>继承</code>是从已有类得到<code>继承</code>信息创建新类的过程。提供<code>继承</code>信息的类被称为父类（超类、基类）；得到<code>继承</code>信息的类被称为子类（派生类）。<code>继承</code>让变化中的软件系统有了一定的延续性，同时<code>继承</code>也是<code>封装</code>程序中可变因素的重要手段。</p>
+<h4 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h4><p>就是保留父类的属性，开扩新的东西。通过子类可以实现继承，子类继承父类的所有属性，同时也可以直接添加和修改属性，提高了代码的可重用性</p>
 <h5 id="继承好处和弊端"><a href="#继承好处和弊端" class="headerlink" title="继承好处和弊端"></a>继承好处和弊端</h5><ul>
 <li><strong>继承的好处</strong><ul>
 <li>a:提高了代码的复用性</li>
@@ -643,7 +666,10 @@ break语句终止某个循环，程序跳转到循环块外的下一条语句</c
 </ul>
 </li>
 </ul>
-<h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><h5 id="01-什么是多态"><a href="#01-什么是多态" class="headerlink" title="01.什么是多态"></a>01.什么是多态</h5><ul>
+<h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><blockquote>
+<p>多态是指程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定，主要体现在编译时的多态性（重载），运行时的多态性（重写）</p>
+</blockquote>
+<h5 id="01-什么是多态"><a href="#01-什么是多态" class="headerlink" title="01.什么是多态"></a>01.什么是多态</h5><ul>
 <li>什么是多态？<ul>
 <li>多态是指程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定，即一个引用变量倒底会指向哪个类的实例对象，该引用变量发出的方法调用到底是哪个类中实现的方法，必须在由程序运行期间才能决定。因为在程序运行时才确定具体的类，这样，不用修改源程序代码，就可以让引用变量绑定到各种不同的类实现上，从而导致该引用调用的具体方法随之改变，即不修改程序代码就可以改变程序运行时所绑定的具体代码，让程序可以选择多个运行状态，这就是多态性。</li>
 </ul>
@@ -1131,6 +1157,7 @@ public static void main(String args[]) {
 </ul>
 <p><strong>默认IntegerCache.low 是-127，Integer.high是128，如果在这个区间[-128,127]内，他就会把变量i当做一个变量，放到内存中，用比较是会得出true；但如果不在这个范围内，就会去new一个Integer对象，当运用“”时，会比较Integer两个对象地址，得出false。</strong></p>
 <p><strong>所以最好使用equals来比较包装类型是否相等（阿里编码规范）</strong></p>
+<p>== 对于基本类型来说是值比较，对于引用类型来说是比较的是引用；而 equals 默认情况下是引用比较，只是很多类重写了 equals 方法，比如 String、Integer 等把它变成了值比较，所以一般情况下 equals 比较的是值是否相等。</p>
 <h3 id="equals"><a href="#equals" class="headerlink" title="equals()"></a>equals()</h3><ul>
 <li><p>对于基本类型，== 判断两个值是否相等，基本类型没有 equals() 方法。</p>
 </li>
@@ -1304,23 +1331,9 @@ Constant pool:
     <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> original<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>hash <span class="token operator">=</span> original<span class="token punctuation">.</span>hash<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<p><strong>在 Java 8 中，String 内部使用 char 数组存储数据。</strong></p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">String</span>
-    <span class="token keyword">implements</span> <span class="token class-name">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>Serializable</span><span class="token punctuation">,</span> Comparable<span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">,</span> CharSequence <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">/** The value is used for character storage. */</span>
-    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">char</span> value<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
-<p><strong>在 Java 9 之后，String 类的实现改用 byte 数组存储字符串，同时使用 coder 来标识使用了哪种编码。</strong></p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">String</span>
-    <span class="token keyword">implements</span> <span class="token class-name">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>Serializable</span><span class="token punctuation">,</span> Comparable<span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">,</span> CharSequence <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">/** The value is used for character storage. */</span>
-    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> value<span class="token punctuation">;</span>
-
-    <span class="token comment" spellcheck="true">/** The identifier of the encoding used to encode the bytes in {@code value}. */</span>
-    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">byte</span> coder<span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
 <p><strong>value 数组被声明为 final，这意味着 value 数组初始化之后就不能再引用其它数组。并且 String 内部没有改变 value 数组的方法，因此可以保证 String 不可变。</strong></p>
-<h4 id="String-StringBuffer-and-StringBuilder"><a href="#String-StringBuffer-and-StringBuilder" class="headerlink" title="String, StringBuffer and StringBuilder"></a>String, StringBuffer and StringBuilder</h4><p><strong>1. 可变性</strong></p>
+<h4 id="String-StringBuffer-and-StringBuilder"><a href="#String-StringBuffer-and-StringBuilder" class="headerlink" title="String, StringBuffer and StringBuilder"></a>String, StringBuffer and StringBuilder</h4><p>String 和 StringBuffer、StringBuilder 的区别在于 String 声明的是不可变的对象，每次操作都会生成新的 String 对象，然后将指针指向新的 String 对象，而 StringBuffer、StringBuilder 可以在原有对象的基础上进行操作，所以在经常改变字符串内容的情况下最好不要使用 String。</p>
+<p><strong>1. 可变性</strong></p>
 <ul>
 <li><p>String 不可变</p>
 </li>
@@ -1776,9 +1789,15 @@ NegativeArraySizeException 为数组分配的空间是负数异常</code></pre><
 <li><p>对于基本类型，final 使数值不变；</p>
 </li>
 <li><p>对于引用类型，final 使引用不变，表示该引用只有一次指向对象的机会，也就不能引用其它对象，但是被引用的对象本身是可以修改的。</p>
+<ul>
+<li>如果final修饰一个引用类型时，则在对其初始化之后便不能再让其指向其他对象了，但该引用所指向的对象的内容是可以发生变化的。本质上是一回事，因为引用的值是一个地址，final要求值，即地址的值不发生变化。</li>
+</ul>
 </li>
 </ul>
-<h3 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h3><p>finally 是用于异常处理的场面，无论是否有异常抛出，都会执行</p>
+<h4 id="final关键字的好处："><a href="#final关键字的好处：" class="headerlink" title="final关键字的好处："></a>final关键字的好处：</h4><p>（1）final关键字提高了性能。JVM和Java应用都会缓存final变量。</p>
+<p>（2）final变量可以安全的在多线程环境下进行共享，而不需要额外的同步开销。</p>
+<p>（3）使用final关键字，JVM会对方法、变量及类进行优化。</p>
+<h4 id="final原理"><a href="#final原理" class="headerlink" title="final原理"></a>final原理</h4><h4 id="final通过反射是否可以修改"><a href="#final通过反射是否可以修改" class="headerlink" title="final通过反射是否可以修改"></a>final通过反射是否可以修改</h4><h3 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h3><p>finally 是用于异常处理的场面，无论是否有异常抛出，都会执行</p>
 <h3 id="finalize"><a href="#finalize" class="headerlink" title="finalize"></a>finalize</h3><p>finalize是Object的方法，所有类都继承了该方法。 当一个对象满足垃圾回收的条件，并且被回收的时候，其finalize()方法就会被调用</p>
 <h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h3><ul>
 <li>它的作用是什么？<ul>
@@ -1991,12 +2010,15 @@ System.out.println(“当前用户是：” + user);
 <p>1) 首先查看jdk中Collection类的源码后:</p>
 <pre><code>public interface Collection&lt;E&gt; extends Iterable&lt;E&gt; {</code></pre><p>通过查看可以发现Collection是一个接口类，其继承了java迭代接口Iterable</p>
 <p><strong>Collection接口中的方法如下:</strong><br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc13.png" alt=""></p>
-<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><p><strong>Jdk1.7之前ArrayList默认大小是10，JDK1.7之后是0(JDK1.8首次new的时候为0，当第一次添加的时候扩容为10)，JDK差异，每次约按1.5倍扩容。 JDK8 中ArrayList扩容的实现是通过grow()方法里使用语句newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1)（即1.5倍扩容）计算容量，然后调用Arrays.copyof()方法进行对原数组进行复制。</strong></p>
+<h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><h4 id="List-三个子类的区别"><a href="#List-三个子类的区别" class="headerlink" title="List 三个子类的区别"></a>List 三个子类的区别</h4><p>ArrayList：底层使用object[]数组实现，内存地址都是连续的便于索引，查询快；在新增的时候需要申请一块连续的内存空间，所以增删比较慢。</p>
+<p>LinkedList: 底层是基于链表实现，链表内存是散乱的，在储存自身内存地址的<br>同时，还储存着下一个元素的内存地址，所以查询慢，增删快。</p>
+<p>Vector：底层数组实现，由于所有的方法都是采用synchronize，线程安全，效率慢。</p>
+<h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><p><strong>Jdk1.7之前ArrayList默认大小是10，JDK1.7之后是0(JDK1.8首次new的时候为0，当第一次添加的时候扩容为10)，JDK差异，每次约按1.5倍扩容。 JDK8 中ArrayList扩容的实现是通过grow()方法里使用语句newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1)（即1.5倍扩容）计算容量，然后调用Arrays.copyof()方法进行对原数组进行复制。</strong></p>
 <p><strong>若想要一个高性能，又是线程安全的ArrayList，可以使用Collections.synchronizedList(list);方法或者使用CopyOnWriteArrayList集合</strong></p>
 <ul>
 <li><p>ArrayList底层其实就是一个Object类型的数组，非线程安全的集合。查询元素快，插入，删除中间元素慢，初始化的长度为10，每次扩容为原大小的1.5倍，可以通过构造方法改变初始容量大小。</p>
 </li>
-<li><p>ArrayList快在下标定位，慢在数组复制。</p>
+<li><p>ArrayList快在下标定位，慢在数组复制。当从 ArrayList 的中间位置插入或者删除元素时，需要对数组进行复制、移动、代价比较高。因此，它适合随机查找和遍历，不适合插入和删除。</p>
 </li>
 <li><p>由于每次添加的时候，通过扩容机制判断原数组是否还有空间，若没有则重新实例化一个空间更大的新数组，把旧数组的数据拷贝到新数组中，耗费时间和性能</p>
 </li>
@@ -2072,6 +2094,9 @@ System.out.println(“当前用户是：” + user);
 <p>在选择的时候，如果顺序很重要，则可以选择TreeSet，如果操作性能和时间效率很重要的话，则可以选择HashSet</p>
 </blockquote>
 <h4 id="HashSet集合"><a href="#HashSet集合" class="headerlink" title="HashSet集合"></a>HashSet集合</h4><blockquote>
+<p>HashSet 存储元素的顺序并不是按照存入时的顺序（和 List 显然不同） 而是按照哈希值来存的所以取数据也是按照哈希值取得，顺序不同</p>
+</blockquote>
+<blockquote>
 <p>当向HashSet集合中存入一个元素时，HashSet会调用该对象的hashCode()方法来得到该对象的hashCode值，然后根据 hashCode值来决定该对象在HashSet中存储位置，存取速度比较快。</p>
 </blockquote>
 <ul>
@@ -2112,7 +2137,10 @@ System.out.println(“当前用户是：” + user);
 <li>性能比HashSet差一丢丢，因为要维护一个双向链表</li>
 <li>初始容量与迭代无关，LinkedHashSet迭代的是双向链表</li>
 </ul>
-<h3 id="遍历set集合"><a href="#遍历set集合" class="headerlink" title="遍历set集合"></a>遍历set集合</h3><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<h4 id="适用场景分析"><a href="#适用场景分析" class="headerlink" title="适用场景分析"></a>适用场景分析</h4><blockquote>
+<p>HashSet是基于Hash算法实现的，其性能通常都优于TreeSet。为快速查找而设计的Set，我们通常都应该使用HashSet，在我们需要排序的功能时，我们才使用TreeSet。</p>
+</blockquote>
+<h4 id="遍历set集合"><a href="#遍历set集合" class="headerlink" title="遍历set集合"></a>遍历set集合</h4><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
 <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     Set<span class="token operator">&lt;</span>String<span class="token operator">></span> set <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     set<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"one"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -2137,17 +2165,38 @@ System.out.println(“当前用户是：” + user);
 <li>List接口：存储一组不唯一，有序的对象</li>
 <li>Set接口：存储一组唯一，无序的对象</li>
 </ul>
-<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p><strong>Map接口不是继承Collection接口；Map接口用于维护键／值对（key/value pairs），他的实现类有:</strong><br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc15.png" alt=""></p>
-<h3 id="Map-常用方法"><a href="#Map-常用方法" class="headerlink" title="Map 常用方法"></a>Map 常用方法</h3><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc16.png" alt=""></p>
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p><a href="https://www.javazhiyin.com/54393.html" target="_blank" rel="noopener">https://www.javazhiyin.com/54393.html</a></p>
+<p><strong>Map接口不是继承Collection接口；Map接口用于维护键／值对（key/value pairs），他的实现类有:</strong><br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc36.png" alt=""></p>
+<h4 id="Map-常用方法"><a href="#Map-常用方法" class="headerlink" title="Map 常用方法"></a>Map 常用方法</h4><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc16.png" alt=""></p>
 <h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><p><strong>底层是哈希表数据结构，线程是不同步的，可以存入null键，null值。要保证键的唯一性，需要覆盖hashCode方法，和equals方法。</strong></p>
+<h5 id="HashMap的底层实现"><a href="#HashMap的底层实现" class="headerlink" title="HashMap的底层实现"></a>HashMap的底层实现</h5><blockquote>
+<p><strong>JDK1.8之前</strong></p>
+</blockquote>
+<p>JDK1.8 之前 HashMap 由 <strong>数组+链表</strong> 组成的（<strong>“链表散列”</strong> 即数组和链表的结合体），数组是 HashMap 的主体，链表则是主要为了解决哈希冲突而存在的（HashMap 采用 “拉链法也就是链地址法” 解决冲突），如果定位到的数组位置不含链表（当前 entry 的 next 指向 null ）,那么对于查找，添加等操作很快，仅需一次寻址即可；如果定位到的数组包含链表，对于添加操作，其时间复杂度依然为 O(1)，因为最新的 Entry 会插入链表头部(<strong>Java 7存入链表头部，Java 8存入链表尾部</strong>)，即需要简单改变引用链即可，而对于查找操作来讲，此时就需要遍历链表，然后通过 key 对象的 equals 方法逐一比对查找.</p>
+<blockquote>
+<p>所谓 <strong>“拉链法”</strong> 就是将链表和数组相结合。也就是说创建一个链表数组，数组中每一格就是一个链表。若遇到哈希冲突，则将冲突的值加到链表中即可。</p>
+</blockquote>
+<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc35.png" alt=""></p>
+<blockquote>
+<p><strong>JDK1.8之后</strong></p>
+</blockquote>
+<p>相比于之前的版本， JDK1.8之后在解决哈希冲突时有了较大的变化，当链表长度大于阈值（<strong>默认为8</strong>）时，<strong>将链表转化为红黑树</strong>，<strong>以减少搜索时间</strong>。<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc35.jpeg" alt=""></p>
 <h4 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h4><p>! 从Hashtable的命名规范就可以看出，t没有大写，并不是我写错了</p>
-<p>底层是哈希表数据结构，不可以存入null键null值。该集合是线程同步的。</p>
+<p>数组+链表组成的，数组是 HashMap 的主体，链表则是主要为了解决哈希冲突而存在的，不可以存入null键null值。该集合是线程同步的。</p>
 <p><strong>它是遗留类，不应该去使用它。现在可以使用 ConcurrentHashMap 来支持线程安全，并且 ConcurrentHashMap 的效率会更高，因为 ConcurrentHashMap 引入了分段锁。</strong></p>
 <h4 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h4><p>底层是二叉树数据结构。线程不同步。可以用于给map集合中的键进行排序。</p>
 <h4 id="LinkedHashMap："><a href="#LinkedHashMap：" class="headerlink" title="LinkedHashMap："></a>LinkedHashMap：</h4><p>该子类基于哈希表又融入了链表。可以Map集合进行增删提高效率。</p>
-<h4 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h4><p>该类是线程安全的 Map 实现。与 Hashtable 相似，但 Hashtable 的 synchronized 是针对整张Hash表的，即每次锁住整张表让线程独占，ConcurrentHashMap 允许多个修改操作并发进行，其关键在于使用了锁分离技术。它使用了多个锁来控制对 hash 表的不同部分进行的修改。ConcurrentHashMap 内部使用段(Segment)来表示这些不同的部分，每个段其实就是一个小的hash table，它们有自己的锁。只要多个修改操作发生在不同的段上，它们就可以并发进行。</p>
+<p>LinkedHashMap是一个根据某种规则有序的hashmap。根据名字，我们也可以看出这个集合是有hash散列的功能的同时也有顺序。hashmap是无法根据某种顺序来访问数据的，例如放入集合的元素先后的顺序。list都有这个功能，可以根据放入集合的先后来访问具体的数据。</p>
+<p><a href="https://www.javazhiyin.com/34466.html" target="_blank" rel="noopener">https://www.javazhiyin.com/34466.html</a></p>
+<h4 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h4><p>1.8之前ConcurrentHashMap 底层采用 <strong>分段的数组+链表 实现</strong>，该类是线程安全的 Map 实现。与 Hashtable 相似，但 Hashtable 的 synchronized 是针对整张Hash表的，即每次锁住整张表让线程独占，ConcurrentHashMap 允许多个修改操作并发进行，其关键在于使用了锁分离技术。它使用了多个锁来控制对 hash 表的不同部分进行的修改。ConcurrentHashMap 内部使用段(Segment)来表示这些不同的部分，每个段其实就是一个小的hash table，它们有自己的锁。只要多个修改操作发生在不同的段上，它们就可以并发进行。</p>
+<p>到了 JDK1.8 的时候已经<strong>摒弃了Segment</strong>的概念，而是直接用 <strong>Node 数组+链表/红黑树</strong>的数据结构来实现，并发控制使用 synchronized 和 CAS 来操作。（JDK1.6以后 对 synchronized锁做了很多优化） 整个看起来就像是优化过且线程安全的 HashMap，虽然在JDK1.8中还能看到 Segment 的数据结构，但是已经简化了属性，只是为了兼容旧版本；</p>
+<blockquote>
+<p>synchronized只锁定当前链表或红黑二叉树的首节点，这样只要hash不冲突，就不会产生并发，效率又提升N倍。</p>
+</blockquote>
+<p>JDK1.7的ConcurrentHashMap：<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc37.jpg" alt=""></p>
+<p>JDK1.8的ConcurrentHashMap（TreeBin: 红黑二叉树节点；Node: 链表节点）：<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc38.png" alt=""></p>
 <p><a href="https://www.cnblogs.com/huangjuncong/p/9478505.html" target="_blank" rel="noopener">https://www.cnblogs.com/huangjuncong/p/9478505.html</a></p>
-<h3 id="遍历map集合"><a href="#遍历map集合" class="headerlink" title="遍历map集合"></a>遍历map集合</h3><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<h4 id="遍历map集合"><a href="#遍历map集合" class="headerlink" title="遍历map集合"></a>遍历map集合</h4><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
 <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test3</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"one"</span><span class="token punctuation">,</span> <span class="token string">"1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -2184,7 +2233,7 @@ System.out.println(“当前用户是：” + user);
         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Key = "</span> <span class="token operator">+</span> key <span class="token operator">+</span> <span class="token string">", Value = "</span> <span class="token operator">+</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<h3 id="三种集合在实际工作用到的地方"><a href="#三种集合在实际工作用到的地方" class="headerlink" title="三种集合在实际工作用到的地方"></a>三种集合在实际工作用到的地方</h3><h3 id="并发容器"><a href="#并发容器" class="headerlink" title="并发容器"></a>并发容器</h3><p>容器指的是集合框架</p>
+<h3 id="并发容器"><a href="#并发容器" class="headerlink" title="并发容器"></a>并发容器</h3><p>容器指的是集合框架</p>
 <p>同步容器是通过syncrhoized关键字对线程不安全的操作进行加锁来保证线程安全的，其原理是使得多线程轮流获取同步锁进行对集合的操作，所以性能有所下降。，像Vector、Hashtable、Stack。</p>
 <p> 为此，java.util.concurrent提供了多种并发容器，以：在原有集合的拷贝上进行操作，用修改后的集合替换原集合  的方式来达到并发且安全地使用集合类的目的。</p>
 <pre><code>根据接口的类型，主要有以下四种接口，其他具体的容器均是对这些接口的实现类：</code></pre><p>Queue类型：阻塞队列BlockingQueue、非阻塞队列ConcurrentLinkedQueue</p>
@@ -2303,6 +2352,7 @@ System.out.println(“当前用户是：” + user);
 <span class="token punctuation">}</span></code></pre>
 <h3 id="Pattern类"><a href="#Pattern类" class="headerlink" title="Pattern类"></a>Pattern类</h3><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc12.png" alt=""></p>
 <h2 id="io流"><a href="#io流" class="headerlink" title="io流"></a>io流</h2><p>Java中使用IO(输入输出）来读取和写入，读写设备上的数据、硬盘文件、内存、键盘……，根据数据的走向可分为输入流和输出流，这个走向是以内存为基准的，即往内存中读数据是输入流，从内存中往外写是输出流。</p>
+<h4 id="IO-介绍"><a href="#IO-介绍" class="headerlink" title="IO 介绍"></a>IO 介绍</h4><p>我们通常所说的 BIO 是相对于 NIO 来说的，BIO 也就是 Java 开始之初推出的 IO 操作模块，BIO 是 BlockingIO 的缩写，顾名思义就是阻塞 IO 的意思。</p>
 <p><strong>根据处理的数据类型可分为字节流和字符流</strong></p>
 <p>  1.字节流可以处理所有数据类型的数据，在java中以Stream结尾</p>
 <p>  2.字符流处理文本数据，在java中以Reader和Writer结尾。<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc17.png" alt=""></p>
@@ -2494,7 +2544,17 @@ java.io.BufferedOutputStream不直接写入输出流，先写入缓冲区，当�
         e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
-<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p><strong>详看java多线程基础笔记 和 线程池队列文章 （包含 线程 线程池 队列）</strong> </p>
+<h4 id="BIO、NIO、AIO的区别"><a href="#BIO、NIO、AIO的区别" class="headerlink" title="BIO、NIO、AIO的区别"></a>BIO、NIO、AIO的区别</h4><p><a href="https://my.oschina.net/u/3471412/blog/2966696" target="_blank" rel="noopener">https://my.oschina.net/u/3471412/blog/2966696</a></p>
+<ol>
+<li>BIO 就是传统的 java.io 包，它是基于流模型实现的，交互的方式是同步、阻塞方式，也就是说在读入输入流或者输出流时，在读写动作完成之前，线程会一直阻塞在那里，它们之间的调用时可靠的线性顺序。它的优点就是代码比较简单、直观；缺点就是 IO 的效率和扩展性很低，容易成为应用性能瓶颈。</li>
+<li>NIO 是 Java 1.4 引入的 java.nio 包，提供了 Channel、Selector、Buffer 等新的抽象，可以构建多路复用的、同步非阻塞 IO 程序，同时提供了更接近操作系统底层高性能的数据操作方式。</li>
+<li>AIO 是 Java 1.7 之后引入的包，是 NIO 的升级版本，提供了异步非堵塞的 IO 操作方式，所以人们叫它 AIO（Asynchronous IO），异步 IO 是基于事件和回调机制实现的，也就是应用操作之后会直接返回，不会堵塞在那里，当后台处理完成，操作系统会通知相应的线程进行后续的操作。</li>
+</ol>
+<h2 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h2><p>Socket又称“套接字”，应用程序通常通过“套接字”向网络发出请求或者应答网络请求。</p>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><h1>
+详看java多线程基础笔记 和 线程池队列文章 （包含 线程 线程池 队列） ,本篇包含大概
+</h1>
+
 <p><a href="https://www.cnblogs.com/yjd_hycf_space/p/7526608.html" target="_blank" rel="noopener">https://www.cnblogs.com/yjd_hycf_space/p/7526608.html</a></p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc19.png" alt="image"></p>
 <h3 id="术语定义"><a href="#术语定义" class="headerlink" title="术语定义"></a>术语定义</h3><table>
@@ -2631,6 +2691,7 @@ t<span class="token punctuation">.</span><span class="token function">start</spa
 </ul>
 <h3 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h3><p>下面的这个图非常重要!</p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc18.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/xc2.png" alt=""></p>
 <ol>
 <li>新建状态（New）：新创建了一个线程对象。</li>
 <li>就绪状态（Runnable）：线程对象创建后，其他线程调用了该对象的start()方法。该状态的线程位于可运行线程池中，变得可运行，等待获取CPU的使用权。</li>
@@ -3248,13 +3309,7 @@ public class HelloWorld {
 </blockquote>
 <p>三、main()方法中可以throw Exception<br>因此main()方法中可以抛出异常，main()方法上也可以声明抛出异常。</p>
 <p>四、main()方法中字符串参数数组作用<br>main()方法中字符串参数数组作用是接收命令行输入参数的，命令行的参数之间用空格隔开。</p>
-<h3 id="jdk1-8新特性学习"><a href="#jdk1-8新特性学习" class="headerlink" title="jdk1.8新特性学习"></a>jdk1.8新特性学习</h3><h4 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h4><h3 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h3><p>Servlet是一种运行于服务器端的Java应用程序，具有独立于平台和协议的特性，可以生成动态的Web页面</p>
-<p>担当客户请求与服务器响应的中间层 </p>
-<p>有特殊的技术规范</p>
-<p>必须继承某个特定父类</p>
-<p>必须配置之后才能执行</p>
-<p>有特定的生命周期</p>
-<h3 id="、时间复杂度-amp-amp-空间复杂度"><a href="#、时间复杂度-amp-amp-空间复杂度" class="headerlink" title="、时间复杂度&amp;&amp;空间复杂度"></a>、时间复杂度&amp;&amp;空间复杂度</h3><h3 id="、算法"><a href="#、算法" class="headerlink" title="、算法"></a>、算法</h3><h3 id="、Gc"><a href="#、Gc" class="headerlink" title="、Gc"></a>、Gc</h3><h3 id="各种树"><a href="#各种树" class="headerlink" title="各种树"></a>各种树</h3><h3 id="虚拟机常用命令"><a href="#虚拟机常用命令" class="headerlink" title="虚拟机常用命令"></a>虚拟机常用命令</h3><script>
+<h3 id="jdk1-8新特性学习"><a href="#jdk1-8新特性学习" class="headerlink" title="jdk1.8新特性学习"></a>jdk1.8新特性学习</h3><h4 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h4><h3 id="时间复杂度-amp-amp-空间复杂度"><a href="#时间复杂度-amp-amp-空间复杂度" class="headerlink" title="时间复杂度&amp;&amp;空间复杂度"></a>时间复杂度&amp;&amp;空间复杂度</h3><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><h3 id="Gc"><a href="#Gc" class="headerlink" title="Gc"></a>Gc</h3><h3 id="各种树"><a href="#各种树" class="headerlink" title="各种树"></a>各种树</h3><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -3582,7 +3637,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">169.1k</span>&nbsp;字
+                class="white-color">173.6k</span>&nbsp;字
              -->
             <!-- 
             
