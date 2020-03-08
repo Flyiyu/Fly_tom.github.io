@@ -4,8 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Redis面试题目, Tom Blog">
-    <meta name="description" content="RedisRedis简介Redis 是一个基于内存的高性能key-value数据库。定期通过异步操作把数据库数据flush到硬盘上进行保存。因为是纯内存操作，Redis的性能非常出色，每秒可以处理超过 10万次读写操作，是已知性能最快的Ke">
+    <meta name="keywords" content="redis深入, Tom Blog">
+    <meta name="description" content="Redis简介Redis 是一个基于内存的高性能key-value数据库。定期通过异步操作把数据库数据flush到硬盘上进行保存。因为是纯内存操作，Redis的性能非常出色，每秒可以处理超过 10万次读写操作，是已知性能最快的Key-Val">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +13,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Redis面试题目 | Tom Blog</title>
+    <title>redis深入 | Tom Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -197,13 +197,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Redis面试题目
+                        redis深入
                     </div>
                 </div>
             </div>
@@ -313,13 +313,9 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/Redis/">
-                                <span class="chip bg-color">Redis</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -327,8 +323,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Redis/" class="post-category">
-                                Redis
+                            <a href="/categories/redis/" class="post-category">
+                                redis
                             </a>
                         
                     </div>
@@ -339,21 +335,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-02-08
+                    2020-03-08
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        6.9k
+                        7.4k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        24 分
+                        26 分
                     </div>
                     
                 
@@ -369,9 +365,8 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h3 id="Redis简介"><a href="#Redis简介" class="headerlink" title="Redis简介"></a>Redis简介</h3><p>Redis 是一个基于内存的高性能key-value数据库。<br>定期通过异步操作把数据库数据flush到硬盘上进行保存。因为是纯内存操作，Redis的性能非常出色，每秒可以处理超过 10万次读写操作，是已知性能最快的Key-Value DB。<br>Redis的出色之处不仅仅是性能，Redis是支持保存多种数据结构，此外单个value的最大限制是1GB。 Redis是单进程单线程的.</p>
-<p>Redis提供了多种高可用方案包括：主从复制、哨兵模式的主从复制、以及集群</p>
-<h4 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h4><p><a href="https://www.cnblogs.com/hepingqingfeng/p/7263782.html" target="_blank" rel="noopener">博客</a></p>
+                <h2 id="Redis简介"><a href="#Redis简介" class="headerlink" title="Redis简介"></a>Redis简介</h2><p>Redis 是一个基于内存的高性能key-value数据库。<br>定期通过异步操作把数据库数据flush到硬盘上进行保存。因为是纯内存操作，Redis的性能非常出色，每秒可以处理超过 10万次读写操作，是已知性能最快的Key-Value DB。<br>Redis的出色之处不仅仅是性能，Redis是支持保存多种数据结构，此外单个value的最大限制是512MB。 Redis是单进程单线程的.</p>
+<h2 id="Redis提供了多种高可用方案包括：主从复制、哨兵模式的主从复制、以及集群"><a href="#Redis提供了多种高可用方案包括：主从复制、哨兵模式的主从复制、以及集群" class="headerlink" title="Redis提供了多种高可用方案包括：主从复制、哨兵模式的主从复制、以及集群"></a>Redis提供了多种高可用方案包括：主从复制、哨兵模式的主从复制、以及集群</h2><h3 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h3><p><a href="https://www.cnblogs.com/hepingqingfeng/p/7263782.html" target="_blank" rel="noopener">博客</a></p>
 <font face="微软雅黑" size="3">
 
 <blockquote>
@@ -402,7 +397,7 @@
 <p>增量复制的过程主要是主服务器每执行一个写命令就会向从服务器发送相同的写命令，从服务器接收并执行收到的写命令。</p>
 </font>
 
-<h4 id="哨兵（Sentinel）"><a href="#哨兵（Sentinel）" class="headerlink" title="哨兵（Sentinel）"></a>哨兵（Sentinel）</h4><font face="微软雅黑" size="3">
+<h3 id="哨兵（Sentinel）"><a href="#哨兵（Sentinel）" class="headerlink" title="哨兵（Sentinel）"></a>哨兵（Sentinel）</h3><font face="微软雅黑" size="3">
 
 <p> 哨兵机制存在的意义：</p>
 <p>没有哨兵机制的时候，主从复制结构部署存在的问题是什么？也可以说redis主节点发生故障如何解决？</p>
@@ -420,9 +415,9 @@
 <p> 7】、若没有足够数量的 Sentinel（哨兵）进程同意 Master主服务器下线， Master主服务器的客观下线状态就会被移除。若 Master主服务器重新向 Sentinel（哨兵）进程发送 PING 命令返回有效回复，Master主服务器的主观下线状态就会被移除。</p>
 </font>
 
-<h2 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h2><hr>
+<h3 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h3><hr>
 <p>以上三者的关系</p>
-<p>==主从往往是为了读写分离、backup 等目的， 哨兵可以检测主从健康， 主挂了可以把从提升为主， 集群往往是为了数据 sharding， 解决单台机器资源的上限的问题==</p>
+<p>主从往往是为了读写分离、backup 等目的， 哨兵可以检测主从健康， 主挂了可以把从提升为主， 集群往往是为了数据 sharding， 解决单台机器资源的上限的问题==</p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/redis3.png" alt="redis3"></p>
 <p>在这个图中，每一个蓝色的圈都代表着一个redis的服务器节点。它们任何两个节点之间都是相互连通的。客户端可以与任何一个节点相连接，然后就可以访问集群中的任何一个节点。对其进行存取和其他操作。</p>
 <p>　　　　那么redis是怎么做到的呢？首先，在redis的每一个节点上，都有这么两个东西，一个是插槽（slot）可以理解为是一个可以存储两个数值的一个变量这个变量的取值范围是：0-16383。还有一个就是cluster我个人把这个cluster理解为是一个集群管理的插件。当我们的存取的key到达的时候，redis会根据crc16的算法得出一个结果，然后把结果对 16384 求余数，这样每个 key 都会对应一个编号在 0-16383 之间的哈希槽，通过这个值，去找到对应的插槽所对应的节点，然后直接自动跳转到这个对应的节点上进行存取操作。</p>
@@ -510,14 +505,15 @@
 <p>避免产生 big-key，导致网卡撑爆、慢查询等。</p>
 <p>重试时间应该大于 cluster-node-time 时间。</p>
 <p>Redis Cluster 不建议使用 pipeline 和 multi-keys 操作，减少 max redirect 产生的场景。</p>
-<h3 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h3><h4 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h4><h4 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h4><font face="微软雅黑" size="3">
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>查看redis基础文章即可</p>
+<h2 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h2><font face="微软雅黑" size="3">
 
 <ul>
 <li>Redis挂掉了，请求全部走数据库。</li>
 <li>对缓存数据设置相同的过期时间，导致某段时间内缓存失效，请求全部走数据库。</li>
 <li>由于原有缓存失效（或者数据未加载到缓存中），新缓存未到期间（缓存正常从Redis中获取，如下图）所有原本应该访问缓存的请求都去查询数据库了，而对数据库CPU和内存造成巨大压力，严重的会造成数据库宕机，造成系统的崩溃。</li>
 </ul>
-<h6 id="缓存雪崩的解决方案："><a href="#缓存雪崩的解决方案：" class="headerlink" title="缓存雪崩的解决方案："></a>缓存雪崩的解决方案：</h6></font>
+<h3 id="缓存雪崩的解决方案："><a href="#缓存雪崩的解决方案：" class="headerlink" title="缓存雪崩的解决方案："></a>缓存雪崩的解决方案：</h3></font>
 对于“Redis挂掉了，请求全部走数据库”这种情况，我们可以有以下的思路：
 
 <ul>
@@ -533,7 +529,7 @@
 <p>1、缓存标记：记录缓存数据是否过期，如果过期会触发通知另外的线程在后台去更新实际key的缓存；</p>
 <p>2、缓存数据：它的过期时间比缓存标记的时间延长1倍，例：标记缓存时间30分钟，数据缓存设置为60分钟。 这样，当缓存标记key过期后，实际缓存还能把旧数据返回给调用端，直到另外的线程在后台更新完成后，才会返回新缓存。</p>
 <p>关于缓存崩溃的解决方法，这里提出了三种方案：使用锁或队列、设置过期标志更新缓存、为key设置不同的缓存失效时间，还有一各被称为“二级缓存”的解决方法。</p>
-<h4 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h4><font face="微软雅黑" size="3">
+<h2 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h2><font face="微软雅黑" size="3">
 
 <blockquote>
 <p>缓存穿透是指查询一个一定不存在的数据。由于缓存不命中，并且出于容错考虑，如果从数据库查不到数据则不写入缓存，这将导致这个不存在的数据每次请求都要到数据库去查询，失去了缓存的意义。</p>
@@ -542,45 +538,92 @@
 <p>由于请求的参数是不合法的(每次都请求不存在的参数)，于是我们可以使用布隆过滤器(BloomFilter)或者压缩filter提前拦截，不合法就不让这个请求到数据库层！<br>当我们从数据库找不到的时候，我们也将这个空对象设置到缓存里边去。下次再请求的时候，就可以从缓存里边获取了。<br>这种情况我们一般会将空对象设置一个较短的过期时间。</p>
 </font>
 
-<h4 id="缓存预热"><a href="#缓存预热" class="headerlink" title="缓存预热"></a>缓存预热</h4><font face="微软雅黑" size="3">
+<h2 id="缓存预热"><a href="#缓存预热" class="headerlink" title="缓存预热"></a>缓存预热</h2><font face="微软雅黑" size="3">
 　　缓存预热就是系统上线后，将相关的缓存数据直接加载到缓存系统。这样避免，用户请求的时候，再去加载相关的数据。
 
 <p>　　解决思路：</p>
 <p>　　　　1，直接写个缓存刷新页面，上线时手工操作下。</p>
 <p>　　　　2，数据量不大，可以在WEB系统启动的时候加载。</p>
 <p>　　　　3，定时刷新缓存，<br>　　　　<br></p></font><p></p>
-<h4 id="缓存更新"><a href="#缓存更新" class="headerlink" title="缓存更新"></a>缓存更新</h4><p>　　缓存淘汰的策略有两种：</p>
+<h2 id="缓存更新"><a href="#缓存更新" class="headerlink" title="缓存更新"></a>缓存更新</h2><p>　　缓存淘汰的策略有两种：</p>
 <p>　　　　(1) 定时去清理过期的缓存。</p>
 <p>　　　　(2)当有用户请求过来时，再判断这个请求所用到的缓存是否过期，过期的话就去底层系统得到新数据并更新缓存。 </p>
 <p>　　两者各有优劣，第一种的缺点是维护大量缓存的key是比较麻烦的，第二种的缺点就是每次用户请求过来都要判断缓存失效，逻辑相对比较复杂，具体用哪种方案，大家可以根据自己的应用场景来权衡。1. 预估失效时间 2. 版本号（必须单调递增，时间戳是最好的选择）3. 提供手动清理缓存的接口。</p>
-<h4 id="redis过期策略"><a href="#redis过期策略" class="headerlink" title="redis过期策略"></a>redis过期策略</h4><p>三种过期策略</p>
-<p><strong>Redis中同时使用了惰性过期和定期过期两种过期策略。</strong></p>
-<h4 id="定时删除"><a href="#定时删除" class="headerlink" title="定时删除"></a>定时删除</h4><p>含义：在设置key的过期时间的同时，为该key创建一个定时器，让定时器在key的过期时间来临时，对key进行删除</p>
-<p>优点：保证内存被尽快释放</p>
-<p>缺点：</p>
-<p>若过期key很多，删除这些key会占用很多的CPU时间，在CPU时间紧张的情况下，CPU不能把所有的时间用来做要紧的事儿，还需要去花时间删除这些key<br>定时器的创建耗时，若为每一个设置过期时间的key创建一个定时器（将会有大量的定时器产生），性能影响严重<br>没人用</p>
-<h4 id="惰性删除"><a href="#惰性删除" class="headerlink" title="惰性删除"></a>惰性删除</h4><p>含义：key过期的时候不删除，每次从数据库获取key的时候去检查是否过期，若过期，则删除，返回null。</p>
-<p>优点：删除操作只发生在从数据库取出key的时候发生，而且只删除当前key，所以对CPU时间的占用是比较少的，而且此时的删除是已经到了非做不可的地步（如果此时还不删除的话，我们就会获取到了已经过期的key了）</p>
-<p>缺点：若大量的key在超出超时时间后，很久一段时间内，都没有被获取过，那么可能发生内存泄露（无用的垃圾占用了大量的内存）</p>
-<h4 id="定期删除"><a href="#定期删除" class="headerlink" title="定期删除"></a>定期删除</h4><p>含义：每隔一段时间执行一次删除过期key操作</p>
-<p>优点：<br>通过限制删除操作的时长和频率，来减少删除操作对CPU时间的占用–处理”定时删除”的缺点<br>定期删除过期key–处理”惰性删除”的缺点</p>
-<p>缺点<br>在内存友好方面，不如”定时删除”<br>在CPU时间友好方面，不如”惰性删除”</p>
-<p>难点<br>合理设置删除操作的执行时长（每次删除执行多长时间）和执行频率（每隔多长时间做一次删除）（这个要根据服务器运行情况来定了）</p>
-<h4 id="秒杀-抢购技术特点"><a href="#秒杀-抢购技术特点" class="headerlink" title="秒杀/抢购技术特点"></a>秒杀/抢购技术特点</h4><blockquote>
-<p>秒杀会遇到的问题<br>1、超卖 2、</p>
+<h2 id="redis过期策略"><a href="#redis过期策略" class="headerlink" title="redis过期策略"></a>redis过期策略</h2><blockquote>
+<p>很多时候服务器经常会用到redis作为缓存，有很多数据都是临时缓存一下，可能用过之后很久都不会再用到了（比如暂存session，又或者只存放日行情股票数据）那么就会出现一下几个问题了</p>
 </blockquote>
-<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><p>(一)String</p>
-<p>这个其实没啥好说的，最常规的set/get操作，value可以是String也可以是数字。一般做一些复杂的计数功能的缓存。</p>
-<p>(二)hash</p>
-<p>这里value存放的是结构化的对象，比较方便的就是操作其中的某个字段。博主在做单点登录的时候，就是用这种数据结构存储用户信息，以cookieId作为key，设置30分钟为缓存过期时间，能很好的模拟出类似session的效果。</p>
-<p>(三)list</p>
-<p>使用List的数据结构，可以做简单的消息队列的功能。另外还有一个就是，可以利用lrange命令，做基于redis的分页功能，性能极佳，用户体验好。本人还用一个场景，很合适—取行情信息。就也是个生产者和消费者的场景。LIST可以很好的完成排队，先进先出的原则。</p>
-<p>(四)set</p>
-<p>因为set堆放的是一堆不重复值的集合。所以可以做全局去重的功能。为什么不用JVM自带的Set进行去重？因为我们的系统一般都是集群部署，使用JVM自带的Set，比较麻烦，难道为了一个做一个全局去重，再起一个公共服务，太麻烦了。</p>
-<p>另外，就是利用交集、并集、差集等操作，可以计算共同喜好，全部的喜好，自己独有的喜好等功能。</p>
-<p>(五)sorted set (Zset)</p>
-<p>sorted set多了一个权重参数score,集合中的元素能够按score进行排列。可以做排行榜应用，取TOP N操作。</p>
-<h4 id="redis的过期策略以及内存淘汰机制"><a href="#redis的过期策略以及内存淘汰机制" class="headerlink" title="redis的过期策略以及内存淘汰机制"></a>redis的过期策略以及内存淘汰机制</h4><script>
+<p>Redis会自己回收清理不用的数据吗？</p>
+<p>如果能，那如何配置？</p>
+<p>如果不能，如何防止数据累加后大量占用存储空间的问题？</p>
+<h3 id="一、设置过期时间"><a href="#一、设置过期时间" class="headerlink" title="一、设置过期时间"></a>一、设置过期时间</h3><p>　　Redis对存储值的过期处理实际上是针对该值的键（key）处理的，即时间的设置也是设置key的有效时间。Expires字典保存了所有键的过期时间，Expires也被称为过期字段。</p>
+<ul>
+<li>expire key time(以秒为单位)–这是最常用的方式</li>
+<li>setex(String key, int seconds, String value)–字符串独有的方式</li>
+</ul>
+<p>注：</p>
+<ol>
+<li>除了字符串自己独有设置过期时间的方法外，其他方法都需要依靠expire方法来设置时间</li>
+<li>如果没有设置时间，那缓存就是永不过期</li>
+<li>如果设置了过期时间，之后又想让缓存永不过期，使用persist key</li>
+</ol>
+<h4 id="1、常用方式"><a href="#1、常用方式" class="headerlink" title="1、常用方式"></a>1、常用方式</h4><p>一般主要包括4种处理过期方，其中<strong>expire都是以秒为单位，pexpire都是以毫秒为单位</strong>的。</p>
+<pre><code>1 EXPIRE key seconds　　//将key的生存时间设置为ttl秒
+2 PEXPIRE key milliseconds　　//将key的生成时间设置为ttl毫秒
+3 EXPIREAT key timestamp　　//将key的过期时间设置为timestamp所代表的的秒数的时间戳
+4 PEXPIREAT key milliseconds-timestamp　　//将key的过期时间设置为timestamp所代表的的毫秒数的时间戳</code></pre><p>备注：timestamp为unix时间戳（例如：timestamp=1499788800 表示将在2017.07.12过期）</p>
+<p>1、2两种方式是设置一个过期的时间段，就是咱们处理验证码最常用的策略，设置三分钟或五分钟后失效，把分钟数转换成秒或毫秒存储到Redis中。</p>
+<p>3、4两种方式是指定一个过期的时间 ，比如优惠券的过期时间是某年某月某日，只是单位不一样。</p>
+<h3 id="二、3种过期策略"><a href="#二、3种过期策略" class="headerlink" title="二、3种过期策略"></a>二、3种过期策略</h3><h4 id="定时删除"><a href="#定时删除" class="headerlink" title="定时删除"></a>定时删除</h4><ul>
+<li>含义：在设置key的过期时间的同时，为该key创建一个定时器，让定时器在key的过期时间来临时，对key进行删除</li>
+<li>优点：保证内存被尽快释放</li>
+<li>缺点：<ul>
+<li>若过期key很多，删除这些key会占用很多的CPU时间，在CPU时间紧张的情况下，CPU不能把所有的时间用来做要紧的事儿，还需要去花时间删除这些key</li>
+<li>定 时器的创建耗时，若为每一个设置过期时间的key创建一个定时器（将会有大量的定时器产生），性能影响严重</li>
+<li>没人用</li>
+</ul>
+</li>
+</ul>
+<h4 id="惰性删除"><a href="#惰性删除" class="headerlink" title="惰性删除"></a>惰性删除</h4><ul>
+<li>含义：key过期的时候不删除，每次从数据库获取key的时候去检查是否过期，若过期，则删除，返回null。</li>
+<li>优点：删除操作只发生在从数据库取出key的时候发生，而且只删除当前key，所以对CPU时间的占用是比较少的，而且此时的删除是已经到了非做不可的地步（如果此时还不删除的话，我们就会获取到了已经过期的key了）</li>
+<li>缺点：若大量的key在超出超时时间后，很久一段时间内，都没有被获取过，那么可能发生内存泄露（无用的垃圾占用了大量的内存）</li>
+</ul>
+<h4 id="定期删除"><a href="#定期删除" class="headerlink" title="定期删除"></a>定期删除</h4><ul>
+<li>含义：每隔一段时间执行一次删除(在redis.conf配置文件设置hz，1s刷新的频率)过期key操作</li>
+<li>优点：<ul>
+<li>通过限制删除操作的时长和频率，来减少删除操作对CPU时间的占用–处理”定时删除”的缺点</li>
+<li>定期删除过期key–处理”惰性删除”的缺点</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>在内存友好方面，不如”定时删除”</li>
+<li>在CPU时间友好方面，不如”惰性删除”</li>
+</ul>
+</li>
+<li>难点<br>合理设置删除操作的执行时长（每次删除执行多长时间）和执行频率（每隔多长时间做一次删除）（这个要根据服务器运行情况来定了）</li>
+</ul>
+<h3 id="Redis采用的过期策略"><a href="#Redis采用的过期策略" class="headerlink" title="Redis采用的过期策略"></a>Redis采用的过期策略</h3><p><strong>懒汉式删除+定期删除</strong></p>
+<p><strong>懒汉式删除流程：</strong></p>
+<ul>
+<li>在进行get或setnx等操作时，先检查key是否过期；</li>
+<li>若过期，删除key，然后执行相应操作；</li>
+<li>若没过期，直接执行相应操作；</li>
+</ul>
+<p><strong>定期删除流程（简单而言，对指定个数个库的每一个库随机删除小于等于指定个数个过期key）：</strong></p>
+<ul>
+<li>遍历每个数据库（就是redis.conf中配置的”database”数量，默认为16）</li>
+<li>检查当前库中的指定个数个key（默认是每个库检查20个key，注意相当于该循环执行20次，循环体是下边的描述）</li>
+<li>如果当前库中没有一个key设置了过期时间，直接执行下一个库的遍历</li>
+<li>随机获取一个设置了过期时间的key，检查该key是否过期，如果过期，删除key</li>
+<li>判断定期删除操作是否已经达到指定时长，若已经达到，直接退出定期删除。</li>
+</ul>
+<blockquote>
+<p>对于定期删除，在程序中有一个全局变量current_db来记录下一个将要遍历的库，假设有16个库，我们这一次定期删除遍历了10个，那此时的current_db就是11，下一次定期删除就从第11个库开始遍历，假设current_db等于15了，那么之后遍历就再从0号库开始（此时current_db==0）</p>
+</blockquote>
+<h3 id="秒杀-抢购技术特点"><a href="#秒杀-抢购技术特点" class="headerlink" title="秒杀/抢购技术特点"></a>秒杀/抢购技术特点</h3><blockquote>
+<p>秒杀会遇到的问题<br>1、超卖 </p>
+</blockquote>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -640,7 +683,7 @@
         repo: 'Fly_tom.github.io',
         owner: 'Flyiyu',
         admin: "Flyiyu",
-        id: '2020-02-08T15-33-02',
+        id: '2020-03-08T13-13-17',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -661,50 +704,43 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/02/08/2019-02-03-spring-mian-shi-li-jie/">
+                <a href="/2020/03/08/2020-03-09-redis-shen-ru/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Spring面试题目">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="redis深入">
                         
-                        <span class="card-title">Spring面试题目</span>
+                        <span class="card-title">redis深入</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            1.谈谈你对Spring 的理解（2017-11-13-lyq）
-Spring 是一个开源框架，为简化企业级应用开发而生。Spring 可以是使简单的JavaBean 实现以前只有EJB 才能实现的功能。Spring 是一个 IOC 和 A
+                            Redis简介Redis 是一个基于内存的高性能key-value数据库。定期通过异步操作把数据库数据flush到硬盘上进行保存。因为是纯内存操作，Redis的性能非常出色，每秒可以处理超过 10万次读写操作，是已知性能最快的Key-Val
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-02-08
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-08
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Spring/" class="post-category">
-                                    Spring
+                            <a href="/categories/redis/" class="post-category">
+                                    redis
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Spring/">
-                        <span class="chip bg-color">Spring</span>
-                    </a>
-                    
-                </div>
+
                 
             </div>
         </div>
@@ -715,46 +751,38 @@ Spring 是一个开源框架，为简化企业级应用开发而生。Spring 可
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/02/08/2019-02-03-java-she-ji-mo-shi/">
+                <a href="/2020/03/08/2020-03-09-redis-ji-chu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="java设计模式">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="redis基础笔记">
                         
-                        <span class="card-title">java设计模式</span>
+                        <span class="card-title">redis基础笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            单例模式(Singleton Pattern)优点：
-(1) 由于单例模式在内存中只有一个实例，减少内存开支，特别是一个对象需要频繁地创建销毁时，而且创建或销毁时性能又无法优化,单例模式就非常明显了
-(2) 单例模式可以在系统设置全局的访问
+                            redis-cli –raw 设置可以显示中文，不会乱码
+1、Redis简介
+REmote DIctionary Server(Redis) 是一个由Salvatore Sanfilippo写的key-value存储系统。Redis是一个开
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-08
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Java/" class="post-category">
-                                    Java
+                            <a href="/categories/redis/" class="post-category">
+                                    redis
                                 </a>
                             
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Java/">
-                        <span class="chip bg-color">Java</span>
-                    </a>
-                    
                 </div>
                 
             </div>
@@ -908,7 +936,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">173.6k</span>&nbsp;字
+                class="white-color">178.7k</span>&nbsp;字
              -->
             <!-- 
             
