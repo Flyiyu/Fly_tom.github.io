@@ -4,8 +4,11 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="SpringBoot, Tom Blog">
-    <meta name="description" content="简介微服务什么是微服务 微服务架构就是将单一程序开发成一个微服务，每个微服务运行在自己的进程中，并使用轻量级的机制通信，通常是HTTP RESTFUL API。这些服务围绕业务能力来划分，并通过自动化部署机制来独立部署。这些服务可以使用不同">
+    <meta name="keywords" content="Docker笔记, Tom Blog">
+    <meta name="description" content="Docker1、简介
+Docker是一个开源的应用容器引擎；是一个轻量级容器技术；
+Docker支持将软件编译成一个镜像；然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像；
+运行中的这个镜像称为容器，容器启动是非">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -13,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>SpringBoot | Tom Blog</title>
+    <title>Docker笔记 | Tom Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -197,13 +200,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        SpringBoot
+                        Docker笔记
                     </div>
                 </div>
             </div>
@@ -315,8 +318,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/SpringBoot/">
-                                <span class="chip bg-color">SpringBoot</span>
+                            <a href="/tags/Docker笔记/">
+                                <span class="chip bg-color">Docker笔记</span>
                             </a>
                         
                     </div>
@@ -327,8 +330,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Spring/" class="post-category">
-                                Spring
+                            <a href="/categories/Docker/" class="post-category">
+                                Docker
                             </a>
                         
                     </div>
@@ -339,21 +342,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-02-08
+                    2020-03-18
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2.7k
+                        2.3k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        10 分
+                        9 分
                     </div>
                     
                 
@@ -369,54 +372,227 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><h4 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h4><h5 id="什么是微服务"><a href="#什么是微服务" class="headerlink" title="什么是微服务"></a>什么是微服务</h5><pre class=" language-java"><code class="language-java"> 微服务架构就是将单一程序开发成一个微服务，每个微服务运行在自己的进程中，并使用轻量级的机制通信，通常是HTTP RESTFUL API。这些服务围绕业务能力来划分，并通过自动化部署机制来独立部署。这些服务可以使用不同的编程语言，不同数据库，以保证最低限度的集中式管理。</code></pre>
-<h5 id="微服务由来"><a href="#微服务由来" class="headerlink" title="微服务由来"></a>微服务由来</h5><p> 微服务最早由Martin Fowler与James Lewis于2014年共同提出，微服务架构风格是一种使用一套小服务来开发单个应用的方式途径，每个服务运行在自己的进程中，并使用轻量级机制通信，通常是HTTP API，这些服务基于业务能力构建，并能够通过自动化部署机制来独立部署，这些服务使用不同的编程语言实现，以及不同数据存储技术，并保持最低限度的集中式管理。</p>
-<h5 id="为什么需要微服务？"><a href="#为什么需要微服务？" class="headerlink" title="为什么需要微服务？"></a>为什么需要微服务？</h5><p> 在传统的IT行业软件大多都是各种独立系统的堆砌，这些系统的问题总结来说就是扩展性差，可靠性不高，维护成本高。到后面引入了SOA服务化，但是，由于 SOA 早期均使用了总线模式，这种总线模式是与某种技术栈强绑定的，比如：J2EE。这导致很多企业的遗留系统很难对接，切换时间太长，成本太高，新系统稳定性的收敛也需要一些时间。最终 SOA 看起来很美，但却成为了企业级奢侈品，中小公司都望而生畏。</p>
-<h5 id="微服务的优势"><a href="#微服务的优势" class="headerlink" title="微服务的优势"></a>微服务的优势</h5><ol>
-<li>将复杂的业务拆分成多个小的业务，每个业务拆分成一个服务，将复杂的问题简单化。利于分工，降低新人的学习成本。 </li>
-<li>微服务系统是分布式系统，业务与业务之间完全解耦，随着业务的增加可以根据业务再拆分，具有极强的横向扩展能力。面对搞并发的场景可以将服务集群化部署，加强系统负载能力。 </li>
-<li>服务间采用HTTP协议通信，服务与服务之间完全独立。每个服务可以根据业务场景选取合适的编程语言和数据库。 </li>
-<li>微服务每个服务都是独立部署的，每个服务的修改和部署对其他服务没有影响。</li>
+                <h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h2><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/docker2.png" alt="docker"></p>
+<p><strong>Docker</strong>是一个开源的应用容器引擎；是一个轻量级容器技术；</p>
+<p>Docker支持将软件编译成一个镜像；然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像；</p>
+<p>运行中的这个镜像称为容器，容器启动是非常快速的。</p>
+<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/docker3.png" alt="docker"></p>
+<h2 id="2、核心概念"><a href="#2、核心概念" class="headerlink" title="2、核心概念"></a>2、核心概念</h2><p>docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；</p>
+<p>docker客户端(Client)：连接docker主机进行操作；</p>
+<p>docker仓库(Registry)：用来保存各种打包好的软件镜像；</p>
+<p>docker镜像(Images)：软件打包好的镜像；放在docker仓库中；</p>
+<p>docker容器(Container)：镜像启动后的实例称为一个容器；容器是独立运行的一个或一组应用</p>
+<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/docker4.png" alt="docker"></p>
+<p>使用Docker的步骤：</p>
+<p>1）、安装Docker</p>
+<p>2）、去Docker仓库找到这个软件对应的镜像；</p>
+<p>3）、使用Docker运行这个镜像，这个镜像就会生成一个Docker容器；</p>
+<p>4）、对容器的启动停止就是对软件的启动停止；</p>
+<h2 id="3、安装Docker"><a href="#3、安装Docker" class="headerlink" title="3、安装Docker"></a>3、安装Docker</h2><h4 id="1）、在linux虚拟机上安装docker"><a href="#1）、在linux虚拟机上安装docker" class="headerlink" title="1）、在linux虚拟机上安装docker"></a>1）、在linux虚拟机上安装docker</h4><p>​    1）、设置好网络以后使用命令重启虚拟机的网络</p>
+<pre class=" language-shell"><code class="language-shell">service network restart</code></pre>
+<p>步骤：</p>
+<p>查看官网即可</p>
+<h2 id="4、Docker常用命令-amp-操作"><a href="#4、Docker常用命令-amp-操作" class="headerlink" title="4、Docker常用命令&amp;操作"></a>4、Docker常用命令&amp;操作</h2><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/docker1.png" alt="docker"></p>
+<h3 id="0）、docker命令"><a href="#0）、docker命令" class="headerlink" title="0）、docker命令"></a>0）、docker命令</h3><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>启动docker服务</td>
+<td>systemctl start docker</td>
+<td></td>
+</tr>
+<tr>
+<td>设置开机启动</td>
+<td>systemctl enable docker</td>
+<td></td>
+</tr>
+<tr>
+<td>停止docker服务</td>
+<td>systemctl enable docker</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="1）、镜像操作"><a href="#1）、镜像操作" class="headerlink" title="1）、镜像操作"></a>1）、镜像操作</h3><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>检索</td>
+<td>docker  search 关键字  eg：docker  search redis</td>
+<td>我们经常去docker  hub上检索镜像的详细信息，如镜像的TAG。</td>
+</tr>
+<tr>
+<td>拉取</td>
+<td>docker pull 镜像名:tag</td>
+<td>:tag是可选的，tag表示标签，多为软件的版本，默认是latest</td>
+</tr>
+<tr>
+<td>列表</td>
+<td>docker images</td>
+<td>查看所有本地镜像</td>
+</tr>
+<tr>
+<td>删除镜像</td>
+<td>docker rmi image-id</td>
+<td>删除指定的本地镜像，要先删除容器</td>
+</tr>
+</tbody></table>
+<p><a href="https://hub.docker.com/" target="_blank" rel="noopener">https://hub.docker.com/</a></p>
+<h3 id="2）、容器操作"><a href="#2）、容器操作" class="headerlink" title="2）、容器操作"></a>2）、容器操作</h3><p>软件镜像（QQ安装程序）—-运行镜像—-产生一个容器（正在运行的软件，运行的QQ）；</p>
+<p>步骤：</p>
+<pre class=" language-shell"><code class="language-shell">1、搜索镜像
+[root@localhost ~]# docker search tomcat
+2、拉取镜像
+[root@localhost ~]# docker pull tomcat
+3、根据镜像启动容器
+docker run --name mytomcat -d tomcat:latest
+4、docker ps  
+查看运行中的容器
+5、 停止运行中的容器
+docker stop  容器的id
+6、查看所有的容器
+docker ps -a
+7、启动容器
+docker start 容器id
+8、删除一个容器
+ docker rm 容器id
+9、启动一个做了端口映射的tomcat
+[root@localhost ~]# docker run -d -p 8888:8080 tomcat
+-d：后台运行
+-p: 将主机的端口映射到容器的一个端口    主机端口:容器内部的端口
+
+10、为了演示简单关闭了linux的防火墙
+service firewalld status ；查看防火墙状态
+service firewalld stop：关闭防火墙
+11、查看容器的日志
+docker logs container-name/container-id
+12、进入正在运行的容器并以命令行交互
+    1. docker exec container-id /bin/bash
+    2. docker attach container-id
+    两种的区别：
+        attach: 直接进入容器启动命令的终端，不会启动新的进程
+        exec: 是在容器中打开新的终端，并且可以启动新的进程
+13、查看容器中运行的进程信息
+docker top
+14、查看 docker 容器变化
+docker diff coniner-id
+
+更多命令参看
+https://docs.docker.com/engine/reference/commandline/docker/
+可以参考每一个镜像的文档
+</code></pre>
+<h3 id="3）、数据卷"><a href="#3）、数据卷" class="headerlink" title="3）、数据卷"></a>3）、数据卷</h3><blockquote>
+<p>有点类似我们Redis里面的rdb和aof文件</p>
+</blockquote>
+<p>作用：</p>
+<p>​    容器的持久化、父子容器的继承、信息共享</p>
+<pre class=" language-shell"><code class="language-shell">docker run -v es2:/usr/share/elasticsearch/config -p 9200:9200 -p 9300:9300 es7.0:1.0</code></pre>
+<p>-v绑定数据卷 </p>
+<p>esvolume 数据卷，需要创建</p>
+<pre class=" language-shell"><code class="language-shell">docker volume create edc-nginx-vol // 创建一个自定义容器卷
+ocker volume ls // 查看所有容器卷
+docker volume inspect edc-nginx-vol // 查看指定容器卷详情信息
+docker stop edc-nginx // 暂停容器实例
+docker rm edc-nginx // 移除容器实例
+docker volume rm edc-nginx-vol // 删除自定义数据卷
+/var/lib/docker/volumes/headESVolume/_data 容器卷的宿主机目录
+                  headESVolume 自定义数据卷名称</code></pre>
+<h3 id="4）、docker-commit"><a href="#4）、docker-commit" class="headerlink" title="4）、docker  commit"></a>4）、docker  commit</h3><p>docker commit主要是用于提交一个container的文件或者配置的变化为一个新的image。</p>
+<p>docker commit和docker export, docker add类似都可以输出image，但是最好的生成image的方法还是使用Dockerfile</p>
+<p>注意：docker commit不会将你挂载的volumes一起打包到image中。</p>
+<pre class=" language-shell"><code class="language-shell">docker commit -m=“提交的描述信息” -a=“作者” 容器ID 要创建的目标镜像名:[标签名]</code></pre>
+<h4 id="慎用-docker-commit"><a href="#慎用-docker-commit" class="headerlink" title="慎用 docker commit"></a><strong>慎用 docker commit</strong></h4><p>使用 <code>docker commit</code> 命令虽然可以比较直观的帮助理解镜像分层存储的概念，但是实际环境中并不会这样使用。</p>
+<p>首先，如果仔细观察之前的 <code>docker diff webserver</code> 的结果，你会发现除了真正想要修改的 <code>/usr/share/nginx/html/index.html</code> 文件外，由于命令的执行，还有很多文件被改动或添加了。这还仅仅是最简单的操作，如果是安装软件包、编译构建，那会有大量的无关内容被添加进来，如果不小心清理，将会导致镜像极为臃肿。</p>
+<p>此外，使用 <code>docker commit</code> 意味着所有对镜像的操作都是黑箱操作，生成的镜像也被称为 <strong>黑箱镜像</strong>，换句话说，就是除了制作镜像的人知道执行过什么命令、怎么生成的镜像，别人根本无从得知。而且，即使是这个制作镜像的人，过一段时间后也无法记清具体在操作的。虽然 <code>docker diff</code> 或许可以告诉得到一些线索，但是远远不到可以确保生成一致镜像的地步。这种黑箱镜像的维护工作是非常痛苦的。</p>
+<p>而且，<strong>镜像所使用的分层存储，除当前层外，之前的每一层都是不会发生改变的，换句话说，任何修改的结果仅仅是在当前层进行标记、添加、修改，而不会改动上一层</strong>。如果使用 <code>docker commit</code> 制作镜像，以及后期修改的话，每一次修改都会让镜像更加臃肿一次，所删除的上一层的东西并不会丢失，会一直如影随形的跟着这个镜像，即使根本无法访问到。这会让镜像更加臃肿。</p>
+<p><em>Union FS 是有最大层数限制的，比如 AUFS，曾经是最大不得超过 42 层，现在是不得超过 127 层。就是commit最多127次。</em></p>
+<h3 id="5）、安装MySQL示例"><a href="#5）、安装MySQL示例" class="headerlink" title="5）、安装MySQL示例"></a>5）、安装MySQL示例</h3><pre class=" language-shell"><code class="language-shell">docker pull mysql</code></pre>
+<p>错误的启动</p>
+<pre class=" language-shell"><code class="language-shell">[root@localhost ~]# docker run --name mysql01 -d mysql
+42f09819908bb72dd99ae19e792e0a5d03c48638421fa64cce5f8ba0f40f5846
+
+mysql退出了
+[root@localhost ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                           PORTS               NAMES
+42f09819908b        mysql               "docker-entrypoint.sh"   34 seconds ago      Exited (1) 33 seconds ago                            mysql01
+
+//错误日志
+[root@localhost ~]# docker logs 42f09819908b
+error: database is uninitialized and password option is not specified 
+  You need to specify one of MYSQL_ROOT_PASSWORD, MYSQL_ALLOW_EMPTY_PASSWORD and MYSQL_RANDOM_ROOT_PASSWORD；这个三个参数必须指定一个</code></pre>
+<p>正确的启动</p>
+<pre class=" language-shell"><code class="language-shell">[root@localhost ~]# docker run --name mysql01 -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+b874c56bec49fb43024b3805ab51e9097da779f2f572c22c695305dedd684c5f
+[root@localhost ~]# docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
+b874c56bec49        mysql               "docker-entrypoint.sh"   4 seconds ago       Up 3 seconds        3306/tcp            mysql01</code></pre>
+<p>做了端口映射</p>
+<pre class=" language-shell"><code class="language-shell">[root@localhost ~]# docker run -p 3306:3306 --name mysql02 -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+ad10e4bc5c6a0f61cbad43898de71d366117d120e39db651844c0e73863b9434
+[root@localhost ~]# docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+ad10e4bc5c6a        mysql               "docker-entrypoint.sh"   4 seconds ago       Up 2 seconds        0.0.0.0:3306->3306/tcp   mysql02</code></pre>
+<p>几个其他的高级操作</p>
+<pre class=" language-shell"><code class="language-shell">docker run --name mysql03 -v /conf/mysql:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
+把主机的/conf/mysql文件夹挂载到 mysqldocker容器的/etc/mysql/conf.d文件夹里面
+改mysql的配置文件就只需要把mysql配置文件放在自定义的文件夹下（/conf/mysql）
+
+docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+指定mysql的一些配置参数</code></pre>
+<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><ol>
+<li><blockquote>
+<p>在运行容器的时候，一定要指定拉取下来的镜像版本号，不然启动的时候，回去重新拉取latest版本的</p>
+</blockquote>
+</li>
 </ol>
-<h5 id="微服务和SOA的关系"><a href="#微服务和SOA的关系" class="headerlink" title="微服务和SOA的关系"></a>微服务和SOA的关系</h5><p>SOA即面向服务的架构，SOA是根据企业服务总线（ESB）模式来整合集成大量单一庞大的系统，微服务可以说是SOA的一种实现，将复杂的业务组件化。但它比ESB实现的SOA更加的轻便敏捷和简单。</p>
-<h3 id="Spring-Boot简介"><a href="#Spring-Boot简介" class="headerlink" title="Spring Boot简介"></a>Spring Boot简介</h3><p>随着使用 Spring 进行开发的个人和企业越来越多，Spring 也慢慢从一个单一简洁的小框架变成一个大而全的开源软件，Spring 的边界不断进行扩充，到了后来 Spring 几乎可以做任何事情，市面上主流的开源软件、中间件都有 Spring 对应组件支持，人们在享用 Spring 的便利之后，也遇到了一些问题。</p>
-<p>2013 年，微服务的概念也慢慢兴起，快速开发微小独立的应用变得更为急迫，Spring刚好处在这样一个交叉点上，于 2013 年初启动了 Spring Boot 项目的研发。2014 年，Spring Boot 伴随着 Spring 4.0 诞生发布了第一个正式版本。</p>
-<p>Spring Boot 并不是要成为 Spring 平台里面众多“Foundation”层项目的替代者。Spring Boot 的目标不在于为已解决的问题域提供新的解决方案，而是为平台带来另一种开发体验，从而简化对这些已有技术的使用。对于已经熟悉 Spring 生态系统的开发人员来说，Spring Boot 是一个很理想的选择；对于采用 Spring 技术的新人来说，Spring Boot 提供一种更简洁的方式来使用这些技术。</p>
-<h4 id="Spring-Boot-的主要优点："><a href="#Spring-Boot-的主要优点：" class="headerlink" title="Spring Boot 的主要优点："></a>Spring Boot 的主要优点：</h4><ul>
-<li><p>为所有 Spring 开发者更快的入门</p>
-</li>
-<li><p>开箱即用，提供各种默认配置来简化项目配置</p>
-</li>
-<li><p>内嵌式容器简化 Web 项目</p>
-</li>
-<li><p>没有冗余代码生成和 XML 配置的要求</p>
-<p>简言之，Spring Boot 是一个快速开发的框架,能够快速的整合第三方框架，简化 XML 配置，全部采用注解形式，内置 Tomcat 容器,帮助开发者能够实现快速开发，简化了应用系统的初始搭建以及开发过程。</p>
-</li>
-</ul>
-<h3 id="与其他框架的区别"><a href="#与其他框架的区别" class="headerlink" title="与其他框架的区别"></a>与其他框架的区别</h3><p>Spring Boot 是在强大的 Spring 帝国生态基础上面发展而来，发明 Spring Boot 不是为了取代 Spring，因此该框架所具备的功能，是为了让人们更容易的使用 Spring。所以说没有 Spring 强大的功能和生态，就不会有后期 Spring Boot 的火热，Spring Boot 使用约定优于配置的理念，重新重构了 Spring 的使用，让 Spring 后续的发展更有生命力。</p>
-<h4 id="SpringBoot-和-SpringMVC-区别"><a href="#SpringBoot-和-SpringMVC-区别" class="headerlink" title="SpringBoot 和 SpringMVC 区别"></a>SpringBoot 和 SpringMVC 区别</h4><p>SpringBoot 是一个快速开发的框架,能够快速的整合第三方框架，简化 XML 配置，全部采用注解形式，内<br>嵌 Tomcat 容器,帮助开发者能够实现快速开发。SpringMVC 是一个封装了 Servlet API 的 MVC 框架，就像<br>其它的 MVC 框架，比如 Struts 一样负责处理 web 请求。SpringBoot 的 Web 组件默认集成的是 SpringMVC<br>框架。SpringMVC 通常被叫做控制层框架。</p>
-<h4 id="SpringBoot-和-SpringCloud-区别"><a href="#SpringBoot-和-SpringCloud-区别" class="headerlink" title="SpringBoot 和 SpringCloud 区别"></a>SpringBoot 和 SpringCloud 区别</h4><p>SpringCloud 依赖于 SpringBoot 组件，或者说 Spring Cloud 构建于 Spring Boot 之上。它为微服务中涉及的<br>配置管理、服务治理、断路器、智能路由、控制总线、全局锁、决策竞选、分布式会话和集群状态管理通<br>常我们使用 SpringMVC 编写 http 协议接口，同时使用 SpringCloud 作为一套完整的微服务解决框架。</p>
-<h4 id="Spring-Boot-的核心：约定优于配置"><a href="#Spring-Boot-的核心：约定优于配置" class="headerlink" title="Spring Boot 的核心：约定优于配置"></a>Spring Boot 的核心：约定优于配置</h4><p>那么什么是约定优于配置呢？</p>
-<p>约定优于配置（Convention Over Configuration），也称作按约定编程，是一种软件设计范式，旨在减少软件开发人员需做决定的数量、获得简单的好处，而又不失灵活性。</p>
-<p>本质是说，开发人员仅需规定应用中不符约定的部分。例如，如果模型中有个名为 User 的类，那么数据库中对应的表就会默认命名为 user。只有在偏离这一约定时，例如将该表命名为“user_info”，才需写有关这个名字的配置。</p>
-<p>我们可以按照这个思路来设想，我们约定 Controller 层就是 Web 请求层可以省略 MVC 的配置；我们约定在 Service 结尾的类自动注入事务，就可以省略了 Spring 的切面事务配置。</p>
-<p>在 Spring 体系中，Spring Boot JPA 就是约定优于配置最佳实现之一，不需要关注表结构，我们约定类名即是表名，属性名即是表的字段，String 对应 varchar，long 对应 bigint，只有需要一些特殊要求的属性，我们再单独进行配置，按照这个约定我们可以将以前的工作大大简化。</p>
-<p>Spring Boot 体系将约定优于配置的思想展现得淋漓尽致，小到配置文件、中间件的默认配置，大到内置容器、生态中的各种 Starters 无不遵循此设计规则。Spring Boot 鼓励各软件组织方创建自己的 Starter，创建 Starter 的核心组件之一就是 autoconfigure 模块，也是 Starter 的核心功能，在启动的时候进行自动装配，属性默认化配置。</p>
-<p>可以说正是因为 Spring Boot 简化的配置和众多的 Starters 才让 Spring Boot 变得简单、易用、快速上手，也可以说正是约定优于配置的思想彻底落地才让 Spring Boot 走向辉煌。Spring Boot 约定优于配置的思想让 Spring Boot 项目非常容易上手，让编程变得更简单，其实编程本该很简单，简单才是编程的美。</p>
-<h4 id="Spring-Boot-2-0-都更新了什么"><a href="#Spring-Boot-2-0-都更新了什么" class="headerlink" title="Spring Boot 2.0 都更新了什么"></a>Spring Boot 2.0 都更新了什么</h4><p>2018 年 3 月 1 号 Spring Boot 2.0.0.RELEASE 正式发布，这是 Spring Boot 1.0 发布 4 年之后第一次重大修订，因此有多新功能和特性值得关注！在 Spring Boot 官方博客中我们了解到：Spring Boot 2.0 版本经历了 17 个月的开发，有 215 个不同的使用者提供了超过 6800 次的提交。</p>
-<p>我们将 Spring Boot 2.0 更新的技术分为三类进行解读：</p>
-<p>第一类，基础环境升级；<br><br>第二类，默认软件替换和优化；<br><br>第三类，新技术的引入。<br><br>基础环境升级<br><br>最低 JDK 8，支持 JDK 9，不再支持 Java 6 和 7<br><br>Spring Boot 2.0 要求 Java 8 作为最低版本，许多现有的 API 已更新，以利用 Java 8 的特性。例如，接口上的默认方法，函数回调以及新的 API，如 javax.time。如果你正在使用 Java 7 或更早版本，则在开发 Spring Boot 2.0 应用程序之前，需要升级你的 JDK。</p>
-<p>Spring Boot 2.0 通过测试可以在 JDK 9 下正常运行，同时 Spring Boot 2.0 宣布不再支持 Java 6 和 7，据我了解国内绝大部分互联网公司的基本环境还在 JDK 7 或者 6 环境下运行，考虑升级 Spring Boot 2.0 的团队需要考虑这个因素。</p>
-<p>依赖组件升级<br><br>Spring Boot 2.0 基于 Spring Framework 5 构建，本次 Spring Boot 的升级，同时也升级了部分其依赖的第三方组件，主要有以下几个：</p>
-<ul>
-<li>Jetty 9.4，Jetty 是一个开源的 Servlet 容器，它为基于 Java 的 Web 内容，例如 JSP 和 Servlet 提供运行环境。Jetty 是使用 Java 语言编写的，它的 API 以一组 JAR 包的形式发布。</li>
-<li>Tomcat 8.5，Apache Tomcat 8.5.x 旨在取代 8.0.x，完全支持 Java 9。</li>
-<li>Flyway 5，Flyway 是独立于数据库的应用、管理并跟踪数据库变更的数据库版本管理工具。用通俗的话讲，Flyway 可以像 SVN 管理不同人的代码那样，管理不同人的 SQL 脚本，从而做到数据库同步。</li>
-<li>Hibernate 5.2，Hibernate 是一款非常流行的 ORM 框架。</li>
-<li>Gradle 3.4，Spring Boot 的 Gradle 插件在很大程度上已被重写，有了重大的改进。</li>
-<li>Thymeleaf 3.0，Thymeleaf 3 相对于 Thymeleaf 2 有非常大的性能提升。</li>
-</ul>
-<script>
+<h2 id="5、docker-file"><a href="#5、docker-file" class="headerlink" title="5、docker file"></a>5、docker file</h2><h4 id="关于docker-file"><a href="#关于docker-file" class="headerlink" title="关于docker file"></a>关于docker file</h4><p>在Docker中创建镜像最常用的方式，就是使用Dockerfile。Dockerfile是一个Docker镜像的描述文件，我们可以理解成火箭发射的A、B、C、D…的步骤。Dockerfile其内部<strong>包含了一条条的指令</strong>，<strong>每一条指令构建一层，因此每一条指令的内容，就是描述该层应当如何构建</strong>。</p>
+<pre class=" language-shell"><code class="language-shell">#基于centos镜像
+FROM centos
+
+#维护人的信息
+MAINTAINER The CentOS Project <303323496@qq.com>
+
+#安装httpd软件包
+RUN yum -y update
+RUN yum -y install httpd
+
+#开启80端口
+EXPOSE 80
+
+#复制网站首页文件至镜像中web站点下
+ADD index.html /var/www/html/index.html
+
+#复制该脚本至镜像中，并修改其权限
+ADD run.sh /run.sh
+RUN chmod 775 /run.sh
+
+#当启动容器时执行的脚本文件
+CMD ["/run.sh"]</code></pre>
+<blockquote>
+<p>有了Dockerfile，就可以创建镜像了：</p>
+</blockquote>
+<pre class=" language-shell"><code class="language-shell">docker build -t tomcat:v1 .</code></pre>
+<blockquote>
+<p>最后，可以通过以下命令创建容器：</p>
+</blockquote>
+<pre class=" language-shell"><code class="language-shell">docker run -itd --name=tomcate -p 8080:8080 -v /app/webapps/:/usr/local/apache-tomcat-8.0.46/webapps/ tomcat:v1</code></pre>
+<h4 id="Dockerfile常用指令"><a href="#Dockerfile常用指令" class="headerlink" title="Dockerfile常用指令"></a>Dockerfile常用指令</h4><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/docker5.png" alt="docker"></p>
+<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/docker6.png" alt="docker"></p>
+<h2 id="6、docker-compose"><a href="#6、docker-compose" class="headerlink" title="6、docker compose"></a>6、docker compose</h2><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -476,7 +652,7 @@
         repo: 'Fly_tom.github.io',
         owner: 'Flyiyu',
         admin: "Flyiyu",
-        id: '2020-02-08T15-33-02',
+        id: '2020-03-18T17-22-11',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -497,46 +673,51 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/02/08/2019-05-12-rabbitmq/">
+                <a href="/2020/03/18/2020-03-18-docker/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="RabbitMQ笔记">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="Docker笔记">
                         
-                        <span class="card-title">RabbitMQ笔记</span>
+                        <span class="card-title">Docker笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            什么叫消息队列  消息（Message）是指在应用间传送的数据。消息可以非常简单，比如只包含文本字符串，也可以更复杂，可能包含嵌入对象。消息队列（Message Queue）是一种应用间的通信方式，消息发送后可以立即返回，由消息系统来确保消
+                            Docker1、简介
+Docker是一个开源的应用容器引擎；是一个轻量级容器技术；
+Docker支持将软件编译成一个镜像；然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像；
+运行中的这个镜像称为容器，容器启动是非
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-02-08
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-18
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/RabbitMQ/" class="post-category">
-                                    RabbitMQ
+                            <a href="/categories/Docker/" class="post-category">
+                                    Docker
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/RabbitMQ/">
-                        <span class="chip bg-color">RabbitMQ</span>
+                    <a href="/tags/Docker笔记/">
+                        <span class="chip bg-color">Docker笔记</span>
                     </a>
                     
                 </div>
@@ -550,32 +731,37 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/02/08/2019-04-11-quartz/">
+                <a href="/2020/03/16/2020-03-09-springboot/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="quartz">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="SpringBoot 入门">
                         
-                        <span class="card-title">quartz</span>
+                        <span class="card-title">SpringBoot 入门</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
-一、什么是Quartz?Quartz是一个完全由Java编写的开源作业调度框架，为在Java应用程序中进行作业调度提供了简单却强大的机制。Quartz允许开发人员根据时间间隔来调度作业。它实现了作业和触发器的多对多的关系，还能把多个作业与
+                            一、Spring Boot 入门1、Spring Boot 简介
+简化Spring应用开发的一个框架；
+整个Spring技术栈的一个大整合；
+J2EE开发的一站式解决方案；
+
+2、微服务2014，martin fowler
+微服务：架构风格
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-02-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-16
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/quartz/" class="post-category">
-                                    quartz
+                            <a href="/categories/Spring系列/" class="post-category">
+                                    Spring系列
                                 </a>
                             
                             
@@ -585,8 +771,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/quartz/">
-                        <span class="chip bg-color">quartz</span>
+                    <a href="/tags/SpringBoot/">
+                        <span class="chip bg-color">SpringBoot</span>
                     </a>
                     
                 </div>
@@ -742,7 +928,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">182.6k</span>&nbsp;字
+                class="white-color">209.7k</span>&nbsp;字
              -->
             <!-- 
             
