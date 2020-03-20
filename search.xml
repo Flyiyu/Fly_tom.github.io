@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>CAS-SSO</title>
+      <link href="/2020/03/18/2020-03-19-cas/"/>
+      <url>/2020/03/18/2020-03-19-cas/</url>
+      
+        <content type="html"><![CDATA[<h2 id="一、SSO"><a href="#一、SSO" class="headerlink" title="一、SSO"></a>一、SSO</h2><blockquote><p>单点登录(Single sign on)，英文名称缩写SSO，SSO的意思就是在多系统的环境中，登录单方系统，就可以在不用再次登录的情况下访问相关受信任的系统。也就是说只要登录一次单体系统就可以</p></blockquote><p><a href="https://www.cnblogs.com/ywlaker/p/6113927.html" target="_blank" rel="noopener">sso 简绍</a></p><h3 id="单点登录角色"><a href="#单点登录角色" class="headerlink" title="单点登录角色"></a>单点登录角色</h3><p>单点登录一般包括下面三种角色：</p><p>①用户(多个)；</p><p>②认证中心(一个)；</p><p>③Web应用(多个)。</p><p>PS：这里所说的web应用可以理解为SSO Client，认证中心可以说是SSO Server。</p><h2 id="二、初识CAS"><a href="#二、初识CAS" class="headerlink" title="二、初识CAS"></a>二、初识CAS</h2><p>首先我们来说一下CAS，CAS全称为Central Authentication Service即中央认证服务，是一个企业多语言单点登录的解决方案，并努力去成为一个身份验证和授权需求的综合平台。</p><p>CAS是由Yale大学发起的一个企业级的、开源的项目，旨在为Web应用系统提供一种可靠的单点登录解决方法（属于 Web SSO ）。</p><p>CAS协议至少涉及三方：客户端Web浏览器，请求身份验证的Web应用程序和CAS服务器。 它也可能涉及后端服务，如数据库服务器，它没有自己的HTTP接口，但与Web应用程序进行通信。</p><p><strong>主要特征：</strong></p><ul><li><p>多种的协议的支持，包括CAS (v1、v2、v3)、SAML(v1、v2)、OAuth、OpenID、OpenID Connect和WS-Federation Passive Requestor</p></li><li><p>多种认证机制，可以通过JAAS，LDAP，RDBMS，X.509，Radius，SPNEGO，JWT，Remote，Trusted，BASIC，Apache Shiro，MongoDB，Pac4J等进行身份验证</p></li><li><p>可以通过WS-FED，Facebook，Twitter，SAML IdP，OpenID，OpenID Connect，CAS等代理委派认证</p></li><li><p>多种形式的授权包括ABAC, Time/Date, REST, Internet2’s Grouper等</p></li><li><p>同时也支持HAZELCAST、EHCache、JPA、MycCache、Apache IGITE、MangGDB、ReDIS、DimoDoB、Couchbase等实现高可用多个集群部署</p></li><li><p>各种丰富的客户端，像常见的Java、Python、Node、PHP、C#、Perl等等</p></li></ul><hr><h2 id="三、详解CAS"><a href="#三、详解CAS" class="headerlink" title="三、详解CAS"></a>三、详解CAS</h2><p>CAS 1.0 协议定义了一组术语，一组票据，一组接口。</p><h3 id="术语："><a href="#术语：" class="headerlink" title="术语："></a>术语：</h3><ul><li>Client：用户。</li><li>Server：中心服务器，也是 SSO 中负责单点登录的服务器。</li><li>Service：需要使用单点登录的各个服务，相当于上文中的产品 a/b。</li></ul><h3 id="接口："><a href="#接口：" class="headerlink" title="接口："></a>接口：</h3><ul><li>/login：登录接口，用于登录到中心服务器。</li><li>/logout：登出接口，用于从中心服务器登出。</li><li>/validate：用于验证用户是否登录中心服务器。</li><li>/serviceValidate：用于让各个 service 验证用户是否登录中心服务器。</li></ul><h3 id="票据"><a href="#票据" class="headerlink" title="票据"></a>票据</h3><p>TGT：Ticket Grangting Ticket </p><blockquote><p>TGT 是 CAS 为用户签发的登录票据，拥有了 TGT，用户就可以证明自己在 CAS 成功登录过。TGT 封装了 Cookie 值以及此 Cookie 值对应的用户信息。当 HTTP 请求到来时，CAS 以此 Cookie 值（TGC）为 key 查询缓存中有无 TGT ，如果有的话，则相信用户已登录过。</p></blockquote><p>TGC：Ticket Granting Cookie</p><blockquote><p>CAS Server 生成TGT放入自己的 Session 中，而 TGC 就是这个 Session 的唯一标识（SessionId），以 Cookie 形式放到浏览器端，是 CAS Server 用来明确用户身份的凭证。</p></blockquote><p>ST：Service Ticket </p><blockquote><p>ST 是 CAS 为用户签发的访问某一 service 的票据。用户访问 service 时，service 发现用户没有 ST，则要求用户去 CAS 获取 ST。用户向 CAS 发出获取 ST 的请求，CAS 发现用户有 TGT，则签发一个 ST，返回给用户。用户拿着 ST 去访问 service，service 拿 ST 去 CAS 验证，验证通过后，允许用户访问资源。</p></blockquote><h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/cas1.jpg" alt="cas"></p><p>如上图： CAS Client 与受保护的客户端应用部署在一起，以 Filter 方式保护 Web 应用的受保护资源，过滤从客户端过来的每一个 Web 请求，同时， CAS Client 会分析 HTTP 请求中是否包含请求 Service Ticket( ST 上图中的 Ticket) ，如果没有，则说明该用户是没有经过认证的；于是 CAS Client 会重定向用户请求到 CAS Server </p><p>Step 2  并传递 Service （要访问的目的资源地址）。 </p><p>Step 3 是用户认证过程，如果用户提供了正确的 Credentials ， CAS Server 随机产生一个相当长度、唯一、不可伪造的 Service Ticket ，并缓存以待将来验证，并且重定向用户到 Service 所在地址（附带刚才产生的 Service Ticket ） , <strong>并为客户端浏览器设置一个 Ticket Granted Cookie （ TGC ）</strong> ； CAS Client 在拿到 Service 和新产生的 Ticket 过后，</p><p>在 Step 5 和 Step6 中与 CAS Server 进行身份核实，以确保 Service Ticket 的合法性。</p><p>在该协议中，所有与 CAS Server 的交互均采用 SSL 协议，以确保 ST 和 TGC 的安全性。协议工作过程中会有 <strong>2 次重定向</strong> 的过程。但是 CAS Client 与 CAS Server 之间进行 Ticket 验证的过程对于用户是透明的（使用 HttpsURLConnection ）。</p><p>​    CAS 请求认证时序图如下：</p><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/cas2.gif" alt="cas"></p><h2 id="四、cas-部署"><a href="#四、cas-部署" class="headerlink" title="四、cas 部署"></a>四、cas 部署</h2><p><a href="https://www.cnblogs.com/zhoubang521/p/5200407.html" target="_blank" rel="noopener">cas证书 项目搭建（HTTPS方式）</a></p><p><a href="https://www.cnblogs.com/vhua/p/cas_1.html" target="_blank" rel="noopener">cas 项目搭建（HTTP方式）</a></p><h3 id="特别说明"><a href="#特别说明" class="headerlink" title="特别说明"></a>特别说明</h3><p>　　CAS 默认认证方式使用的是HTTPS协议，一般对安全性不高的话建议取消改成HTTP方式。因为，开启的话会经常提示证书过期、需要用户确认等，对客户的感知不好，当前有需要的可以开启。</p><p> 如果需要HTTPS协议的话，有关证书的生成可以参考这篇文章 ： <a href="http://blog.163.com/pudi_1984_mail/blog/static/1643856162010113105547539/" target="_blank" rel="noopener">CAS单点登录证书导入</a> </p><p> 取消HTTPS协议的方法，第四点会具体介绍，大家可以接着往下看！</p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> SSO </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CAS-SSO </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Docker笔记</title>
       <link href="/2020/03/18/2020-03-18-docker/"/>
       <url>/2020/03/18/2020-03-18-docker/</url>
