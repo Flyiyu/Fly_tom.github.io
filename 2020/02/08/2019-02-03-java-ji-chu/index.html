@@ -343,14 +343,14 @@ Java语言概述请描述一下javajava是一个面向对象的编程语言，�
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        45.4k
+                        46.3k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        169 分
+                        172 分
                     </div>
                     
                 
@@ -401,7 +401,27 @@ Java语言概述请描述一下javajava是一个面向对象的编程语言，�
 <li>利用反射，调用Class类的或者是Constructor类的newInstance（）方法</li>
 <li>用反序列化，调用ObjectInputStream类的readObject（）方法</li>
 </ul>
-<h3 id="JVM的垃圾回收机制"><a href="#JVM的垃圾回收机制" class="headerlink" title="JVM的垃圾回收机制"></a>JVM的垃圾回收机制</h3><h2 id="基础知识点"><a href="#基础知识点" class="headerlink" title="基础知识点"></a>基础知识点</h2><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><hr>
+<h3 id="JVM的垃圾回收机制"><a href="#JVM的垃圾回收机制" class="headerlink" title="JVM的垃圾回收机制"></a>JVM的垃圾回收机制</h3><p>GC是垃圾收集的意思（Gabage Collection）,内存处理是编程人员容易出现问题的地方，忘记或者错误的内存回收会导致程序或系统的不稳定甚至崩溃，Java提供的GC功能可以自动监测对象是否超过作用域从而达到自动回收内存的目的，Java语言没有提供释放已分配内存的显示操作方法。垃圾回收主要针对的是堆内存(heap)，</p>
+<h4 id="如何判断对象是否需要回收？"><a href="#如何判断对象是否需要回收？" class="headerlink" title="如何判断对象是否需要回收？"></a>如何判断对象是否需要回收？</h4><p>有两种（采用第二种方式）</p>
+<p>​    1 引用计数法(但是并没有采用)</p>
+<p>为每一个创建的对象分配一个引用计数器，用来存储该对象被引用的个数。当该个数为零，意味着没有人再使用这个对象，可以认为“对象死亡”。但是，这种方案存在严重的问题，就是无法检测“循环引用”：当两个对象互相引用，即时它俩都不被外界任何东西引用，它俩的计数都不为零，因此永远不会被回收。而实际上对于开发者而言，这两个对象已经完全没有用处了。</p>
+<p>​    2、<strong>可达性分析</strong>（采用）</p>
+<p>这种方案是目前主流语言里采用的对象存活性判断方案。基本思路是把所有引用的对象想象成一棵树，从树的根结点 GC Roots 出发，持续遍历找出所有连接的树枝对象，这些对象则被称为“可达”对象，或称“存活”对象。其余的对象则被视为“死亡”的“不可达”对象，或称“垃圾”。</p>
+<h4 id="有哪些方式来回收这些垃圾呢？"><a href="#有哪些方式来回收这些垃圾呢？" class="headerlink" title="有哪些方式来回收这些垃圾呢？"></a>有哪些方式来回收这些垃圾呢？</h4><p>通过java的分代回收机制，堆中的对象主要分为三种</p>
+<ul>
+<li><p>刚刚创建的对象。在代码运行时会持续不断地创造新的对象，这些新创建的对象会被统一放在一起。因为有很多局部变量等在新创建后很快会变成不可达的对象，快速死去，因此这块区域的特点是存活对象少，垃圾多。形象点描述这块区域为：新生代；</p>
+</li>
+<li><p>存活了一段时间的对象。这些对象早早就被创建了，而且一直活了下来。我们把这些存活时间较长的对象放在一起，它们的特点是存活对象多，垃圾少。形象点描述这块区域为：老年代；</p>
+</li>
+<li><p>永久存在的对象。比如一些静态文件，这些对象的特点是不需要垃圾回收，永远存活。形象点描述这块区域为：永久代。（不过在 Java 8 里已经把永久代删除了，把这块内存空间给了元空间，后续文章再讲解。）</p>
+</li>
+</ul>
+<p>也就是说，常规的 Java 堆至少包括了 新生代 和 老年代 两块内存区域，而且这两块区域有很明显的特征：</p>
+<ul>
+<li>新生代：存活对象少、垃圾多</li>
+<li>老年代：存活对象多、垃圾少</li>
+</ul>
+<h2 id="基础知识点"><a href="#基础知识点" class="headerlink" title="基础知识点"></a>基础知识点</h2><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><hr>
 <p>String是类类型，不是基本类型。</p>
 <p>基本类型 有八种：整型 （4种）字符型 （1种）浮点型 （2种）布尔型（1种）</p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ms0002.jpg" alt=""></p>
@@ -979,55 +999,56 @@ public static void main(String[] args) {
 </ul>
 <h4 id="06-局部内部类介绍"><a href="#06-局部内部类介绍" class="headerlink" title="06.局部内部类介绍"></a>06.局部内部类介绍</h4><ul>
 <li>局部内部类可以简称为局部类，局部类可以在任何代码块中声明，并且其作用域位于代码块之中。例如，可以在一个方法快、一个if语句块、一个while语句块中声明一个局部类</li>
-<li>如果类的实例只在作用域内使用的话，使用局部类可以说是一个好办法<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Logger</span> <span class="token punctuation">{</span>
-  <span class="token keyword">void</span> <span class="token function">log</span><span class="token punctuation">(</span>String message<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
-</li>
+<li>如果类的实例只在作用域内使用的话，使用局部类可以说是一个好办法</li>
 </ul>
-<p>public class Outer {</p>
-<pre><code>String time = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM));
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Logger</span> <span class="token punctuation">{</span>
+    <span class="token keyword">void</span> <span class="token function">log</span><span class="token punctuation">(</span>String message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-public Logger getLogger() {
-    class LoggerImpl implements Logger {
-        @Override
-        public void log(String message) {
-            System.out.println(time + " : " + message);
-        }
-    }
-    return new LoggerImpl();
-}</code></pre><p>}<br>public static void main(String[] args) {<br>    Outer outer=new Outer();<br>    Logger logger=outer.getLogger();<br>    logger.log(“Hi”);<br>}</p>
-<pre><code>
-### 泛形
-**什么是泛型**
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Outer</span> <span class="token punctuation">{</span>
 
-泛型是Java SE 1.5的新特性，泛型的本质是参数化类型，也就是说所操作的数据类型被指定为一个参数。这种参数类型可以用在类、接口和方法的创建中，分别称为泛型类、泛型接口、泛型方法。 Java语言引入泛型的好处是安全简单。
+    String time <span class="token operator">=</span> LocalDateTime<span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>DateTimeFormatter<span class="token punctuation">.</span><span class="token function">ofLocalizedDateTime</span><span class="token punctuation">(</span>FormatStyle<span class="token punctuation">.</span>MEDIUM<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-在Java SE 1.5之前，没有泛型的情况的下，通过对类型Object的引用来实现参数的“任意化”，“任意化”带来的缺点是要做显式的强制类型转换，而这种转换是要求开发者对实际参数类型可以预知的情况下进行的。对于强制类型转换错误的情况，编译器可能不提示错误，在运行的时候才出现异常，这是一个安全隐患。
-
-#### 泛形方法
-``` java
-/**
+    <span class="token keyword">public</span> Logger <span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">class</span> <span class="token class-name">LoggerImpl</span> <span class="token keyword">implements</span> <span class="token class-name">Logger</span> <span class="token punctuation">{</span>
+            <span class="token annotation punctuation">@Override</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">log</span><span class="token punctuation">(</span>String message<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>time <span class="token operator">+</span> <span class="token string">" : "</span> <span class="token operator">+</span> message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">LoggerImpl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Outer outer<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Logger logger<span class="token operator">=</span>outer<span class="token punctuation">.</span><span class="token function">getLogger</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    logger<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Hi"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="泛形"><a href="#泛形" class="headerlink" title="泛形"></a>泛形</h3><p><strong>什么是泛型</strong></p>
+<p>泛型是Java SE 1.5的新特性，泛型的本质是参数化类型，也就是说所操作的数据类型被指定为一个参数。这种参数类型可以用在类、接口和方法的创建中，分别称为泛型类、泛型接口、泛型方法。 Java语言引入泛型的好处是安全简单。</p>
+<p>在Java SE 1.5之前，没有泛型的情况的下，通过对类型Object的引用来实现参数的“任意化”，“任意化”带来的缺点是要做显式的强制类型转换，而这种转换是要求开发者对实际参数类型可以预知的情况下进行的。对于强制类型转换错误的情况，编译器可能不提示错误，在运行的时候才出现异常，这是一个安全隐患。</p>
+<h4 id="泛形方法"><a href="#泛形方法" class="headerlink" title="泛形方法"></a>泛形方法</h4><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
  * 说明：
- * 1）&lt;E&gt;非常重要，可以理解为声明此方法为泛型方法。
- * 2）只有声明了&lt;E&gt;的方法才是泛型方法，泛型类中的使用了泛型的成员方法并不是泛型方法。
- * 3）&lt;E&gt;表明该方法将使用泛型类型E，此时才可以在方法中使用泛型类型E。
+ * 1）&lt;E>非常重要，可以理解为声明此方法为泛型方法。
+ * 2）只有声明了&lt;E>的方法才是泛型方法，泛型类中的使用了泛型的成员方法并不是泛型方法。
+ * 3）&lt;E>表明该方法将使用泛型类型E，此时才可以在方法中使用泛型类型E。
  * 4）与泛型类的定义一样，此处E可以随便写为任意标识，常见的如T、E、K、V等形式的参数常用于表示泛型。
  *
  * @param inputArray
- * @param &lt;E&gt;
- */
-public static &lt;E&gt; void printArray(E[] inputArray) {
-    // 输出数组元素
-    for (E element : inputArray) {
-        System.out.println(element + " ");
-    }
-}
+ * @param &lt;E>
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token operator">&lt;</span>E<span class="token operator">></span> <span class="token keyword">void</span> <span class="token function">printArray</span><span class="token punctuation">(</span>E<span class="token punctuation">[</span><span class="token punctuation">]</span> inputArray<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// 输出数组元素</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>E element <span class="token operator">:</span> inputArray<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>element <span class="token operator">+</span> <span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-public static void main(String args[]) {
-    Integer[] intArray = {1, 2, 3, 4, 5};
-    printArray(intArray);
-}</code></pre><h4 id="泛形类"><a href="#泛形类" class="headerlink" title="泛形类"></a>泛形类</h4><h4 id="泛形接口"><a href="#泛形接口" class="headerlink" title="泛形接口"></a>泛形接口</h4><h4 id="泛形通配符：？"><a href="#泛形通配符：？" class="headerlink" title="泛形通配符：？"></a>泛形通配符：？</h4><h4 id="泛形的限定"><a href="#泛形的限定" class="headerlink" title="泛形的限定"></a>泛形的限定</h4><p>我们知道使用泛型类时：如果明确参数类型，那么泛型就代表一种类型；如果使用通配符？，那么泛型就代表任意类型。但有时候我们希望指定某些类型(不是一个，也不要所有)能作为参数类型，这应该怎么办呢？</p>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String args<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Integer<span class="token punctuation">[</span><span class="token punctuation">]</span> intArray <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token function">printArray</span><span class="token punctuation">(</span>intArray<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h4 id="泛形类"><a href="#泛形类" class="headerlink" title="泛形类"></a>泛形类</h4><h4 id="泛形接口"><a href="#泛形接口" class="headerlink" title="泛形接口"></a>泛形接口</h4><h4 id="泛形通配符：？"><a href="#泛形通配符：？" class="headerlink" title="泛形通配符：？"></a>泛形通配符：？</h4><h4 id="泛形的限定"><a href="#泛形的限定" class="headerlink" title="泛形的限定"></a>泛形的限定</h4><p>我们知道使用泛型类时：如果明确参数类型，那么泛型就代表一种类型；如果使用通配符？，那么泛型就代表任意类型。但有时候我们希望指定某些类型(不是一个，也不要所有)能作为参数类型，这应该怎么办呢？</p>
 <pre><code>    Java中利用泛型的限定解决了这个问题，即泛型的限定。我们只需要按这样的格式书写：
 
    上限：&lt;？ extends E&gt;表示参数类型是E及其所有子类。
@@ -2872,7 +2893,6 @@ t<span class="token punctuation">.</span><span class="token function">start</spa
 <li>LinkedTransferQueue：一个由链表结构组成的无界阻塞队列。</li>
 <li>LinkedBlockingDeque：一个由链表结构组成的双向阻塞队列。 </li>
 </ul>
-<h2 id="并发包"><a href="#并发包" class="headerlink" title="并发包"></a>并发包</h2><p><a href="https://segmentfault.com/a/1190000015558984" target="_blank" rel="noopener">https://segmentfault.com/a/1190000015558984</a></p>
 <h2 id="JAVA-锁"><a href="#JAVA-锁" class="headerlink" title="JAVA 锁"></a>JAVA 锁</h2><h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><h4 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h4><p>    乐观锁是一种乐观思想，即认为读多写少，遇到并发写的可能性低，每次去拿数据的时候都认为<br>别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数<br>据，采取在写时先读出当前版本号，然后加锁操作（比较跟上一次的版本号，如果一样则更新），<br>如果失败则要重复读-比较-写的操作。</p>
 <p>    java 中的乐观锁基本都是通过 CAS 操作实现的，CAS是一种更新的原子操作，比较当前值跟传入值是否一样，一样则更新，否则失败。</p>
 <h4 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h4><p>    悲观锁是就是悲观思想，即认为写多，遇到并发写的可能性高，每次去拿数据的时候都认为别人<br>会修改，所以每次在读写数据的时候都会上锁，这样别人想读写这个数据就会 block 直到拿到锁。<br>java中的悲观锁就是Synchronized,AQS框架下的锁则是先尝试cas乐观锁去获取锁，获取不到，<br>才会转换为悲观锁，如 RetreenLock。</p>
@@ -2946,7 +2966,6 @@ t<span class="token punctuation">.</span><span class="token function">start</spa
 </ul>
 <h3 id="单向链表（Single-Linked-List）"><a href="#单向链表（Single-Linked-List）" class="headerlink" title="单向链表（Single-Linked List）"></a>单向链表（Single-Linked List）</h3><p>　　单链表是链表中结构最简单的。一个单链表的节点(Node)分为两个部分，第一个部分(data)保存或者显示关于节点的信息，另一个部分存储下一个节点的地址。最后一个节点存储地址的部分指向空值。</p>
 <p>　　单向链表只可向一个方向遍历，一般查找一个节点的时候需要从第一个节点开始每次访问下一个节点，一直访问到需要的位置。而插入一个节点，对于单向链表，我们只提供在链表头插入，只需要将当前插入的节点设置为头节点，next指向原头节点即可。删除一个节点，我们将该节点的上一个节点的next指向该节点的下一个节点。</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc19.png" alt=""></p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc20.png" alt=""></p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc21.png" alt=""></p>
 <h2 id="栈-stack-与堆-heap"><a href="#栈-stack-与堆-heap" class="headerlink" title="栈(stack)与堆(heap)"></a>栈(stack)与堆(heap)</h2><p>1.寄存器：最快的存储区, 由编译器根据需求进行分配,我们在程序中无法控制；</p>
@@ -3309,7 +3328,32 @@ public class HelloWorld {
 </blockquote>
 <p>三、main()方法中可以throw Exception<br>因此main()方法中可以抛出异常，main()方法上也可以声明抛出异常。</p>
 <p>四、main()方法中字符串参数数组作用<br>main()方法中字符串参数数组作用是接收命令行输入参数的，命令行的参数之间用空格隔开。</p>
-<h3 id="jdk1-8新特性学习"><a href="#jdk1-8新特性学习" class="headerlink" title="jdk1.8新特性学习"></a>jdk1.8新特性学习</h3><h4 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h4><h3 id="时间复杂度-amp-amp-空间复杂度"><a href="#时间复杂度-amp-amp-空间复杂度" class="headerlink" title="时间复杂度&amp;&amp;空间复杂度"></a>时间复杂度&amp;&amp;空间复杂度</h3><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><h3 id="Gc"><a href="#Gc" class="headerlink" title="Gc"></a>Gc</h3><h3 id="各种树"><a href="#各种树" class="headerlink" title="各种树"></a>各种树</h3><script>
+<h3 id="jdk1-8新特性学习"><a href="#jdk1-8新特性学习" class="headerlink" title="jdk1.8新特性学习"></a>jdk1.8新特性学习</h3><h4 id="新特性列表"><a href="#新特性列表" class="headerlink" title="新特性列表"></a>新特性列表</h4><p>以下是Java8中的引入的部分新特性。关于Java8新特性更详细的介绍可参考<a href="http://www.oracle.com/technetwork/java/javase/8-whats-new-2157071.html" target="_blank" rel="noopener">这里</a>。</p>
+<ul>
+<li>接口默认方法和静态方法</li>
+<li>Lambda 表达式</li>
+<li>函数式接口</li>
+<li>方法引用</li>
+<li>Stream</li>
+<li>Optional</li>
+<li>Date/Time API</li>
+<li>重复注解</li>
+<li>扩展注解的支持</li>
+<li>Base64</li>
+<li>JavaFX</li>
+<li>其它<ul>
+<li>JDBC4.2规范</li>
+<li>更好的类型推测机制</li>
+<li>HashMap性能提升</li>
+<li>IO/NIO 的改进</li>
+<li>JavaScript引擎Nashorn</li>
+<li>并发（Concurrency）</li>
+<li>类依赖分析器jdeps</li>
+<li>JVM的PermGen空间被移除</li>
+</ul>
+</li>
+</ul>
+<h4 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h4><h3 id="时间复杂度-amp-amp-空间复杂度"><a href="#时间复杂度-amp-amp-空间复杂度" class="headerlink" title="时间复杂度&amp;&amp;空间复杂度"></a>时间复杂度&amp;&amp;空间复杂度</h3><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><h3 id="Gc"><a href="#Gc" class="headerlink" title="Gc"></a>Gc</h3><h3 id="各种树"><a href="#各种树" class="headerlink" title="各种树"></a>各种树</h3><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }

@@ -1032,6 +1032,12 @@ System.out.println("是否停止2？=" + Thread.interrupted());//false
 <p>　　　　比如：a=1;b=2;c=a+b这三个操作，第一步（a=1)和第二步(b=2)由于不存在数据依赖关系，所以可能会发生重排序，但是c=a+b这个操作是不会被重排序的，因为需要保证最终的结果一定是c=a+b=3。</p>
 <p>　　重排序在单线程模式下是一定会保证最终结果的正确性，但是在多线程环境下，问题就出来了</p>
 <p><strong>简单总结下，volatile是一种轻量级的同步机制，它主要有两个特性：一是保证共享变量对所有线程的可见性；二是禁止指令重排序优化。同时需要注意的是，volatile对于单个的共享变量的读/写具有原子性，但是像num++这种复合操作，volatile无法保证其原子性</strong></p>
+<h5 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h5><p>　　为什么出现这种情况呢，我们需要先了解一下JMM（java内存模型）</p>
+<p>　　java虚拟机有自己的内存模型（Java Memory Model，JMM），JMM可以屏蔽掉各种硬件和操作系统的内存访问差异，以实现让java程序在各种平台下都能达到一致的内存访问效果。</p>
+<p>　　JMM决定一个线程对共享变量的写入何时对另一个线程可见，JMM定义了线程和主内存之间的抽象关系：共享变量存储在主内存(Main Memory)中，每个线程都有一个私有的本地内存（Local Memory），本地内存保存了被该线程使用到的主内存的副本拷贝，线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存中的变量。这三者之间的交互关系如下</p>
+<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/jc31.png" alt=""></p>
+<p>　需要注意的是，JMM是个抽象的内存模型，所以所谓的本地内存，主内存都是抽象概念，并不一定就真实的对应cpu缓存和物理内存。当然如果是出于理解的目的，这样对应起来也无不可。</p>
+<p>  那么这种共享变量在多线程模型中的不可见性如何解决呢？比较粗暴的方式自然就是加锁，但是此处使用synchronized或者Lock这些方式太重量级了，有点炮打蚊子的意思。比较合理的方式其实就是volatile</p>
 <h4 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h4><p><a href="https://www.cnblogs.com/xzwblog/p/7227509.html" target="_blank" rel="noopener">https://www.cnblogs.com/xzwblog/p/7227509.html</a></p>
 <p><a href="https://www.jianshu.com/p/98b68c97df9b" target="_blank" rel="noopener">https://www.jianshu.com/p/98b68c97df9b</a></p>
 <p>变量值的共享可以使用public static的形式，所有线程都使用同一个变量，如果想实现每一个线程都有自己的共享变量该如何实现呢？JDK中的ThreadLocal类正是为了解决这样的问题。</p>
@@ -1080,12 +1086,10 @@ ThreadB threadLocal.get() = 0
 ThreadA threadLocal.get() = 1
 ThreadB threadLocal.get() = 1
 ThreadA threadLocal.get() = 2
-ThreadB threadLocal.get() = 2</code></pre><h5 id="ThreadLocal的内存泄露问题"><a href="#ThreadLocal的内存泄露问题" class="headerlink" title="ThreadLocal的内存泄露问题"></a>ThreadLocal的内存泄露问题</h5><p>&nbsp; &nbsp; &nbsp; &nbsp;根据上面Entry方法的源码，我们知道ThreadLocalMap是使用ThreadLocal的弱引用作为Key的。下图是本文介绍到的一些对象之间的引用关系图，实线表示强引用，虚线表示弱引用：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/xc1.png" alt="xc"></p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp;如上图，ThreadLocalMap使用ThreadLocal的弱引用作为key，如果一个ThreadLocal没有外部强引用引用他，那么系统gc的时候，这个ThreadLocal势必会被回收，这样一来，ThreadLocalMap中就会出现key为null的Entry，就没有办法访问这些key为null的Entry的value，如果当前线程再迟迟不结束的话，这些key为null的Entry的value就会一直存在一条强引用链：<br>Thread Ref -&gt; Thread -&gt; ThreaLocalMap -&gt; Entry -&gt; value<br>永远无法回收，造成内存泄露。<br>　　<br>&nbsp; &nbsp; &nbsp; &nbsp;ThreadLocalMap设计时的对上面问题的对策：<br>ThreadLocalMap的getEntry函数的流程大概为：</p>
-<p>首先从ThreadLocal的直接索引位置(通过ThreadLocal.threadLocalHashCode &amp; (table.length-1)运算得到)获取Entry e，如果e不为null并且key相同则返回e；<br>如果e为null或者key不一致则向下一个位置查询，如果下一个位置的key和当前需要查询的key相等，则返回对应的Entry。否则，如果key值为null，则擦除该位置的Entry，并继续向下一个位置查询。在这个过程中遇到的key为null的Entry都会被擦除，那么Entry内的value也就没有强引用链，自然会被回收。仔细研究代码可以发现，set操作也有类似的思想，将key为null的这些Entry都删除，防止内存泄露。</p>
-<p>&nbsp; &nbsp; &nbsp; &nbsp;但是光这样还是不够的，上面的设计思路依赖一个前提条件：要调用ThreadLocalMap的getEntry函数或者set函数。这当然是不可能任何情况都成立的，所以很多情况下需要使用者手动调用ThreadLocal的remove函数，手动删除不再需要的ThreadLocal，防止内存泄露。所以JDK建议将ThreadLocal变量定义成private static的，这样的话ThreadLocal的生命周期就更长，由于一直存在ThreadLocal的强引用，所以ThreadLocal也就不会被回收，也就能保证任何时候都能根据ThreadLocal的弱引用访问到Entry的value值，然后remove它，防止内存泄露。<br>关于ThreadLocalMap内部类的简单介绍</p>
-<p><strong>初始容量16，负载因子2/3，解决冲突的方法是再hash法，也就是：在当前hash的基础上再自增一个常量。</strong></p>
+ThreadB threadLocal.get() = 2</code></pre><h5 id="ThreadLocal内存泄露"><a href="#ThreadLocal内存泄露" class="headerlink" title="ThreadLocal内存泄露"></a>ThreadLocal内存泄露</h5><p><strong>内存泄漏memory leak：</strong> 是指程序在申请内存后，无法释放已申请的内存空间，一次内存泄漏似乎不会有大的影响，但内存泄漏堆积后的后果就是内存溢出。</p>
+<p><strong>内存溢出 out of memory：</strong> 没内存可以分配给新的对象了。</p>
+<p>我们知道，线程<code>Thread对象</code>中，每个线程对象内部都有一个的<code>ThreadLocalMap</code>对象。如果这个对象存储了多个大对象，则可能早出<code>内存溢出OOM</code>。为了防止这种情况发生，在ThreadLocal的源码中，有对应的策略，即调用 get（）、set（）、remove（） 方法，均会清除 ThreadLocal内部的 内存。</p>
+<p><strong>ThreadLocal的内部是ThreadLocalMap</strong>。<strong>ThreadLocalMap内部是由一个Entry数组组成</strong>。Entry类的构造函数为 Entry（弱引用的ThreadLocal对象， Object value对象）。<strong>因为Entry的key是一个弱引用的ThreadLocal对象</strong>，<strong>所以在 垃圾回收 之前，将会清除此Entry对象的key</strong>。那么， ThreadLocalMap 中就会出现 key 为 null 的 Entry，就没有办法访问这些 key 为 null 的 Entry 的 value。这些 value 被Entry对象引用，所以value所占内存不会被释放。<strong>若在指定的线程任务里面，调用ThreadLocal对象的get（）、set（）、remove（）方法，可以避免出现内存泄露。</strong></p>
 <h3 id="juc"><a href="#juc" class="headerlink" title="juc"></a>juc</h3><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/thread2.png" alt=""></p>
 <h4 id="Java-JUC简介"><a href="#Java-JUC简介" class="headerlink" title="Java JUC简介"></a>Java JUC简介</h4><blockquote>
 <p>在 Java 5.0 提供了 java.util.concurrent （简称JUC ）包，在此包中增加了在并发编程中很常用的实用工具类，用于定义类似于线程的自定义子系统，包括线程池、异步 IO 和轻量级任务框架。提供可调的、灵活的线程池。还提供了设计用于多线程上下文中的 Collection 实现等。</p>
