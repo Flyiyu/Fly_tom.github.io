@@ -343,14 +343,14 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        9.6k
+                        9.5k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        36 分
+                        35 分
                     </div>
                     
                 
@@ -375,7 +375,6 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
 <p>生产者（Producer）：是能够发布消息到话题的任何对象。</p>
 <p>服务代理（Broker）：已发布的消息保存在一组服务器中，它们被称为代理（Broker）或Kafka集群。</p>
 <p>消费者（Consumer）：可以订阅一个或多个话题，并从Broker拉数据，从而消费这些已发布的消息。</p>
-<p><img src="" alt="kafka 1图片 图片收集"></p>
 <h3 id="2-1-拓扑结构"><a href="#2-1-拓扑结构" class="headerlink" title="2.1 拓扑结构"></a>2.1 拓扑结构</h3><p>如下图：</p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ka1.png" alt="image"></p>
 <p>图.1</p>
@@ -384,12 +383,8 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
 </li>
 <li><p><strong>Topic</strong>：Topic在逻辑上可以被认为是一个queue。每条消费都必须指定它的topic，可以简单理解为必须指明把这条消息放进哪个queue里。</p>
 <ul>
-<li>Partition:topic物理上的分区，一个topic可以分为多个partition，每个partition是一个有序的队列。</li>
+<li><strong>Partition</strong>：是物理概念上的分区，为了提供系统吞吐率，在物理上每个Topic会分成一个或多个Partition，每个Partition对应一个文件夹，通过partition实现了并行处理和水平扩展<ul>
 <li>offset：每个partition都由一系列有序的、不可变的消息组成，这些消息被连续的追加到partition中。partition中的每个消息都有一个连续的序列号叫做offset,用于partition唯一标识一条消息.</li>
-</ul>
-</li>
-<li><p><strong>Partition</strong>：是物理概念上的分区，为了提供系统吞吐率，在物理上每个Topic会分成一个或多个Partition，每个Partition对应一个文件夹，通过partition实现了并行处理和水平扩展</p>
-<ul>
 <li>Segment：<ul>
 <li>partition物理上由多个segment组成，每个Segment存着message信息</li>
 <li>一个Segment对应一个文件</li>
@@ -400,7 +395,11 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
 </li>
 </ul>
 </li>
-<li><p><strong>ISR</strong>：In-Sync Replicas 副本同步队列  </p>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>ISR</strong>：In-Sync Replicas 副本同步队列 (kafka副本 实现高可用)</p>
 </li>
 <li><p><strong>Producer</strong>：消息产生者，负责生产消息并发送到Kafka Broker</p>
 </li>
@@ -408,7 +407,7 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
 <ul>
 <li><p>消费者就是消息的使用者，在消费者端也有几个名词需要区分一下。</p>
 <blockquote>
-<p>一般消息队列有两种模式的消费方式，分别是 队列模式 和 订阅模式。</p>
+<p>一般消息队列有两种模式的消费方式，分别是 队列模式（或者 点对点模式） 和 发布订阅模式。</p>
 </blockquote>
 <ul>
 <li>队列模式：一对一，就是一个消息只能被一个消费者消费，不能重复消费。一般情况队列支持存在多个消费者，但是对于一个消息，只会有一个消费者可以消费它。</li>
@@ -424,67 +423,22 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
 <li>Controller：中央控制器Control，负责管理分区和副本状态并执行管理着这些分区的重新分配。（里面涉及到partition leader 选举）</li>
 </ul>
 </li>
+<li><p>Replication:每一个分区都有多个副本，副本的作用是做备胎。当主分区（Leader）故障的时候会选择一个备胎（Follower）上位，成为Leader。在kafka中默认副本的最大数量是10个，且副本的数量不能大于Broker的数量，follower和leader绝对是在不同的机器，同一机器对同一个分区也只可能存放一个副本（包括自己）。</p>
+</li>
 <li><p><strong>controller</strong>：kafka 集群中的其中一个服务器，用来进行 leader election 以及 各种 failover。</p>
 </li>
-<li><p><strong>删除</strong></p>
-<ul>
-<li>对于传统的message queue而言，一般会删除已经被消费的消息，而Kafka集群会保留所有的消息，无论其被消费与否。当然，因为磁盘限制，不可能永久保留所有数据（实际上也没必要），因此Kafka提供两种策略去删除旧数据。一是基于时间，二是基于partition文件大小。例如可以通过配置$KAFKA_HOME/config/server.properties，让Kafka删除一周前的数据，也可通过配置让Kafka在partition文件超过1GB时删除旧数据</li>
-</ul>
+<li><p>Zookeeper：kafka集群依赖zookeeper来保存集群的的元信息，来保证系统的可用性。</p>
 </li>
 </ul>
 <h3 id="2-3-zookeeper-节点"><a href="#2-3-zookeeper-节点" class="headerlink" title="2.3 zookeeper 节点"></a>2.3 zookeeper 节点</h3><p>kafka 在 zookeeper 中的存储结构如下图所示：</p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ka2.png" alt="image"></p>
-<p>图.2</p>
-<h2 id="三、producer-发布消息"><a href="#三、producer-发布消息" class="headerlink" title="三、producer 发布消息"></a><strong>三、producer 发布消息</strong></h2><h3 id="3-1-写入方式"><a href="#3-1-写入方式" class="headerlink" title="3.1 写入方式"></a>3.1 写入方式</h3><p>producer 采用 push 模式将消息发布到 broker，每条消息都被 append 到 patition 中，属于顺序写磁盘（顺序写磁盘效率比随机写内存要高，保障 kafka 吞吐率）。</p>
+<h2 id="三、producer-发布消息"><a href="#三、producer-发布消息" class="headerlink" title="三、producer 发布消息"></a><strong>三、producer 发布消息</strong></h2><h3 id="3-1-写入方式"><a href="#3-1-写入方式" class="headerlink" title="3.1 写入方式"></a>3.1 写入方式</h3><p>producer 采用 push 模式将消息发布到 broker，每条消息都被 append 到 patition 中，属于顺序写磁盘（顺序写磁盘效率比随机写内存要高，保障 kafka 吞吐率）。<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ka8.png" alt="image"></p>
+<blockquote>
+<p>需要注意的一点是，消息写入leader后，follower是主动的去leader进行同步的！producer采用push模式将数据发布到broker，每条消息追加到分区中，顺序写入磁盘，所以保证同一分区内的数据是有序的</p>
+</blockquote>
 <h3 id="3-2-消息路由"><a href="#3-2-消息路由" class="headerlink" title="3.2 消息路由"></a>3.2 消息路由</h3><p>producer 发送消息到 broker 时，会根据分区算法选择将其存储到哪一个 partition。其路由机制为：</p>
 <p>1. 指定了 patition，则直接使用；<br>2. 未指定 patition 但指定 key，通过对 key 的 value 进行hash 选出一个 patition<br>3. patition 和 key 都未指定，使用轮询选出一个 patition。</p>
-<p> 附上 java 客户端分区源码，一目了然：</p>
-<pre><code>//创建消息实例  
-public ProducerRecord(String topic, Integer partition, Long timestamp, K key, V value) {  
-     if (topic == null)  
-          throw new IllegalArgumentException("Topic cannot be null");  
-     if (timestamp != null &amp;&amp; timestamp &lt; 0)  
-          throw new IllegalArgumentException("Invalid timestamp " + timestamp);  
-     this.topic = topic;  
-     this.partition = partition;  
-     this.key = key;  
-     this.value = value;  
-     this.timestamp = timestamp;  
-}  
-
-//计算 patition，如果指定了 patition 则直接使用，否则使用 key 计算  
-private int partition(ProducerRecord&lt;K, V&gt; record, byte\[\] serializedKey , byte\[\] serializedValue, Cluster cluster) {  
-     Integer partition = record.partition();  
-     if (partition != null) {  
-          List&lt;PartitionInfo&gt; partitions = cluster.partitionsForTopic(record.topic());  
-          int lastPartition = partitions.size() - 1;  
-          if (partition &lt; 0 || partition &gt; lastPartition) {  
-               throw new IllegalArgumentException(String.format("Invalid partition given with record: %d is not in the range \[0...%d\].", partition, lastPartition));  
-          }  
-          return partition;  
-     }  
-     return this.partitioner.partition(record.topic(), record.key(), serializedKey, record.value(), serializedValue, cluster);  
-}  
-
-// 使用 key 选取 patition  
-public int partition(String topic, Object key, byte\[\] keyBytes, Object value, byte\[\] valueBytes, Cluster cluster) {  
-     List&lt;PartitionInfo&gt; partitions = cluster.partitionsForTopic(topic);  
-     int numPartitions = partitions.size();  
-     if (keyBytes == null) {  
-          int nextValue = counter.getAndIncrement();  
-          List&lt;PartitionInfo&gt; availablePartitions = cluster.availablePartitionsForTopic(topic);  
-          if (availablePartitions.size() &gt; 0) {  
-               int part = DefaultPartitioner.toPositive(nextValue) % availablePartitions.size();  
-               return availablePartitions.get(part).partition();  
-          } else {  
-               return DefaultPartitioner.toPositive(nextValue) % numPartitions;  
-          }  
-     } else {  
-          //对 keyBytes 进行 hash 选出一个 patition  
-          return DefaultPartitioner.toPositive(Utils.murmur2(keyBytes)) % numPartitions;  
-     }  
-}
-</code></pre><h3 id="3-3-写入流程"><a href="#3-3-写入流程" class="headerlink" title="3.3 写入流程"></a>3.3 写入流程</h3><p> producer 写入消息序列图如下所示：</p>
+<h3 id="3-3-写入流程"><a href="#3-3-写入流程" class="headerlink" title="3.3 写入流程"></a>3.3 写入流程</h3><p> producer 写入消息序列图如下所示：</p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ka3.png" alt="image"></p>
 <p>图.3</p>
 <p>流程说明：</p>
@@ -492,9 +446,24 @@ public int partition(String topic, Object key, byte\[\] keyBytes, Object value, 
 <h3 id="3-4-producer-delivery-guarantee"><a href="#3-4-producer-delivery-guarantee" class="headerlink" title="3.4 producer delivery guarantee"></a>3.4 producer delivery guarantee</h3><p> 一般情况下存在三种情况：</p>
 <p>1. At most once 消息可能会丢，但绝不会重复传输<br>2. At least one 消息绝不会丢，但可能会重复传输<br>3. Exactly once 每条消息肯定会被传输一次且仅传输一次</p>
 <p>当 producer 向 broker 发送消息时，一旦这条消息被 commit，由于 replication 的存在，它就不会丢。但是如果 producer 发送数据给 broker 后，遇到网络问题而造成通信中断，那 Producer 就无法判断该条消息是否已经 commit。虽然 Kafka 无法确定网络故障期间发生了什么，但是 producer 可以生成一种类似于主键的东西，发生故障时幂等性的重试多次，这样就做到了 Exactly once，但目前还并未实现。所以目前默认情况下一条消息从 producer 到 broker 是确保了 At least once，可通过设置 producer 异步发送实现At most once。</p>
-<h2 id="四、broker-保存消息"><a href="#四、broker-保存消息" class="headerlink" title="四、broker 保存消息"></a><strong>四、broker 保存消息</strong></h2><h3 id="4-1-存储方式"><a href="#4-1-存储方式" class="headerlink" title="4.1 存储方式"></a>4.1 存储方式</h3><p>物理上把 topic 分成一个或多个 patition（对应 server.properties 中的 num.partitions=3 配置），每个 patition 物理上对应一个文件夹（该文件夹存储该 patition 的所有消息和索引文件），如下：</p>
+<p>保证消息不丢失是一个消息队列中间件的基本保证，那producer在向kafka写入消息的时候，怎么保证消息不丢失呢？那就是通过ACK应答机制！在生产者向队列写入数据的时候可以设置参数来确定是否确认kafka接收到数据，这个参数可设置的值为0、1、all。</p>
+<ul>
+<li>0代表producer往集群发送数据不需要等到集群的返回，不确保消息发送成功。安全性最低但是效率最高。</li>
+</ul>
+<ul>
+<li><p>1代表producer往集群发送数据只要leader应答就可以发送下一条，只确保leader发送成功。</p>
+</li>
+<li><p>all代表producer往集群发送数据需要所有的follower都完成从leader的同步才会发送下一条，确保leader发送成功和所有的副本都完成备份。安全性最高，但是效率最低。</p>
+</li>
+</ul>
+<h2 id="四、broker-保存消息"><a href="#四、broker-保存消息" class="headerlink" title="四、broker 保存消息"></a><strong>四、broker 保存消息</strong></h2><blockquote>
+<p>　Producer将数据写入kafka后，集群就需要对数据进行保存了！kafka将数据保存在磁盘，可能在我们的一般的认知里，写入磁盘是比较耗时的操作，不适合这种高并发的组件。Kafka初始会单独开辟一块磁盘空间，顺序写入数据（效率比随机写入高）。</p>
+</blockquote>
+<h3 id="4-1-存储方式"><a href="#4-1-存储方式" class="headerlink" title="4.1 存储方式"></a>4.1 存储方式</h3><p>物理上把 topic 分成一个或多个 patition（对应 server.properties 中的 num.partitions=3 配置），每个 patition 物理上对应一个文件夹（该文件夹存储该 patition 的所有消息和索引文件），如下：</p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ka4.png" alt="image"></p>
-<p>图.4</p>
+<p>Partition在服务器上的表现形式就是一个一个的文件夹，每个partition的文件夹下面会有多组segment文件，每组segment文件又包含.index文件、.log文件、.timeindex文件（早期版本中没有）三个文件， log文件就实际是存储message的地方，而index和timeindex文件为索引文件，用于检索消息。</p>
+<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ka9.png" alt="image"></p>
+<p>　如上图，这个partition有三组segment文件，每个log文件的大小是一样的，但是存储的message数量是不一定相等的（每条的message大小不一致）。文件的命名是以该segment最小offset来命名的，如000.index存储offset为0~368795的消息，kafka就是利用分段+索引的方式来解决查找效率的问题。</p>
 <h3 id="4-2-存储策略"><a href="#4-2-存储策略" class="headerlink" title="4.2 存储策略"></a>4.2 存储策略</h3><p>无论消息是否被消费，kafka 都会保留所有消息。有两种策略可以删除旧数据：</p>
 <p>1. 基于时间：log.retention.hours=168<br>2. 基于大小：log.retention.bytes=1073741824</p>
 <p>需要注意的是，因为Kafka读取特定消息的时间复杂度为O(1)，即与文件大小无关，所以这里删除过期文件与提高 Kafka 性能无关。</p>
@@ -511,8 +480,8 @@ public int partition(String topic, Object key, byte\[\] keyBytes, Object value, 
 <h2 id="五、kafka-HA"><a href="#五、kafka-HA" class="headerlink" title="五、kafka HA"></a><strong>五、kafka HA</strong></h2><h3 id="5-1-replication"><a href="#5-1-replication" class="headerlink" title="5.1 replication"></a>5.1 replication</h3><p>如图.1所示，同一个 partition 可能会有多个 replica（对应 server.properties 配置中的 default.replication.factor=N）。没有 replica 的情况下，一旦 broker 宕机，其上所有 patition 的数据都不可被消费，同时 producer 也不能再将数据存于其上的 patition。引入replication 之后，同一个 partition 可能会有多个 replica，而这时需要在这些 replica 之间选出一个 leader，producer 和 consumer 只与这个 leader 交互，其它 replica 作为 follower 从 leader 中复制数据。</p>
 <p>Kafka 分配 Replica 的算法如下：</p>
 <p>1. 将所有 broker（假设共 n 个 broker）和待分配的 partition 排序<br>2. 将第 i 个 partition 分配到第（i mod n）个 broker 上<br>3. 将第 i 个 partition 的第 j 个 replica 分配到第（(i + j) mode n）个 broker上</p>
-<h3 id="5-2-leader-failover"><a href="#5-2-leader-failover" class="headerlink" title="5.2 leader failover"></a>5.2 leader failover</h3><p>当 partition 对应的 leader 宕机时，需要从 follower 中选举出新 leader。在选举新leader时，一个基本的原则是，新的 leader 必须拥有旧 leader commit 过的所有消息。</p>
-<p>kafka 在 zookeeper 中（/brokers/…/state）动态维护了一个 ISR（in-sync replicas），由3.3节的写入流程可知 ISR 里面的所有 replica 都跟上了 leader，只有 ISR 里面的成员才能选为 leader。对于 f+1 个 replica，一个 partition 可以在容忍 f 个 replica 失效的情况下保证消息不丢失。</p>
+<h3 id="5-2-选举"><a href="#5-2-选举" class="headerlink" title="5.2 选举"></a>5.2 选举</h3><p>当 partition 对应的 leader 宕机时，需要从 follower 中选举出新 leader。在选举新leader时，一个基本的原则是，新的 leader 必须拥有旧 leader commit 过的所有消息。</p>
+<p>kafka 在 zookeeper 中（/brokers/…/state）动态维护了一个 ISR（in-sync replicas），ISR 里面的所有 replica 都跟上了 leader，只有 ISR 里面的成员才能选为 leader。对于 f+1 个 replica，一个 partition 可以在容忍 f 个 replica 失效的情况下保证消息不丢失。</p>
 <p>当所有 replica 都不工作时，有两种可行的方案：</p>
 <p>1. 等待 ISR 中的任一个 replica 活过来，并选它作为 leader。可保障数据不丢失，但时间可能相对较长。<br>2. 选择第一个活过来的 replica（不一定是 ISR 成员）作为 leader。无法保障数据不丢失，但相对不可用时间较短。</p>
 <p>kafka 0.8.* 使用第二种方式。</p>
@@ -525,22 +494,7 @@ public int partition(String topic, Object key, byte\[\] keyBytes, Object value, 
 <h3 id="5-4-controller-failover"><a href="#5-4-controller-failover" class="headerlink" title="5.4 controller failover"></a>5.4 controller failover</h3><p> 当 controller 宕机时会触发 controller failover。每个 broker 都会在 zookeeper 的 “/controller” 节点注册 watcher，当 controller 宕机时 zookeeper 中的临时节点消失，所有存活的 broker 收到 fire 的通知，每个 broker 都尝试创建新的 controller path，只有一个竞选成功并当选为 controller。</p>
 <p>当新的 controller 当选时，会触发 KafkaController.onControllerFailover 方法，在该方法中完成如下操作：</p>
 <p>1. 读取并增加 Controller Epoch。<br>2. 在 reassignedPartitions Patch(/admin/reassign_partitions) 上注册 watcher。<br>3. 在 preferredReplicaElection Path(/admin/preferred_replica_election) 上注册 watcher。<br>4. 通过 partitionStateMachine 在 broker Topics Patch(/brokers/topics) 上注册 watcher。<br>5. 若 delete.topic.enable=true（默认值是 false），则 partitionStateMachine 在 Delete Topic Patch(/admin/delete_topics) 上注册 watcher。<br>6. 通过 replicaStateMachine在 Broker Ids Patch(/brokers/ids)上注册Watch。<br>7. 初始化 ControllerContext 对象，设置当前所有 topic，“活”着的 broker 列表，所有 partition 的 leader 及 ISR等。<br>8. 启动 replicaStateMachine 和 partitionStateMachine。<br>9. 将 brokerState 状态设置为 RunningAsController。<br>10. 将每个 partition 的 Leadership 信息发送给所有“活”着的 broker。<br>11. 若 auto.leader.rebalance.enable=true（默认值是true），则启动 partition-rebalance 线程。<br>12. 若 delete.topic.enable=true 且Delete Topic Patch(/admin/delete_topics)中有值，则删除相应的Topic。</p>
-<h2 id="六-consumer-消费消息"><a href="#六-consumer-消费消息" class="headerlink" title="六. consumer 消费消息"></a><strong>六. consumer 消费消息</strong></h2><h3 id="6-1-consumer-API"><a href="#6-1-consumer-API" class="headerlink" title="6.1 consumer API"></a>6.1 consumer API</h3><p>kafka 提供了两套 consumer API：</p>
-<p>1. The high-level Consumer API<br>2. The SimpleConsumer API</p>
-<p> 其中 high-level consumer API 提供了一个从 kafka 消费数据的高层抽象，而 SimpleConsumer API 则需要开发人员更多地关注细节。</p>
-<h4 id="6-1-1-The-high-level-consumer-API"><a href="#6-1-1-The-high-level-consumer-API" class="headerlink" title="6.1.1 The high-level consumer API"></a>6.1.1 The high-level consumer API</h4><p>high-level consumer API 提供了 consumer group 的语义，一个消息只能被 group 内的一个 consumer 所消费，且 consumer 消费消息时不关注 offset，最后一个 offset 由 zookeeper 保存。</p>
-<p>使用 high-level consumer API 可以是多线程的应用，应当注意：</p>
-<p>1. 如果消费线程大于 patition 数量，则有些线程将收不到消息<br>2. 如果 patition 数量大于线程数，则有些线程多收到多个 patition 的消息<br>3. 如果一个线程消费多个 patition，则无法保证你收到的消息的顺序，而一个 patition 内的消息是有序的</p>
-<h4 id="6-1-2-The-SimpleConsumer-API"><a href="#6-1-2-The-SimpleConsumer-API" class="headerlink" title="6.1.2 The SimpleConsumer API"></a>6.1.2 The SimpleConsumer API</h4><p>如果你想要对 patition 有更多的控制权，那就应该使用 SimpleConsumer API，比如：</p>
-<p>1. 多次读取一个消息<br>2. 只消费一个 patition 中的部分消息<br>3. 使用事务来保证一个消息仅被消费一次</p>
-<p> 但是使用此 API 时，partition、offset、broker、leader 等对你不再透明，需要自己去管理。你需要做大量的额外工作：</p>
-<p>1. 必须在应用程序中跟踪 offset，从而确定下一条应该消费哪条消息<br>2. 应用程序需要通过程序获知每个 Partition 的 leader 是谁<br>3. 需要处理 leader 的变更</p>
-<p> 使用 SimpleConsumer API 的一般流程如下：</p>
-<p>1. 查找到一个“活着”的 broker，并且找出每个 partition 的 leader<br>2. 找出每个 partition 的 follower<br>3. 定义好请求，该请求应该能描述应用程序需要哪些数据<br>4. fetch 数据<br>5. 识别 leader 的变化，并对之作出必要的响应</p>
-<blockquote>
-<p>以下针对 high-level Consumer API 进行说明。</p>
-</blockquote>
-<h3 id="6-2-consumer-group"><a href="#6-2-consumer-group" class="headerlink" title="6.2 consumer group"></a>6.2 consumer group</h3><p>如 2.2 节所说， kafka 的分配单位是 patition。每个 consumer 都属于一个 group，一个 partition 只能被同一个 group 内的一个 consumer 所消费（也就保障了一个消息只能被 group 内的一个 consuemr 所消费），但是多个 group 可以同时消费这个 partition。</p>
+<h2 id="六-consumer-消费消息"><a href="#六-consumer-消费消息" class="headerlink" title="六. consumer 消费消息"></a><strong>六. consumer 消费消息</strong></h2><h3 id="6-2-consumer-group"><a href="#6-2-consumer-group" class="headerlink" title="6.2 consumer group"></a>6.2 consumer group</h3><p>如 2.2 节所说， kafka 的分配单位是 patition。每个 consumer 都属于一个 group，一个 partition 只能被同一个 group 内的一个 consumer 所消费（也就保障了一个消息只能被 group 内的一个 consuemr 所消费），但是多个 group 可以同时消费这个 partition。<br><strong>所以在实际的应用中，建议消费者组的consumer的数量与partition的数量一致！</strong></p>
 <p>kafka 的设计目标之一就是同时实现离线处理和实时处理，根据这一特性，可以使用 spark/Storm 这些实时处理系统对消息在线处理，同时使用 Hadoop 批处理系统进行离线处理，还可以将数据备份到另一个数据中心，只需要保证这三者属于不同的 consumer group。如下图所示：</p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ka9.jpg" alt="image"></p>
 <h2 id="6-3-消费方式"><a href="#6-3-消费方式" class="headerlink" title="6.3 消费方式"></a><strong>6.3 消费方式</strong></h2><p>consumer 采用 pull 模式从 broker 中读取数据。</p>
@@ -548,10 +502,12 @@ public int partition(String topic, Object key, byte\[\] keyBytes, Object value, 
 <p>对于 Kafka 而言，pull 模式更合适，它可简化 broker 的设计，consumer 可自主控制消费消息的速率，同时 consumer 可以自己控制消费方式——即可批量消费也可逐条消费，同时还能选择不同的提交方式从而实现不同的传输语义。</p>
 <h3 id="6-4-consumer-delivery-guarantee"><a href="#6-4-consumer-delivery-guarantee" class="headerlink" title="6.4 consumer delivery guarantee"></a>6.4 consumer delivery guarantee</h3><p>如果将 consumer 设置为 autocommit，consumer 一旦读到数据立即自动 commit。如果只讨论这一读取消息的过程，那 Kafka 确保了 Exactly once。</p>
 <p>但实际使用中应用程序并非在 consumer 读取完数据就结束了，而是要进行进一步处理，而数据处理与 commit 的顺序在很大程度上决定了consumer delivery guarantee：</p>
-<p><strong>1.读完消息先 commit 再处理消息。</strong><br>    这种模式下，如果 consumer 在 commit 后还没来得及处理消息就 crash 了，下次重新开始工作后就无法读到刚刚已提交而未处理的消息，这就对应于 At most once<br><strong>2.读完消息先处理再 commit。</strong><br>    这种模式下，如果在处理完消息之后 commit 之前 consumer crash 了，下次重新开始工作时还会处理刚刚未 commit 的消息，实际上该消息已经被处理过了。这就对应于 At least once。<br><strong>3.如果一定要做到 Exactly once，就需要协调 offset 和实际操作的输出。</strong><br>    精典的做法是引入两阶段提交。如果能让 offset 和操作输入存在同一个地方，会更简洁和通用。这种方式可能更好，因为许多输出系统可能不支持两阶段提交。比如，consumer 拿到数据后可能把数据放到 HDFS，如果把最新的 offset 和数据本身一起写到 HDFS，那就可以保证数据的输出和 offset 的更新要么都完成，要么都不完成，间接实现 Exactly once。（目前就 high-level API而言，offset 是存于Zookeeper 中的，无法存于HDFS，而SimpleConsuemr API的 offset 是由自己去维护的，可以将之存于 HDFS 中）</p>
+<p><strong>1.读完消息先 commit 再处理消息。</strong><br>    这种模式下，如果 consumer 在 commit 后还没来得及处理消息就 crash 了，下次重新开始工作后就无法读到刚刚已提交而未处理的消息，这就对应于 At most once  </p>
+<p><strong>2.读完消息先处理再 commit。</strong><br>    这种模式下，如果在处理完消息之后 commit 之前 consumer crash 了，下次重新开始工作时还会处理刚刚未 commit 的消息，实际上该消息已经被处理过了。这就对应于 At least once。  </p>
+<p><strong>3.如果一定要做到 Exactly once，就需要协调 offset 和实际操作的输出。</strong><br>    精典的做法是引入两阶段提交。如果能让 offset 和操作输入存在同一个地方，会更简洁和通用。这种方式可能更好，因为许多输出系统可能不支持两阶段提交。比如，consumer 拿到数据后可能把数据放到 HDFS，如果把最新的 offset 和数据本身一起写到 HDFS，那就可以保证数据的输出和 offset 的更新要么都完成，要么都不完成，间接实现 Exactly once。（目前就 high-level API而言，offset 是存于Zookeeper 中的，无法存于HDFS，而SimpleConsuemr API的 offset 是由自己去维护的，可以将之存于 HDFS 中）</p>
 <p>总之，Kafka 默认保证 At least once，并且允许通过设置 producer 异步提交来实现 At most once（见文章《kafka consumer防止数据丢失》）。而 Exactly once 要求与外部存储系统协作，幸运的是 kafka 提供的 offset 可以非常直接非常容易得使用这种方式。</p>
 <p>更多关于 kafka 传输语义的信息请参考《Message Delivery Semantics》。</p>
-<h3 id="6-5-consumer-rebalance"><a href="#6-5-consumer-rebalance" class="headerlink" title="6.5 consumer rebalance"></a>6.5 consumer rebalance</h3><p>当有 consumer 加入或退出、以及 partition 的改变（如 broker 加入或退出）时会触发 rebalance。consumer rebalance算法如下：</p>
+<h3 id="6-5-consumer-rebalance（重新平衡）"><a href="#6-5-consumer-rebalance（重新平衡）" class="headerlink" title="6.5 consumer rebalance（重新平衡）"></a>6.5 consumer rebalance（重新平衡）</h3><p>当有 consumer 加入或退出、以及 partition 的改变（如 broker 加入或退出）时会触发 rebalance。consumer rebalance算法如下：</p>
 <p>1. 将目标 topic 下的所有 partirtion 排序，存于PT<br>2. 对某 consumer group 下所有 consumer 排序，存于 CG，第 i 个consumer 记为 Ci<br>3. N=size(PT)/size(CG)，向上取整<br>4. 解除 Ci 对原来分配的 partition 的消费权（i从0开始）<br>5. 将第i*N到（i+1）*N-1个 partition 分配给 Ci</p>
 <p>在 0.8.*版本，每个 consumer 都只负责调整自己所消费的 partition，为了保证整个consumer group 的一致性，当一个 consumer 触发了 rebalance 时，该 consumer group 内的其它所有其它 consumer 也应该同时触发 rebalance。这会导致以下几个问题：</p>
 <p><strong>1.Herd effect</strong><br>　　任何 broker 或者 consumer 的增减都会触发所有的 consumer 的 rebalance<br><strong>2.Split Brain</strong><br>　　每个 consumer 分别单独通过 zookeeper 判断哪些 broker 和 consumer 宕机了，那么不同 consumer 在同一时刻从 zookeeper 看到的 view 就可能不一样，这是由 zookeeper 的特性决定的，这就会造成不正确的 reblance 尝试。<br><strong>3. 调整结果不可控</strong><br>　　所有的 consumer 都并不知道其它 consumer 的 rebalance 是否成功，这可能会导致 kafka 工作在一个不正确的状态。</p>
