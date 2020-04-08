@@ -347,14 +347,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.7k
+                        2k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        6 分
+                        7 分
                     </div>
                     
                 
@@ -447,16 +447,22 @@
 <p>在InnoDB中的实现</p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mysql5.jpg" alt=""></p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mysql6.jpg" alt=""></p>
-<h3 id="五、为什么索引结构默认使用B-Tree，而不是Hash，二叉树，红黑树？"><a href="#五、为什么索引结构默认使用B-Tree，而不是Hash，二叉树，红黑树？" class="headerlink" title="五、为什么索引结构默认使用B+Tree，而不是Hash，二叉树，红黑树？"></a>五、为什么索引结构默认使用B+Tree，而不是Hash，二叉树，红黑树？</h3><p>B+tree：因为B树不管叶子节点还是非叶子节点，都会保存数据，这样导致在非叶子节点中能保存的指针数量变少（有些资料也称为扇出），指针少的情况下要保存大量数据，只能增加树的高度，导致IO操作变多，查询性能变低；</p>
+<h3 id="五、索引在磁盘中保存的格式"><a href="#五、索引在磁盘中保存的格式" class="headerlink" title="五、索引在磁盘中保存的格式"></a>五、索引在磁盘中保存的格式</h3><p><strong>myisam存储引擎（非聚集索引）：索引文件和数据文件分离。</strong></p>
+<p>data目录下以.frm 、.MYD、.MYI结尾的三个文件。<br>.frm：表的表结构。<br>.MYD:表的数据记录（表的数据行）。<br>.MYI：表的索引。<br>查找过程：根据myi文件中索引找到数据在myd文件中的位置（B+tree的叶节点存储了数据的位置）。</p>
+<p><strong>innodb存储引擎（聚集）（支持事务）：</strong></p>
+<p>data目录下以.frm和.ibd（index、data）结尾的两个文件。<br>ibd文件存储了索引和数据。该存储引擎要求存储数据文件时就是以B+Tree存储的。<br>表数据文件本身就是按B+Tree组织的一个索引结构文件。<br>与myi比少了一次磁盘I/O。</p>
+<p><strong>问题：</strong> 为什么innoDB必须有主键？为什么推荐使用整型的自增主键。</p>
+<p><strong>答：</strong> 必须有一个B+Tree来组织数据文件。如果不指定主键，mysql也会自动生成一个主键（使用唯一列或自动加一列）。<br>整型所占用的存储空间较小，而且整型数据容易做比较（检索）。<br>使用自增主键更便于插入，避免或减少了B+Tree的调整。</p>
+<h3 id="六、为什么索引结构默认使用B-Tree，而不是Hash，二叉树，红黑树？"><a href="#六、为什么索引结构默认使用B-Tree，而不是Hash，二叉树，红黑树？" class="headerlink" title="六、为什么索引结构默认使用B+Tree，而不是Hash，二叉树，红黑树？"></a>六、为什么索引结构默认使用B+Tree，而不是Hash，二叉树，红黑树？</h3><p>B+tree：因为B树不管叶子节点还是非叶子节点，都会保存数据，这样导致在非叶子节点中能保存的指针数量变少（有些资料也称为扇出），指针少的情况下要保存大量数据，只能增加树的高度，导致IO操作变多，查询性能变低；</p>
 <p>Hash：虽然可以快速定位，但是没有顺序，IO复杂度高。</p>
 <p>二叉树：树的高度不均匀，不能自平衡，查找效率跟数据有关（树的高度），并且IO代价高。</p>
 <p>红黑树：树的高度随着数据量增加而增加，IO代价高。</p>
-<h3 id="六、为什么官方建议使用自增长主键作为索引？"><a href="#六、为什么官方建议使用自增长主键作为索引？" class="headerlink" title="六、为什么官方建议使用自增长主键作为索引？"></a>六、为什么官方建议使用自增长主键作为索引？</h3><p>结合B+Tree的特点，自增主键是连续的，在插入过程中尽量减少页分裂，即使要进行页分裂，也只会分裂很少一部分。并且能减少数据的移动，每次插入都是插入到最后。总之就是减少分裂和移动的频率。</p>
+<h3 id="七、为什么官方建议使用自增长主键作为索引？"><a href="#七、为什么官方建议使用自增长主键作为索引？" class="headerlink" title="七、为什么官方建议使用自增长主键作为索引？"></a>七、为什么官方建议使用自增长主键作为索引？</h3><p>结合B+Tree的特点，自增主键是连续的，在插入过程中尽量减少页分裂，即使要进行页分裂，也只会分裂很少一部分。并且能减少数据的移动，每次插入都是插入到最后。总之就是减少分裂和移动的频率。</p>
 <p>插入连续的数据：</p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mysql7.gif" alt=""></p>
 <p>插入非连续的数据</p>
 <p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mysql8.gif" alt=""></p>
-<h3 id="七、简单总结下"><a href="#七、简单总结下" class="headerlink" title="七、简单总结下"></a>七、简单总结下</h3><p>1、MySQL使用B+Tree作为索引数据结构。 2、B+Tree在新增数据时，会根据索引指定列的值对旧的B+Tree做调整。 4、从物理存储结构上说，B-Tree和B+Tree都以页(4K)来划分节点的大小，但是由于B+Tree中中间节点不存储数据，因此B+Tree能够在同样大小的节点中，存储更多的key，提高查找效率。 5、影响MySQL查找性能的主要还是磁盘IO次数，大部分是磁头移动到指定磁道的时间花费。 6、MyISAM存储引擎下索引和数据存储是分离的，InnoDB索引和数据存储在一起。 7、InnoDB存储引擎下索引的实现，(辅助索引)全部是依赖于主索引建立的(辅助索引中叶子结点存储的并不是数据的地址，还是主索引的值，因此，所有依赖于辅助索引的都是先根据辅助索引查到主索引，再根据主索引查数据的地址)。 8、由于InnoDB索引的特性，因此如果主索引不是自增的(id作主键)，那么每次插入新的数据，都很可能对B+Tree的主索引进行重整，影响性能。因此，尽量以自增id作为InnoDB的主索引。</p>
+<h3 id="八、简单总结下"><a href="#八、简单总结下" class="headerlink" title="八、简单总结下"></a>八、简单总结下</h3><p>1、MySQL使用B+Tree作为索引数据结构。 2、B+Tree在新增数据时，会根据索引指定列的值对旧的B+Tree做调整。 4、从物理存储结构上说，B-Tree和B+Tree都以页(4K)来划分节点的大小，但是由于B+Tree中中间节点不存储数据，因此B+Tree能够在同样大小的节点中，存储更多的key，提高查找效率。 5、影响MySQL查找性能的主要还是磁盘IO次数，大部分是磁头移动到指定磁道的时间花费。 6、MyISAM存储引擎下索引和数据存储是分离的，InnoDB索引和数据存储在一起。 7、InnoDB存储引擎下索引的实现，(辅助索引)全部是依赖于主索引建立的(辅助索引中叶子结点存储的并不是数据的地址，还是主索引的值，因此，所有依赖于辅助索引的都是先根据辅助索引查到主索引，再根据主索引查数据的地址)。 8、由于InnoDB索引的特性，因此如果主索引不是自增的(id作主键)，那么每次插入新的数据，都很可能对B+Tree的主索引进行重整，影响性能。因此，尽量以自增id作为InnoDB的主索引。</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

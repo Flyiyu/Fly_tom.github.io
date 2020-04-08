@@ -650,7 +650,8 @@ J2EE开发的一站式解决方案；
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Redis简介Redis 是一个基于内存的高性能key-value数据库。定期通过异步操作把数据库数据flush到硬盘上进行保存。因为是纯内存操作，Redis的性能非常出色，每秒可以处理超过 10万次读写操作，是已知性能最快的Key-Val
+                            Redis高可用方案：主从复制、哨兵模式的主从复制、以及集群主从复制
+通过持久化功能，Redis保证了即使在服务器重启的情况下也不会损失（或少量损失）数据，因为持久化会把内存中数据保存到硬盘上，重启会从硬盘上加载数据。但是由于数据是存储在一
                         
                     </div>
                     <div class="publish-info">
