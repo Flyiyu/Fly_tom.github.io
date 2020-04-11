@@ -369,7 +369,7 @@ https://my.oschina.net/happyBKs/blog/1798778
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>7-2</p>
-<h3 id="Elasticsearch简介"><a href="#Elasticsearch简介" class="headerlink" title="Elasticsearch简介"></a>Elasticsearch简介</h3><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es8.jpg" alt="image"></p>
+<h3 id="Elasticsearch简介"><a href="#Elasticsearch简介" class="headerlink" title="Elasticsearch简介"></a>Elasticsearch简介</h3><p><img src="https://gitee.com/fly_tom/use/raw/master/es8.jpg" alt="image"></p>
 <p><a href="https://my.oschina.net/happyBKs/blog/1798778" target="_blank" rel="noopener">https://my.oschina.net/happyBKs/blog/1798778</a></p>
 <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>随着业务复杂度的提升以及微服务的兴起，传统单一项目会被按照业务规则进行垂直拆分，另外为了防止单点故障我们也会将重要的服务模块进行集群部署，通过负载均衡进行服务的调用。那么随着节点的增多，各个服务的日志也会散落在各个服务器上。这对于我们进行日志分析带来了巨大的挑战，总不能一台一台的登录去下载日志吧。那么我们需要一种收集日志的工具将散落在各个服务器节点上的日志收集起来，进行统一的查询及管理统计。那么ELK就可以做到这一点。</p>
 <h4 id="Elasticsearch特性"><a href="#Elasticsearch特性" class="headerlink" title="Elasticsearch特性"></a>Elasticsearch特性</h4><ul>
@@ -396,8 +396,8 @@ https://my.oschina.net/happyBKs/blog/1798778
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
   <span class="token property">"tagline"</span> <span class="token operator">:</span> <span class="token string">"You Know, for Search"</span>
 <span class="token punctuation">}</span></code></pre>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es1.png" alt="image"><br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es2.png" alt="image"><br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es3.png" alt="image"></p>
-<p>###############################<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/es1.png" alt="image"><br><img src="https://gitee.com/fly_tom/use/raw/master/es2.png" alt="image"><br><img src="https://gitee.com/fly_tom/use/raw/master/es3.png" alt="image"></p>
+<p>###############################<br><img src="https://gitee.com/fly_tom/use/raw/master/es.png" alt="image"></p>
 <p>可以看到，我们成功的创建了一个twitter的节点，当然shard默认是5，我这里设置成了7<br>每一个绿色的小框框代表了一个shard，外面有黑色框框的代表主shard，没有的便是replication，横向的node对应了集群中每一个节点。至此简单的es集群就部署好了。</p>
 <font size="3">
 Elasticsearch 是一个开源的搜索引擎，建立在一个全文搜索引擎库 Apache Lucene™ 基础之上。 Lucene 可以说是当下最先进、高性能、全功能的搜索引擎库--无论是开源还是私有。
@@ -442,7 +442,7 @@ Elasticsearch -&gt; Indices -&gt; Types -&gt; Documents -&gt; Fields
 索引相当于数据库，类型相当于表，文档相当于行，字段（Fields）相当于表的列（字段）。
 
 </code></pre><p><strong>Mapping 映射</strong></p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es10.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/es10.png" alt="image"></p>
 <h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p><a href="https://www.cnblogs.com/shoufeng/p/10692113.html" target="_blank" rel="noopener">https://www.cnblogs.com/shoufeng/p/10692113.html</a></p>
 <h4 id="1-核心数据类型"><a href="#1-核心数据类型" class="headerlink" title="1 核心数据类型"></a>1 核心数据类型</h4><ul>
 <li><p>字符串类型 - string(不再支持), 用text或keyword类型来代替string</p>
@@ -563,8 +563,8 @@ Elasticsearch -&gt; Indices -&gt; Types -&gt; Documents -&gt; Fields
 <h5 id="乐观锁并发控制"><a href="#乐观锁并发控制" class="headerlink" title="乐观锁并发控制"></a>乐观锁并发控制</h5><p>es采用乐观锁</p>
 <p>乐观锁不会加锁，会采用一个版本号</p>
 <p>优点：并发能力高<br>缺点：每次操作都要比对版本号</p>
-<h3 id="ES相关性算分-relevance"><a href="#ES相关性算分-relevance" class="headerlink" title="ES相关性算分 relevance"></a>ES相关性算分 relevance</h3><h3 id="ES节点角色"><a href="#ES节点角色" class="headerlink" title="ES节点角色"></a>ES节点角色</h3><h3 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h3><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es13.png" alt="image"></p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es20.png" alt="image"></p>
+<h3 id="ES相关性算分-relevance"><a href="#ES相关性算分-relevance" class="headerlink" title="ES相关性算分 relevance"></a>ES相关性算分 relevance</h3><h3 id="ES节点角色"><a href="#ES节点角色" class="headerlink" title="ES节点角色"></a>ES节点角色</h3><h3 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h3><p><img src="https://gitee.com/fly_tom/use/raw/master/es13.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/es20.png" alt="image"></p>
 <ul>
 <li>倒排索引- -旦生成,不能更改</li>
 <li>其好处如下:<ul>
@@ -574,14 +574,14 @@ Elasticsearch -&gt; Indices -&gt; Types -&gt; Documents -&gt; Fields
 <li>利于对文件进行压缩存储,节省磁盘和内存存储空间</li>
 </ul>
 </li>
-<li>坏处为需要写入新文档时,必须重新构建倒排索引文件,然后替换老文件后,新文档才<br>能被检索,导致文档实时性差<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es25.png" alt="image"></li>
+<li>坏处为需要写入新文档时,必须重新构建倒排索引文件,然后替换老文件后,新文档才<br>能被检索,导致文档实时性差<br><img src="https://gitee.com/fly_tom/use/raw/master/es25.png" alt="image"></li>
 </ul>
-<h4 id="新文档搜索实时性"><a href="#新文档搜索实时性" class="headerlink" title="新文档搜索实时性"></a>新文档搜索实时性</h4><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es26.png" alt="image"><br>当有一个新的文档，构建倒排索引文件，对两个新旧索引进行同时查询，最后再进行一个汇总</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es27.png" alt="image"></p>
+<h4 id="新文档搜索实时性"><a href="#新文档搜索实时性" class="headerlink" title="新文档搜索实时性"></a>新文档搜索实时性</h4><p><img src="https://gitee.com/fly_tom/use/raw/master/es26.png" alt="image"><br>当有一个新的文档，构建倒排索引文件，对两个新旧索引进行同时查询，最后再进行一个汇总</p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/es27.png" alt="image"></p>
 <h3 id="Search运行机制"><a href="#Search运行机制" class="headerlink" title="Search运行机制"></a>Search运行机制</h3><ul>
 <li>Search执行的时候实际分为两个步骤运行<ul>
 <li>Query阶段</li>
-<li>Fetch阶段<br>称为：Query-Then-Fetch<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es28.png" alt="image"><br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es29.png" alt="image"></li>
+<li>Fetch阶段<br>称为：Query-Then-Fetch<br><img src="https://gitee.com/fly_tom/use/raw/master/es28.png" alt="image"><br><img src="https://gitee.com/fly_tom/use/raw/master/es29.png" alt="image"></li>
 </ul>
 </li>
 </ul>
@@ -589,7 +589,7 @@ Elasticsearch -&gt; Indices -&gt; Types -&gt; Documents -&gt; Fields
 <h3 id="集群的状态status"><a href="#集群的状态status" class="headerlink" title="集群的状态status"></a>集群的状态status</h3><p>① green: 所有primary shard和replica shard都已成功分配, 集群是100%可用的;</p>
 <p>② yellow: 所有primary shard都已成功分配, 但至少有一个replica shard缺失. 此时集群所有功能都正常使用, 数据不会丢失, 搜索结果依然完整, 但集群的可用性减弱. —— 需要及时处理的警告.</p>
 <p>③ red: 至少有一个primary shard(以及它的全部副本分片)缺失 —— 部分数据不能使用, 搜索只能返回部分数据, 而分配到这个分配上的写入请求会返回一个异常. 此时虽然可以运行部分功能, 但为了索引数据的完整性, 需要尽快修复集群.</p>
-<h3 id="ES元数据"><a href="#ES元数据" class="headerlink" title="ES元数据"></a>ES元数据</h3><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es14.png" alt="image"></p>
+<h3 id="ES元数据"><a href="#ES元数据" class="headerlink" title="ES元数据"></a>ES元数据</h3><p><img src="https://gitee.com/fly_tom/use/raw/master/es14.png" alt="image"></p>
 <h3 id="ES分词"><a href="#ES分词" class="headerlink" title="ES分词"></a>ES分词</h3><p><a href="https://www.jianshu.com/p/914f102bc174" target="_blank" rel="noopener">https://www.jianshu.com/p/914f102bc174</a><br>以及自定分词</p>
 <h4 id="ES自带分词器"><a href="#ES自带分词器" class="headerlink" title="ES自带分词器"></a>ES自带分词器</h4><ul>
 <li>Standard</li>
@@ -602,7 +602,7 @@ Elasticsearch -&gt; Indices -&gt; Types -&gt; Documents -&gt; Fields
 </ul>
 <h3 id="es查询"><a href="#es查询" class="headerlink" title="es查询"></a>es查询</h3><ul>
 <li><p>URI Search</p>
-<p>  <img src="https://raw.githubusercontent.com/Flyiyu/use/master/es15.png" alt="image"><br>  <img src="https://raw.githubusercontent.com/Flyiyu/use/master/es17.png" alt="image"></p>
+<p>  <img src="https://gitee.com/fly_tom/use/raw/master/es15.png" alt="image"><br>  <img src="https://gitee.com/fly_tom/use/raw/master/es17.png" alt="image"></p>
 <blockquote>
 <p>GET /lib/_search</p>
 </blockquote>
@@ -624,7 +624,7 @@ GET /lib/_search?q=tom
 }
 ```</code></pre><ul>
 <li>Request Body<ul>
-<li>使用ElasticSearch提供的，基于json格式的更加完备的Query Domain Specific Language (DSL查询)<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es16.jpg" alt="image"></li>
+<li>使用ElasticSearch提供的，基于json格式的更加完备的Query Domain Specific Language (DSL查询)<br><img src="https://gitee.com/fly_tom/use/raw/master/es16.jpg" alt="image"></li>
 </ul>
 </li>
 </ul>
@@ -632,7 +632,7 @@ GET /lib/_search?q=tom
 POST,对应Create:在服务器新建立一个资源，调用insert操作。
 PUT，对应update操作:在服务器更新资源，调用update操作。
 PATCH，对应update操作，在服务器更新资源，客户端提供改变的属性。（目前JDK7没有实现，tomcat7也不行。）
-DELETE，对应DELETE操作，从服务器删除资源，调用delete语句。</code></pre><h3 id="Mapping参数"><a href="#Mapping参数" class="headerlink" title="Mapping参数"></a>Mapping参数</h3><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es18.png" alt="image"></p>
+DELETE，对应DELETE操作，从服务器删除资源，调用delete语句。</code></pre><h3 id="Mapping参数"><a href="#Mapping参数" class="headerlink" title="Mapping参数"></a>Mapping参数</h3><p><img src="https://gitee.com/fly_tom/use/raw/master/es18.png" alt="image"></p>
 <p>在7.0之后一个索引只可以有一个type</p>
 <p>analyzer</p>
 <p>分词器，默认为standard analyzer，当该字段被索引和搜索时对字段进行分词处理</p>
@@ -672,8 +672,8 @@ DELETE，对应DELETE操作，从服务器删除资源，调用delete语句。</
 NodeClient顾名思义，是作为ES集群的一个节点，它是ES中的一环，其他的节点对它是感知的，不像TransportClient那样，ES集群对它一无所知。
 NodeClient通信的性能会更好，但是因为是ES的一环，所以它出问题，也会给ES集群带来问题。
 NodeClient可以设置不作为数据节点，在elasticsearch.yml中设置，这样就不会在此节点上分配数据。</code></pre><p>提示<br>Java 客户端作为节点必须和 Elasticsearch 有相同的 主要 版本；否则，它们之间将无法互相理解。</p>
-<h3 id="分片"><a href="#分片" class="headerlink" title="分片"></a>分片</h3><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es6.png" alt="image"><br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es7.png" alt="image"><br></p></font><p></p>
-<h3 id="脑裂"><a href="#脑裂" class="headerlink" title="脑裂"></a>脑裂</h3><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es19.png" alt="image"></p>
+<h3 id="分片"><a href="#分片" class="headerlink" title="分片"></a>分片</h3><p><img src="https://gitee.com/fly_tom/use/raw/master/es6.png" alt="image"><br><img src="https://gitee.com/fly_tom/use/raw/master/es7.png" alt="image"><br></p></font><p></p>
+<h3 id="脑裂"><a href="#脑裂" class="headerlink" title="脑裂"></a>脑裂</h3><p><img src="https://gitee.com/fly_tom/use/raw/master/es19.png" alt="image"></p>
 <h3 id="文档分布式存储"><a href="#文档分布式存储" class="headerlink" title="文档分布式存储"></a>文档分布式存储</h3><h4 id="存储一个document是如何选择存储在哪个分片上面"><a href="#存储一个document是如何选择存储在哪个分片上面" class="headerlink" title="存储一个document是如何选择存储在哪个分片上面"></a>存储一个document是如何选择存储在哪个分片上面</h4><p><a href="https://www.cnblogs.com/wangshouchang/p/8049492.html" target="_blank" rel="noopener">https://www.cnblogs.com/wangshouchang/p/8049492.html</a></p>
 <p>.shard = hash(routing) % number_of_primary_shards</p>
 <p>下面将对这个公式每个字段进行分析</p>
@@ -684,9 +684,9 @@ NodeClient可以设置不作为数据节点，在elasticsearch.yml中设置，�
 <li>number_of_primary_shards 主分片的数量，routing字段经过hash函数计算之后的值，将对 主分片的数量也就是 number_of_primary_shards 进行取与，之后得到的shard就是我们文档所在的分片的位置</li>
 </ul>
 <p>该算法与主分片数相关，这也就是主分片一旦创建就无法修改的原因</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es21.png" alt="image"><br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es22.png" alt="image"><br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es23.png" alt="image"><br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es24.png" alt="image"></p>
-<h3 id="深度分页问题"><a href="#深度分页问题" class="headerlink" title="深度分页问题"></a>深度分页问题</h3><p>深度分页是分布式存储系统必然会面临的一个问题<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es30.png" alt="image"></p>
-<p>分页方式的应用场景<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es31.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/es21.png" alt="image"><br><img src="https://gitee.com/fly_tom/use/raw/master/es22.png" alt="image"><br><img src="https://gitee.com/fly_tom/use/raw/master/es23.png" alt="image"><br><img src="https://gitee.com/fly_tom/use/raw/master/es24.png" alt="image"></p>
+<h3 id="深度分页问题"><a href="#深度分页问题" class="headerlink" title="深度分页问题"></a>深度分页问题</h3><p>深度分页是分布式存储系统必然会面临的一个问题<br><img src="https://gitee.com/fly_tom/use/raw/master/es30.png" alt="image"></p>
+<p>分页方式的应用场景<br><img src="https://gitee.com/fly_tom/use/raw/master/es31.png" alt="image"></p>
 <h3 id="ES聚合"><a href="#ES聚合" class="headerlink" title="ES聚合"></a>ES聚合</h3><p>es将聚合分析主要分为4类：</p>
 <ul>
 <li>Bucket 分桶类型，类似sql中的GROUP BY的语法<ul>
@@ -716,7 +716,7 @@ NodeClient可以设置不作为数据节点，在elasticsearch.yml中设置，�
 </ul>
 <h3 id="日志监控平台–平台架构ELK"><a href="#日志监控平台–平台架构ELK" class="headerlink" title="日志监控平台–平台架构ELK"></a>日志监控平台–平台架构ELK</h3><p>ElasticSearch是有其自己的套件的，简称ELK，即ElasticSearch，Logstash以及Kibana。ElasticSearch负责存储，Logstash负责收集数据来源，Kibana负责可视化数据，分工明确。</p>
 <p>　　下面，我给大家用一个图来说明日志监控平台的架构，如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/es9.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/es9.png" alt="image"></p>
 <p>　　通过上图，我们可以清晰的看到日志平台整个流向过程。首先，多个独立的Agent，这里就是图左边的三个LogStash节点，他们负责收集不同来源的数据，由一个Indexer负责进行汇总和分析数据，在这个当中有一个中间过程，这里我们使用了Broker，用Redis来实现这部分功能，其作用充当一个缓冲区，之后由ElasticSearch负责存储和搜索数据，最后由前段的Kibana可视化我们收集的数据。</p>
 <p>　　这里说明几点需要注意的地方：</p>
 <p>采用LogStash收集各种日志数据，其类型可以是：系统日志、文件、Redis、MQ等等。<br>Broker作为远程代理和中心代理的缓冲区，使用Redis进行实现，原因有二：其一，可以提高系统的性能；其二，可以提高系统的高可用性，当中心代理提取数据失败时，数据保存在Redis中，可以规避数据丢失的风险。<br>中心代理使用LogStash，负责从Broker中获取数据，可以执行相关的分析和处理，它提供有Filter功能。<br>ElasticSearch用于存储最终的数据，并对外提供搜索功能，基于Restful。<br>Kibana提供一个简单、丰富的Web View可视化界面，用于可视化ElasticSearch集群中的数据，支持各种查询、统计和展示。</p>

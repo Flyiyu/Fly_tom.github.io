@@ -388,12 +388,12 @@
 <p>不谈存储引擎，只讨论实现(抽象)</p>
 </blockquote>
 <h4 id="Hash索引"><a href="#Hash索引" class="headerlink" title="Hash索引"></a>Hash索引</h4><p>基于哈希表实现，只有精确匹配索引所有列的查询才有效，对于每一行数据，存储引擎都会对所有的索引列计算一个哈希码（hash code），并且Hash索引将所有的哈希码存储在索引中，同时在索引表中保存指向每个数据行的指针。</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mysql1.png" alt=""></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mysql1.png" alt=""></p>
 <h4 id="B-Tree索引（MySQL使用B-Tree）"><a href="#B-Tree索引（MySQL使用B-Tree）" class="headerlink" title="B-Tree索引（MySQL使用B+Tree）"></a>B-Tree索引（MySQL使用B+Tree）</h4><p>B-Tree能加快数据的访问速度，因为存储引擎不再需要进行全表扫描来获取数据，数据分布在各个节点之中。</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mysql2.png" alt=""></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mysql2.png" alt=""></p>
 <p>B+Tree索引</p>
 <p>是B-Tree的改进版本，同时也是数据库索引索引所采用的存储结构。数据都在叶子节点上，并且增加了顺序访问指针，每个叶子节点都指向相邻的叶子节点的地址。相比B-Tree来说，进行范围查找时只需要查找两个节点，进行遍历即可。而B-Tree需要获取所有节点，相比之下B+Tree效率更高。</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mysql3.png" alt=""></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mysql3.png" alt=""></p>
 <blockquote>
 <p>结合存储引擎来讨论（一般默认使用B+Tree）</p>
 </blockquote>
@@ -443,10 +443,10 @@
 </tr>
 </tbody></table>
 <p><strong>在MyISAM引擎中的实现</strong>（二级索引也是这样实现的）</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mysql4.jpg" alt=""></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mysql4.jpg" alt=""></p>
 <p>在InnoDB中的实现</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mysql5.jpg" alt=""></p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mysql6.jpg" alt=""></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mysql5.jpg" alt=""></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mysql6.jpg" alt=""></p>
 <h3 id="五、索引在磁盘中保存的格式"><a href="#五、索引在磁盘中保存的格式" class="headerlink" title="五、索引在磁盘中保存的格式"></a>五、索引在磁盘中保存的格式</h3><p><strong>myisam存储引擎（非聚集索引）：索引文件和数据文件分离。</strong></p>
 <p>data目录下以.frm 、.MYD、.MYI结尾的三个文件。<br>.frm：表的表结构。<br>.MYD:表的数据记录（表的数据行）。<br>.MYI：表的索引。<br>查找过程：根据myi文件中索引找到数据在myd文件中的位置（B+tree的叶节点存储了数据的位置）。</p>
 <p><strong>innodb存储引擎（聚集）（支持事务）：</strong></p>
@@ -459,9 +459,9 @@
 <p>红黑树：树的高度随着数据量增加而增加，IO代价高。</p>
 <h3 id="七、为什么官方建议使用自增长主键作为索引？"><a href="#七、为什么官方建议使用自增长主键作为索引？" class="headerlink" title="七、为什么官方建议使用自增长主键作为索引？"></a>七、为什么官方建议使用自增长主键作为索引？</h3><p>结合B+Tree的特点，自增主键是连续的，在插入过程中尽量减少页分裂，即使要进行页分裂，也只会分裂很少一部分。并且能减少数据的移动，每次插入都是插入到最后。总之就是减少分裂和移动的频率。</p>
 <p>插入连续的数据：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mysql7.gif" alt=""></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mysql7.gif" alt=""></p>
 <p>插入非连续的数据</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mysql8.gif" alt=""></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mysql8.gif" alt=""></p>
 <h3 id="八、简单总结下"><a href="#八、简单总结下" class="headerlink" title="八、简单总结下"></a>八、简单总结下</h3><p>1、MySQL使用B+Tree作为索引数据结构。 2、B+Tree在新增数据时，会根据索引指定列的值对旧的B+Tree做调整。 4、从物理存储结构上说，B-Tree和B+Tree都以页(4K)来划分节点的大小，但是由于B+Tree中中间节点不存储数据，因此B+Tree能够在同样大小的节点中，存储更多的key，提高查找效率。 5、影响MySQL查找性能的主要还是磁盘IO次数，大部分是磁头移动到指定磁道的时间花费。 6、MyISAM存储引擎下索引和数据存储是分离的，InnoDB索引和数据存储在一起。 7、InnoDB存储引擎下索引的实现，(辅助索引)全部是依赖于主索引建立的(辅助索引中叶子结点存储的并不是数据的地址，还是主索引的值，因此，所有依赖于辅助索引的都是先根据辅助索引查到主索引，再根据主索引查数据的地址)。 8、由于InnoDB索引的特性，因此如果主索引不是自增的(id作主键)，那么每次插入新的数据，都很可能对B+Tree的主索引进行重整，影响性能。因此，尽量以自增id作为InnoDB的主索引。</p>
 <script>
         document.querySelectorAll('.github-emoji')

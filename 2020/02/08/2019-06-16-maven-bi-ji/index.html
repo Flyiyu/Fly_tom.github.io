@@ -389,7 +389,7 @@
 <p>构建定义：把动态的 Web 工程经过编译得到的编译结果部署到服务器上的整个过程。</p>
 <p>编译：java 源文件[.java]-&gt;编译-&gt;Classz 字节码文件[.class]</p>
 <p>部署：最终在 sevlet 容器中部署的不是动态 web 工程，而是编译后的文件</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv1.png" alt="image"></p>
 <p><strong>③ 构建的各个环节</strong></p>
 <ul>
 <li><p>清理 clean：将以前编译得到的旧文件 class 字节码文件删除</p>
@@ -418,13 +418,13 @@
 </ul>
 <p>④ 验证：maven -v 查看 maven 版本</p>
 <p>看到版本信息，恭喜你已经 OK 了。</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv2.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv2.png" alt="image"></p>
 <h3 id="四、第一个-maven"><a href="#四、第一个-maven" class="headerlink" title="四、第一个 maven"></a>四、第一个 maven</h3><p><strong>① 创建约定的目录结构</strong>（maven 工程必须按照约定的目录结构创建）</p>
 <blockquote>
 <p>根目录：工程名<br>|—src：源码<br>|—|—main:存放主程序<br>|—|—|—java：java 源码文件<br>|—|—|—resource：存放框架的配置文件<br>|—|—test：存放测试程序<br>|—pop.xml：maven 的核心配置文件</p>
 </blockquote>
 <p>我们按照上面的文件夹目录结构手动创建一下，不用任何 IDE 环境（手动的其实最有助于我们理解 maven）</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv3.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv3.png" alt="image"></p>
 <h4 id="文件内容如下"><a href="#文件内容如下" class="headerlink" title="文件内容如下"></a>文件内容如下</h4><p>在 src/main/java/com/hzg/maven 目录下新建文件 Hello.java，内容如下</p>
 <pre><code>package com.hzg.maven;
 public class Hello {
@@ -466,27 +466,27 @@ public class Hello {
 </li>
 </ul>
 <p><strong>执行 maven 命令必须进入到 pom.xml 的目录中进行执行</strong></p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv4.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv4.png" alt="image"></p>
 <p>进入到项目的 pom.xml 目录之后，就可以执行啦。</p>
 <p><strong>1、运行 mvn compile</strong></p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv5.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv5.png" alt="image"></p>
 <p>OK，运行完毕，你在 pom.xml 配置的依赖的包已经导入到仓库了，问题来了，<strong>仓库默认的位置在哪？</strong></p>
 <p><strong>仓库的默认位置：</strong>c:\Usrs[登录当前系统的用户名].m2\repository</p>
 <p>刚才执行完 compile 之后，之前的文件夹发生了变化</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv6.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv6.png" alt="image"></p>
 <p>我们发现 Hello 项目里里多了一个 target 文件夹。文件夹的内容为：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv7.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv7.png" alt="image"></p>
 <p>发现 target 里主要存放的就是编译后的字节码文件</p>
 <p><strong>2、运行 mvn test-compile</strong>，target 文件夹下面除了 classes 之外多了 test-classes 文件夹</p>
 <p><strong>3、运行 mvn package</strong>，target 文件夹下面又多了一个打好的 jar 包</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv8.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv8.png" alt="image"></p>
 <p>4、运行 mvn clean，发现整个 target 文件夹都没了。又回到了编译之前我们手动创建的文件夹</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv9.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv9.png" alt="image"></p>
 <h3 id="五、仓库和坐标"><a href="#五、仓库和坐标" class="headerlink" title="五、仓库和坐标"></a>五、仓库和坐标</h3><p><strong>①pom.xml：</strong><br>Project Object Model 项目对象模型。它是 maven 的核心配置文件，所有的构建的配置都在这里设置。</p>
 <p><strong>② 坐标：</strong> 使用下面的三个向量在仓库中唯一的定位一个 maven 工程</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv10.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv10.png" alt="image"></p>
 <p><strong>③ maven 工程的坐标与仓库中路径的关系：</strong></p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv11.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv11.png" alt="image"></p>
 <p>maven 坐标和仓库对应的映射关系：[groupId][artifactId][version][artifactId]-[version].jar</p>
 <p>去本地仓库看一下此目录：org\springframework\spring-core\4.3.4.RELEASE\spring-core-4.3.4.RELEASE.jar</p>
 <p>果然是完全对应的（默认仓库地址上面说过了哦，不要说不知道在哪，没事下面我们再说一下仓库）</p>
@@ -511,7 +511,7 @@ public class Hello {
 <p>举例：现在我再创建第二个 maven 工程 HelloFriend，其中用到了第一个 Hello 工程里类的 sayHello(String name)方法。我们在给 HelloFriend 项目使用 mvn compile 命令进行编译的时候，会提示缺少依赖 Hello 的 jar 包。怎么办呢？</p>
 <p>到第一个 maven 工程中执行 mvn install 后，你再去看一下本地仓库，你会发现有了 Hello 项目的 jar 包。一旦本地仓库有了依赖的 maven 工程的 jar 包后，你再到 HelloFriend 项目中使用 mvn compile 命令的时候，可以成功编译</p>
 <p><strong>③ 依赖范围</strong></p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv12.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv12.png" alt="image"></p>
 <p><em>scope 就是依赖的范围</em></p>
 <p><strong>1、compile，</strong> 默认值，适用于所有阶段（开发、测试、部署、运行），本 jar 会一直存在所有阶段。</p>
 <p><strong>2、provided，</strong> 只在开发、测试阶段使用，目的是不让 Servlet 容器和你本地仓库的 jar 包冲突 。如 servlet.jar。</p>
@@ -576,7 +576,7 @@ public class Hello {
 </li>
 </ul>
 <p>那我们在 Hello 的项目中执行 mvn install 命令，通过日志看看中间经历了什么？</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv13.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv13.png" alt="image"></p>
 <p>通过日志我们发现，其实执行 mvn install，其中已经执行了 compile 和 test 。</p>
 <p><strong>总结：</strong> 不论你要执行生命周期的哪一个阶段，maven 都是从这个生命周期的开始执行</p>
 <p><strong>插件：</strong> 每个阶段都有插件（plugin），看上面标红的。插件的职责就是执行它对应的命令。</p>
@@ -592,7 +592,7 @@ public class Hello {
 </li>
 </ul>
 <h3 id="八、maven-工程的依赖高级特性"><a href="#八、maven-工程的依赖高级特性" class="headerlink" title="八、maven 工程的依赖高级特性"></a>八、maven 工程的依赖高级特性</h3><p><strong>① 依赖的传递性</strong></p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv14.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv14.png" alt="image"></p>
 <p>WebMavenDemo 项目依赖 JavaMavenService1 JavaMavenService1 项目依赖 JavaMavenService2</p>
 <p>pom.xml 文件配置好依赖关系后，必须首先 mvn install 后，依赖的 jar 包才能使用。</p>
 <ul>
@@ -602,20 +602,20 @@ public class Hello {
 </li>
 </ul>
 <p><strong>传递性：</strong></p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv15.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv15.png" alt="image"></p>
 <p>在 Eclipse 中，为 JavaMavenService2 中增加了一个 spring-core.jar 包后，会惊喜的发现依赖的两个项目都自动的增加了这个 jar 包，这就是依赖的传递性。</p>
 <blockquote>
 <p>注意：非 compile 范围的依赖是不能传递的。</p>
 </blockquote>
 <p><strong>② 依赖版本的原则：</strong></p>
 <p><strong>1、路径最短者优先原则</strong></p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv16.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv16.png" alt="image"></p>
 <p>Service2 的 log4j 的版本是 1.2.7 版本，Service1 排除了此包的依赖，自己加了一个 Log4j 的 1.2.9 的版本，那么 WebMavenDemo 项目遵守路径最短优先原则，Log4j 的版本和 Sercive1 的版本一致。</p>
 <p><strong>2、路径相同先声明优先原则</strong></p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv17.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv17.png" alt="image"></p>
 <p>这种场景依赖关系发生了变化，WebMavenDemo 项目依赖 Sercive1 和 Service2，它俩是同一个路径，那么谁在 WebMavenDemo 的 pom.xml 中先声明的依赖就用谁的版本。</p>
 <p><strong>③ 统一管理依赖的版本：</strong></p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv18.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv18.png" alt="image"></p>
 <p>为了统一管理版本号，可以使用 properties 标签，里面可以自定义版本的标签名。在使用的地方使用${自定义标签名}</p>
 <h3 id="十、build-配置"><a href="#十、build-配置" class="headerlink" title="十、build 配置"></a>十、build 配置</h3><pre><code>&lt;build&gt;
 　　&lt;!-- 项目的名字 --&gt;
@@ -676,7 +676,7 @@ public class Hello {
 　　　　&lt;/plugin&gt;  
 　　&lt;/plugins&gt;
 &lt;/build&gt;</code></pre><p>配置好 build 后，执行 mvn package 之后，在 maven 工程指定的 target 目录里 war 包和文件都按照配置的生成了</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/mv19.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/mv19.png" alt="image"></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

@@ -425,7 +425,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
         <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
       <span class="token punctuation">}</span></code></pre>
 <p>​    结果如图所示，借用函数的作用域解决块级作用域的问题，因为有块级作用域，每次添加的i都是当前i。</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/1.1.2-1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/1.1.2-1.png" alt="image"></p>
 <p>​    在ES6中使用let/const解决块级作用域问题，let和const有块级作用域，const定义常量，在for块级中使用let解决块级作用域问题。</p>
 <pre class=" language-javascript"><code class="language-javascript">      <span class="token comment" spellcheck="true">// ES6使用let/const</span>
       <span class="token keyword">const</span> btns <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementsByTagName</span><span class="token punctuation">(</span><span class="token string">"button"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -461,7 +461,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
         console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span>
     <span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span></code></pre>
 <p><strong>const内存地址详解</strong></p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/1.2-1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/1.2-1.png" alt="image"></p>
 <p>​    对象count一开始只想0x10的地址，直接将count（给count重新赋值，指向一个新的对象）指向地址改为0x20会报错，const是常量，无法更改对象地址。</p>
 <p>​    对象user一开始指向0x10地址，user有<code>Name</code>、<code>Age</code>、<code>Height</code>三个属性，此时修改属性<code>Name='ttt'</code>，user对象的地址未改变，不会报错。</p>
 <h3 id="1-3-ES6的增强写法"><a href="#1-3-ES6的增强写法" class="headerlink" title="1.3    ES6的增强写法"></a>1.3    ES6的增强写法</h3><h4 id="1-3-1-ES6的对象属性增强型写法"><a href="#1-3-1-ES6的对象属性增强型写法" class="headerlink" title="1.3.1    ES6的对象属性增强型写法"></a>1.3.1    ES6的对象属性增强型写法</h4><p>​    ES6以前定义一个对象</p>
@@ -693,7 +693,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
 <p>显示结果如图所示：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/2.2.1-1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/2.2.1-1.png" alt="image"></p>
 <p>​    <code>&lt;li v-for="(item, index) in movies" :key="index"&gt;&lt;/li&gt;</code>item表示当前遍历的元素，index表示元素索引， 为了给 Vue 一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，你需要为每项提供一个唯一 <code>key</code> 属性。建议尽可能在使用 <code>v-for</code> 时提供 <code>key</code> attribute，除非遍历输出的 DOM 内容非常简单，或者是刻意依赖默认行为以获取性能上的提升。</p>
 <p>因为它是 Vue 识别节点的一个通用机制，<code>key</code> 并不仅与 <code>v-for</code> 特别关联。</p>
 <blockquote>
@@ -820,7 +820,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
 <p>输出结果如下：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/3.3-1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/3.3-1.png" alt="image"></p>
 <h3 id="3-4-v-text"><a href="#3-4-v-text" class="headerlink" title="3.4 v-text"></a>3.4 <code>v-text</code></h3><blockquote>
 <p><code>v-text</code>会覆盖dom元素中的数据，相当于js的innerHTML方法。</p>
 </blockquote>
@@ -851,7 +851,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
   </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
-<pre><code>如图所示，使用`{{message}}`是拼接变量和字符串，而是用`v-text`是直接覆盖字符串内容。</code></pre><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/3.4-1.png" alt="image"></p>
+<pre><code>如图所示，使用`{{message}}`是拼接变量和字符串，而是用`v-text`是直接覆盖字符串内容。</code></pre><p><img src="https://gitee.com/fly_tom/use/raw/master/vue/3.4-1.png" alt="image"></p>
 <h3 id="3-5-v-pre"><a href="#3-5-v-pre" class="headerlink" title="3.5    v-pre"></a>3.5    <code>v-pre</code></h3><blockquote>
 <p>有时候我们期望直接输出<code>{{message}}</code>这样的字符串，而不是被<code>{{}}</code>语法转化的message的变量值，此时我们可以使用<code>v-pre</code>标签。</p>
 </blockquote>
@@ -885,7 +885,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <blockquote>
 <p>结果如图，使用<code>v-pre</code>修饰的dom会直接输出字符串。</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/3.5-1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/3.5-1.png" alt="image"></p>
 <h3 id="3-6-v-cloak"><a href="#3-6-v-cloak" class="headerlink" title="3.6    v-cloak"></a>3.6    <code>v-cloak</code></h3><blockquote>
 <p>有时候因为加载延时问题，例如卡掉了，数据没有及时刷新，就造成了页面显示从<code></code>到message变量“你好啊”的变化，这样闪动的变化，会造成用户体验不好。此时需要使用到<code>v-cloak</code>的这个标签。在vue解析之前，div属性中有<code>v-cloak</code>这个标签，在vue解析完成之后，v-cloak标签被移除。简单，类似div开始有一个css属性<code>display:none;</code>，加载完成之后，css属性变成<code>display:block</code>，元素显示出来。</p>
 </blockquote>
@@ -927,7 +927,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <blockquote>
 <p>这里通过延时1秒模拟加载卡住的状态，结果一开始不显示message的值，div元素中有v-cloak的属性，1秒后显示message变量的值，div中的v-cloak元素被移除。</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/3.6-1.gif" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/3.6-1.gif" alt="image"></p>
 <h2 id="（四）动态绑定属性"><a href="#（四）动态绑定属性" class="headerlink" title="（四）动态绑定属性"></a>（四）动态绑定属性</h2><h3 id="4-1-v-bind的基本使用"><a href="#4-1-v-bind的基本使用" class="headerlink" title="4.1    v-bind的基本使用"></a>4.1    v-bind的基本使用</h3><blockquote>
 <p>某些时候我们并不想将变量放在标签内容中，像这样<code>&lt;h2&gt;&lt;/h2&gt;</code>是将变量h2标签括起来，类似js的innerHTML。但是我们期望将变量<code>imgURL</code>写在如下位置，想这样<code>&lt;img src="imgURL" alt=""&gt;</code>导入图片是希望动态获取图片的链接，此时的imgURL并非变量而是字符串imgURL，如果要将其生效为变量，需要使用到一个标签<code>v-bind:</code>，像这样<code>&lt;img v-bind:src="imgURL" alt=""&gt;</code>，而且这里也不能使用Mustache语法，类似<code>&lt;img v-bind:src="" alt=""&gt;</code>，这也是错误的。</p>
 </blockquote>
@@ -967,7 +967,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <blockquote>
 <p>此时vue对象中定义的<code>imgURL</code>变量和<code>aHerf</code>变量可以动态的绑定到img标签的src属性和a标签的href属性。<code>v-bind:</code>由于用的很多，vue对他有一个语法糖的优化写法也就是<code>:</code>，此时修改imgURL变量图片叶重新加载。</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/4.1-1.gif" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/4.1-1.gif" alt="image"></p>
 <h3 id="4-2-v-bind动态绑定class-对象语法"><a href="#4-2-v-bind动态绑定class-对象语法" class="headerlink" title="4.2    v-bind动态绑定class(对象语法)"></a>4.2    v-bind动态绑定class(对象语法)</h3><blockquote>
 <p>有时候我们期望对Dom元素的节点的class进行动态绑定，选择此Dom是否有指定class属性。例如，给h2标签加上<code>class="active"</code>，当Dom元素有次class时候，变红<code>&lt;style&gt;.active{color:red;}&lt;/style&gt;</code>，在写一个按钮绑定事件，点击变黑色，再次点击变红色。</p>
 </blockquote>
@@ -1070,7 +1070,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li><p>可以直接使用方法返回数组对象</p>
 </li>
 </ol>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/4.3-2.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/4.3-2.png" alt="image"></p>
 <h3 id="4-4-v-for和v-bind结合"><a href="#4-4-v-for和v-bind结合" class="headerlink" title="4.4    v-for和v-bind结合"></a>4.4    v-for和v-bind结合</h3><blockquote>
 <p>使用v-for和v-bind实现一个小demo，将电影列表展示，并点击某一个电影列表时候，将此电影列表变成红色。</p>
 </blockquote>
@@ -1115,7 +1115,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <blockquote>
 <p>v-for时候的index索引，给每行绑定事件点击事件，点击当行是获取此行索引index并赋值给<code>currentIndex</code>，使用<code>v-bind:</code>绑定class，当<code>index===currentIndex</code>Dom元素有active的class，颜色变红。</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/4.4-1.gif" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/4.4-1.gif" alt="image"></p>
 <h3 id="4-5-v-bind动态绑定style"><a href="#4-5-v-bind动态绑定style" class="headerlink" title="4.5    v-bind动态绑定style"></a>4.5    v-bind动态绑定style</h3><h4 id="4-5-1-v-bind动态绑定style-对象语法"><a href="#4-5-1-v-bind动态绑定style-对象语法" class="headerlink" title="4.5.1    v-bind动态绑定style(对象语法)"></a>4.5.1    v-bind动态绑定style(对象语法)</h4><pre class=" language-html"><code class="language-html">    <span class="token comment" spellcheck="true">&lt;!-- &lt;h2 :style="{key(属性名):value(属性值)}">{{message}}&lt;/h2> --></span>
     <span class="token comment" spellcheck="true">&lt;!-- 加单引号，当成字符串解析 --></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span> <span class="token attr-name">:</span><span class="token style-attr language-css"><span class="token attr-name"><span class="token attr-name">style</span></span><span class="token punctuation">="</span><span class="token attr-value"><span class="token punctuation">{</span><span class="token property">fontSize</span><span class="token punctuation">:</span><span class="token string">'50px'</span><span class="token punctuation">}</span></span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>{{message}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
@@ -1302,11 +1302,11 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <blockquote>
 <p><em>初始化</em></p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/6.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/6.png" alt="image"></p>
 <blockquote>
 <p>修改fullName*</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/7.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/7.png" alt="image"></p>
 <blockquote>
 <p><em>结论</em></p>
 </blockquote>
@@ -1362,9 +1362,9 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
 <p>​    分别使用方法和计算属性获取四次fullName，结果如图。</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/5.4-1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/5.4-1.png" alt="image"></p>
 <p>​    由此可见计算属性有缓存，在<code>this.firstName + " " + this.lastName</code>的属性不变的情况下，methods调用了四次，而计算属性才调用了一次，性能上计算属性明显比methods好。而且在改动firstName的情况下，计算属性只调用一次，methods依然要调用4次。</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/5.4-2.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/5.4-2.png" alt="image"></p>
 <h3 id="5-5-Vue计算属性与侦听器总结"><a href="#5-5-Vue计算属性与侦听器总结" class="headerlink" title="5.5    Vue计算属性与侦听器总结"></a>5.5    Vue计算属性与侦听器总结</h3><blockquote>
 <p><strong>照例看一段代码：</strong></p>
 </blockquote>
@@ -1426,24 +1426,24 @@ console<span class="token punctuation">.</span><span class="token function">log<
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
 <blockquote>
-<p>初始化：<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/1.png" alt="image"></p>
+<p>初始化：<br><img src="https://gitee.com/fly_tom/use/raw/master/vue/1.png" alt="image"></p>
 </blockquote>
 <blockquote>
 <p>修改firstName/lastName/两者都修改</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/2.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/2.png" alt="image"></p>
 <blockquote>
 <p>修改computed中没计算的age</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/3.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/3.png" alt="image"></p>
 <blockquote>
 <p>修改Vue实例外的对象</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/4.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/4.png" alt="image"></p>
 <blockquote>
 <p>修改Vue实例外对象后在修改Vue实例内的对象</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/5.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/5.png" alt="image"></p>
 <blockquote>
 <p>测试结论：</p>
 </blockquote>
@@ -1636,7 +1636,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li><p>v-if、v-else、v-else-if联合使用相当于if、elseif、else，但是在条件比较多的时候建议使用计算属性。</p>
 </li>
 </ol>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/7.1-1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/7.1-1.png" alt="image"></p>
 <h3 id="7-2-v-if的demo"><a href="#7-2-v-if的demo" class="headerlink" title="7.2    v-if的demo"></a>7.2    v-if的demo</h3><p>​    在登录网站是经常可以选择使用账户名或者邮箱登录的切换按钮。要求点击按钮切换登录方式。</p>
 <pre class=" language-html"><code class="language-html"><span class="token doctype">&lt;!DOCTYPE html></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -1673,7 +1673,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <blockquote>
 <p>这里有个小问题，如果已经输入了账号了，此时想切换到邮箱输入，输入框未自己清空。</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/7.2-1.gif" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/7.2-1.gif" alt="image"></p>
 <p>​    这里需要了解一下vue底层操作，此时input输入框值被复用了。</p>
 <ol>
 <li><p>vue在进行DOM渲染是，处于性能考虑，会复用已经存在的元素，而不是每次都创建新的DOM元素。</p>
@@ -1780,7 +1780,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <ol>
 <li>遍历过程没有使用index索引，<code>&lt;li v-for="(item,key) in user" &gt;undefined-undefined&lt;/li&gt;</code>，item表示当前元素是属性值，key表示user对象属性名。</li>
 <li>遍历过程使用index索引，index表示索引从0开始。</li>
-<li><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/8.2-1.png" alt="image"></li>
+<li><img src="https://gitee.com/fly_tom/use/raw/master/vue/8.2-1.png" alt="image"></li>
 </ol>
 <h3 id="8-3-v-for使用key"><a href="#8-3-v-for使用key" class="headerlink" title="8.3    v-for使用key"></a>8.3    v-for使用key</h3><pre class=" language-html"><code class="language-html"><span class="token doctype">&lt;!DOCTYPE html></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -1828,7 +1828,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li><p>不加key如果要插入f依次替换。</p>
 </li>
 </ol>
-<p>   <strong>v-for加key与不加</strong><br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/8.3-1.png" alt="image"></p>
+<p>   <strong>v-for加key与不加</strong><br><img src="https://gitee.com/fly_tom/use/raw/master/vue/8.3-1.png" alt="image"></p>
 <blockquote>
 <p>​    不加key渲染时候会依次替换渲染，加了key会直接将其放在指定位置，加key提升效率。</p>
 </blockquote>
@@ -1945,7 +1945,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li>给每个<code>&lt;li&gt;</code>标签加上,单击事件，并将index传入单击事件的回调函数methods的<code>liClick()</code>。</li>
 <li>定义一个变量<code>curIndex</code>表示当前索引，初始值为0，用于表示选中状态的电影列。</li>
 <li>定义个class样式active，在active为激活状态是，<code>background-color: red;</code>为红色。使用表达式<code>index=curIndex</code>判断当前选中状态的列。</li>
-<li><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/8.5-1.gif" alt="image"></li>
+<li><img src="https://gitee.com/fly_tom/use/raw/master/vue/8.5-1.gif" alt="image"></li>
 </ol>
 <h2 id="（十）v-model"><a href="#（十）v-model" class="headerlink" title="（十）v-model"></a>（十）v-model</h2><h3 id="10-1-v-model的基本使用"><a href="#10-1-v-model的基本使用" class="headerlink" title="10.1    v-model的基本使用"></a>10.1    v-model的基本使用</h3><pre class=" language-html"><code class="language-html">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>app<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token comment" spellcheck="true">&lt;!-- 输入框内容修改，message也修改，修改message，input内容也修改，双向绑定 --></span>
@@ -2148,7 +2148,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <li><code>number</code>,默认是string类型，使用<code>number</code>复制为number类型。</li>
 <li><code>trim</code>用于 自动过滤用户输入的首尾空白字符 </li>
 </ol>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/10.6-1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/10.6-1.png" alt="image"></p>
 <h2 id="（十一）组件化开发"><a href="#（十一）组件化开发" class="headerlink" title="（十一）组件化开发"></a>（十一）组件化开发</h2><h3 id="11-1-组件化的基本使用"><a href="#11-1-组件化的基本使用" class="headerlink" title="11.1    组件化的基本使用"></a>11.1    组件化的基本使用</h3><p>​    简单的组件示例</p>
 <pre class=" language-html"><code class="language-html">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>app<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token comment" spellcheck="true">&lt;!-- 3.使用组件 --></span>
@@ -2193,7 +2193,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>my-cpn</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>my-cpn</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>cpnc</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>cpnc</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/11.1-1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/11.1-1.png" alt="image"></p>
 <h3 id="11-2-全局组件和局部组件"><a href="#11-2-全局组件和局部组件" class="headerlink" title="11.2    全局组件和局部组件"></a>11.2    全局组件和局部组件</h3><p>​    组件的注册方式有两种，一种是全局组件一种是局部组件。</p>
 <pre class=" language-html"><code class="language-html">  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>app<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>全局组件<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
@@ -2361,7 +2361,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
     <span class="token punctuation">}</span><span class="token punctuation">)</span>
   </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
 <p>在<code>template</code>中使用组件内部的数据<code>msg</code>。</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/11.6-1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/11.6-1.png" alt="image"></p>
 <h4 id="11-6-2-组件的data为什么必须要是函数"><a href="#11-6-2-组件的data为什么必须要是函数" class="headerlink" title="11.6.2    组件的data为什么必须要是函数"></a>11.6.2    组件的data为什么必须要是函数</h4><p>​    组件的思想是复用，定义组件当然是把通用的公共的东西抽出来复用。</p>
 <pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>app<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>data不使用函数<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
@@ -2413,7 +2413,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
     <span class="token punctuation">}</span><span class="token punctuation">)</span>
   </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span></code></pre>
 <p>上述代码中定义了两个组件<code>cpn1</code>和<code>cpn2</code>，都是定义了两个计数器，<code>con1</code>的data虽然使用了函数，但是为了模拟<code>data:{count:0}</code>，使用了常量<code>obj</code>来返回count。</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/11.6-2.gif" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/11.6-2.gif" alt="image"></p>
 <p>图中可以看到，不使用<code>data</code>的好像共用一个<code>count</code>属性，而使用函数的<code>data</code>的count是各自用各自的，像局部变量一样有块级作用域，这个块级就是vue组件的作用域。</p>
 <blockquote>
 <p>我们在复用组件的时候肯定希望，各自组件用各自的变量，如果确实需要都用一样的，可以全局组件注册，也可以是用vuex来进行状态管理。</p>
@@ -2708,7 +2708,7 @@ cmovies<span class="token punctuation">:</span> <span class="token punctuation">
 <span class="token punctuation">}</span><span class="token punctuation">,</span></code></pre>
 <p>4.并在父组件（vue实例）中调用<code>&lt;cpn @itemclick="cpnClcik"&gt;&lt;/cpn&gt;</code>（<em>不写参数默认传递btnClick的item</em> ），父组件监听事件名为<code>itemclick</code>的子组件传过来的事件。</p>
 <pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>cpn</span> <span class="token attr-name">@itemclick</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>cpnClcik<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>cpn</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/11.8-1.gif" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/11.8-1.gif" alt="image"></p>
 <h4 id="11-8-3-父子组件通信案例"><a href="#11-8-3-父子组件通信案例" class="headerlink" title="11.8.3    父子组件通信案例"></a>11.8.3    父子组件通信案例</h4><p>​    实现父子组件的值双向绑定。</p>
 <pre class=" language-html"><code class="language-html"><span class="token doctype">&lt;!DOCTYPE html></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -2952,8 +2952,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <pre class=" language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>cpn</span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>aaa<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>cpn</span><span class="token punctuation">></span></span></code></pre>
 <p><strong>直接调用</strong></p>
 <h2 id="（十二）组件化高级"><a href="#（十二）组件化高级" class="headerlink" title="（十二）组件化高级"></a>（十二）组件化高级</h2><h3 id="12-1-slot-插槽的基本使用"><a href="#12-1-slot-插槽的基本使用" class="headerlink" title="12.1    slot-插槽的基本使用"></a>12.1    slot-插槽的基本使用</h3><p>​    我们在使用组件的时候有时候希望，在组件内部定制化内容，例如京东这样。</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/12.1-1.png" alt="image"></p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/12.1-2.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/12.1-1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/12.1-2.png" alt="image"></p>
 <p>这两个都是导航栏，组件的思想是可以复用的，把这个导航栏看做一个组件。</p>
 <p>这个组件都可以分成三个部分，左边中间右边，如果可以分割组件，就可以定制化组件内容了。</p>
 <pre class=" language-html"><code class="language-html">  <span class="token comment" spellcheck="true">&lt;!-- 父组件 --></span>
@@ -3028,7 +3028,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <p>使用插槽，<code>&lt;span style="color:red;"&gt;这是插槽内容222&lt;/span&gt;</code>将替换插槽的默认值</p>
 </blockquote>
 <p>上述代码结果如图所示</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/12.1-3.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/12.1-3.png" alt="image"></p>
 <blockquote>
 <p>替换了两次插槽，两次未替换显示默认的button。</p>
 <p>如果想实现组件分成三部分就可以使用三个<code>&lt;slot&gt;&lt;/slot&gt;</code>来填充插槽了。</p>
@@ -3090,7 +3090,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <blockquote>
 <p>如图所示</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/12.2-1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/12.2-1.png" alt="image"></p>
 <blockquote>
 <p>没有具名的插槽排在最后，因为在定义组件的时候，排在了最后，如果有多个按顺序排列。具名插槽按照自定义的顺序排列。</p>
 </blockquote>
@@ -3178,7 +3178,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
 <p>结果如下</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/12.3-1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/12.3-1.png" alt="image"></p>
 <blockquote>
 <p>子组件使用的是子组件的isShow，子组件为false，所以button没显示，被隐藏。</p>
 </blockquote>
@@ -3261,8 +3261,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <blockquote>
 <p>组件中使用<code>slot-scope="slot"</code><strong>（2.6.0已经废弃）</strong>给插槽属性命名，在通过<code>slot</code>调用绑定在插槽上的属性。也可以使用<code>v-slot="slot"</code>。</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/12.4-1.png" alt="image"></p>
-<h2 id="（十三）Vue实例的生命周期"><a href="#（十三）Vue实例的生命周期" class="headerlink" title="（十三）Vue实例的生命周期"></a>（十三）Vue实例的生命周期</h2><h3 id="13-1-生命周期图"><a href="#13-1-生命周期图" class="headerlink" title="13.1     生命周期图"></a>13.1     <span id="top">生命周期图</span></h3><p>​    Vue实例的生命周期中有多个状态。<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/lifecycle.png" alt="生命周期图"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/12.4-1.png" alt="image"></p>
+<h2 id="（十三）Vue实例的生命周期"><a href="#（十三）Vue实例的生命周期" class="headerlink" title="（十三）Vue实例的生命周期"></a>（十三）Vue实例的生命周期</h2><h3 id="13-1-生命周期图"><a href="#13-1-生命周期图" class="headerlink" title="13.1     生命周期图"></a>13.1     <span id="top">生命周期图</span></h3><p>​    Vue实例的生命周期中有多个状态。<br><img src="https://gitee.com/fly_tom/use/raw/master/vue/lifecycle.png" alt="生命周期图"></p>
 <blockquote>
 <p>测试代码</p>
 </blockquote>
@@ -3325,7 +3325,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
 <p>如图所示：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/13/1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/13/1.png" alt="image"></p>
 <p>初始化页面依次调用了：</p>
 <blockquote>
 <ol>
@@ -3352,7 +3352,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 </blockquote>
 <h3 id="13-2-再探究"><a href="#13-2-再探究" class="headerlink" title="13.2    再探究"></a>13.2    再探究</h3><h4 id="13-2-1-beforeCreate之前"><a href="#13-2-1-beforeCreate之前" class="headerlink" title="13.2.1    beforeCreate之前"></a>13.2.1    beforeCreate之前</h4><p>初始化钩子函数和生命周期</p>
 <h4 id="13-2-2-beforeCreate和created钩子函数间的生命周期"><a href="#13-2-2-beforeCreate和created钩子函数间的生命周期" class="headerlink" title="13.2.2    beforeCreate和created钩子函数间的生命周期"></a>13.2.2    beforeCreate和created钩子函数间的生命周期</h4><p>在beforeCreate和created之间，进行数据观测(data observer) ，也就是在这个时候开始监控data中的数据变化了，同时初始化事件。<br><span style="float:right;"><a href="#1">生命周期展示图</a></span></p>
-<h4 id="13-2-3-created钩子函数和beforeMount间的生命周期"><a href="#13-2-3-created钩子函数和beforeMount间的生命周期" class="headerlink" title="13.2.3    created钩子函数和beforeMount间的生命周期"></a>13.2.3    created钩子函数和beforeMount间的生命周期</h4><p>对于created钩子函数和beforeMount有判断：<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/13/2.png" alt="image"></p>
+<h4 id="13-2-3-created钩子函数和beforeMount间的生命周期"><a href="#13-2-3-created钩子函数和beforeMount间的生命周期" class="headerlink" title="13.2.3    created钩子函数和beforeMount间的生命周期"></a>13.2.3    created钩子函数和beforeMount间的生命周期</h4><p>对于created钩子函数和beforeMount有判断：<br><img src="https://gitee.com/fly_tom/use/raw/master/vue/13/2.png" alt="image"></p>
 <h5 id="13-2-3-1el选项对生命周期影响"><a href="#13-2-3-1el选项对生命周期影响" class="headerlink" title="13.2.3.1el选项对生命周期影响"></a>13.2.3.1el选项对生命周期影响</h5><blockquote>
 <ol>
 <li>有el选项</li>
@@ -3373,7 +3373,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
         console.log('调用了mounted钩子函数')
     }
 })</code></pre><p>结果:</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/13/3.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/13/3.png" alt="image"></p>
 <blockquote>
 <ol start="2">
 <li>无el选项</li>
@@ -3392,7 +3392,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
     mounted: function () {
         console.log('调用了mounted钩子函数')
     }
-})</code></pre><p>结果：<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/13/4.png" alt="image"></p>
+})</code></pre><p>结果：<br><img src="https://gitee.com/fly_tom/use/raw/master/vue/13/4.png" alt="image"></p>
 <blockquote>
 <p>证明没有el选项，则停止编译，也意味着暂时停止了生命周期。生命周期到created钩子函数就结束了。而当我们不加el选项，但是手动执行vm.$mount(el)方法的话，也能够使暂停的生命周期进行下去，例如：</p>
 </blockquote>
@@ -3410,8 +3410,8 @@ console<span class="token punctuation">.</span><span class="token function">log<
         console.log('调用了mounted钩子函数')
     }
 })
-app.$mount('#app')</code></pre><p>结果：<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/13/3.png" alt="image"></p>
-<h4 id="13-2-3-2-template"><a href="#13-2-3-2-template" class="headerlink" title="13.2.3.2    template"></a>13.2.3.2    template</h4><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/13/5.png" alt="image"></p>
+app.$mount('#app')</code></pre><p>结果：<br><img src="https://gitee.com/fly_tom/use/raw/master/vue/13/3.png" alt="image"></p>
+<h4 id="13-2-3-2-template"><a href="#13-2-3-2-template" class="headerlink" title="13.2.3.2    template"></a>13.2.3.2    template</h4><p><img src="https://gitee.com/fly_tom/use/raw/master/vue/13/5.png" alt="image"></p>
 <blockquote>
 <p>同时使用<code>template</code>和<code>HTML</code>，查看优先级：</p>
 </blockquote>
@@ -3427,7 +3427,7 @@ app.$mount('#app')</code></pre><p>结果：<br><img src="https://raw.githubuserc
             },
             template:"&lt;p&gt;{{msg}}&lt;/p&gt;",
         });
-    &lt;/script&gt;</code></pre><p>结果：<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/13/6.png" alt="image"></p>
+    &lt;/script&gt;</code></pre><p>结果：<br><img src="https://gitee.com/fly_tom/use/raw/master/vue/13/6.png" alt="image"></p>
 <blockquote>
 <p>结论</p>
 </blockquote>
@@ -3451,7 +3451,7 @@ app.$mount('#app')</code></pre><p>结果：<br><img src="https://raw.githubuserc
     render (createElement) {
         return (....)
     }
-})</code></pre><h4 id="13-2-4-beforeMount和mounted钩子函数间的生命周期"><a href="#13-2-4-beforeMount和mounted钩子函数间的生命周期" class="headerlink" title="13.2.4    beforeMount和mounted钩子函数间的生命周期"></a>13.2.4    beforeMount和mounted钩子函数间的生命周期</h4><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/13/7.png" alt="image"></p>
+})</code></pre><h4 id="13-2-4-beforeMount和mounted钩子函数间的生命周期"><a href="#13-2-4-beforeMount和mounted钩子函数间的生命周期" class="headerlink" title="13.2.4    beforeMount和mounted钩子函数间的生命周期"></a>13.2.4    beforeMount和mounted钩子函数间的生命周期</h4><p><img src="https://gitee.com/fly_tom/use/raw/master/vue/13/7.png" alt="image"></p>
 <blockquote>
 <p>beforeMount</p>
 </blockquote>
@@ -3463,7 +3463,7 @@ app.$mount('#app')</code></pre><p>结果：<br><img src="https://raw.githubuserc
 <blockquote>
 <p>这里两个钩子函数间是载入数据。</p>
 </blockquote>
-<h4 id="13-2-5-beforeUpdate钩子函数和updated钩子函数间的生命周期"><a href="#13-2-5-beforeUpdate钩子函数和updated钩子函数间的生命周期" class="headerlink" title="13.2.5    beforeUpdate钩子函数和updated钩子函数间的生命周期"></a>13.2.5    beforeUpdate钩子函数和updated钩子函数间的生命周期</h4><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/13/8.png" alt="image"><br>在Vue中，修改数据会导致重新渲染，依次调用beforeUpdate钩子函数和updated钩子函数</p>
+<h4 id="13-2-5-beforeUpdate钩子函数和updated钩子函数间的生命周期"><a href="#13-2-5-beforeUpdate钩子函数和updated钩子函数间的生命周期" class="headerlink" title="13.2.5    beforeUpdate钩子函数和updated钩子函数间的生命周期"></a>13.2.5    beforeUpdate钩子函数和updated钩子函数间的生命周期</h4><p><img src="https://gitee.com/fly_tom/use/raw/master/vue/13/8.png" alt="image"><br>在Vue中，修改数据会导致重新渲染，依次调用beforeUpdate钩子函数和updated钩子函数</p>
 <p>如果待修改的数据没有载入模板中，不会调用这里两个钩子函数</p>
 <pre><code>var app = new Vue({
     el: '#app',
@@ -3478,7 +3478,7 @@ app.$mount('#app')</code></pre><p>结果：<br><img src="https://raw.githubuserc
         console.log('调用了updated钩子函数')
     }
 })
-app.msg = 2</code></pre><p>结果：<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/13/9.png" alt="image"><br>如果绑定了数据，会调用两个钩子函数：</p>
+app.msg = 2</code></pre><p>结果：<br><img src="https://gitee.com/fly_tom/use/raw/master/vue/13/9.png" alt="image"><br>如果绑定了数据，会调用两个钩子函数：</p>
 <pre><code>&lt;h1&gt;测试有数据绑定修改数据，钩子函数调用情况&lt;/h1&gt;
 &lt;div id="app"&gt;
 &lt;/div&gt;
@@ -3497,11 +3497,11 @@ app.msg = 2</code></pre><p>结果：<br><img src="https://raw.githubusercontent.
         },
     });
     app.msg = "数据被修改了";
-&lt;/script&gt;</code></pre><p>结果：<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/13/10.png" alt="image"></p>
+&lt;/script&gt;</code></pre><p>结果：<br><img src="https://gitee.com/fly_tom/use/raw/master/vue/13/10.png" alt="image"></p>
 <blockquote>
 <p>注意只有写入模板的数据才会被追踪</p>
 </blockquote>
-<h4 id="13-2-6-beforeDestroy和destroyed钩子函数间的生命周期"><a href="#13-2-6-beforeDestroy和destroyed钩子函数间的生命周期" class="headerlink" title="13.2.6    beforeDestroy和destroyed钩子函数间的生命周期"></a>13.2.6    beforeDestroy和destroyed钩子函数间的生命周期</h4><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/13/11.png" alt="image"></p>
+<h4 id="13-2-6-beforeDestroy和destroyed钩子函数间的生命周期"><a href="#13-2-6-beforeDestroy和destroyed钩子函数间的生命周期" class="headerlink" title="13.2.6    beforeDestroy和destroyed钩子函数间的生命周期"></a>13.2.6    beforeDestroy和destroyed钩子函数间的生命周期</h4><p><img src="https://gitee.com/fly_tom/use/raw/master/vue/13/11.png" alt="image"></p>
 <h5 id="13-2-6-1-beforeDestroy"><a href="#13-2-6-1-beforeDestroy" class="headerlink" title="13.2.6.1    beforeDestroy"></a>13.2.6.1    beforeDestroy</h5><p>销毁前执行（$destroy方法被调用的时候就会执行）,一般在这里善后:清除计时器、清除非指令绑定的事件等等…’)</p>
 <h5 id="13-2-6-2-destroyed"><a href="#13-2-6-2-destroyed" class="headerlink" title="13.2.6.2    destroyed"></a>13.2.6.2    destroyed</h5><p>销毁后 （Dom元素存在，只是不再受vue控制）,卸载watcher，事件监听，子组件</p>
 <blockquote>
@@ -3639,7 +3639,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <pre><code>import {name} from './aaa.js'
 console.log(name)</code></pre><p><code>./aaa.js</code>表示aaa.js和mmm.js在同级目录。</p>
 <p>如图打印结果。</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/13.4-1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/13.4-1.png" alt="image"></p>
 <h4 id="13-4-2-统一导出"><a href="#13-4-2-统一导出" class="headerlink" title="13.4.2    统一导出"></a>13.4.2    统一导出</h4><pre class=" language-javascript"><code class="language-javascript"><span class="token keyword">var</span> age <span class="token operator">=</span> <span class="token number">22</span>
 <span class="token keyword">function</span> <span class="token function">sum</span><span class="token punctuation">(</span>num1<span class="token punctuation">,</span> num2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
   <span class="token keyword">return</span> num1 <span class="token operator">+</span> num2
@@ -3667,7 +3667,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 <blockquote>
 <p>使用{}将需要的变量放置进去</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/13.4-2.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/13.4-2.png" alt="image"></p>
 <h4 id="13-4-3-导出函数-类"><a href="#13-4-3-导出函数-类" class="headerlink" title="13.4.3    导出函数/类"></a>13.4.3    导出函数/类</h4><blockquote>
 <p>在aaa.js中添加</p>
 </blockquote>
@@ -3699,7 +3699,7 @@ p<span class="token punctuation">.</span><span class="token function">run</span>
 <blockquote>
 <p>如图</p>
 </blockquote>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/vue/13.4-3.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/vue/13.4-3.png" alt="image"></p>
 <h4 id="13-4-4-默认导入-export-default"><a href="#13-4-4-默认导入-export-default" class="headerlink" title="13.4.4    默认导入 export default"></a>13.4.4    默认导入 export default</h4><blockquote>
 <p>导出</p>
 </blockquote>

@@ -387,9 +387,9 @@
 <p>RabbitMQ 提供了许多插件，来从多方面进行扩展，也可以编写自己的插件。</p>
 <h3 id="RabbitMQ-中的概念模型"><a href="#RabbitMQ-中的概念模型" class="headerlink" title="RabbitMQ 中的概念模型"></a>RabbitMQ 中的概念模型</h3><h4 id="消息模型"><a href="#消息模型" class="headerlink" title="消息模型"></a>消息模型</h4><p>所有 MQ 产品从模型抽象上来说都是一样的过程：</p>
 <p>  消费者（consumer）订阅某个队列。生产者（producer）创建消息，然后发布到队列（queue）中，最后将消息发送到监听的消费者。</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/rabbitmq1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/rabbitmq1.png" alt="image"></p>
 <h4 id="RabbitMQ-基本概念"><a href="#RabbitMQ-基本概念" class="headerlink" title="RabbitMQ 基本概念"></a>RabbitMQ 基本概念</h4><p>  上面只是最简单抽象的描述，具体到 RabbitMQ 则有更详细的概念需要解释。上面介绍过 RabbitMQ 是 AMQP 协议的一个开源实现，所以其内部实际上也是 AMQP 中的基本概念：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/rabbitmq2.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/rabbitmq2.png" alt="image"></p>
 <ol>
 <li>Message<br>消息，消息是不具名的，它由消息头和消息体组成。消息体是不透明的，而消息头则由一系列的可选属性组成，这些属性包括routing-key（路由键）、priority（相对于其他消息的优先权）、delivery-mode（指出该消息可能需要持久性存储）等。</li>
 <li>Publisher<br>消息的生产者，也是一个向交换器发布消息的客户端应用程序。</li>
@@ -402,26 +402,26 @@
 <li>Exchange<br>交换器，用来接收生产者发送的消息并将这些消息路由给服务器中的队列。</li>
 <li>Broker<br>表示消息队列服务器实体。</li>
 </ol>
-<h4 id="RabbitMQ的基本原理"><a href="#RabbitMQ的基本原理" class="headerlink" title="RabbitMQ的基本原理"></a>RabbitMQ的基本原理</h4><p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/rabbitmq3.png" alt="image"></p>
+<h4 id="RabbitMQ的基本原理"><a href="#RabbitMQ的基本原理" class="headerlink" title="RabbitMQ的基本原理"></a>RabbitMQ的基本原理</h4><p><img src="https://gitee.com/fly_tom/use/raw/master/rabbitmq3.png" alt="image"></p>
 <p>  通过上面这张应用相结合的结构图既能够清晰的看清楚整体的send Message到Receive Message的一个大致的流程。</p>
 <p>　<strong>Queue</strong><br>　<br>  Queue（队列）RabbitMQ的作用是存储消息，队列的特性是先进先出。上图可以清晰地看到Client A和Client B是生产者，生产者生产消息最终被送到RabbitMQ的内部对象Queue中去，而消费者则是从Queue队列中取出数据。可以简化成表示为：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/rabbitmq4.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/rabbitmq4.png" alt="image"></p>
 <p>   生产者Send Message “A”被传送到Queue中，消费者发现消息队列Queue中有订阅的消息，就会将这条消息A读取出来进行一些列的业务操作。这里只是一个消费正对应一个队列Queue，也可以多个消费者订阅同一个队列Queue，当然这里就会将Queue里面的消息平分给其他的消费者，但是会存在一个一个问题就是如果每个消息的处理时间不同，就会导致某些消费者一直在忙碌中，而有的消费者处理完了消息后一直处于空闲状态，因为前面已经提及到了Queue会平分这些消息给相应的消费者。这里我们就可以使用prefetchCount来限制每次发送给消费者消息的个数。详情见下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/rabbitmq5.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/rabbitmq5.png" alt="image"></p>
 <p>  这里的prefetchCount=1是指每次从Queue中发送一条消息来。等消费者处理完这条消息后Queue会再发送一条消息给消费者。<br><strong>Exchange</strong><br>  我们在开篇的时候就留了一个坑，就是那个应用结构图里面，消费者Client A和消费者Client B是如何知道我发送的消息是给Queue1还是给Queue2，有没有过这个问题，那么我们就来解开这个面纱，看看到底是个什么构造。首先明确一点就是生产者产生的消息并不是直接发送给消息队列Queue的，而是要经过Exchange（交换器），由Exchange再将消息路由到一个或多个Queue，当然这里还会对不符合路由规则的消息进行丢弃掉，这里指的是后续要谈到的Exchange Type。那么Exchange是怎样将消息准确的推送到对应的Queue的呢？那么这里的功劳最大的当属Binding，RabbitMQ是通过Binding将Exchange和Queue链接在一起，这样Exchange就知道如何将消息准确的推送到Queue中去。简单示意图如下所示：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/rabbitmq6.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/rabbitmq6.png" alt="image"></p>
 <p>   <strong>在绑定（Binding）Exchange和Queue的同时，一般会指定一个Binding Key，生产者将消息发送给Exchange的时候，一般会产生一个Routing Key，当Routing Key和Binding Key对应上的时候，消息就会发送到对应的Queue中去</strong>。那么Exchange有四种类型，不同的类型有着不同的策略。也就是表明不同的类型将决定绑定的Queue不同，换言之就是说生产者发送了一个消息，Routing Key的规则是A，那么生产者会将Routing Key=A的消息推送到Exchange中，这时候Exchange中会有自己的规则，对应的规则去筛选生产者发来的消息，如果能够对应上Exchange的内部规则就将消息推送到对应的Queue中去。那么接下来就来详细讲解下Exchange里面类型。</p>
 <h5 id="Exchange-Type"><a href="#Exchange-Type" class="headerlink" title="Exchange Type"></a>Exchange Type</h5><ul>
 <li>fanout</li>
 </ul>
 <p>  fanout类型的Exchange路由规则非常简单，它会把所有发送到该Exchange的消息路由到所有与它绑定的Queue中。</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/rabbitmq7.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/rabbitmq7.png" alt="image"></p>
 <p>上图所示，生产者（P）生产消息1将消息1推送到Exchange，由于Exchange Type=fanout这时候会遵循fanout的规则将消息推送到所有与它绑定Queue，也就是图上的两个Queue最后两个消费者消费。</p>
 <ul>
 <li>direct</li>
 </ul>
 <p>  direct类型的Exchange路由规则也很简单，它会把消息路由到那些binding key与routing key完全匹配的Queue中</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/rabbitmq8.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/rabbitmq8.png" alt="image"></p>
 <p>当生产者（P）发送消息时Rotuing key=booking时，这时候将消息传送给Exchange，Exchange获取到生产者发送过来消息后，会根据自身的规则进行与匹配相应的Queue，这时发现Queue1和Queue2都符合，就会将消息传送给这两个队列，如果我们以Rotuing key=create和Rotuing key=confirm发送消息时，这时消息只会被推送到Queue2队列中，其他Routing Key的消息将会被丢弃。</p>
 <ul>
 <li>topic</li>
@@ -431,7 +431,7 @@
 <li>routing key为一个句点号“. ”分隔的字符串（我们将被句点号“. ”分隔开的每一段独立的字符串称为一个单词），如“stock.usd.nyse”、“nyse.vmw”、“quick.orange.rabbit”</li>
 <li>binding key与routing key一样也是句点号“. ”分隔的字符串</li>
 <li>binding key中可以存在两种特殊字符“<em>”与“#”，用于做模糊匹配，其中“</em>”用于匹配一个单词，“#”用于匹配多个单词（可以是零个）</li>
-<li><img src="https://raw.githubusercontent.com/Flyiyu/use/master/rabbitmq9.png" alt="image"></li>
+<li><img src="https://gitee.com/fly_tom/use/raw/master/rabbitmq9.png" alt="image"></li>
 </ol>
 <p>  当生产者发送消息Routing Key=F.C.E的时候，这时候只满足Queue1，所以会被路由到Queue中，如果Routing Key=A.C.E这时候会被同是路由到Queue1和Queue2中，如果Routing Key=A.F.B时，这里只会发送一条消息到Queue2中。</p>
 <ul>

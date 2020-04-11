@@ -384,9 +384,9 @@ path.logs: /var/log/logstash   #日志输出路径
 <p>logstash配置文件</p>
 <p>logstash pipeline 包含两个必须的元素：input和output，和一个可选元素：filter。</p>
 <p> 从input读取事件源，（经过filter解析和处理之后），从output输出到目标存储库（elasticsearch或其他）。</p>
-<p> <img src="https://raw.githubusercontent.com/Flyiyu/use/master/ls.png" alt="image"></p>
-<p> <img src="https://raw.githubusercontent.com/Flyiyu/use/master/ls2.png" alt="image"></p>
-<p> <img src="https://raw.githubusercontent.com/Flyiyu/use/master/ls3.png" alt="image"></p>
+<p> <img src="https://gitee.com/fly_tom/use/raw/master/ls.png" alt="image"></p>
+<p> <img src="https://gitee.com/fly_tom/use/raw/master/ls2.png" alt="image"></p>
+<p> <img src="https://gitee.com/fly_tom/use/raw/master/ls3.png" alt="image"></p>
 <p> Logstash的数据处理过程主要包括：Inputs, Filters, Outputs 三部分， 另外在Inputs和Outputs中可以使用Codecs对数据格式进行处理。这四个部分均以插件形式存在，在logstash.conf配置文件中设置需要使用的input，filter，output, codec插件，以实现特定的数据采集，数据处理，数据输出等功能</p>
 <p>Inputs：用于从数据源获取数据，常见的插件如file, syslog, redis, beats 等[详细参考]<br>Filters：用于处理数据如格式转换，数据派生等，常见的插件如grok, mutate, drop, clone, geoip等[详细参考]<br>Outputs：用于数据输出，常见的插件如elastcisearch，file, graphite, statsd等[详细参考]<br>Codecs：Codecs不是一个单独的流程，而是在输入和输出等插件中用于数据转换的模块，用于对数据进行编码处理，常见的插件如json，multiline</p>
 <h4 id="input"><a href="#input" class="headerlink" title="input"></a>input</h4><p> input部分，由于需要提取的是日志文件，一般使用file插件，该插件常用的几个参数是：</p>
@@ -641,9 +641,8 @@ output {
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            redis-cli –raw 设置可以显示中文，不会乱码
-1、Redis简介
-REmote DIctionary Server(Redis) 是一个由Salvatore Sanfilippo写的key-value存储系统。Redis是一个开
+                            1、Redis简介
+REmote DIctionary Server(Redis) 是一个由Salvatore Sanfilippo写的key-value存储系统。Redis是一个开源的使用ANSI C语言编写、遵守BSD协议、支持网络、可
                         
                     </div>
                     <div class="publish-info">

@@ -373,7 +373,7 @@
 <p>在复制的概念中，数据库分为两类，一类是主数据库（master），另一类是从数据库[1] （slave）。主数据库可以进行读写操作，当写操作导致数据变化时会自动将数据同步给从数据库。而从数据库一般是只读的，并接受主数据库同步过来的数据。一个主数据库可以拥有多个<br>从数据库，而一个从数据库只能拥有一个主数据库。</p>
 </blockquote>
 <p>一台master主机可以拥有多台slave从机。而一台slave从机又可以拥有多个slave从机。如此下去，形成强大的多级服务器集群架构（高扩展）。可以避免Redis单点故障，实现容灾恢复效果（高可用）。</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/redis5.png" alt=""></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/redis5.png" alt=""></p>
 <h5 id="复制原理"><a href="#复制原理" class="headerlink" title="复制原理"></a>复制原理</h5><blockquote>
 <p>redis复制过程可分为三个阶段：</p>
 </blockquote>
@@ -392,7 +392,7 @@
 <p>　　6）从服务器完成对快照的载入，开始接收命令请求，并执行来自主服务器缓冲区的写命令；</p>
 <h6 id="增量同步"><a href="#增量同步" class="headerlink" title="增量同步"></a>增量同步</h6><p>Redis增量复制是指Slave初始化后开始正常工作时主服务器发生的写操作同步到从服务器的过程。 </p>
 <p>增量复制的过程主要是主服务器每执行一个写命令就会向从服务器发送相同的写命令，从服务器接收并执行收到的写命令。</p>
-<h3 id="哨兵（Sentinel）"><a href="#哨兵（Sentinel）" class="headerlink" title="哨兵（Sentinel）"></a>哨兵（Sentinel）</h3><p> 哨兵机制存在的意义：</p>
+<h3 id="哨兵（Sentinel）"><a href="#哨兵（Sentinel）" class="headerlink" title="哨兵（Sentinel）"></a>哨兵（Sentinel）</h3><p>哨兵机制存在的意义：</p>
 <p>没有哨兵机制的时候，主从复制结构部署存在的问题是什么？也可以说redis主节点发生故障如何解决？</p>
 <pre><code>如果主节点down调，主从切换需要人工介入
 
@@ -408,10 +408,10 @@
 <p> 7】、若没有足够数量的 Sentinel（哨兵）进程同意 Master主服务器下线， Master主服务器的客观下线状态就会被移除。若 Master主服务器重新向 Sentinel（哨兵）进程发送 PING 命令返回有效回复，Master主服务器的主观下线状态就会被移除。</p>
 <h3 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h3><p>以上三者的关系</p>
 <p>主从往往是为了读写分离、backup 等目的， 哨兵可以检测主从健康， 主挂了可以把从提升为主， 集群往往是为了数据 sharding， 解决单台机器资源的上限的问题==</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/redis3.png" alt="redis3"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/redis3.png" alt="redis3"></p>
 <p>在这个图中，每一个蓝色的圈都代表着一个redis的服务器节点。它们任何两个节点之间都是相互连通的。客户端可以与任何一个节点相连接，然后就可以访问集群中的任何一个节点。对其进行存取和其他操作。</p>
 <p>　　那么redis是怎么做到的呢？首先，在redis的每一个节点上，都有这么两个东西，一个是插槽（slot）可以理解为是一个可以存储两个数值的一个变量这个变量的取值范围是：0-16383。还有一个就是cluster我个人把这个cluster理解为是一个集群管理的插件。当我们的存取的key到达的时候，redis会根据crc16的算法得出一个结果，然后把结果对 16384 求余数，这样每个 key 都会对应一个编号在 0-16383 之间的哈希槽，通过这个值，去找到对应的插槽所对应的节点，然后直接自动跳转到这个对应的节点上进行存取操作。</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/redis4.png" alt="redis4"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/redis4.png" alt="redis4"></p>
 <p>还有如果集群的话，是有好多个redis一起工作的，那么，就需要这个集群不是那么容易挂掉，所以呢，理论上就应该给集群中的每个节点至少一个备用的redis服务。这个备用的redis称为从节点（slave）。那么这个集群是如何判断是否有某个节点挂掉了呢？</p>
 <p>　　　　首先要说的是，每一个节点都存有这个集群所有主节点以及从节点的信息。</p>
 <p>　　　　它们之间通过互相的ping-pong判断是否节点可以连接上。如果有一半以上的节点去ping一个节点的时候没有回应，集群就认为这个节点宕机了，然后去连接它的备用节点。如果某个节点和所有从节点全部挂掉，我们集群就进入faill状态。还有就是如果有一半以上的主节点宕机，那么我们集群同样进入发力了状态。这就是我们的redis的投票机制</p>
@@ -500,17 +500,17 @@
 <li>对缓存数据设置相同的过期时间，导致某段时间内缓存失效，请求全部走数据库。</li>
 <li>由于原有缓存失效（或者数据未加载到缓存中），新缓存未到期间（缓存正常从Redis中获取，如下图）所有原本应该访问缓存的请求都去查询数据库了，而对数据库CPU和内存造成巨大压力，严重的会造成数据库宕机，造成系统的崩溃。</li>
 </ul>
-<p><strong>缓存雪崩的解决方案：</strong></p>
+<p><strong>解决方案：</strong></p>
 <p>对于“Redis挂掉了，请求全部走数据库”这种情况，我们可以有以下的思路：</p>
 <ul>
 <li>事发前：实现Redis的高可用(主从架构+Sentinel 或者Redis Cluster)，尽量避免Redis挂掉这种情况发生。</li>
 <li>事发中：万一Redis真的挂了，我们可以设置本地缓存(ehcache)+限流(hystrix)，尽量避免我们的数据库被干掉(起码能保证我们的服务还是能正常工作的)</li>
 <li>事发后：redis持久化，重启后自动从磁盘上加载数据，快速恢复缓存数据。</li>
 </ul>
-<p>（1）碰到这种情况，一般并发量不是特别多的时候，使用最多的解决方案是加锁排队，伪代码如下：<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/redis1.png" alt="redis1"></p>
+<p>（1）碰到这种情况，一般并发量不是特别多的时候，使用最多的解决方案是加锁排队，伪代码如下：<br><img src="https://gitee.com/fly_tom/use/raw/master/redis1.png" alt="redis1"></p>
 <p>加锁排队只是为了减轻数据库的压力，并没有提高系统吞吐量。假设在高并发下，缓存重建期间key是锁着的，这是过来1000个请求999个都在阻塞的。同样会导致用户等待超时，这是个治标不治本的方法！</p>
 <p>注意：加锁排队的解决方式分布式环境的并发问题，有可能还要解决分布式锁的问题；线程还会被阻塞，用户体验很差！因此，在真正的高并发场景下很少使用！</p>
-<p>（2）给每一个缓存数据增加相应的缓存标记，记录缓存的是否失效，如果缓存标记失效，则更新数据缓存，实例伪代码如下：<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/redis2.png" alt="redis2"></p>
+<p>（2）给每一个缓存数据增加相应的缓存标记，记录缓存的是否失效，如果缓存标记失效，则更新数据缓存，实例伪代码如下：<br><img src="https://gitee.com/fly_tom/use/raw/master/redis2.png" alt="redis2"></p>
 <p><strong>解释说明：</strong></p>
 <p>1、缓存标记：记录缓存数据是否过期，如果过期会触发通知另外的线程在后台去更新实际key的缓存；</p>
 <p>2、缓存数据：它的过期时间比缓存标记的时间延长1倍，例：标记缓存时间30分钟，数据缓存设置为60分钟。 这样，当缓存标记key过期后，实际缓存还能把旧数据返回给调用端，直到另外的线程在后台更新完成后，才会返回新缓存。</p>
@@ -756,9 +756,8 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            redis-cli –raw 设置可以显示中文，不会乱码
-1、Redis简介
-REmote DIctionary Server(Redis) 是一个由Salvatore Sanfilippo写的key-value存储系统。Redis是一个开
+                            1、Redis简介
+REmote DIctionary Server(Redis) 是一个由Salvatore Sanfilippo写的key-value存储系统。Redis是一个开源的使用ANSI C语言编写、遵守BSD协议、支持网络、可
                         
                     </div>
                     <div class="publish-info">

@@ -376,7 +376,7 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
 <p>服务代理（Broker）：已发布的消息保存在一组服务器中，它们被称为代理（Broker）或Kafka集群。</p>
 <p>消费者（Consumer）：可以订阅一个或多个话题，并从Broker拉数据，从而消费这些已发布的消息。</p>
 <h3 id="2-1-拓扑结构"><a href="#2-1-拓扑结构" class="headerlink" title="2.1 拓扑结构"></a>2.1 拓扑结构</h3><p>如下图：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ka1.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/ka1.png" alt="image"></p>
 <p>图.1</p>
 <h3 id="2-2-相关概念"><a href="#2-2-相关概念" class="headerlink" title="2.2 相关概念"></a>2.2 相关概念</h3><ul>
 <li><p>KafkaConsumer和KafkaProducer不同，后者是线程安全的，因此我们鼓励用户在多个线程中共享一个KafkaProducer实例，这样通常都要比每个线程维护一个KafkaProducer实例效率要高。但对于KafkaConsumer而言，它不是线程安全的</p>
@@ -431,15 +431,15 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
 </li>
 </ul>
 <h3 id="2-3-zookeeper-节点"><a href="#2-3-zookeeper-节点" class="headerlink" title="2.3 zookeeper 节点"></a>2.3 zookeeper 节点</h3><p>kafka 在 zookeeper 中的存储结构如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ka2.png" alt="image"></p>
-<h2 id="三、producer-发布消息"><a href="#三、producer-发布消息" class="headerlink" title="三、producer 发布消息"></a><strong>三、producer 发布消息</strong></h2><h3 id="3-1-写入方式"><a href="#3-1-写入方式" class="headerlink" title="3.1 写入方式"></a>3.1 写入方式</h3><p>producer 采用 push 模式将消息发布到 broker，每条消息都被 append 到 patition 中，属于顺序写磁盘（顺序写磁盘效率比随机写内存要高，保障 kafka 吞吐率）。<br><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ka8.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/ka2.png" alt="image"></p>
+<h2 id="三、producer-发布消息"><a href="#三、producer-发布消息" class="headerlink" title="三、producer 发布消息"></a><strong>三、producer 发布消息</strong></h2><h3 id="3-1-写入方式"><a href="#3-1-写入方式" class="headerlink" title="3.1 写入方式"></a>3.1 写入方式</h3><p>producer 采用 push 模式将消息发布到 broker，每条消息都被 append 到 patition 中，属于顺序写磁盘（顺序写磁盘效率比随机写内存要高，保障 kafka 吞吐率）。<br><img src="https://gitee.com/fly_tom/use/raw/master/ka8.png" alt="image"></p>
 <blockquote>
 <p>需要注意的一点是，消息写入leader后，follower是主动的去leader进行同步的！producer采用push模式将数据发布到broker，每条消息追加到分区中，顺序写入磁盘，所以保证同一分区内的数据是有序的</p>
 </blockquote>
 <h3 id="3-2-消息路由"><a href="#3-2-消息路由" class="headerlink" title="3.2 消息路由"></a>3.2 消息路由</h3><p>producer 发送消息到 broker 时，会根据分区算法选择将其存储到哪一个 partition。其路由机制为：</p>
 <p>1. 指定了 patition，则直接使用；<br>2. 未指定 patition 但指定 key，通过对 key 的 value 进行hash 选出一个 patition<br>3. patition 和 key 都未指定，使用轮询选出一个 patition。</p>
 <h3 id="3-3-写入流程"><a href="#3-3-写入流程" class="headerlink" title="3.3 写入流程"></a>3.3 写入流程</h3><p> producer 写入消息序列图如下所示：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ka3.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/ka3.png" alt="image"></p>
 <p>图.3</p>
 <p>流程说明：</p>
 <p>1. producer 先从 zookeeper 的 “/brokers/…/state” 节点找到该 partition 的 leader<br>2. producer 将消息发送给该 leader<br>3. leader 将消息写入本地 log<br>4. followers 从 leader pull 消息，写入本地 log 后 leader 发送 ACK<br>5. leader 收到所有 ISR 中的 replica 的 ACK 后，增加 HW（high watermark，最后 commit 的 offset） 并向 producer 发送 ACK</p>
@@ -460,20 +460,20 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
 <p>　Producer将数据写入kafka后，集群就需要对数据进行保存了！kafka将数据保存在磁盘，可能在我们的一般的认知里，写入磁盘是比较耗时的操作，不适合这种高并发的组件。Kafka初始会单独开辟一块磁盘空间，顺序写入数据（效率比随机写入高）。</p>
 </blockquote>
 <h3 id="4-1-存储方式"><a href="#4-1-存储方式" class="headerlink" title="4.1 存储方式"></a>4.1 存储方式</h3><p>物理上把 topic 分成一个或多个 patition（对应 server.properties 中的 num.partitions=3 配置），每个 patition 物理上对应一个文件夹（该文件夹存储该 patition 的所有消息和索引文件），如下：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ka4.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/ka4.png" alt="image"></p>
 <p>Partition在服务器上的表现形式就是一个一个的文件夹，每个partition的文件夹下面会有多组segment文件，每组segment文件又包含.index文件、.log文件、.timeindex文件（早期版本中没有）三个文件， log文件就实际是存储message的地方，而index和timeindex文件为索引文件，用于检索消息。</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ka9.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/ka9.png" alt="image"></p>
 <p>　如上图，这个partition有三组segment文件，每个log文件的大小是一样的，但是存储的message数量是不一定相等的（每条的message大小不一致）。文件的命名是以该segment最小offset来命名的，如000.index存储offset为0~368795的消息，kafka就是利用分段+索引的方式来解决查找效率的问题。</p>
 <h3 id="4-2-存储策略"><a href="#4-2-存储策略" class="headerlink" title="4.2 存储策略"></a>4.2 存储策略</h3><p>无论消息是否被消费，kafka 都会保留所有消息。有两种策略可以删除旧数据：</p>
 <p>1. 基于时间：log.retention.hours=168<br>2. 基于大小：log.retention.bytes=1073741824</p>
 <p>需要注意的是，因为Kafka读取特定消息的时间复杂度为O(1)，即与文件大小无关，所以这里删除过期文件与提高 Kafka 性能无关。</p>
 <h3 id="4-3-topic-创建与删除"><a href="#4-3-topic-创建与删除" class="headerlink" title="4.3 topic 创建与删除"></a>4.3 topic 创建与删除</h3><h4 id="4-3-1-创建-topic"><a href="#4-3-1-创建-topic" class="headerlink" title="4.3.1 创建 topic"></a>4.3.1 创建 topic</h4><p>创建 topic 的序列图如下所示：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ka5.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/ka5.png" alt="image"></p>
 <p>图.5</p>
 <p>流程说明：</p>
 <p>1. controller 在 ZooKeeper 的 /brokers/topics 节点上注册 watcher，当 topic 被创建，则 controller 会通过 watch 得到该 topic 的 partition/replica 分配。<br>2. controller从 /brokers/ids 读取当前所有可用的 broker 列表，对于 set_p 中的每一个 partition：<br>    2.1 从分配给该 partition 的所有 replica（称为AR）中任选一个可用的 broker 作为新的 leader，并将AR设置为新的 ISR<br>    2.2 将新的 leader 和 ISR 写入 /brokers/topics/[topic]/partitions/[partition]/state<br>3. controller 通过 RPC 向相关的 broker 发送 LeaderAndISRRequest。</p>
 <h4 id="4-3-2-删除-topic"><a href="#4-3-2-删除-topic" class="headerlink" title="4.3.2 删除 topic"></a>4.3.2 删除 topic</h4><p>删除 topic 的序列图如下所示：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ka6.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/ka6.png" alt="image"></p>
 <p>图.6</p>
 <p>流程说明：</p>
 <p>1. controller 在 zooKeeper 的 /brokers/topics 节点上注册 watcher，当 topic 被删除，则 controller 会通过 watch 得到该 topic 的 partition/replica 分配。<br>2. 若 delete.topic.enable=false，结束；否则 controller 注册在 /admin/delete_topics 上的 watch 被 fire，controller 通过回调向对应的 broker 发送 StopReplicaRequest。</p>
@@ -487,7 +487,7 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
 <p>kafka 0.8.* 使用第二种方式。</p>
 <p>kafka 通过 Controller 来选举 leader，流程请参考5.3节。</p>
 <h3 id="5-3-broker-failover"><a href="#5-3-broker-failover" class="headerlink" title="5.3 broker failover"></a>5.3 broker failover</h3><p>kafka broker failover 序列图如下所示：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ka7.png" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/ka7.png" alt="image"></p>
 <p>图.7</p>
 <p>流程说明： </p>
 <p>1. controller 在 zookeeper 的 /brokers/ids/[brokerId] 节点注册 Watcher，当 broker 宕机时 zookeeper 会 fire watch<br>2. controller 从 /brokers/ids 节点读取可用broker<br>3. controller决定set_p，该集合包含宕机 broker 上的所有 partition<br>4. 对 set_p 中的每一个 partition<br>    4.1 从/brokers/topics/[topic]/partitions/[partition]/state 节点读取 ISR<br>    4.2 决定新 leader（如4.3节所描述）<br>    4.3 将新 leader、ISR、controller_epoch 和 leader_epoch 等信息写入 state 节点<br>5. 通过 RPC 向相关 broker 发送 leaderAndISRRequest 命令</p>
@@ -496,7 +496,7 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
 <p>1. 读取并增加 Controller Epoch。<br>2. 在 reassignedPartitions Patch(/admin/reassign_partitions) 上注册 watcher。<br>3. 在 preferredReplicaElection Path(/admin/preferred_replica_election) 上注册 watcher。<br>4. 通过 partitionStateMachine 在 broker Topics Patch(/brokers/topics) 上注册 watcher。<br>5. 若 delete.topic.enable=true（默认值是 false），则 partitionStateMachine 在 Delete Topic Patch(/admin/delete_topics) 上注册 watcher。<br>6. 通过 replicaStateMachine在 Broker Ids Patch(/brokers/ids)上注册Watch。<br>7. 初始化 ControllerContext 对象，设置当前所有 topic，“活”着的 broker 列表，所有 partition 的 leader 及 ISR等。<br>8. 启动 replicaStateMachine 和 partitionStateMachine。<br>9. 将 brokerState 状态设置为 RunningAsController。<br>10. 将每个 partition 的 Leadership 信息发送给所有“活”着的 broker。<br>11. 若 auto.leader.rebalance.enable=true（默认值是true），则启动 partition-rebalance 线程。<br>12. 若 delete.topic.enable=true 且Delete Topic Patch(/admin/delete_topics)中有值，则删除相应的Topic。</p>
 <h2 id="六-consumer-消费消息"><a href="#六-consumer-消费消息" class="headerlink" title="六. consumer 消费消息"></a><strong>六. consumer 消费消息</strong></h2><h3 id="6-2-consumer-group"><a href="#6-2-consumer-group" class="headerlink" title="6.2 consumer group"></a>6.2 consumer group</h3><p>如 2.2 节所说， kafka 的分配单位是 patition。每个 consumer 都属于一个 group，一个 partition 只能被同一个 group 内的一个 consumer 所消费（也就保障了一个消息只能被 group 内的一个 consuemr 所消费），但是多个 group 可以同时消费这个 partition。<br><strong>所以在实际的应用中，建议消费者组的consumer的数量与partition的数量一致！</strong></p>
 <p>kafka 的设计目标之一就是同时实现离线处理和实时处理，根据这一特性，可以使用 spark/Storm 这些实时处理系统对消息在线处理，同时使用 Hadoop 批处理系统进行离线处理，还可以将数据备份到另一个数据中心，只需要保证这三者属于不同的 consumer group。如下图所示：</p>
-<p><img src="https://raw.githubusercontent.com/Flyiyu/use/master/ka9.jpg" alt="image"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/ka9.jpg" alt="image"></p>
 <h2 id="6-3-消费方式"><a href="#6-3-消费方式" class="headerlink" title="6.3 消费方式"></a><strong>6.3 消费方式</strong></h2><p>consumer 采用 pull 模式从 broker 中读取数据。</p>
 <p>push 模式很难适应消费速率不同的消费者，因为消息发送速率是由 broker 决定的。它的目标是尽可能以最快速度传递消息，但是这样很容易造成 consumer 来不及处理消息，典型的表现就是拒绝服务以及网络拥塞。而 pull 模式则可以根据 consumer 的消费能力以适当的速率消费消息。</p>
 <p>对于 Kafka 而言，pull 模式更合适，它可简化 broker 的设计，consumer 可自主控制消费消息的速率，同时 consumer 可以自己控制消费方式——即可批量消费也可逐条消费，同时还能选择不同的提交方式从而实现不同的传输语义。</p>
