@@ -346,14 +346,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        7.2k
+                        7.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        28 分
+                        27 分
                     </div>
                     
                 
@@ -431,10 +431,7 @@
 <li>Gradle 3.4，Spring Boot 的 Gradle 插件在很大程度上已被重写，有了重大的改进。</li>
 <li>Thymeleaf 3.0，Thymeleaf 3 相对于 Thymeleaf 2 有非常大的性能提升。</li>
 </ul>
-<h2 id="SpringBoot-自动配置原理"><a href="#SpringBoot-自动配置原理" class="headerlink" title="SpringBoot 自动配置原理"></a>SpringBoot 自动配置原理</h2><blockquote>
-<p>小伙伴们是否想起曾经被 SSM 整合支配的恐惧？相信很多小伙伴都是有过这样的经历的，一大堆配置问题，各种排除扫描，导入一个新的依赖又得添加新的配置。自从有了 SpringBoot 之后，咋们就起飞了！各种零配置开箱即用，而我们之所以开发起来能够这么爽，自动配置的功劳少不了，今天我们就一起来讨论一下 SpringBoot 自动配置原理。</p>
-</blockquote>
-<h2 id="1-SpringBoot-源码常用注解拾遗"><a href="#1-SpringBoot-源码常用注解拾遗" class="headerlink" title="1. SpringBoot 源码常用注解拾遗"></a>1. SpringBoot 源码常用注解拾遗</h2><h3 id="组合注解"><a href="#组合注解" class="headerlink" title="组合注解"></a>组合注解</h3><p>当可能大量同时使用到几个注解到同一个类上，就可以考虑将这几个注解到别的注解上。被注解的注解我们就称之为组合注解。</p>
+<h2 id="SpringBoot-源码常用注解拾遗"><a href="#SpringBoot-源码常用注解拾遗" class="headerlink" title="SpringBoot 源码常用注解拾遗"></a>SpringBoot 源码常用注解拾遗</h2><h3 id="组合注解"><a href="#组合注解" class="headerlink" title="组合注解"></a>组合注解</h3><p>当可能大量同时使用到几个注解到同一个类上，就可以考虑将这几个注解到别的注解上。被注解的注解我们就称之为组合注解。</p>
 <ul>
 <li><p>元注解：可以注解到别的注解上的注解。</p>
 </li>
@@ -443,17 +440,19 @@
 </ul>
 <h3 id="Value-【Spring-提供】"><a href="#Value-【Spring-提供】" class="headerlink" title="@Value 【Spring 提供】"></a>@Value 【Spring 提供】</h3><p>@Value 就相当于传统 xml 配置文件中的 value 字段。</p>
 <p>假设存在代码：</p>
-<pre><code>@Component 
-public class Person { 
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Component</span> 
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span> 
 
-@Value("i am name") 
-private String name; 
+<span class="token annotation punctuation">@Value</span><span class="token punctuation">(</span><span class="token string">"i am name"</span><span class="token punctuation">)</span> 
+<span class="token keyword">private</span> String name<span class="token punctuation">;</span> 
 
-} </code></pre><p>上面代码等价于的配置文件：</p>
-<pre><code>&lt;bean class="Person"&gt; 
-&lt;property name ="name" value="i am name"&gt;&lt;/property&gt;
-&lt;/bean&gt; 
-</code></pre><p>我们知道配置文件中的 value 的取值可以是：</p>
+<span class="token punctuation">}</span> </code></pre>
+<p>上面代码等价于的配置文件：</p>
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Person<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 
+    &lt;property name ="name" value="i am name"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span> 
+</code></pre>
+<p>我们知道配置文件中的 value 的取值可以是：</p>
 <ul>
 <li><p>字面量</p>
 </li>
@@ -469,18 +468,20 @@ private String name;
 <p>标有 <code>@ConfigurationProperties</code> 的类的所有属性和配置文件中相关的配置项进行绑定。（默认从全局配置文件中获取配置值），绑定之后我们就可以通过这个类去访问全局配置文件中的属性值了。</p>
 <p>下面看一个实例：</p>
 <p>1.在主配置文件中添加如下配置</p>
-<pre><code>person.name=kundy
+<pre class=" language-xml"><code class="language-xml">person.name=kundy
 person.age=13
-person.sex=male</code></pre><p>2.创建配置类，由于篇幅问题这里省略了 setter、getter 方法，但是实际开发中这个是必须的，否则无法成功注入。另外，@Component 这个注解也还是需要添加的。</p>
-<pre><code>@Component 
-@ConfigurationProperties(prefix = "person") 
-public class Person { 
+person.sex=male</code></pre>
+<p>2.创建配置类，由于篇幅问题这里省略了 setter、getter 方法，但是实际开发中这个是必须的，否则无法成功注入。另外，@Component 这个注解也还是需要添加的。</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Component</span> 
+<span class="token annotation punctuation">@ConfigurationProperties</span><span class="token punctuation">(</span>prefix <span class="token operator">=</span> <span class="token string">"person"</span><span class="token punctuation">)</span> 
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span> 
 
-private String name; 
-private Integer age; 
-private String sex; 
+<span class="token keyword">private</span> String name<span class="token punctuation">;</span> 
+<span class="token keyword">private</span> Integer age<span class="token punctuation">;</span> 
+<span class="token keyword">private</span> String sex<span class="token punctuation">;</span> 
 
-} </code></pre><p>这里 <code>@ConfigurationProperties</code> 有一个 prefix 参数，主要是用来指定该配置项在配置文件中的前缀。</p>
+<span class="token punctuation">}</span> </code></pre>
+<p>这里 <code>@ConfigurationProperties</code> 有一个 prefix 参数，主要是用来指定该配置项在配置文件中的前缀。</p>
 <p>3.测试，在 SpringBoot 环境中，编写个测试方法，注入 Person 类，即可通过 Person 对象取到配置文件的值。</p>
 <h3 id="Import-【Spring-提供】"><a href="#Import-【Spring-提供】" class="headerlink" title="@Import 【Spring 提供】"></a>@Import 【Spring 提供】</h3><p>@Import 注解支持导入普通 java 类，并将其声明成一个bean。主要用于将多个分散的 java config 配置类融合成一个更大的 config 类。</p>
 <ul>
@@ -498,96 +499,105 @@ private String sex;
 <li><p>配合 ImportBeanDefinitionRegistrar 使用。</p>
 </li>
 </ul>
-<h3 id="1-直接导入普通的-Java-类"><a href="#1-直接导入普通的-Java-类" class="headerlink" title="1. 直接导入普通的 Java 类"></a>1. 直接导入普通的 Java 类</h3><p>1.创建一个普通的 Java 类。</p>
-<pre><code>public class Circle { 
+<h4 id="1-直接导入普通的-Java-类"><a href="#1-直接导入普通的-Java-类" class="headerlink" title="1. 直接导入普通的 Java 类"></a>1. 直接导入普通的 Java 类</h4><p>1.创建一个普通的 Java 类。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Circle</span> <span class="token punctuation">{</span> 
 
-public void sayHi() { 
-    System.out.println("Circle sayHi()"); 
-    } 
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">sayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Circle sayHi()"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span> 
 
-} </code></pre><p>2.创建一个配置类，里面没有显式声明任何的 Bean，然后将刚才创建的 Circle 导入。</p>
-<pre><code>@Import({Circle.class}) 
-@Configuration 
-public class MainConfig { 
+<span class="token punctuation">}</span> </code></pre>
+<p>2.创建一个配置类，里面没有显式声明任何的 Bean，然后将刚才创建的 Circle 导入。</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Import</span><span class="token punctuation">(</span><span class="token punctuation">{</span>Circle<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">)</span> 
+<span class="token annotation punctuation">@Configuration</span> 
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MainConfig</span> <span class="token punctuation">{</span> 
 
-} </code></pre><p>3.创建测试类。</p>
-<pre><code>public static void main(String[] args) { 
+<span class="token punctuation">}</span> </code></pre>
+<p>3.创建测试类。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
 
-ApplicationContext context = new AnnotationConfigApplicationContext(MainConfig.class); 
-Circle circle = context.getBean(Circle.class); 
-circle.sayHi(); 
+ApplicationContext context <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AnnotationConfigApplicationContext</span><span class="token punctuation">(</span>MainConfig<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+Circle circle <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>Circle<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+circle<span class="token punctuation">.</span><span class="token function">sayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
 
-} </code></pre><p>4.运行结果：</p>
+<span class="token punctuation">}</span> </code></pre>
+<p>4.运行结果：</p>
 <pre><code>&gt; Circle sayHi()</code></pre><p>可以看到我们顺利的从 IOC 容器中获取到了 Circle 对象，证明我们在配置类中导入的 Circle 类，确实被声明为了一个 Bean。</p>
-<h3 id="2-配合自定义的-ImportSelector-使用"><a href="#2-配合自定义的-ImportSelector-使用" class="headerlink" title="2. 配合自定义的 ImportSelector 使用"></a>2. 配合自定义的 ImportSelector 使用</h3><p>ImportSelector 是一个接口，该接口中只有一个 selectImports 方法，用于返回全类名数组。所以利用该特性我们可以给容器动态导入 N 个 Bean。</p>
+<h4 id="2-配合自定义的-ImportSelector-使用"><a href="#2-配合自定义的-ImportSelector-使用" class="headerlink" title="2. 配合自定义的 ImportSelector 使用"></a>2. 配合自定义的 ImportSelector 使用</h4><p>ImportSelector 是一个接口，该接口中只有一个 selectImports 方法，用于返回全类名数组。所以利用该特性我们可以给容器动态导入 N 个 Bean。</p>
 <p>1.创建普通 Java 类 Triangle。</p>
-<pre><code>public class Triangle { 
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Triangle</span> <span class="token punctuation">{</span> 
 
-public void sayHi(){ 
-System.out.println("Triangle sayHi()"); 
-} 
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">sayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Triangle sayHi()"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span> 
 
-}</code></pre><p>2.创建 ImportSelector 实现类，selectImports 返回 Triangle 的全类名。</p>
-<pre><code>public class MyImportSelector implements ImportSelector { 
+<span class="token punctuation">}</span></code></pre>
+<p>2.创建 ImportSelector 实现类，selectImports 返回 Triangle 的全类名。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyImportSelector</span> <span class="token keyword">implements</span> <span class="token class-name">ImportSelector</span> <span class="token punctuation">{</span> 
 
-@Override 
-public String[] selectImports(AnnotationMetadata annotationMetadata) { 
-return new String[]{"annotation.importannotation.waytwo.Triangle"}; 
-} 
+<span class="token annotation punctuation">@Override</span> 
+<span class="token keyword">public</span> String<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">selectImports</span><span class="token punctuation">(</span>AnnotationMetadata annotationMetadata<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+<span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token string">"annotation.importannotation.waytwo.Triangle"</span><span class="token punctuation">}</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span> 
 
-} </code></pre><p>3.创建配置类，在原来的基础上还导入了 MyImportSelector。</p>
-<pre><code>@Import({Circle.class,MyImportSelector.class}) 
-@Configuration 
-public class MainConfigTwo { 
+<span class="token punctuation">}</span> </code></pre>
+<p>3.创建配置类，在原来的基础上还导入了 MyImportSelector。</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Import</span><span class="token punctuation">(</span><span class="token punctuation">{</span>Circle<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span>MyImportSelector<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">)</span> 
+<span class="token annotation punctuation">@Configuration</span> 
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MainConfigTwo</span> <span class="token punctuation">{</span> 
 
-} </code></pre><p>4.创建测试类</p>
-<pre><code>public static void main(String[] args) { 
+<span class="token punctuation">}</span> </code></pre>
+<p>4.创建测试类</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
 
-ApplicationContext context = new AnnotationConfigApplicationContext(MainConfigTwo.class); 
-Circle circle = context.getBean(Circle.class); 
-Triangle triangle = context.getBean(Triangle.class); 
-circle.sayHi(); 
-triangle.sayHi(); 
+ApplicationContext context <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AnnotationConfigApplicationContext</span><span class="token punctuation">(</span>MainConfigTwo<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+Circle circle <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>Circle<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+Triangle triangle <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>Triangle<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+circle<span class="token punctuation">.</span><span class="token function">sayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+triangle<span class="token punctuation">.</span><span class="token function">sayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
 
-} </code></pre><p>5.运行结果：</p>
+<span class="token punctuation">}</span> </code></pre>
+<p>5.运行结果：</p>
 <pre><code>&gt; Circle sayHi()  
 &gt; Triangle sayHi()</code></pre><p>可以看到 Triangle 对象也被 IOC 容器成功的实例化出来了。</p>
-<h3 id="3-配合-ImportBeanDefinitionRegistrar-使用"><a href="#3-配合-ImportBeanDefinitionRegistrar-使用" class="headerlink" title="3. 配合 ImportBeanDefinitionRegistrar 使用"></a>3. 配合 ImportBeanDefinitionRegistrar 使用</h3><p>ImportBeanDefinitionRegistrar 也是一个接口，它可以手动注册bean到容器中，从而我们可以对类进行个性化的定制。(需要搭配 @Import 与 @Configuration 一起使用。）</p>
+<h4 id="3-配合-ImportBeanDefinitionRegistrar-使用"><a href="#3-配合-ImportBeanDefinitionRegistrar-使用" class="headerlink" title="3. 配合 ImportBeanDefinitionRegistrar 使用"></a>3. 配合 ImportBeanDefinitionRegistrar 使用</h4><p>ImportBeanDefinitionRegistrar 也是一个接口，它可以手动注册bean到容器中，从而我们可以对类进行个性化的定制。(需要搭配 @Import 与 @Configuration 一起使用。）</p>
 <p>1.创建普通 Java 类 Rectangle。</p>
-<pre><code>public class Rectangle { 
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Rectangle</span> <span class="token punctuation">{</span> 
 
-public void sayHi() { 
-System.out.println("Rectangle sayHi()"); 
-} 
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">sayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Rectangle sayHi()"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span> 
 
-}</code></pre><p>2.创建 ImportBeanDefinitionRegistrar 实现类，实现方法直接手动注册一个名叫 rectangle 的 Bean 到 IOC 容器中。</p>
-<pre><code>public class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar { 
+<span class="token punctuation">}</span></code></pre>
+<p>2.创建 ImportBeanDefinitionRegistrar 实现类，实现方法直接手动注册一个名叫 rectangle 的 Bean 到 IOC 容器中。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyImportBeanDefinitionRegistrar</span> <span class="token keyword">implements</span> <span class="token class-name">ImportBeanDefinitionRegistrar</span> <span class="token punctuation">{</span> 
 
-@Override 
-public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry) { 
+<span class="token annotation punctuation">@Override</span> 
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">registerBeanDefinitions</span><span class="token punctuation">(</span>AnnotationMetadata annotationMetadata<span class="token punctuation">,</span> BeanDefinitionRegistry beanDefinitionRegistry<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
 
-RootBeanDefinition rootBeanDefinition = new RootBeanDefinition(Rectangle.class); 
-// 注册一个名字叫做 rectangle 的 bean 
-beanDefinitionRegistry.registerBeanDefinition("rectangle", rootBeanDefinition); 
-} 
+RootBeanDefinition rootBeanDefinition <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RootBeanDefinition</span><span class="token punctuation">(</span>Rectangle<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment" spellcheck="true">// 注册一个名字叫做 rectangle 的 bean </span>
+beanDefinitionRegistry<span class="token punctuation">.</span><span class="token function">registerBeanDefinition</span><span class="token punctuation">(</span><span class="token string">"rectangle"</span><span class="token punctuation">,</span> rootBeanDefinition<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span> 
 
-}</code></pre><p>3.创建配置类，导入 MyImportBeanDefinitionRegistrar 类。</p>
-<pre><code>@Import({Circle.class, MyImportSelector.class, MyImportBeanDefinitionRegistrar.class}) 
-@Configuration 
-public class MainConfigThree { 
+<span class="token punctuation">}</span></code></pre>
+<p>3.创建配置类，导入 MyImportBeanDefinitionRegistrar 类。</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Import</span><span class="token punctuation">(</span><span class="token punctuation">{</span>Circle<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> MyImportSelector<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> MyImportBeanDefinitionRegistrar<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">)</span> 
+<span class="token annotation punctuation">@Configuration</span> 
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MainConfigThree</span> <span class="token punctuation">{</span> 
 
-} </code></pre><p>4.创建测试类。</p>
-<pre><code>public static void main(String[] args) { 
-
-ApplicationContext context = new AnnotationConfigApplicationContext(MainConfigThree.class); 
-Circle circle = context.getBean(Circle.class); 
-Triangle triangle = context.getBean(Triangle.class); 
-Rectangle rectangle = context.getBean(Rectangle.class); 
-circle.sayHi(); 
-triangle.sayHi(); 
-rectangle.sayHi(); 
-
-} </code></pre><p>5.运行结果</p>
+<span class="token punctuation">}</span> </code></pre>
+<p>4.创建测试类。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+    ApplicationContext context <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AnnotationConfigApplicationContext</span><span class="token punctuation">(</span>MainConfigThree<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    Circle circle <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>Circle<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    Triangle triangle <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>Triangle<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    Rectangle rectangle <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>Rectangle<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    circle<span class="token punctuation">.</span><span class="token function">sayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    triangle<span class="token punctuation">.</span><span class="token function">sayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    rectangle<span class="token punctuation">.</span><span class="token function">sayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token punctuation">}</span> </code></pre>
+<p>5.运行结果</p>
 <pre><code>&gt; Circle sayHi()  
 &gt; Triangle sayHi()  
 &gt; Rectangle sayHi()</code></pre><p>嗯对，Rectangle 对象也被注册进来了。</p>
@@ -596,42 +606,46 @@ rectangle.sayHi();
 </blockquote>
 <p>下面看一个简单的例子：</p>
 <p>1.创建普通 Java 类 ConditionBean，该类主要用来验证 Bean 是否成功加载。</p>
-<pre><code>public class ConditionBean { 
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConditionBean</span> <span class="token punctuation">{</span> 
 
-public void sayHi() { 
-System.out.println("ConditionBean sayHi()"); 
-} 
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">sayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"ConditionBean sayHi()"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span> 
 
-} </code></pre><p>2.创建 Condition 实现类，@Conditional 注解只有一个 Condition 类型的参数，Condition 是一个接口，该接口只有一个返回布尔值的 matches() 方法，该方法返回 true 则条件成立，配置类生效。反之，则不生效。在该例子中我们直接返回 true。</p>
-<pre><code>public class MyCondition implements Condition { 
+<span class="token punctuation">}</span> </code></pre>
+<p>2.创建 Condition 实现类，@Conditional 注解只有一个 Condition 类型的参数，Condition 是一个接口，该接口只有一个返回布尔值的 matches() 方法，该方法返回 true 则条件成立，配置类生效。反之，则不生效。在该例子中我们直接返回 true。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyCondition</span> <span class="token keyword">implements</span> <span class="token class-name">Condition</span> <span class="token punctuation">{</span> 
 
-@Override 
-public boolean matches(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata) { 
-return true; 
-} 
+    <span class="token annotation punctuation">@Override</span> 
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">matches</span><span class="token punctuation">(</span>ConditionContext conditionContext<span class="token punctuation">,</span> AnnotatedTypeMetadata annotatedTypeMetadata<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span> 
 
-} </code></pre><p>3.创建配置类，可以看到该配置的 @Conditional 传了我们刚才创建的 Condition 实现类进去，用作条件判断。</p>
-<pre><code>@Configuration 
-@Conditional(MyCondition.class) 
-public class ConditionConfig { 
+<span class="token punctuation">}</span> </code></pre>
+<p>3.创建配置类，可以看到该配置的 @Conditional 传了我们刚才创建的 Condition 实现类进去，用作条件判断。</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span> 
+<span class="token annotation punctuation">@Conditional</span><span class="token punctuation">(</span>MyCondition<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span> 
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConditionConfig</span> <span class="token punctuation">{</span> 
 
-@Bean 
-public ConditionBean conditionBean(){ 
-return new ConditionBean(); 
-} 
+    <span class="token annotation punctuation">@Bean</span> 
+    <span class="token keyword">public</span> ConditionBean <span class="token function">conditionBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span> 
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">ConditionBean</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">}</span> 
 
-} </code></pre><p>4.编写测试方法。</p>
-<pre><code>public static void main(String[] args) { 
+<span class="token punctuation">}</span> </code></pre>
+<p>4.编写测试方法。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
 
-ApplicationContext context = new AnnotationConfigApplicationContext(ConditionConfig.class); 
-ConditionBean conditionBean = context.getBean(ConditionBean.class); 
-conditionBean.sayHi(); 
+    ApplicationContext context <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AnnotationConfigApplicationContext</span><span class="token punctuation">(</span>ConditionConfig<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    ConditionBean conditionBean <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>ConditionBean<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    conditionBean<span class="token punctuation">.</span><span class="token function">sayHi</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
 
-} </code></pre><p>5.结果分析</p>
+<span class="token punctuation">}</span> </code></pre>
+<p>5.结果分析</p>
 <p>因为 Condition 的 matches 方法直接返回了 true，配置类会生效，我们可以把 matches 改成返回 false，则配置类就不会生效了。</p>
 <p>除了自定义 Condition，Spring 还为我们扩展了一些常用的 Condition。常用注解，可以参考：<a href="http://mp.weixin.qq.com/s?__biz=MzI4Njc5NjM1NQ==&amp;mid=2247488634&amp;idx=1&amp;sn=b62b98d0c545aec50a2e1f5b25963059&amp;chksm=ebd62b56dca1a240e03125436df7a7cf2232364ac7116ea3f2639e198606ac46b6688877e247&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">深入理解Spring中的各种注解</a></p>
 <hr>
-<h2 id="2-SpringBoot-启动过程"><a href="#2-SpringBoot-启动过程" class="headerlink" title="2. SpringBoot 启动过程"></a>2. SpringBoot 启动过程</h2><p>在看源码的过程中，我们会看到以下四个类的方法经常会被调用，我们需要对一下几个类有点印象：</p>
+<h2 id="SpringBoot-启动过程"><a href="#SpringBoot-启动过程" class="headerlink" title="SpringBoot 启动过程"></a>SpringBoot 启动过程</h2><p>在看源码的过程中，我们会看到以下四个类的方法经常会被调用，我们需要对一下几个类有点印象：</p>
 <ul>
 <li><p>ApplicationContextInitializer</p>
 </li>
@@ -651,31 +665,32 @@ conditionBean.sayHi();
 <li><p>运行 run() 方法。</p>
 </li>
 </ul>
-<h3 id="创建-SpringApplication-对象"><a href="#创建-SpringApplication-对象" class="headerlink" title="创建 SpringApplication 对象"></a>创建 SpringApplication 对象</h3><pre><code>public SpringApplication(ResourceLoader resourceLoader, Class... primarySources) { 
+<h3 id="创建-SpringApplication-对象"><a href="#创建-SpringApplication-对象" class="headerlink" title="创建 SpringApplication 对象"></a>创建 SpringApplication 对象</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token function">SpringApplication</span><span class="token punctuation">(</span>ResourceLoader resourceLoader<span class="token punctuation">,</span> Class<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> primarySources<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
 
-this.sources = new LinkedHashSet(); 
-this.bannerMode = Mode.CONSOLE; 
-this.logStartupInfo = true; 
-this.addCommandLineProperties = true; 
-this.addConversionService = true; 
-this.headless = true; 
-this.registerShutdownHook = true; 
-this.additionalProfiles = new HashSet(); 
-this.isCustomEnvironment = false; 
-this.resourceLoader = resourceLoader; 
-Assert.notNull(primarySources, "PrimarySources must not be null"); 
-// 保存主配置类（这里是一个数组，说明可以有多个主配置类） 
-this.primarySources = new LinkedHashSet(Arrays.asList(primarySources)); 
-// 判断当前是否是一个 Web 应用 
-this.webApplicationType = WebApplicationType.deduceFromClasspath(); 
-// 从类路径下找到 META/INF/Spring.factories 配置的所有 ApplicationContextInitializer，然后保存起来 
-this.setInitializers(this.getSpringFactoriesInstances(ApplicationContextInitializer.class)); 
-// 从类路径下找到 META/INF/Spring.factories 配置的所有 ApplicationListener，然后保存起来 
-this.setListeners(this.getSpringFactoriesInstances(ApplicationListener.class)); 
-// 从多个配置类中找到有 main 方法的主配置类（只有一个） 
-this.mainApplicationClass = this.deduceMainApplicationClass(); 
+<span class="token keyword">this</span><span class="token punctuation">.</span>sources <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedHashSet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token keyword">this</span><span class="token punctuation">.</span>bannerMode <span class="token operator">=</span> Mode<span class="token punctuation">.</span>CONSOLE<span class="token punctuation">;</span> 
+<span class="token keyword">this</span><span class="token punctuation">.</span>logStartupInfo <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> 
+<span class="token keyword">this</span><span class="token punctuation">.</span>addCommandLineProperties <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> 
+<span class="token keyword">this</span><span class="token punctuation">.</span>addConversionService <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> 
+<span class="token keyword">this</span><span class="token punctuation">.</span>headless <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> 
+<span class="token keyword">this</span><span class="token punctuation">.</span>registerShutdownHook <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> 
+<span class="token keyword">this</span><span class="token punctuation">.</span>additionalProfiles <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token keyword">this</span><span class="token punctuation">.</span>isCustomEnvironment <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span> 
+<span class="token keyword">this</span><span class="token punctuation">.</span>resourceLoader <span class="token operator">=</span> resourceLoader<span class="token punctuation">;</span> 
+Assert<span class="token punctuation">.</span><span class="token function">notNull</span><span class="token punctuation">(</span>primarySources<span class="token punctuation">,</span> <span class="token string">"PrimarySources must not be null"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment" spellcheck="true">// 保存主配置类（这里是一个数组，说明可以有多个主配置类） </span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>primarySources <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedHashSet</span><span class="token punctuation">(</span>Arrays<span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span>primarySources<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment" spellcheck="true">// 判断当前是否是一个 Web 应用 </span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>webApplicationType <span class="token operator">=</span> WebApplicationType<span class="token punctuation">.</span><span class="token function">deduceFromClasspath</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment" spellcheck="true">// 从类路径下找到 META/INF/Spring.factories 配置的所有 ApplicationContextInitializer，然后保存起来 </span>
+<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setInitializers</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getSpringFactoriesInstances</span><span class="token punctuation">(</span>ApplicationContextInitializer<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment" spellcheck="true">// 从类路径下找到 META/INF/Spring.factories 配置的所有 ApplicationListener，然后保存起来 </span>
+<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setListeners</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getSpringFactoriesInstances</span><span class="token punctuation">(</span>ApplicationListener<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token comment" spellcheck="true">// 从多个配置类中找到有 main 方法的主配置类（只有一个） </span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>mainApplicationClass <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">deduceMainApplicationClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
 
-} </code></pre><h3 id="运行-run-方法"><a href="#运行-run-方法" class="headerlink" title="运行 run() 方法"></a>运行 run() 方法</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> ConfigurableApplicationContext <span class="token function">run</span><span class="token punctuation">(</span>String<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+<span class="token punctuation">}</span> </code></pre>
+<h3 id="运行-run-方法"><a href="#运行-run-方法" class="headerlink" title="运行 run() 方法"></a>运行 run() 方法</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> ConfigurableApplicationContext <span class="token function">run</span><span class="token punctuation">(</span>String<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span> 
 
 <span class="token comment" spellcheck="true">// 创建计时器 </span>
 StopWatch stopWatch <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StopWatch</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
@@ -733,7 +748,7 @@ exceptionReporters <span class="token operator">=</span> <span class="token keyw
   <span class="token punctuation">}</span> </code></pre>
 <h3 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h3><p>run() 阶段主要就是回调本节开头提到过的4个监听器中的方法与加载项目中组件到 IOC 容器中，而所有需要回调的监听器都是从类路径下的 META/INF/Spring.factories 中获取，从而达到启动前后的各种定制操作。</p>
 <hr>
-<h2 id="3-SpringBoot-自动配置原理"><a href="#3-SpringBoot-自动配置原理" class="headerlink" title="3. SpringBoot 自动配置原理"></a>3. SpringBoot 自动配置原理</h2><h3 id="SpringBootApplication-注解"><a href="#SpringBootApplication-注解" class="headerlink" title="@SpringBootApplication 注解"></a>@SpringBootApplication 注解</h3><p>SpringBoot 项目的一切都要从 @SpringBootApplication 这个注解开始说起。</p>
+<h2 id="SpringBoot-自动配置原理"><a href="#SpringBoot-自动配置原理" class="headerlink" title="SpringBoot 自动配置原理"></a>SpringBoot 自动配置原理</h2><h3 id="SpringBootApplication-注解"><a href="#SpringBootApplication-注解" class="headerlink" title="@SpringBootApplication 注解"></a>@SpringBootApplication 注解</h3><p>SpringBoot 项目的一切都要从 @SpringBootApplication 这个注解开始说起。</p>
 <p>@SpringBootApplication 标注在某个类上说明：</p>
 <ul>
 <li><p>这个类是 SpringBoot 的主配置类。</p>
@@ -742,20 +757,21 @@ exceptionReporters <span class="token operator">=</span> <span class="token keyw
 </li>
 </ul>
 <p>该注解的定义如下：</p>
-<pre><code>@SpringBootConfiguration 
-@EnableAutoConfiguration 
-@ComponentScan( 
-excludeFilters = {@Filter( 
-type = FilterType.CUSTOM, 
-classes = {TypeExcludeFilter.class} 
-), @Filter( 
-type = FilterType.CUSTOM, 
-classes = {AutoConfigurationExcludeFilter.class} 
-)} 
-) 
-public @interface SpringBootApplication { 
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@SpringBootConfiguration</span> 
+<span class="token annotation punctuation">@EnableAutoConfiguration</span> 
+<span class="token annotation punctuation">@ComponentScan</span><span class="token punctuation">(</span> 
+excludeFilters <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token annotation punctuation">@Filter</span><span class="token punctuation">(</span> 
+type <span class="token operator">=</span> FilterType<span class="token punctuation">.</span>CUSTOM<span class="token punctuation">,</span> 
+classes <span class="token operator">=</span> <span class="token punctuation">{</span>TypeExcludeFilter<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span> 
+<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token annotation punctuation">@Filter</span><span class="token punctuation">(</span> 
+type <span class="token operator">=</span> FilterType<span class="token punctuation">.</span>CUSTOM<span class="token punctuation">,</span> 
+classes <span class="token operator">=</span> <span class="token punctuation">{</span>AutoConfigurationExcludeFilter<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span> 
+<span class="token punctuation">)</span><span class="token punctuation">}</span> 
+<span class="token punctuation">)</span> 
+<span class="token keyword">public</span> @<span class="token keyword">interface</span> <span class="token class-name">SpringBootApplication</span> <span class="token punctuation">{</span> 
 
-}</code></pre><p>可以看到 SpringBootApplication 注解是一个组合注解（关于组合注解文章的开头有讲到），其主要组合了一下三个注解：</p>
+<span class="token punctuation">}</span></code></pre>
+<p>可以看到 SpringBootApplication 注解是一个组合注解（关于组合注解文章的开头有讲到），其主要组合了一下三个注解：</p>
 <ul>
 <li><p>@SpringBootConfiguration：该注解表示这是一个 SpringBoot 的配置类，其实它就是一个 @Configuration 注解而已。</p>
 </li>
@@ -765,9 +781,11 @@ public @interface SpringBootApplication {
 </li>
 </ul>
 <h3 id="EnableAutoConfiguration-注解"><a href="#EnableAutoConfiguration-注解" class="headerlink" title="@EnableAutoConfiguration 注解"></a>@EnableAutoConfiguration 注解</h3><p>先看该注解是怎么定义的：</p>
-<pre><code>@AutoConfigurationPackage 
-@Import({AutoConfigurationImportSelector.class}) 
-public @interface EnableAutoConfiguration { </code></pre><p><strong>@AutoConfigurationPackage</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@AutoConfigurationPackage</span> 
+<span class="token annotation punctuation">@Import</span><span class="token punctuation">(</span><span class="token punctuation">{</span>AutoConfigurationImportSelector<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">)</span> 
+<span class="token keyword">public</span> @<span class="token keyword">interface</span> <span class="token class-name">EnableAutoConfiguration</span> <span class="token punctuation">{</span> 
+<span class="token punctuation">}</span></code></pre>
+<p><strong>@AutoConfigurationPackage</strong></p>
 <p>从字面意思理解就是自动配置包。点进去可以看到就是一个 @Import 注解：<code>@Import({Registrar.class})</code>，导入了一个 Registrar 的组件。关于 @Import 的用法文章上面也有介绍哦。</p>
 <p>我们在 Registrar 类中的 registerBeanDefinitions 方法上打上断点，可以看到返回了一个包名，该包名其实就是主配置类所在的包。</p>
 <p>一句话：@AutoConfigurationPackage 注解就是<strong>将主配置类（@SpringBootConfiguration标注的类）的所在包及下面所有子包里面的所有组件扫描到Spring容器中</strong>。所以说，默认情况下主配置类包及子包以外的组件，Spring 容器是扫描不到的。</p>
@@ -795,7 +813,12 @@ public @interface EnableAutoConfiguration { </code></pre><p><strong>@AutoConfigu
 <p>通过上面方式，所有的自动配置类就被导进主配置类中了。但是这么多的配置类，明显有很多自动配置我们平常是没有使用到的，没理由全部都生效吧。</p>
 <p>接下来我们以 HttpEncodingAutoConfiguration为例来看一个自动配置类是怎么工作的。为啥选这个类呢？主要是这个类比较的简单典型。</p>
 <p>先看一下该类标有的注解：</p>
-<pre><code>@Configuration @EnableConfigurationProperties({HttpProperties.class}) @ConditionalOnWebApplication( type = Type.SERVLET ) @ConditionalOnClass({CharacterEncodingFilter.class}) @ConditionalOnProperty( prefix = "spring.http.encoding", value = {"enabled"}, matchIfMissing = true ) public class HttpEncodingAutoConfiguration { }</code></pre><ul>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span> <span class="token annotation punctuation">@EnableConfigurationProperties</span><span class="token punctuation">(</span><span class="token punctuation">{</span>HttpProperties<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">)</span> 
+<span class="token annotation punctuation">@ConditionalOnWebApplication</span><span class="token punctuation">(</span> type <span class="token operator">=</span> Type<span class="token punctuation">.</span>SERVLET <span class="token punctuation">)</span> <span class="token annotation punctuation">@ConditionalOnClass</span><span class="token punctuation">(</span><span class="token punctuation">{</span>CharacterEncodingFilter<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span><span class="token punctuation">)</span> 
+<span class="token annotation punctuation">@ConditionalOnProperty</span><span class="token punctuation">(</span> 
+    prefix <span class="token operator">=</span> <span class="token string">"spring.http.encoding"</span><span class="token punctuation">,</span> value <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">"enabled"</span><span class="token punctuation">}</span><span class="token punctuation">,</span> matchIfMissing <span class="token operator">=</span> <span class="token boolean">true</span> <span class="token punctuation">)</span> 
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HttpEncodingAutoConfiguration</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span></code></pre>
+<ul>
 <li><p><strong>@Configuration：</strong>标记为配置类。</p>
 </li>
 <li><p><strong>@ConditionalOnWebApplication：</strong>web应用下才生效。</p>

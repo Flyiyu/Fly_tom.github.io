@@ -5,9 +5,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Dubbo笔记, Tom Blog">
-    <meta name="description" content="何为Dubbo
-
-&amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;Dubbo是一个分布式服务框架，其前身是阿里巴巴开源项目Dubbo，致力于提供高性能和透明化的RPC远程服务调用方案，以及SOA服务治理方案。Dubbo采用全spring">
+    <meta name="description" content="何为Dubbo&amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;Dubbo是一个分布式服务框架，其前身是阿里巴巴开源项目Dubbo，致力于提供高性能和透明化的RPC远程服务调用方案，以及SOA服务治理方案。Dubbo采用全spring配置">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -348,14 +346,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.2k
+                        2k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        4 分
+                        7 分
                     </div>
                     
                 
@@ -371,13 +369,11 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="何为Dubbo"><a href="#何为Dubbo" class="headerlink" title="何为Dubbo"></a>何为Dubbo</h3><font size="4">
-
-<p>&nbsp; &nbsp; &nbsp;&nbsp;Dubbo是一个分布式服务框架，其前身是阿里巴巴开源项目Dubbo，致力于提供高性能和透明化的RPC远程服务调用方案，以及SOA服务治理方案。Dubbo采用全spring配置方式，透明化接入应用，对应用没有任何API侵入，只需用Spring加载Dubbo的配置即可。</p>
-<h3 id="其核心部分包含"><a href="#其核心部分包含" class="headerlink" title="其核心部分包含:"></a>其核心部分包含:</h3><p><strong>远程通讯：</strong> 提供对多种基于长连接的NIO框架抽象封装，包括多种线程模型，序列化，以及“请求-响应”模式的信息交换方式。</p>
+                <h2 id="何为Dubbo"><a href="#何为Dubbo" class="headerlink" title="何为Dubbo"></a>何为Dubbo</h2><p>&nbsp; &nbsp; &nbsp;&nbsp;Dubbo是一个分布式服务框架，其前身是阿里巴巴开源项目Dubbo，致力于提供高性能和透明化的RPC远程服务调用方案，以及SOA服务治理方案。Dubbo采用全spring配置方式，透明化接入应用，对应用没有任何API侵入，只需用Spring加载Dubbo的配置即可。</p>
+<h2 id="其核心部分包含"><a href="#其核心部分包含" class="headerlink" title="其核心部分包含:"></a>其核心部分包含:</h2><p><strong>远程通讯：</strong> 提供对多种基于长连接的NIO框架抽象封装，包括多种线程模型，序列化，以及“请求-响应”模式的信息交换方式。</p>
 <p><strong>集群容错:</strong> 提供基于接口方法的透明远程过程调用，包括多协议支持，以及软负载均衡，失败容错，地址路由，动态配置等集群支持。</p>
 <p><strong>自动发现:</strong> 基于注册中心目录服务，使服务消费方能动态的查找服务提供方，使地址透明，使服务提供方可以平滑增加或减少机器。</p>
-<h3 id="Dubbo的由来"><a href="#Dubbo的由来" class="headerlink" title="Dubbo的由来"></a>Dubbo的由来</h3><h4 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h4><p>随着互联网的发展，网站应用的规模不断扩大，常规的垂直应用架构已无法应对，分布式服务架构以及流动计算架构势在必行，亟需一个治理系统确保架构有条不紊的演进。</p>
+<h2 id="Dubbo的由来"><a href="#Dubbo的由来" class="headerlink" title="Dubbo的由来"></a>Dubbo的由来</h2><h4 id="1-背景"><a href="#1-背景" class="headerlink" title="1.背景"></a>1.背景</h4><p>随着互联网的发展，网站应用的规模不断扩大，常规的垂直应用架构已无法应对，分布式服务架构以及流动计算架构势在必行，亟需一个治理系统确保架构有条不紊的演进。</p>
 <ul>
 <li><p>单一应用架构</p>
 <pre><code>  当网站流量很小时，只需一个应用，将所有功能都部署在一起，以减少部署节点和成本。
@@ -396,7 +392,7 @@
   度中心基于访问压力实时管理集群容量，提高集群利用率。
   此时，用于提高机器利用率的 资源调度和治理中心(SOA) 是关键。</code></pre></li>
 </ul>
-<h3 id="Dubbo解决了哪些问题"><a href="#Dubbo解决了哪些问题" class="headerlink" title="Dubbo解决了哪些问题"></a>Dubbo解决了哪些问题</h3><p>透明化的远程方法调用，就像调用本地方法一样调用远程方法，只需简单配置，没有任何API侵入。</p>
+<h2 id="Dubbo解决了哪些问题"><a href="#Dubbo解决了哪些问题" class="headerlink" title="Dubbo解决了哪些问题"></a>Dubbo解决了哪些问题</h2><p>透明化的远程方法调用，就像调用本地方法一样调用远程方法，只需简单配置，没有任何API侵入。</p>
 <p>软负载均衡及容错机制，可在内网替代F5等硬件负载均衡器，降低成本，减少单点。</p>
 <p>服务自动注册与发现，不再需要写死服务提供方地址，注册中心基于接口名查询服务提供者的IP地址，并且能够平滑添加或删除服务提供者。</p>
 <p>Dubbo基于RPC（Remote Procedure Call 远程过程调用）协议，服务提供方和服务消费方之间的调用关系：<br><img src="https://gitee.com/fly_tom/use/raw/master/dubbo1.png" alt="dubbo"></p>
@@ -417,7 +413,46 @@
 <li>服务消费者，从提供者地址列表中，基于软负载均衡算法，选一台提供者进行调用，如果调用失败，再选另一台调用。</li>
 <li>服务消费者和提供者，在内存中累计调用次数和调用时间，定时每分钟发送一次统计数据到监控中心。</li>
 </ul>
-</font>
+<p>Dubbo 属于 RPC 框架，连接消费者和生产者，<strong>注册中心</strong> 监控被调用对象的运行状态</p>
+<p><strong>Dubbo提供的注册中心有如下几种类型可供选择：</strong></p>
+<ul>
+<li>Multicast注册中心</li>
+<li><strong>Zookeeper注册中心</strong></li>
+<li>Redis注册中心</li>
+<li>Simple注册中心</li>
+</ul>
+<h2 id="Dubbo-调用工作流"><a href="#Dubbo-调用工作流" class="headerlink" title="Dubbo 调用工作流"></a>Dubbo 调用工作流</h2><p>Dubbo 框架是用来处理分布式系统中，服务发现与注册以及调用问题的，并且管理调用过程。</p>
+<p>上面介绍了 Dubbo 的框架分层，下图的工作流就展示了他们是如何工作的。</p>
+<p>​    <strong>工作流涉及到服务提供者（Provider），注册中心（Registration），网络（Network）和服务消费者（Consumer）：</strong></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/dubbo2.png" alt="image"></p>
+<ul>
+<li>服务提供者在启动的时候，会通过读取一些配置将服务实例化。</li>
+<li>Proxy 封装服务调用接口，方便调用者调用。客户端获取 Proxy 时，可以像调用本地服务一样，调用远程服务。</li>
+<li>Proxy 在封装时，需要调用 Protocol 定义协议格式，例如：Dubbo Protocol。</li>
+<li>将 Proxy 封装成 Invoker，它是真实服务调用的实例。</li>
+<li>将 Invoker 转化成 Exporter，Exporter 只是把 Invoker 包装了一层，是为了在注册中心中暴露自己，方便消费者使用。</li>
+<li>将包装好的 Exporter 注册到注册中心。</li>
+<li>服务消费者建立好实例，会到服务注册中心订阅服务提供者的元数据。元数据包括服务 IP 和端口以及调用方式（Proxy）。</li>
+<li>消费者会通过获取的 Proxy 进行调用。通过服务提供方包装过程可以知道，Proxy 实际包装了 Invoker 实体，因此需要使用 Invoker 进行调用。</li>
+<li>在 Invoker 调用之前，通过 Directory 获取服务提供者的 Invoker 列表。在分布式的服务中有可能出现同一个服务，分布在不同的节点上。</li>
+<li>通过路由规则了解，服务需要从哪些节点获取。</li>
+<li>Invoker 调用过程中，通过 Cluster 进行容错，如果遇到失败策略进行重试。</li>
+<li>调用中，由于多个服务可能会分布到不同的节点，就要通过 LoadBalance 来实现负载均衡。</li>
+<li>Invoker 调用之前还需要经过 Filter，它是一个过滤链，用来处理上下文，限流和计数的工作。</li>
+<li>生成过滤以后的 Invoker。</li>
+<li>用 Client 进行数据传输。</li>
+<li>Codec 会根据 Protocol 定义的协议，进行协议的构造。</li>
+<li>构造完成的数据，通过序列化 Serialization 传输给服务提供者。</li>
+<li>Request 已经到达了服务提供者，它会被分配到线程池（ThreadPool）中进行处理。</li>
+<li>Server 拿到请求以后查找对应的 Exporter（包含有 Invoker）。</li>
+<li>由于 Export 也会被 Filter 层层包裹</li>
+<li>通过 Filter 以后获得 Invoker</li>
+<li>最后，对服务提供者实体进行调用。</li>
+</ul>
+<p>上面调用步骤经历了这么多过程，其中出现了 Proxy，Invoker，Exporter，Filter。</p>
+<p>实际上都是调用实体在不同阶段的不同表现形式，本质是一样的，在不同的使用场景使用不同的实体。</p>
+<p>例如 Proxy 是用来方便调用者调用的。Invoker 是在调用具体实体时使用的。Exporter 用来注册到注册中心的等等。</p>
+<p>后面我们会对具体流程进行解析。如果时间不够无法阅读完全文，可以把上面的图保存。</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
