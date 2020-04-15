@@ -343,14 +343,14 @@ Java语言概述请描述一下javajava是一个面向对象的编程语言，�
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        46.3k
+                        36.3k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        172 分
+                        137 分
                     </div>
                     
                 
@@ -402,6 +402,10 @@ Java语言概述请描述一下javajava是一个面向对象的编程语言，�
 <li>用反序列化，调用ObjectInputStream类的readObject（）方法</li>
 </ul>
 <h3 id="JVM的垃圾回收机制"><a href="#JVM的垃圾回收机制" class="headerlink" title="JVM的垃圾回收机制"></a>JVM的垃圾回收机制</h3><p>GC是垃圾收集的意思（Gabage Collection）,内存处理是编程人员容易出现问题的地方，忘记或者错误的内存回收会导致程序或系统的不稳定甚至崩溃，Java提供的GC功能可以自动监测对象是否超过作用域从而达到自动回收内存的目的，Java语言没有提供释放已分配内存的显示操作方法。垃圾回收主要针对的是堆内存(heap)，</p>
+<h4 id="什么时候触发我们的GC机制"><a href="#什么时候触发我们的GC机制" class="headerlink" title="什么时候触发我们的GC机制"></a>什么时候触发我们的GC机制</h4><p>　　① 在程序空闲的时候。<br>　　② 手动调用system.gc()。不推荐，因为调用的时候开销很大会严重影响程序运行，更有甚者程序直接挂掉；如果你想跑路就大胆尝试吧！<br>　　③Java堆内存不足时,GC会被调用。当应用线程在运行,并在运行过程中创建新对象,若这时内存空间不足,JVM就会强制地调用GC线程,以便回收内存用于新的分配。若GC一次之后仍不能满足内存分配的要求,JVM会再进行两次GC作进一步的尝试,若仍无法满足要求,则 JVM将报“out of memory”（内存泄露）这是灰常严重的情况，这时Java应用将停止。<br>　　出现内存泄露的集中情况：<br>　　①静态集合类像HashMap、Vector等<br>　　②各种连接，数据库连接，网络连接，IO连接等没有显示调用close关闭，不被GC回收导致内存泄露。<br>　　③监听器的使用，在释放对象的同时没有相应删除监听器的时候也可能导致内存泄露。</p>
+<p>　　顺便提一下 Minor GC、Full GC、OOM什么时候触发：<br>　　创建对象是新生代的Eden空间调用Minor GC；当升到老年代的对象大于老年代剩余空间Full GC；GC与非GC时间耗时超过了GCTimeRatio的限制引发OOM。</p>
+<p><strong>JVM的内存管理结构:</strong></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/jc40.png" alt=""></p>
 <h4 id="如何判断对象是否需要回收？"><a href="#如何判断对象是否需要回收？" class="headerlink" title="如何判断对象是否需要回收？"></a>如何判断对象是否需要回收？</h4><p>有两种（采用第二种方式）</p>
 <p>​    1 引用计数法(但是并没有采用)</p>
 <p>为每一个创建的对象分配一个引用计数器，用来存储该对象被引用的个数。当该个数为零，意味着没有人再使用这个对象，可以认为“对象死亡”。但是，这种方案存在严重的问题，就是无法检测“循环引用”：当两个对象互相引用，即时它俩都不被外界任何东西引用，它俩的计数都不为零，因此永远不会被回收。而实际上对于开发者而言，这两个对象已经完全没有用处了。</p>
@@ -713,6 +717,7 @@ break语句终止某个循环，程序跳转到循环块外的下一条语句</c
 </ul>
 <p><code>多态性</code>：<code>多态性</code>是指允许不同子类型的对象对同一消息作出不同的响应。简单的说就是用同样的对象引用调用同样的方法但是做了不同的事情。<code>多态性</code>分为编译时的<code>多态性</code>和运行时的<code>多态性</code>。如果将对象的方法视为对象向外界提供的服务，那么运行时的<code>多态性</code>可以解释为：当 A 系统访问 B 系统提供的服务时，B 系统有多种提供服务的方式， 但一切对 A 系统来说都是透明的。方法重载（overload）实现的是编译时的<code>多态性</code>（也称为前绑定），而方法重写<br>（override）实现的是运行时的<code>多态性</code>（也称为后绑定）。运行时的多态是面向对象最精髓的东西，要实现多态需要做两件事：1. 方法重写（子类<code>继承</code>父类并重写父类中已有的或<code>抽象</code>的方法）；2. 对象造型（用父类型引用引用子类型对象，这样同样的引用调用同样的方法就会根据子类对象的不同而表现出不同的行为）。</p>
 <p>4）    <code>抽象</code>：<code>抽象</code>是将一类对象的共同特征总结出来构造类的过程，包括数据<code>抽象</code>和行为<code>抽象</code>两方面。<code>抽象</code>只关注对象有哪些属性和行为，并不关注这些行为的细节是什么</p>
+<p>​    </p>
 <p>父类Animal</p>
 <pre><code> class Animal {
     int num = 10;
@@ -1029,15 +1034,15 @@ public static void main(String[] args) {
 <p>在Java SE 1.5之前，没有泛型的情况的下，通过对类型Object的引用来实现参数的“任意化”，“任意化”带来的缺点是要做显式的强制类型转换，而这种转换是要求开发者对实际参数类型可以预知的情况下进行的。对于强制类型转换错误的情况，编译器可能不提示错误，在运行的时候才出现异常，这是一个安全隐患。</p>
 <h4 id="泛形方法"><a href="#泛形方法" class="headerlink" title="泛形方法"></a>泛形方法</h4><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
  * 说明：
- * 1）&lt;E>非常重要，可以理解为声明此方法为泛型方法。
- * 2）只有声明了&lt;E>的方法才是泛型方法，泛型类中的使用了泛型的成员方法并不是泛型方法。
- * 3）&lt;E>表明该方法将使用泛型类型E，此时才可以在方法中使用泛型类型E。
+ * 1）&lt;E&gt;非常重要，可以理解为声明此方法为泛型方法。
+ * 2）只有声明了&lt;E&gt;的方法才是泛型方法，泛型类中的使用了泛型的成员方法并不是泛型方法。
+ * 3）&lt;E&gt;表明该方法将使用泛型类型E，此时才可以在方法中使用泛型类型E。
  * 4）与泛型类的定义一样，此处E可以随便写为任意标识，常见的如T、E、K、V等形式的参数常用于表示泛型。
  *
  * @param inputArray
- * @param &lt;E>
+ * @param &lt;E&gt;
  */</span>
-<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token operator">&lt;</span>E<span class="token operator">></span> <span class="token keyword">void</span> <span class="token function">printArray</span><span class="token punctuation">(</span>E<span class="token punctuation">[</span><span class="token punctuation">]</span> inputArray<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token operator">&lt;</span>E<span class="token operator">&gt;</span> <span class="token keyword">void</span> <span class="token function">printArray</span><span class="token punctuation">(</span>E<span class="token punctuation">[</span><span class="token punctuation">]</span> inputArray<span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token comment" spellcheck="true">// 输出数组元素</span>
     <span class="token keyword">for</span> <span class="token punctuation">(</span>E element <span class="token operator">:</span> inputArray<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>element <span class="token operator">+</span> <span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -1150,7 +1155,7 @@ public static void main(String[] args) {
     <span class="token punctuation">}</span>   
 <span class="token punctuation">}</span>  </code></pre>
 <p>运行结果：<br>父类–静态变量<br>父类–静态初始化块<br>子类–静态变量<br>子类–静态初始化块<br>父类–变量<br>父类–初始化块<br>父类–构造器<br>子类–变量<br>子类–初始化块<br>子类–构造器</p>
-<h2 id="equals-hashcode-String-StringBuffer-StringBuilder-记录"><a href="#equals-hashcode-String-StringBuffer-StringBuilder-记录" class="headerlink" title="== | equals | hashcode |String StringBuffer StringBuilder 记录"></a>== | equals | hashcode |String StringBuffer StringBuilder 记录</h2><h3 id="和-equals"><a href="#和-equals" class="headerlink" title="== 和 equals"></a>== 和 equals</h3><p>缓存池</p>
+<h2 id="equals-hashcode-String-StringBuffer-StringBuilder"><a href="#equals-hashcode-String-StringBuffer-StringBuilder" class="headerlink" title="== | equals | hashcode |String StringBuffer StringBuilder"></a>== | equals | hashcode |String StringBuffer StringBuilder</h2><h3 id="和-equals"><a href="#和-equals" class="headerlink" title="== 和 equals"></a>== 和 equals</h3><p>缓存池</p>
 <pre><code>public class Main_1 {
  public static void main(String[] args) {
     Integer a = 1;
@@ -1479,75 +1484,53 @@ public final native void wait(long timeout) throws InterruptedException
 public final void wait(long timeout, int nanos) throws InterruptedException
 
 public final void wait() throws InterruptedException</code></pre><ul>
-<li>getClass方法</li>
-</ul>
-<ul>
-<li>返回当前运行时对象的Class对象</li>
-</ul>
-<ul>
-<li>hashCode方法</li>
-</ul>
-<ul>
-<li>该方法返回对象的哈希码，主要使用在哈希表中，比如JDK中的HashMap。（文章中有对hashcode的详细解释）</li>
-</ul>
-<ul>
-<li>equals方法</li>
-</ul>
-<ul>
-<li>如果重写了equals方法，通常有必要重写hashCode方法，这点已经在hashCode方法中说明了。</li>
-</ul>
-<ul>
-<li>clone方法</li>
-</ul>
-<ul>
+<li><p>getClass方法</p>
+</li>
+<li><p>返回当前运行时对象的Class对象</p>
+</li>
+<li><p>hashCode方法</p>
+</li>
+<li><p>该方法返回对象的哈希码，主要使用在哈希表中，比如JDK中的HashMap。（文章中有对hashcode的详细解释）</p>
+</li>
+<li><p>equals方法</p>
+</li>
+<li><p>如果重写了equals方法，通常有必要重写hashCode方法，这点已经在hashCode方法中说明了。</p>
+</li>
+<li><p>clone方法</p>
+</li>
 <li><p>创建并返回当前对象的一份拷贝。<strong>Object本身没有实现Cloneable接口</strong>，所以不重写clone方法并且进行调用的话会发生CloneNotSupportedException异常。</p>
 </li>
 <li><p>使用 clone() 方法来拷贝一个对象即复杂又有风险，它会抛出异常，并且还需要类型转换。Effective Java 书上讲到，最好不要去使用 clone()，可以使用拷贝构造函数或者拷贝工厂来拷贝一个对象。</p>
 </li>
-</ul>
-<ul>
-<li>toString方法</li>
-</ul>
-<ul>
-<li>Object对象的默认实现，即输出类的名字@实例的哈希码的16进制。</li>
-</ul>
-<ul>
-<li>notify方法：</li>
-</ul>
-<ul>
-<li>唤醒一个在此对象监视器上等待的线程(监视器相当于就是锁的概念)。</li>
-</ul>
-<ul>
-<li>notifyAll方法</li>
-</ul>
-<ul>
-<li>跟notify一样，唯一的区别就是会唤醒在此对象监视器上等待的所有线程，而不是一个线程。</li>
-</ul>
-<ul>
-<li>wait(long timeout) throws InterruptedException方法</li>
-</ul>
-<ul>
-<li>wait方法会让当前线程等待直到另外一个线程调用对象的notify或notifyAll方法，或者超过参数设置的timeout超时时间。</li>
-</ul>
-<ul>
-<li>wait(long timeout, int nanos) throws InterruptedException方法</li>
-</ul>
-<ul>
-<li>跟wait(long timeout)方法类似，<strong>多了一个nanos参数，这个参数表示额外时间</strong>（以毫微秒为单位，范围是 0-999999）。 所以超时的时间还需要加上nanos毫秒。</li>
-</ul>
-<ul>
+<li><p>toString方法</p>
+</li>
+<li><p>Object对象的默认实现，即输出类的名字@实例的哈希码的16进制。</p>
+</li>
+<li><p>notify方法：</p>
+</li>
+<li><p>唤醒一个在此对象监视器上等待的线程(监视器相当于就是锁的概念)。</p>
+</li>
+<li><p>notifyAll方法</p>
+</li>
+<li><p>跟notify一样，唯一的区别就是会唤醒在此对象监视器上等待的所有线程，而不是一个线程。</p>
+</li>
+<li><p>wait(long timeout) throws InterruptedException方法</p>
+</li>
+<li><p>wait方法会让当前线程等待直到另外一个线程调用对象的notify或notifyAll方法，或者超过参数设置的timeout超时时间。</p>
+</li>
+<li><p>wait(long timeout, int nanos) throws InterruptedException方法</p>
+</li>
+<li><p>跟wait(long timeout)方法类似，<strong>多了一个nanos参数，这个参数表示额外时间</strong>（以毫微秒为单位，范围是 0-999999）。 所以超时的时间还需要加上nanos毫秒。</p>
+</li>
 <li><p>wait() throws InterruptedException方法</p>
 <p>需要注意的是 wait(0, 0)和wait(0)效果是一样的，即一直等待。</p>
 </li>
-</ul>
-<ul>
-<li>跟之前的2个wait方法一样，只不过该方法一直等待，没有超时时间这个概念。</li>
-</ul>
-<ul>
-<li>finalize方法</li>
-</ul>
-<ul>
-<li>该方法的作用是实例被垃圾回收器回收的时候触发的操作，就好比 “死前的最后一波挣扎”。</li>
+<li><p>跟之前的2个wait方法一样，只不过该方法一直等待，没有超时时间这个概念。</p>
+</li>
+<li><p>finalize方法</p>
+</li>
+<li><p>该方法的作用是实例被垃圾回收器回收的时候触发的操作，就好比 “死前的最后一波挣扎”。</p>
+</li>
 </ul>
 <p><strong>补充：什么是Native Method</strong></p>
 <p>简单地讲，一个Native Method就是一个java调用非java代码的接口。一个Native Method是这样一个java的方法：该方法的实现由非java语言实现，比如C。这个特征并非java所特有，很多其它的编程语言都有这一机制，比如在C＋＋中，你可以用extern “C”告知C＋＋编译器去调用一个C的函数。</p>
@@ -1805,8 +1788,6 @@ NegativeArraySizeException 为数组分配的空间是负数异常</code></pre><
 <li><p>修饰变量：表示该变量只能被赋值一次</p>
 <p>声明数据为常量，可以是编译时常量，也可以是在运行时被初始化后不能被改变的常量。</p>
 </li>
-</ul>
-<ul>
 <li><p>对于基本类型，final 使数值不变；</p>
 </li>
 <li><p>对于引用类型，final 使引用不变，表示该引用只有一次指向对象的机会，也就不能引用其它对象，但是被引用的对象本身是可以修改的。</p>
@@ -1821,11 +1802,13 @@ NegativeArraySizeException 为数组分配的空间是负数异常</code></pre><
 <h4 id="final原理"><a href="#final原理" class="headerlink" title="final原理"></a>final原理</h4><h4 id="final通过反射是否可以修改"><a href="#final通过反射是否可以修改" class="headerlink" title="final通过反射是否可以修改"></a>final通过反射是否可以修改</h4><h3 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h3><p>finally 是用于异常处理的场面，无论是否有异常抛出，都会执行</p>
 <h3 id="finalize"><a href="#finalize" class="headerlink" title="finalize"></a>finalize</h3><p>finalize是Object的方法，所有类都继承了该方法。 当一个对象满足垃圾回收的条件，并且被回收的时候，其finalize()方法就会被调用</p>
 <h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h3><ul>
-<li>它的作用是什么？<ul>
+<li><p>它的作用是什么？</p>
+<ul>
 <li>instanceof是Java的一个二元操作符，和==，&gt;，&lt;是同一类东西。由于它是由字母组成的，所以也是Java的保留关键字。它的作用是测试它左边的对象是否是它右边的类的实例，返回boolean类型的数据。</li>
 </ul>
 </li>
-<li>使用过程中注意事项有哪些？<ul>
+<li><p>使用过程中注意事项有哪些？</p>
+<ul>
 <li>类的实例包含本身的实例，以及所有直接或间接子类的实例</li>
 <li>instanceof左边显式声明的类型与右边操作元必须是同种类或存在继承关系，也就是说需要位于同一个继承树，否则会编译错误<pre><code>//比如下面就会编译错误
 String s = null;
@@ -2085,7 +2068,7 @@ System.out.println(“当前用户是：” + user);
 <h4 id="几种集合的区别"><a href="#几种集合的区别" class="headerlink" title="几种集合的区别"></a>几种集合的区别</h4><p>ArrayList查询快，写数据慢；LinkedList查询慢，写数据快<br>ArrayList查询快是因为底层是由数组实现，new的内存地址是连续的，通过下标定位数据快。写数据慢是因为复制数组耗时。LinkedList底层是双向循环链表，查询数据依次遍历慢。写数据只需修改指针引用。<br>ArrayList和LinkedList都不是线程安全的，小并发量的情况下可以使用Vector，若并发量很多，且读多写少可以考虑使用CopyOnWriteArrayList。</p>
 <h4 id="遍历list集合"><a href="#遍历list集合" class="headerlink" title="遍历list集合"></a>遍历list集合</h4><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
 <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    List<span class="token operator">&lt;</span>String<span class="token operator">></span> list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    List<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"one"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"two"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">/**
@@ -2105,7 +2088,7 @@ System.out.println(“当前用户是：” + user);
     <span class="token comment" spellcheck="true">/**
      * 通过迭代器遍历
      */</span>
-    Iterator<span class="token operator">&lt;</span>String<span class="token operator">></span> iterator <span class="token operator">=</span> list<span class="token punctuation">.</span><span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Iterator<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> iterator <span class="token operator">=</span> list<span class="token punctuation">.</span><span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">while</span> <span class="token punctuation">(</span>iterator<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>iterator<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
@@ -2134,6 +2117,15 @@ System.out.println(“当前用户是：” + user);
 <p><strong>HashMap中如何实现key的唯一性？</strong><br>当key-value键值对插入到HashMap中。</p>
 <p>首先是对key值哈希，得到key在哈希数组中的下标。HashMap中哈希是调用对象key的hashCode()方法，然后再做异或处理。</p>
 <p>如果当前下标上已经有值，说明有两个元素的映射到相同的下标。此时，需要第二次判断，调用key对象的equals方法，对象不相同则插入链表的表尾，对象相同则覆盖。</p>
+<blockquote>
+<p>HashSet底层实现HashMap add时添加的类型</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> Object PRESENT <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">add</span><span class="token punctuation">(</span>E e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span> PRESENT<span class="token punctuation">)</span><span class="token operator">==</span>null<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>key为添加的值，value为一个object对象。</p>
 <h4 id="TreeSet集合"><a href="#TreeSet集合" class="headerlink" title="TreeSet集合"></a>TreeSet集合</h4><ul>
 <li>底层数据结构是红黑树(是一个自平衡的二叉树)</li>
 <li>有排序功能，支持两种排序方法：自然排序和定制排序。默认情况下，TreeSet采用自然排序。</li>
@@ -2141,12 +2133,20 @@ System.out.println(“当前用户是：” + user);
 <li>线程不安全的。</li>
 <li><strong>当要排序的为一个对象时，需要通过重写进行排序</strong></li>
 </ul>
-<h4 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h4><p>既然TreeSet可以自然排序,那么TreeSet必定是有排序规则的。</p>
-<p>1:让存入的元素自定义比较规则。</p>
-<p>2:给TreeSet指定排序规则。</p>
+<h5 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h5><p>既然TreeSet可以自然排序,那么TreeSet必定是有排序规则的。</p>
+<ol>
+<li><p>让存入的元素自定义比较规则。</p>
+</li>
+<li><p>给TreeSet指定排序规则。</p>
+</li>
+</ol>
+<blockquote>
 <p>方式一：元素自身具备比较性</p>
-<p>元素自身具备比较性，需要元素实现Comparable接口，重写compareTo方法，也就是让元素自身具备比较性，这种方式叫做元素的自然排序也叫做默认排序。</p>
+</blockquote>
+<p>元素自身具备比较性，需要元素实现<strong>Comparable接口</strong>，重写<strong>compareTo方法</strong>，也就是让元素自身具备比较性，这种方式叫做元素的自然排序也叫做默认排序。</p>
+<blockquote>
 <p>方式二：容器具备比较性</p>
+</blockquote>
 <p>当元素自身不具备比较性，或者自身具备的比较性不是所需要的。那么此时可以让容器自身具备。需要定义一个类实现接口Comparator，重写compare方法，并将该接口的子类实例对象作为参数传递给TreeMap集合的构造方法。</p>
 <p>注意：当Comparable比较方式和Comparator比较方式同时存在时，以Comparator的比较方式为主；</p>
 <p>注意：在重写compareTo或者compare方法时，必须要明确比较的主要条件相等时要比较次要条件。（假设姓名和年龄一直的人为相同的人，如果想要对人按照年龄的大小来排序，如果年龄相同的人，需要如何处理？不能直接return 0，因为可能姓名不同（年龄相同姓名不同的人是不同的人）。此时就需要进行次要条件判断（需要判断姓名），只有姓名和年龄同时相等的才可以返回0.）</p>
@@ -2163,14 +2163,14 @@ System.out.println(“当前用户是：” + user);
 </blockquote>
 <h4 id="遍历set集合"><a href="#遍历set集合" class="headerlink" title="遍历set集合"></a>遍历set集合</h4><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
 <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test2</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    Set<span class="token operator">&lt;</span>String<span class="token operator">></span> set <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Set<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> set <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     set<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"one"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     set<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"two"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
     <span class="token comment" spellcheck="true">/**
      * 迭代器遍历方式
      */</span>
-    Iterator<span class="token operator">&lt;</span>String<span class="token operator">></span> iterator <span class="token operator">=</span> set<span class="token punctuation">.</span><span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Iterator<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span> iterator <span class="token operator">=</span> set<span class="token punctuation">.</span><span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">while</span> <span class="token punctuation">(</span>iterator<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>iterator<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
@@ -2219,11 +2219,11 @@ System.out.println(“当前用户是：” + user);
 <p><a href="https://www.cnblogs.com/huangjuncong/p/9478505.html" target="_blank" rel="noopener">https://www.cnblogs.com/huangjuncong/p/9478505.html</a></p>
 <h4 id="遍历map集合"><a href="#遍历map集合" class="headerlink" title="遍历map集合"></a>遍历map集合</h4><pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
 <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test3</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">&gt;</span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"one"</span><span class="token punctuation">,</span> <span class="token string">"1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"two"</span><span class="token punctuation">,</span> <span class="token string">"2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"three"</span><span class="token punctuation">,</span> <span class="token string">"3"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span>Map<span class="token punctuation">.</span>Entry<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">></span> entry <span class="token operator">:</span> map<span class="token punctuation">.</span><span class="token function">entrySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>Map<span class="token punctuation">.</span>Entry<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">&gt;</span> entry <span class="token operator">:</span> map<span class="token punctuation">.</span><span class="token function">entrySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Key = "</span> <span class="token operator">+</span> entry<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">", Value = "</span> <span class="token operator">+</span> entry<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
@@ -2241,9 +2241,9 @@ System.out.println(“当前用户是：” + user);
     <span class="token comment" spellcheck="true">/**
      * 迭代器
      */</span>
-    Iterator<span class="token operator">&lt;</span>Map<span class="token punctuation">.</span>Entry<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">>></span> entries <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">entrySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Iterator<span class="token operator">&lt;</span>Map<span class="token punctuation">.</span>Entry<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">&gt;&gt;</span> entries <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">entrySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token keyword">while</span> <span class="token punctuation">(</span>entries<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        Map<span class="token punctuation">.</span>Entry<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">></span> entry <span class="token operator">=</span> entries<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Map<span class="token punctuation">.</span>Entry<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">&gt;</span> entry <span class="token operator">=</span> entries<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Key = "</span> <span class="token operator">+</span> entry<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">", Value = "</span> <span class="token operator">+</span> entry<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
     <span class="token comment" spellcheck="true">/**
@@ -2572,327 +2572,6 @@ java.io.BufferedOutputStream不直接写入输出流，先写入缓冲区，当�
 <li>AIO 是 Java 1.7 之后引入的包，是 NIO 的升级版本，提供了异步非堵塞的 IO 操作方式，所以人们叫它 AIO（Asynchronous IO），异步 IO 是基于事件和回调机制实现的，也就是应用操作之后会直接返回，不会堵塞在那里，当后台处理完成，操作系统会通知相应的线程进行后续的操作。</li>
 </ol>
 <h2 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h2><p>Socket又称“套接字”，应用程序通常通过“套接字”向网络发出请求或者应答网络请求。</p>
-<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><h1>
-详看java多线程基础笔记 和 线程池队列文章 （包含 线程 线程池 队列） ,本篇包含大概
-</h1>
-
-<p><a href="https://www.cnblogs.com/yjd_hycf_space/p/7526608.html" target="_blank" rel="noopener">https://www.cnblogs.com/yjd_hycf_space/p/7526608.html</a></p>
-<p><img src="https://gitee.com/fly_tom/use/raw/master/jc19.png" alt="image"></p>
-<h3 id="术语定义"><a href="#术语定义" class="headerlink" title="术语定义"></a>术语定义</h3><table>
-<thead>
-<tr>
-<th>术语</th>
-<th>英文单词</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>共享变量</td>
-<td></td>
-<td>在多个线程之间能够被共享的变量被称为共享变量。共享变量包括所有的实例变量，静态变量和数组元素。他们都被存放在堆内存中，Volatile只作用于共享变量。</td>
-</tr>
-<tr>
-<td>内存屏障</td>
-<td>Memory Barriers</td>
-<td>是一组处理器指令，用于实现对内存操作的顺序限制。</td>
-</tr>
-<tr>
-<td>缓冲行</td>
-<td>Cache line</td>
-<td>缓存中可以分配的最小存储单位。处理器填写缓存线时会加载整个缓存线，需要使用多个主内存读周期。</td>
-</tr>
-<tr>
-<td>原子操作</td>
-<td>Atomic operations</td>
-<td>不可中断的一个或一系列操作。</td>
-</tr>
-<tr>
-<td>缓存行填充</td>
-<td>cache line fill</td>
-<td>当处理器识别到从内存中读取操作数是可缓存的，处理器读取整个缓存行到适当的缓存（L1，L2，L3的或所有）</td>
-</tr>
-<tr>
-<td>缓存命中</td>
-<td>cache hit</td>
-<td>如果进行高速缓存行填充操作的内存位置仍然是下次处理器访问的地址时，处理器从缓存中读取操作数，而不是从内存。</td>
-</tr>
-<tr>
-<td>写命中</td>
-<td>write hit</td>
-<td>当处理器将操作数写回到一个内存缓存的区域时，它首先会检查这个缓存的内存地址是否在缓存行中，如果存在一个有效的缓存行，则处理器将这个操作数写回到缓存，而不是写回到内存，这个操作被称为写命中。</td>
-</tr>
-<tr>
-<td>写缺失</td>
-<td>write misses the cache</td>
-<td>一个有效的缓存行被写入到不存在的内存区域。</td>
-</tr>
-</tbody></table>
-<p><strong>什么是进程</strong></p>
-<p>进程是指在系统中正在运行的一个应用程序；程序一旦运行就是进程，或者更专业化来说：进程是指程序执行时的一个实例。</p>
-<p><strong>进程时间片的概念</strong></p>
-<p>一个操作系统中，如果同时运行着多个进程，他们是一定交替运行的。每个进程不管有没有运行完毕，都只占据一段时间的CPU。<br>这个运行时间就是进程时间片。它非常短促，所以感觉不到他们是交替占用CPU。</p>
-<p><strong>什么是线程</strong></p>
-<ul>
-<li><p>线程：进程内部的控制流。它也是一段可运行的指令。</p>
-</li>
-<li><p>特点：资源占用小，线程间通信容易。</p>
-</li>
-<li><p>多进程是指操作系统能同时运行多个任务（程序）。</p>
-</li>
-</ul>
-<p>多线程：</p>
-<pre><code>指的是这个程序（一个进程）运行时产生了不止一个线程</code></pre><h3 id="线程进程的区别体现在几个方面："><a href="#线程进程的区别体现在几个方面：" class="headerlink" title="线程进程的区别体现在几个方面："></a>线程进程的区别体现在几个方面：</h3><p>第一：  因为进程拥有独立的堆栈空间和数据段，所以每当启动一个新的进程必须分配给它独立的地址空间，建立众多的数据表来维护它的代码段、堆栈段和数据段，这对于多进程来说十分“奢侈”，系统开销比较大，而线程不一样，线程拥有独立的堆栈空间，但是共享数据段，它们彼此之间使用相同的地址空间，共享大部分数据，比进程更节俭，开销比较小，切换速度也比进程快，效率高，但是正由于进程之间独立的特点，使得进程安全性比较高，也因为进程有独立的地址空间，一个进程崩溃后，在保护模式下不会对其它进程产生影响，而线程只是一个进程中的不同执行路径。一个线程死掉就等于整个进程死掉。</p>
-<p>第二：  体现在通信机制上面，正因为进程之间互不干扰，相互独立，进程的通信机制相对很复杂，譬如管道，信号，消息队列，共享内存，套接字等通信机制，而线程由于共享数据段所以通信机制很方便。</p>
-<p>3.属于同一个进程的所有线程共享该进程的所有资源，包括文件描述符。而不同过的进程相互独立。</p>
-<p>4.线程又称为轻量级进程，进程有进程控制块，线程有线程控制块；</p>
-<p>5.线程必定也只能属于一个进程，而进程可以拥有多个线程而且至少拥有一个线程；</p>
-<p>第四：体现在程序结构上，举一个简明易懂的列子：当我们使用进程的时候，我们不自主的使用if else嵌套来判断pid，使得程序结构繁琐，但是当我们使用线程的时候，基本上可以甩掉它，当然程序内部执行功能单元需要使用的时候还是要使用，所以线程对程序结构的改善有很大帮助。</p>
-<p>并行与并发：</p>
-<pre><code>1.    并行：多个cpu实例或者多台机器同时执行一段处理逻辑，是真正的同时。
-2.    并发：通过cpu调度算法，让用户看上去同时执行，实际上从cpu操作层面不是真正的同时。并发往往在场景中有公用的资源，
-那么针对这个公用的资源往往产生瓶颈，我们会用TPS或者QPS来反应这个系统的处理能力。
-并发性（concurrency）和并行性（parallel）
-</code></pre><p><strong>线程的特点</strong></p>
-<ul>
-<li>线程的运行方式和进程一样，在同一个进程内部，线程也是交替占用CPU。每个线程的运行时间，称为线程时间片。</li>
-<li>线程有开始、中间和结束部分，即有一定的生命周期。</li>
-<li>同一个进程中的多个线程是共享一块内存空间和一组系统资源。</li>
-<li>线程不能作为具体的可执行命令体存在。最终用户不能直接执行线程，线程只能运行在进程中。</li>
-</ul>
-<p><strong>如何创建线程</strong></p>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 两种方法来创建线程：</span>
-<span class="token comment" spellcheck="true">// 继承java.lang.Thread类，并覆盖run( )方法。</span>
- <span class="token keyword">class</span> <span class="token class-name">mythread</span> <span class="token keyword">extends</span> <span class="token class-name">Thread</span> <span class="token punctuation">{</span>
-     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-         <span class="token comment" spellcheck="true">/* 覆盖该方法*/</span>
-      <span class="token punctuation">}</span>
- <span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">// 实现java.lang.Runnable接口，并实现run( )方法。</span>
-<span class="token keyword">class</span> <span class="token class-name">mythread</span> <span class="token keyword">implements</span> <span class="token class-name">Runnable</span><span class="token punctuation">{</span>
-      <span class="token annotation punctuation">@Override</span>
-      <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
-          <span class="token comment" spellcheck="true">/* 实现该方法*/</span>
-      <span class="token punctuation">}</span>
- <span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">// 一个线程的对象只能执行一次start()方法</span></code></pre>
-<p><strong>线程的启动</strong></p>
-<ul>
-<li><p>新建的线程不会自动开始运行，必须通过start( )方法启动线程。如果不调用这个方法，线程将不会运行。</p>
-</li>
-<li><p>也就是说可以事先创建线程，并在需要的时候才启动他们。如：</p>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 继承Thread的线程：</span>
-Typer  t <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Typer</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-t<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// 实现Runnable接口的线程：</span>
-Runnable  mt <span class="token operator">=</span>   <span class="token keyword">new</span> <span class="token class-name">Typer</span> <span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-Thread    t  <span class="token operator">=</span>   <span class="token keyword">new</span> <span class="token class-name">Thread</span><span class="token punctuation">(</span>mt<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 父类的类型子类的对象</span>
-t<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span> <span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-</li>
-</ul>
-<p><strong>线程执行过程</strong></p>
-<ul>
-<li><p>调用start( )方法时，将创建一个新的线程，并为线程分配系统资源，如内存。接着它将调用 run( ) 方法。</p>
-</li>
-<li><p>run( ) 方法中的代码定义执行线程所需的功能。</p>
-<ul>
-<li>run()方法能够调用其他方法，引用其他的类，申明变量。</li>
-<li>run()方法在程序中确定另一个并发线程的执行入口。</li>
-</ul>
-</li>
-<li><p>当run()方法中的任务完成返回时，该线程也将结束。</p>
-</li>
-</ul>
-<p><strong>注意：start()方法的调用后并不是立即执行多线程代码，而是使得该线程变为可运行态（Runnable），什么时候运行是由操作系统决定的。<br>从程序运行的结果可以发现，多线程程序是乱序执行。</strong></p>
-<h3 id="Thread和Runnable的区别"><a href="#Thread和Runnable的区别" class="headerlink" title="Thread和Runnable的区别"></a>Thread和Runnable的区别</h3><p>实现Runnable接口比继承Thread类所具有的优势：</p>
-<ul>
-<li>适合多个相同的程序代码的线程去处理同一个资源</li>
-<li>可以避免java中的单继承的限制</li>
-<li>增加程序的健壮性，代码可以被多个线程共享，代码和数据独立</li>
-<li>线程池只能放入实现Runable或callable类线程，不能直接放入继承Thread的类</li>
-</ul>
-<h3 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h3><p>下面的这个图非常重要!</p>
-<p><img src="https://gitee.com/fly_tom/use/raw/master/jc18.jpg" alt=""></p>
-<p><img src="https://gitee.com/fly_tom/use/raw/master/xc2.png" alt=""></p>
-<ol>
-<li>新建状态（New）：新创建了一个线程对象。</li>
-<li>就绪状态（Runnable）：线程对象创建后，其他线程调用了该对象的start()方法。该状态的线程位于可运行线程池中，变得可运行，等待获取CPU的使用权。</li>
-<li>运行状态（Running）：就绪状态的线程获取了CPU，执行程序代码。</li>
-<li>阻塞状态（Blocked）：阻塞状态是线程因为某种原因放弃CPU使用权，暂时停止运行。直到线程进入就绪状态，才有机会转到运行状态。阻塞的情况分三种：<ul>
-<li>等待阻塞：运行的线程执行wait()方法，JVM会把该线程放入等待池中。(wait会释放持    有的锁)</li>
-<li>同步阻塞：运行的线程在获取对象的同步锁时，若该同步锁被别的线程占用，则JVM会把该线程放入锁池中。</li>
-<li>其他阻塞：运行的线程执行sleep()或join()方法，或者发出了I/O请求时，JVM会把该线程置为阻塞状态。当sleep()状态超时、join()等待线程终止或者超时、或者I/O处理完毕时，线程重新转入就绪状态。（注意,sleep是不会释放持有的锁）</li>
-</ul>
-</li>
-<li>死亡状态（Dead）：线程执行完了或者因异常退出了run()方法，该线程结束生命周期。</li>
-</ol>
-<h3 id="线程调度"><a href="#线程调度" class="headerlink" title="线程调度"></a>线程调度</h3><p>线程的调度</p>
-<p>1、调整线程优先级：Java线程有优先级，优先级高的线程会获得较多的运行机会。</p>
-<p>Java线程的优先级用整数表示，取值范围是1~10，Thread类有以下三个静态常量：<br>static int MAX_PRIORITY<br>    线程可以具有的最高优先级，取值为10。<br>static int MIN_PRIORITY<br>    线程可以具有的最低优先级，取值为1。<br>static int NORM_PRIORITY<br>          分配给线程的默认优先级，取值为5。</p>
-<p>Thread类的setPriority()和getPriority()方法分别用来设置和获取线程的优先级。</p>
-<p>每个线程都有默认的优先级。主线程的默认优先级为Thread.NORM_PRIORITY。<br>线程的优先级有继承关系，比如A线程中创建了B线程，那么B将和A具有相同的优先级。<br>JVM提供了10个线程优先级，但与常见的操作系统都不能很好的映射。如果希望程序能移植到各个操作系统中，应该仅仅使用Thread类有以下三个静态常量作为优先级，这样能保证同样的优先级采用了同样的调度方式。</p>
-<p>2、线程睡眠：Thread.sleep(long millis)方法，使线程转到阻塞状态。millis参数设定睡眠的时间，以毫秒为单位。当睡眠结束后，就转为就绪（Runnable）状态。sleep()平台移植性好。</p>
-<p>3、线程等待：Object类中的wait()方法，导致当前的线程等待，直到其他线程调用此对象的 notify() 方法或 notifyAll() 唤醒方法。这个两个唤醒方法也是Object类中的方法，行为等价于调用 wait(0) 一样。</p>
-<p>4、线程让步：Thread.yield() 方法，暂停当前正在执行的线程对象，把执行机会让给相同或者更高优先级的线程。</p>
-<p>5、线程加入：join()方法，等待其他线程终止。在当前线程中调用另一个线程的join()方法，则当前线程转入阻塞状态，直到另一个进程运行结束，当前线程再由阻塞转为就绪状态。</p>
-<p>6、线程唤醒：Object类中的notify()方法，唤醒在此对象监视器上等待的单个线程。如果所有线程都在此对象上等待，则会选择唤醒其中一个线程。选择是任意性的，并在对实现做出决定时发生。线程通过调用其中一个 wait 方法，在对象的监视器上等待。 直到当前的线程放弃此对象上的锁定，才能继续执行被唤醒的线程。被唤醒的线程将以常规方式与在该对象上主动同步的其他所有线程进行竞争；例如，唤醒的线程在作为锁定此对象的下一个线程方面没有可靠的特权或劣势。类似的方法还有一个notifyAll()，唤醒在此对象监视器上等待的所有线程。<br> 注意：Thread中suspend()和resume()两个方法在JDK1.5中已经废除，不再介绍。因为有死锁倾向。</p>
-<h3 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h3><ol>
-<li>定义：守护线程–也称“服务线程”，他是后台线程，它有一个特性，即为用户线程 提供 公<br>共服务，在没有用户线程可服务时会自动离开。</li>
-<li>优先级：守护线程的优先级比较低，用于为系统中的其它对象和线程提供服务。</li>
-<li>设置：通过 setDaemon(true)来设置线程为“守护线程”；将一个用户线程设置为守护线程<br>的方式是在 线程对象创建 之前 用线程对象的 setDaemon 方法。</li>
-<li>在 Daemon 线程中产生的新线程也是 Daemon 的。</li>
-<li>线程则是 JVM 级别的，以 Tomcat 为例，如果你在 Web 应用中启动一个线程，这个线程的<br>生命周期并不会和 Web 应用程序保持同步。也就是说，即使你停止了 Web 应用，这个线程<br>依旧是活跃的。</li>
-<li>example: 垃圾回收线程就是一个经典的守护线程，当我们的程序中不再有任何运行的Thread,<br>程序就不会再产生垃圾，垃圾回收器也就无事可做，所以当垃圾回收线程是 JVM 上仅剩的线<br>程时，垃圾回收线程会自动离开。它始终在低级别的状态中运行，用于实时监控和管理系统<br>中的可回收资源。</li>
-<li>生命周期：守护进程（Daemon）是运行在后台的一种特殊进程。它独立于控制终端并且周<br>期性地执行某种任务或等待处理某些发生的事件。也就是说守护线程不依赖于终端，但是依<br>赖于系统，与系统“同生共死”。当 JVM 中所有的线程都是守护线程的时候，JVM 就可以退<br>出了；如果还有一个或以上的非守护线程则 JVM 不会退出。</li>
-</ol>
-<h3 id="yield-、sleep-、join-和interrupt-方法"><a href="#yield-、sleep-、join-和interrupt-方法" class="headerlink" title="yield()、sleep()、join()和interrupt()方法"></a>yield()、sleep()、join()和interrupt()方法</h3><p>1、yield()　</p>
-<p>　　  yield()是Thread类的静态方法。它能让当前线程暂停，但不会阻塞该线程，而是由“运行状态”进入到“就绪状态”，从而让 其它具有相同优先级的等待线程获取执行权；但是，并不能保证在当前线程调用yield()之后，其它具有相同优先级的线程就一定能获得执行权；也有可能是 当前线程又进入到“运行状态”继续运行！</p>
-<p>　　值得注意的是，yield()方法不会释放锁。</p>
-<p>2、sleep()</p>
-<p>　　  sleep()是Thread类的静态方法。该方法声明抛出了InterrupedException异常。所以使用时，要么捕捉，要么声明抛出。</p>
-<p>　　有2种重载方式：</p>
-<p>——static void sleep(long millis)　　:　　让当前正在执行的线程暂停millis毫秒，并进入阻塞状态，该方法受到系统计时器和线程调度器的精度和准度的影响。</p>
-<p>——static void sleep(long millis , int nanos)　　：　　让当前正在执行的线程暂停millis毫秒加nanos微秒，并进入阻塞状态，该方法受到系统计时器和线程调度器的精度和准度的影响。</p>
-<p>　　sleep() 的作用是让当前线程休眠，即当前线程会从“运行状态”进入到“休眠(阻塞)状态”。sleep()会指定休眠时间，线程休眠的时间会大于/等于该休眠时间；在线程重新被唤醒时，它会由“阻塞状态”变成“就绪状态”，从而等待cpu的调度执行。常用来暂停程序的运行。　　</p>
-<p>　　同时注意，sleep()方法不会释放锁。</p>
-<p>3、join()</p>
-<p>　　join() 是Thread的一个实例方法。表示，当某个程序执行流中调用其他线程的join方法时，调用线程将被阻塞，直到被join的线程执行完毕。</p>
-<p>有3种重载的形式：</p>
-<p>——join()　　:　　等待被join的线程执行完成</p>
-<p>——join(long millis)　　：　　等待被join的线程的时间最长为millis毫秒，若在millis毫秒内，被join的线程还未执行结束，则不等待。</p>
-<p>——join(long millis , int nanos)　　:　　等待被join的线程的时间最长为millis毫秒加nanos微秒，若在此时间内，被join的线程还未执行结束，则不等待。</p>
-<p>  即当前线程内，用某个线程对象调用join()后，会使当前线程等待，直到该线程对象的线程运行完毕，原线程才会继续运行。</p>
-<p>4、interrupt()　　　</p>
-<p>　　我们经常通过判断线程的中断标记来控制线程。　 　</p>
-<p>　　  interrupt()是Thread类的一个实例方法，用于中断本线程。这个方法被调用时，会立即将线程的中断标志设置为“true”。所以当中断处于“阻塞状态”的线程时，由于处于阻塞状态，中断标记会被设置为“false”，抛出一个 InterruptedException。所以我们在线程的循环外捕获这个异常，就可以退出线程了。</p>
-<p>　  interrupt()并不会中断处于“运行状态”的线程，它会把线程的“中断标记”设置为true，所以我们可以不断通过isInterrupted()来检测中断标记，从而在调用了interrupt()后终止线程，这也是通常我们对interrupt()的用法。</p>
-<p>　　  Interrupted()是Thread类的一个静态方法，它返回一个布尔类型指明当前线程是否已经被中断，isInterrupted()是Thread类的实例方法，返回一个布尔类型来判断线程是否已经被中断。它们都能够用于检测对象的“中断标记”。区别是，interrupted()除了返回中断标记之外，它还会清除中断标记(即将中断标记设为false)；而isInterrupted()仅仅返回中断标记。
-　　
-　　
-　　</p>
-<h3 id="start-与-run-区别"><a href="#start-与-run-区别" class="headerlink" title="start 与 run 区别"></a>start 与 run 区别</h3><ol>
-<li>start（）方法来启动线程，真正实现了多线程运行。这时无需等待 run 方法体代码执行完毕，可以直接继续执行下面的代码。</li>
-<li>通过调用 Thread 类的 start()方法来启动一个线程， 这时此线程是处于就绪状态， 并没有运<br>行。</li>
-<li>方法 run()称为线程体，它包含了要执行的这个线程的内容，线程就进入了运行状态，开始运<br>行 run 函数当中的代码。 Run 方法运行结束， 此线程终止。然后 CPU 再调度其它线程。</li>
-</ol>
-<h3 id="Synchronized关键字"><a href="#Synchronized关键字" class="headerlink" title="Synchronized关键字"></a>Synchronized关键字</h3><p>synchronized是一个重量级锁，相对于Lock，它会显得那么笨重 诚然，随着Javs SE 1.6对synchronized进行的各种优化后，synchronized并不会显得那么重了。</p>
-<p>  1、同步和异步的区别和联系</p>
-<p> 　　  所谓同步，可以理解为在执行完一个函数或方法之后，一直等待系统返回值或消息，这时程序是出于阻塞的，只有接收到返回的值或消息后才往下执行其它的命令。</p>
-<p>  异步，执行完函数或方法后，不必阻塞性地等待返回值或消息，只需要向系统委托一个异步过程，那么当系统接收到返回值或消息时，系统会自动触发委托的异步过程，从而完成一个完整的流程。</p>
-<p>   同步在一定程度上可以看做是单线程，这个线程请求一个方法后就待这个方法给他回复，否则他不往下执行(死心眼)。</p>
-<p>异步在一定程度上可以看做是多线程的，请求一个方法后，就不管了，继续执行其他的方法。</p>
-<p>1、原理</p>
-<p><strong>在java中，每一个对象有且仅有一个同步锁。这也意味着，同步锁是依赖于对象而存在。</strong></p>
-<p>　　  当当前线程调用某对象的synchronized方法时，就获取了该对象的同步锁。例如，synchronized(obj)，当前线程就获取了“obj这个对象”的同步锁。</p>
-<p>　　  不同线程对同步锁的访问是互斥的。也就是说，某时间点，对象的同步锁只能被一个线程获取到！通过同步锁，我们就能在多线程中，实现对“对象/方法”的互斥访问。<br>例如，现在有个线程A和线程B，它们都会访问“对象obj的同步锁”。假设，在某一时刻，线程A获取到“obj的同步锁”并在执行一些操作；而此时，线程B也企图获取“obj的同步锁” —— 线程B会获取失败，它必须等待，直到线程A释放了“该对象的同步锁”之后线程B才能获取到“obj的同步锁”从而才可以运行。</p>
-<p>2、基本规则</p>
-<p>　　  第一条 :  当一个线程访问“某对象”的“synchronized方法”或者“synchronized代码块”时，其他线程对“该对象”的该“synchronized方法”或者“synchronized代码块”的访问将被阻塞。</p>
-<p>　　  第二条 :  当一个线程访问“某对象”的“synchronized方法”或者“synchronized代码块”时，其他线程仍然可以访问“该对象”的非同步代码块。</p>
-<p>　  第三条 :  当一个线程访问“某对象”的“synchronized方法”或者“synchronized代码块”时，其他线程对“该对象”的其他的“synchronized方法”或者“synchronized代码块”的访问将被阻塞。</p>
-<p>1、普通同步方法，锁是当前实例对象</p>
-<p>2、静态同步方法，锁是当前类的class对象</p>
-<p>3、同步方法块，锁是括号里面的对象</p>
-<p>3、实例锁和全局锁</p>
-<p>  实例锁 – 锁在某一个实例对象上。如果该类是单例，那么该锁也具有全局锁的概念。<br>               实例锁对应的就是synchronized关键字。</p>
-<p>  全局锁 – 该锁针对的是类，无论实例多少个对象，那么线程都共享该锁。<br>               全局锁对应的就是static synchronized（或者是锁在该类的class或者classloader对象上）。</p>
-<p>  就是说，一个非静态方法上的synchronized关键字，代表该方法依赖其所属对象。一个静态方法上synchronized关键字，代表该方法依赖这个类本身。</p>
-<h4 id="synchronized-wait-notify结合-典型场景生产者消费者问题"><a href="#synchronized-wait-notify结合-典型场景生产者消费者问题" class="headerlink" title="synchronized, wait, notify结合:典型场景生产者消费者问题"></a>synchronized, wait, notify结合:典型场景生产者消费者问题</h4><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">/**
-   * 生产者生产出来的产品交给店员
-   */</span>
-  <span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">void</span> <span class="token function">produce</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-  <span class="token punctuation">{</span>
-      <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>product <span class="token operator">>=</span> MAX_PRODUCT<span class="token punctuation">)</span>
-      <span class="token punctuation">{</span>
-          <span class="token keyword">try</span>
-          <span class="token punctuation">{</span>
-              <span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  
-              System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"产品已满,请稍候再生产"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span>
-          <span class="token keyword">catch</span><span class="token punctuation">(</span>InterruptedException e<span class="token punctuation">)</span>
-          <span class="token punctuation">{</span>
-              e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span>
-          <span class="token keyword">return</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-
-      <span class="token keyword">this</span><span class="token punctuation">.</span>product<span class="token operator">++</span><span class="token punctuation">;</span>
-      System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"生产者生产第"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>product <span class="token operator">+</span> <span class="token string">"个产品."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token function">notifyAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//通知等待区的消费者可以取出产品了</span>
-  <span class="token punctuation">}</span>
-
-  <span class="token comment" spellcheck="true">/**
-   * 消费者从店员取产品
-   */</span>
-  <span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">void</span> <span class="token function">consume</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-  <span class="token punctuation">{</span>
-      <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>product <span class="token operator">&lt;=</span> MIN_PRODUCT<span class="token punctuation">)</span>
-      <span class="token punctuation">{</span>
-          <span class="token keyword">try</span> 
-          <span class="token punctuation">{</span>
-              <span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-              System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"缺货,稍候再取"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span> 
-          <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> 
-          <span class="token punctuation">{</span>
-              e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-          <span class="token punctuation">}</span>
-          <span class="token keyword">return</span><span class="token punctuation">;</span>
-      <span class="token punctuation">}</span>
-
-      System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"消费者取走了第"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>product <span class="token operator">+</span> <span class="token string">"个产品."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token keyword">this</span><span class="token punctuation">.</span>product<span class="token operator">--</span><span class="token punctuation">;</span>
-      <span class="token function">notifyAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">//通知等待去的生产者可以生产产品了</span>
-  <span class="token punctuation">}</span>
-</code></pre>
-<h3 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h3><h4 id="Volatile的官方定义"><a href="#Volatile的官方定义" class="headerlink" title="Volatile的官方定义"></a>Volatile的官方定义</h4><p>  Java语言规范第三版中对volatile的定义如下：<br>java编程语言允许线程访问共享变量，为了确保共享变量能被准确和一致的更新，线程应该确保通过排他锁单独获得这个变量。Java语言提供了volatile，在某些情况下比锁更加方便。如果一个字段被声明成volatile，java线程内存模型确保所有线程看到这个变量的值是一致的。</p>
-<p>  volatile这个关键字。其实这个关键字有两层语义。第一层语义就是可见性。可见性指的是在一个线程中对该变量的修改会马上由工作内存（Work Memory）写回主内存（Main Memory），所以会马上反应在其它线程的读取操作中。顺便一提，工作内存和主内存可以近似理解为实际电脑中的高速缓存和主存，工作内存是线程独享的，主存是线程共享的。volatile的第二层语义是禁止指令重排序优化。我们写的代码（尤其是多线程代码），由于编译器优化，在实际执行的时候可能与我们编写的顺序不同。编译器只保证程序执行结果与源代码相同，却不保证实际指令的顺序与源代码相同。</p>
-<p><strong>Volatile变量修饰符如果使用恰当的话，它比synchronized的使用和执行成本会更低，因为它不会引起线程上下文的切换和调度。</strong></p>
-<h4 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h4><p>　　为什么出现这种情况呢，我们需要先了解一下JMM（java内存模型）</p>
-<p>　　java虚拟机有自己的内存模型（Java Memory Model，JMM），JMM可以屏蔽掉各种硬件和操作系统的内存访问差异，以实现让java程序在各种平台下都能达到一致的内存访问效果。</p>
-<p>　　JMM决定一个线程对共享变量的写入何时对另一个线程可见，JMM定义了线程和主内存之间的抽象关系：共享变量存储在主内存(Main Memory)中，每个线程都有一个私有的本地内存（Local Memory），本地内存保存了被该线程使用到的主内存的副本拷贝，线程对变量的所有操作都必须在工作内存中进行，而不能直接读写主内存中的变量。这三者之间的交互关系如下</p>
-<p><img src="https://gitee.com/fly_tom/use/raw/master/jc31.png" alt=""></p>
-<p>　需要注意的是，JMM是个抽象的内存模型，所以所谓的本地内存，主内存都是抽象概念，并不一定就真实的对应cpu缓存和物理内存。当然如果是出于理解的目的，这样对应起来也无不可。</p>
-<p>  那么这种共享变量在多线程模型中的不可见性如何解决呢？比较粗暴的方式自然就是加锁，但是此处使用synchronized或者Lock这些方式太重量级了，有点炮打蚊子的意思。比较合理的方式其实就是volatile</p>
-<h3 id="ThreadLocal类"><a href="#ThreadLocal类" class="headerlink" title="ThreadLocal类"></a>ThreadLocal类</h3><h4 id="ThreadLocal概念"><a href="#ThreadLocal概念" class="headerlink" title="ThreadLocal概念"></a>ThreadLocal概念</h4><p>ThreadLocal 是线程的局部变量， 是每一个线程所单独持有的，其他线程不能对其进行访问。</p>
-<p>  ThreadLocal，直译为“线程本地”或“本地线程”，如果你真的这么认为，那就错了！其实，它就是一个容器，用于存放线程的局部变量，我认为应该叫做 ThreadLocalVariable（线程局部变量）才对，真不理解为什么当初 Sun 公司的工程师这样命名。</p>
-<p>  当使用ThreadLocal维护变量的时候 为每一个使用该变量的线程提供一个独立的变量副本，即每个线程内部都会有一个该变量，这样同时多个线程访问该变量并不会彼此相互影响，因此他们使用的都是自己从内存中拷贝过来的变量的副本， 这样就不存在线程安全问题，也不会影响程序的执行性能。</p>
-<p>  但是要注意，虽然ThreadLocal能够解决上面说的问题，但是由于在每个线程中都创建了副本，所以要考虑它对资源的消耗，比如内存的占用会比不使用ThreadLocal要大。</p>
-<p><strong>跳出误区</strong></p>
-<p>  需要重点强调的的是，不要拿ThreadLocal和synchronized做类比，因为这种比较压根就是无意义的！sysnchronized是一种互斥同步机制，是为了保证在多线程环境下对于共享资源的正确访问。而ThreadLocal从本质上讲，无非是提供了一个“线程级”的变量作用域，它是一种线程封闭（每个线程独享变量）技术，更直白点讲，ThreadLocal可以理解为将对象的作用范围限制在一个线程上下文中，使得变量的作用域为“线程级”。</p>
-<h4 id="ThreadLocal常用方法介绍"><a href="#ThreadLocal常用方法介绍" class="headerlink" title="ThreadLocal常用方法介绍"></a>ThreadLocal常用方法介绍</h4><p>public void set(T value)：将值放入线程局部变量中</p>
-<p>public T get()：从线程局部变量中获取值</p>
-<p>public void remove()：从线程局部变量中移除值（有助于 JVM 垃圾回收）</p>
-<p>protected T initialValue()：返回线程局部变量中的初始值（默认为 null） </p>
-<p>为什么 initialValue() 方法是 protected 的呢？就是为了提醒程序员们，这个方法是要自己来实现的，给这个线程局部变量一个初始值吧。</p>
-<h4 id="ThreadLocal内存泄露"><a href="#ThreadLocal内存泄露" class="headerlink" title="ThreadLocal内存泄露"></a>ThreadLocal内存泄露</h4><p><strong>内存泄漏memory leak：</strong> 是指程序在申请内存后，无法释放已申请的内存空间，一次内存泄漏似乎不会有大的影响，但内存泄漏堆积后的后果就是内存溢出。</p>
-<p><strong>内存溢出 out of memory：</strong> 没内存可以分配给新的对象了。</p>
-<p>我们知道，线程<code>Thread对象</code>中，每个线程对象内部都有一个的<code>ThreadLocalMap</code>对象。如果这个对象存储了多个大对象，则可能早出<code>内存溢出OOM</code>。为了防止这种情况发生，在ThreadLocal的源码中，有对应的策略，即调用 get（）、set（）、remove（） 方法，均会清除 ThreadLocal内部的 内存。</p>
-<p><strong>ThreadLocal的内部是ThreadLocalMap</strong>。<strong>ThreadLocalMap内部是由一个Entry数组组成</strong>。Entry类的构造函数为 Entry（弱引用的ThreadLocal对象， Object value对象）。<strong>因为Entry的key是一个弱引用的ThreadLocal对象</strong>，<strong>所以在 垃圾回收 之前，将会清除此Entry对象的key</strong>。那么， ThreadLocalMap 中就会出现 key 为 null 的 Entry，就没有办法访问这些 key 为 null 的 Entry 的 value。这些 value 被Entry对象引用，所以value所占内存不会被释放。<strong>若在指定的线程任务里面，调用ThreadLocal对象的get（）、set（）、remove（）方法，可以避免出现内存泄露。</strong></p>
-<h3 id="线程组"><a href="#线程组" class="headerlink" title="线程组"></a>线程组</h3><pre><code>Runnable r[] = new Runnable[2];</code></pre><h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><p>具体的可以看另一个文章 （java多线程基础笔记）</p>
-<p><img src="https://gitee.com/fly_tom/use/raw/master/jc25.jpg" alt=""></p>
-<p>我们使用线程的时候就去创建一个线程，这样实现起来非常简便，但是就会有一个问题：</p>
-<p>  如果并发的线程数量很多，并且每个线程都是执行一个时间很短的任务就结束了，这样频繁创建线程就会大大降低系统的效率，因为频繁创建线程和销毁线程需要时间。</p>
-<p>  那么有没有一种办法使得线程可以复用，就是执行完一个任务，并不被销毁，而是可以继续执行其他的任务？  在Java中可以通过线程池来达到这样的效果.</p>
-<p>  合理利用线程池能够带来三个好处。第一：降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。第二：提高响应速度。当任务到达时，任务可以不需要的等到线程创建就能立即执行。第三：提高线程的可管理性。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控。但是要做到合理的利用线程池，必须对其原理了如指掌。</p>
-<p>下为常见的四种：</p>
-<ol>
-<li>newCachedThreadPool ：大小不受限，当线程释放时，可重用该线程；</li>
-<li>newFixedThreadPool ：大小固定，无可用线程时，任务需等待，直到有可用线程；</li>
-<li>newSingleThreadExecutor ：创建一个单线程，任务会按顺序依次执行；</li>
-<li>newScheduledThreadPool：创建一个定长线程池，支持定时及周期性任务执行</li>
-</ol>
-<h4 id="BlockingQueue（阻塞队列）"><a href="#BlockingQueue（阻塞队列）" class="headerlink" title="BlockingQueue（阻塞队列）"></a>BlockingQueue（阻塞队列）</h4><blockquote>
-<p>阻塞队列提供了可阻塞的入队和出对操作，如果队列满了，入队操作将阻塞直到有空间可用，如果队列空了，出队操作将阻塞直到有元素可用；</p>
-</blockquote>
-<p>在Java中，主要有以下类型的阻塞队列：</p>
-<ul>
-<li>ArrayBlockingQueue ：一个由数组结构组成的有界阻塞队列。</li>
-<li>LinkedBlockingQueue ：一个由链表结构组成的有界阻塞队列。</li>
-<li>PriorityBlockingQueue ：一个支持优先级排序的无界阻塞队列。</li>
-<li>DelayQueue：一个支持延时获取元素的无界阻塞队列。</li>
-<li>SynchronousQueue：一个不存储元素的阻塞队列。</li>
-<li>LinkedTransferQueue：一个由链表结构组成的无界阻塞队列。</li>
-<li>LinkedBlockingDeque：一个由链表结构组成的双向阻塞队列。 </li>
-</ul>
 <h2 id="JAVA-锁"><a href="#JAVA-锁" class="headerlink" title="JAVA 锁"></a>JAVA 锁</h2><h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><h4 id="乐观锁"><a href="#乐观锁" class="headerlink" title="乐观锁"></a>乐观锁</h4><p>    乐观锁是一种乐观思想，即认为读多写少，遇到并发写的可能性低，每次去拿数据的时候都认为<br>别人不会修改，所以不会上锁，但是在更新的时候会判断一下在此期间别人有没有去更新这个数<br>据，采取在写时先读出当前版本号，然后加锁操作（比较跟上一次的版本号，如果一样则更新），<br>如果失败则要重复读-比较-写的操作。</p>
 <p>    java 中的乐观锁基本都是通过 CAS 操作实现的，CAS是一种更新的原子操作，比较当前值跟传入值是否一样，一样则更新，否则失败。</p>
 <h4 id="悲观锁"><a href="#悲观锁" class="headerlink" title="悲观锁"></a>悲观锁</h4><p>    悲观锁是就是悲观思想，即认为写多，遇到并发写的可能性高，每次去拿数据的时候都认为别人<br>会修改，所以每次在读写数据的时候都会上锁，这样别人想读写这个数据就会 block 直到拿到锁。<br>java中的悲观锁就是Synchronized,AQS框架下的锁则是先尝试cas乐观锁去获取锁，获取不到，<br>才会转换为悲观锁，如 RetreenLock。</p>
@@ -3099,7 +2778,7 @@ t<span class="token punctuation">.</span><span class="token function">start</spa
 <h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><p>主要是两个：队头，队尾</p>
 <p>入队：队尾指针向后移动</p>
 <p>出队：队头指针向后移动</p>
-<h2 id="值传递和引用传递"><a href="#值传递和引用传递" class="headerlink" title="值传递和引用传递"></a>值传递和引用传递</h2><h4 id="1-形参与实参"><a href="#1-形参与实参" class="headerlink" title="1. 形参与实参"></a>1. 形参与实参</h4><h3 id="1-形参与实参-1"><a href="#1-形参与实参-1" class="headerlink" title="1. 形参与实参"></a>1. 形参与实参</h3><p>我们先来重温一组语法：</p>
+<h2 id="值传递和引用传递"><a href="#值传递和引用传递" class="headerlink" title="值传递和引用传递"></a>值传递和引用传递</h2><h3 id="1-形参与实参"><a href="#1-形参与实参" class="headerlink" title="1. 形参与实参"></a>1. 形参与实参</h3><p>我们先来重温一组语法：</p>
 <blockquote>
 <ol>
 <li><p>形参：方法被调用时需要传递进来的参数，如：func(int a)中的a，它只有在func被调用期间a才有意义，也就是会被分配内存空间，在方法func执行完成后，a就会被销毁释放空间，也就是不存在了</p>
@@ -3109,211 +2788,15 @@ t<span class="token punctuation">.</span><span class="token function">start</spa
 </ol>
 </blockquote>
 <p>举个栗子：</p>
-<pre><code>public static void func(int a){
- a=20;
- System.out.println(a);
-}
-public static void main(String[] args) {
- int a=10;//变量
- func(a);
-}</code></pre><p>例子中<br>int a=10;中的a在被调用之前就已经创建并初始化，在调用func方法时，他被当做参数传入，所以这个a是实参。<br>而func(int a)中的a只有在func被调用时它的生命周期才开始，而在func调用结束之后，它也随之被JVM释放掉，，所以这个a是形参。</p>
-<h2 id="2-Java的数据类型"><a href="#2-Java的数据类型" class="headerlink" title="2. Java的数据类型"></a>2. Java的数据类型</h2><p>所谓数据类型，是编程语言中对内存的一种抽象表达方式，我们知道程序是由代码文件和静态资源组成，在程序被运行前，这些代码存在在硬盘里，程序开始运行，这些代码会被转成计算机能识别的内容放到内存中被执行。<br>因此</p>
-<blockquote>
-<p>数据类型实质上是用来定义编程语言中相同类型的数据的存储形式，也就是决定了如何将代表这些值的位存储到计算机的内存中。</p>
-</blockquote>
-<p>所以，数据在内存中的存储，是根据数据类型来划定存储形式和存储位置的。<br>那么<br>Java的数据类型有哪些？</p>
-<blockquote>
-<ol>
-<li>基本类型：编程语言中内置的最小粒度的数据类型。它包括四大类八种类型：</li>
-</ol>
-<blockquote>
-<p>4种整数类型：byte、short、int、long<br>2种浮点数类型：float、double<br>1种字符类型：char<br>1种布尔类型：boolean</p>
-</blockquote>
-<ol start="2">
-<li>引用类型：引用也叫句柄，引用类型，是编程语言中定义的在句柄中存放着实际内容所在地址的地址值的一种数据形式。它主要包括：</li>
-</ol>
-<blockquote>
-<p>类<br>接口<br>数组</p>
-</blockquote>
-</blockquote>
-<p>有了数据类型，JVM对程序数据的管理就规范化了，不同的数据类型，它的存储形式和位置是不一样的，要想知道JVM是怎么存储各种类型的数据，就得先了解JVM的内存划分以及每部分的职能。</p>
-<h2 id="3-JVM内存的划分及职能"><a href="#3-JVM内存的划分及职能" class="headerlink" title="3.JVM内存的划分及职能"></a>3.JVM内存的划分及职能</h2><p>Java语言本身是不能操作内存的，它的一切都是交给JVM来管理和控制的，因此Java内存区域的划分也就是JVM的区域划分，在说JVM的内存划分之前，我们先来看一下Java程序的执行过程，如下图：  </p>
-<p><img src="images%5CxrXpc56zxwPIur5r0vPhEJpJP6QXmozznUXxpugnTGGCB8eWHmcg9sjc88CMjoWuagmLTgibGKIJchE6JkC1Plw.jpg" alt=""></p>
-<p>有图可以看出：Java代码被编译器编译成字节码之后，JVM开辟一片内存空间（也叫运行时数据区），通过类加载器加到到运行时数据区来存储程序执行期间需要用到的数据和相关信息，在这个数据区中，它由以下几部分组成：</p>
-<h3 id="1-虚拟机栈"><a href="#1-虚拟机栈" class="headerlink" title="1. 虚拟机栈"></a>1. 虚拟机栈</h3><h3 id="2-堆"><a href="#2-堆" class="headerlink" title="2. 堆"></a>2. 堆</h3><h3 id="3-程序计数器"><a href="#3-程序计数器" class="headerlink" title="3. 程序计数器"></a>3. 程序计数器</h3><h3 id="4-方法区"><a href="#4-方法区" class="headerlink" title="4. 方法区"></a>4. 方法区</h3><h3 id="5-本地方法栈"><a href="#5-本地方法栈" class="headerlink" title="5. 本地方法栈"></a>5. 本地方法栈</h3><p>我们接着来了解一下每部分的原理以及具体用来存储程序执行过程中的哪些数据。</p>
-<hr>
-<blockquote>
-<p><strong>1. 虚拟机栈</strong></p>
-</blockquote>
-<p>虚拟机栈是Java方法执行的内存模型，栈中存放着栈帧，每个栈帧分别对应一个被调用的方法，方法的调用过程对应栈帧在虚拟机中入栈到出栈的过程。</p>
-<p>栈是线程私有的，也就是线程之间的栈是隔离的；当程序中某个线程开始执行一个方法时就会相应的创建一个栈帧并且入栈（位于栈顶），在方法结束后，栈帧出栈。</p>
-<p>下图表示了一个Java栈的模型以及栈帧的组成：  </p>
-<p><img src="images%5CxrXpc56zxwPIur5r0vPhEJpJP6QXmozzhafOtSl5zaWYfOCzicibCgWQRISwTlEr0Kd1TJj3ibia5mQvb7sTUyVq5A.jpg" alt=""></p>
-<p><strong>栈帧</strong>:是用于支持虚拟机进行方法调用和方法执行的数据结构，它是虚拟机运行时数据区中的虚拟机栈的栈元素。</p>
-<p>每个栈帧中包括：</p>
-<ol>
-<li><p><strong>局部变量表</strong>:用来存储方法中的局部变量（非静态变量、函数形参）。当变量为基本数据类型时，直接存储值，当变量为引用类型时，存储的是指向具体对象的引用。</p>
-</li>
-<li><p><strong>操作数栈</strong>:Java虚拟机的解释执行引擎被称为”基于栈的执行引擎”，其中所指的栈就是指操作数栈。</p>
-</li>
-<li><p><strong>指向运行时常量池的引用</strong>:存储程序执行时可能用到常量的引用。</p>
-</li>
-<li><p><strong>方法返回地址</strong>:存储方法执行完成后的返回地址。</p>
-</li>
-</ol>
-<hr>
-<blockquote>
-<p><strong>2. 堆：</strong></p>
-</blockquote>
-<p>堆是用来存储对象本身和数组的，在JVM中只有一个堆，因此，堆是被所有线程共享的。</p>
-<hr>
-<blockquote>
-<p><strong>3. 方法区：</strong></p>
-</blockquote>
-<p>方法区是一块所有线程共享的内存逻辑区域，在JVM中只有一个方法区，用来存储一些线程可共享的内容，它是线程安全的，多个线程同时访问方法区中同一个内容时，只能有一个线程装载该数据，其它线程只能等待。</p>
-<p>方法区可存储的内容有：类的全路径名、类的直接超类的权全限定名、类的访问修饰符、类的类型（类或接口）、类的直接接口全限定名的有序列表、常量池（字段，方法信息，静态变量，类型引用（class））等。</p>
-<hr>
-<blockquote>
-<p><strong>4. 本地方法栈：</strong></p>
-</blockquote>
-<p>本地方法栈的功能和虚拟机栈是基本一致的，并且也是线程私有的，它们的区别在于虚拟机栈是为执行Java方法服务的，而本地方法栈是为执行本地方法服务的。</p>
-<p><strong>有人会疑惑：什么是本地方法？为什么Java还要调用本地方法？</strong></p>
-<hr>
-<blockquote>
-<p><strong>5. 程序计数器：</strong></p>
-</blockquote>
-<p>线程私有的。<br>记录着当前线程所执行的字节码的行号指示器，在程序运行过程中，字节码解释器工作时就是通过改变这个计数器的值来选取下一条需要执行的字节码指令，分支、循环、异常处理、线程恢复等基础功能都需要依赖计数器完成。</p>
-<hr>
-<h2 id="4-数据如何在内存中存储？"><a href="#4-数据如何在内存中存储？" class="headerlink" title="4. 数据如何在内存中存储？"></a>4. 数据如何在内存中存储？</h2><p>从上面程序运行图我们可以看到，JVM在程序运行时的内存分配有三个地方：</p>
-<ul>
-<li><p>堆</p>
-</li>
-<li><p>栈</p>
-</li>
-<li><p>静态方法区</p>
-</li>
-<li><p>常量区</p>
-</li>
-</ul>
-<p>相应地，每个存储区域都有自己的内存分配策略：</p>
-<ul>
-<li><p>堆式：</p>
-</li>
-<li><p>栈式</p>
-</li>
-<li><p>静态</p>
-</li>
-</ul>
-<p>我们已经知道：Java中的数据类型有基本数据类型和引用数据类型，那么这些数据的存储都使用哪一种策略呢？<br>这里要分以下的情况进行探究：</p>
-<blockquote>
-<p><strong>1. 基本数据类型的存储：</strong></p>
-<ul>
-<li><p>A. 基本数据类型的局部变量</p>
-</li>
-<li><p>B. 基本数据类型的成员变量</p>
-</li>
-<li><p>C. 基本数据类型的静态变量</p>
-</li>
-</ul>
-<p><strong>2. 引用数据类型的存储</strong></p>
-</blockquote>
-<hr>
-<blockquote>
-<p><strong>1. 基本数据类型的存储</strong></p>
-</blockquote>
-<hr>
-<p>我们分别来研究一下：</p>
-<h5 id="A-基本数据类型的局部变量"><a href="#A-基本数据类型的局部变量" class="headerlink" title="A.基本数据类型的局部变量"></a><strong>A.基本数据类型的局部变量</strong></h5><ol>
-<li><p>定义基本数据类型的局部变量以及数据都是直接存储在内存中的栈上，也就是前面说到的<strong>“虚拟机栈”</strong>，数据本身的值就是存储在栈空间里面。  </p>
-<p><img src="images%5CxrXpc56zxwPIur5r0vPhEJpJP6QXmozznNuHDLtNxibO1b1yN7wV4HPSno4CHZWXaEicootMFec7t31G38HzFpSQ.png" alt=""></p>
-</li>
-</ol>
-<pre><code>如上图，在方法内定义的变量直接存储在栈中，如</code></pre><pre><code>    int age=50;
-    int weight=50;
-    int grade=6;</code></pre><p>当我们写“int age=50；”，其实是分为两步的：</p>
-<pre><code>    int age;//定义变量
-    age=50;//赋值</code></pre><p>首先JVM创建一个名为age的变量，存于局部变量表中，然后去栈中查找是否存在有字面量值为50的内容，如果有就直接把age指向这个地址，如果没有，JVM会在栈中开辟一块空间来存储“50”这个内容，并且把age指向这个地址。因此我们可以知道：<br><strong>我们声明并初始化基本数据类型的局部变量时，变量名以及字面量值都是存储在栈中，而且是真实的内容。</strong></p>
-<p>我们再来看“int weight=50；”，按照刚才的思路：字面量为50的内容在栈中已经存在，因此weight是直接指向这个地址的。由此可见：<strong>栈中的数据在当前线程下是共享的</strong>。</p>
-<p>那么如果再执行下面的代码呢？</p>
-<pre><code>    weight=40；</code></pre><p>当代码中重新给weight变量进行赋值时，JVM会去栈中寻找字面量为40的内容，发现没有，就会开辟一块内存空间存储40这个内容，并且把weight指向这个地址。由此可知：</p>
-<p><strong>基本数据类型的数据本身是不会改变的，当局部变量重新赋值时，并不是在内存中改变字面量内容，而是重新在栈中寻找已存在的相同的数据，若栈中不存在，则重新开辟内存存新数据，并且把要重新赋值的局部变量的引用指向新数据所在地址。</strong></p>
-<hr>
-<h5 id="B-基本数据类型的成员变量"><a href="#B-基本数据类型的成员变量" class="headerlink" title="B. 基本数据类型的成员变量"></a><strong>B. 基本数据类型的成员变量</strong></h5><p>成员变量：顾名思义，就是在类体中定义的变量。<br>看下图：  </p>
-<p><img src="images%5CxrXpc56zxwPIur5r0vPhEJpJP6QXmozziaY24epYoPoM45SJiajF9qCXtupO2539ia0NMKIYUo3yjhFibJ1ZgTvIWg.jpg" alt=""></p>
-<p>我们看per的地址指向的是堆内存中的一块区域，我们来还原一下代码：</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Person</span><span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token keyword">int</span> age<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> String name<span class="token punctuation">;</span>
-    <span class="token keyword">private</span> <span class="token keyword">int</span> grade<span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">//篇幅较长，省略setter getter方法 </span>
-    staticvoid <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"run...."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-    <span class="token punctuation">}</span><span class="token punctuation">;</span>
-
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">)</span><span class="token punctuation">{</span>
+ a<span class="token operator">=</span><span class="token number">20</span><span class="token punctuation">;</span>
+ System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">//调用</span>
-Person per<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
-<p>同样是局部变量的age、name、grade却被存储到了堆中为per对象开辟的一块空间中。因此可知：<strong>基本数据类型的成员变量名和值都存储于堆中，其生命周期和对象的是一致的。</strong></p>
-<hr>
-<h5 id="C-基本数据类型的静态变量"><a href="#C-基本数据类型的静态变量" class="headerlink" title="C. 基本数据类型的静态变量"></a><strong>C. 基本数据类型的静态变量</strong></h5><p>前面提到<strong>方法区</strong>用来存储一些共享数据，因此<strong>基本数据类型的静态变量名以及值存储于方法区的运行时常量池中，静态变量随类加载而加载，随类消失而消失</strong></p>
-<hr>
-<blockquote>
-<p><strong>2. 引用数据类型的存储:</strong></p>
-</blockquote>
-<p>上面提到：堆是用来存储对象本身和数组，而引用（句柄）存放的是实际内容的地址值，因此通过上面的程序运行图，也可以看出，当我们定义一个对象时</p>
-<pre><code>Person per=new Person();</code></pre><p>实际上，它也是有两个过程：</p>
-<pre><code>Person per;
-//定义变量
-per=new Person();
-//赋值</code></pre><p>在执行Person per;时，JVM先在虚拟机栈中的变量表中开辟一块内存存放per变量，在执行per=new Person()时，JVM会创建一个Person类的实例对象并在堆中开辟一块内存存储这个实例，同时把实例的地址值赋值给per变量。因此可见：<br><strong>对于引用数据类型的对象/数组，变量名存在栈中，变量值存储的是对象的地址，并不是对象的实际内容。</strong></p>
-<h2 id="Java的内存分配以及栈和堆的区别"><a href="#Java的内存分配以及栈和堆的区别" class="headerlink" title="Java的内存分配以及栈和堆的区别"></a>Java的内存分配以及栈和堆的区别</h2><ul>
-<li><strong>先了解几个概念</strong><ul>
-<li>栈</li>
-<li>堆</li>
-<li>方法区</li>
-<li>本地方法去</li>
-<li>寄存器<pre><code>A:栈: 存放的是局部变量
-局部变量：在方法定义或者方法声明上的变量都是局部变量。
-B:堆: 存放的是所有new出来的东西
-特点：
-  a: 每一个new出来的东西都会为其分配一个地制值。
-  b: 每一个变量都有一个默认的值
-      byte，short，int，long  -- 0
-      float，double            -- 0.0
-      char                    -- '\u0000'
-      boolean                -- false
-      引用数据类型               -- null       
-  c: 使用完毕就变成了垃圾，等待垃圾回收器对其回收
-C:方法区:(面向对象部分讲解)
-D:本地方法区:(和系统相关)
-E:寄存器:(cpu使用)</code></pre><h3 id="局部变量存储位置"><a href="#局部变量存储位置" class="headerlink" title="局部变量存储位置"></a>局部变量存储位置</h3></li>
-</ul>
-</li>
-<li>在方法中声明的变量，即该变量是局部变量<ul>
-<li>每当程序调用方法时，系统都会为该方法建立一个方法栈，其所在方法中声明的变量就放在方法栈中，当方法结束系统会释放方法栈，其对应在该方法中声明的变量随着栈的销毁而结束，这就局部变量只能在方法中有效的原因。</li>
-<li>在方法中声明的变量可以是基本类型的变量，也可以是引用类型的变量。<a href="https://github.com/yangchong211/YCBlogs" target="_blank" rel="noopener">博客</a></li>
-<li>当声明是基本类型的变量的时，其变量名及值（变量名及值是两个概念）是放在JAVA虚拟机栈中</li>
-<li>当声明的是引用变量时，所声明的变量（该变量实际上是在方法中存储的是内存地址值）是放在JAVA虚拟机的栈中，该变量所指向的对象是放在堆类存中的</li>
-</ul>
-</li>
-</ul>
-<h3 id="成员变量存储位置"><a href="#成员变量存储位置" class="headerlink" title="成员变量存储位置"></a>成员变量存储位置</h3><ul>
-<li>在类中声明的变量是成员变量，也叫全局变量<ul>
-<li>放在堆中的（因为全局变量不会随着某个方法执行结束而销毁）。</li>
-<li>同样在类中声明的变量即可是基本类型的变量，也可是引用类型的变量。</li>
-<li>当声明的是基本类型的变量其变量名及其值放在堆内存中的</li>
-<li>引用类型时，其声明的变量仍然会存储一个内存地址值，该内存地址值指向所引用的对象。引用变量名和对应的对象仍然存储在相应的堆中</li>
-</ul>
-</li>
-</ul>
-<h3 id="静态变量存储位置"><a href="#静态变量存储位置" class="headerlink" title="静态变量存储位置"></a>静态变量存储位置</h3><ul>
-<li>静态变量其实就是常量<ul>
-<li>注意是：存储在JVM的方法区中</li>
-<li>static变量在类加载时被初始化，存储在JVM的方法区中，整个内存中只有一个static变量的拷贝，可以使用类名直接访问，也可以通过类的实例化对象访问，一般不推荐通过实例化对象访问，通俗的讲static变量属于类，不属于对象，任何实例化的对象访问的都是同一个static变量，任何地放都可以通过类名来访问static变量。</li>
-</ul>
-</li>
-</ul>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ <span class="token keyword">int</span> a<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//变量</span>
+ <span class="token function">func</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>例子中<br>int a=10;中的a在被调用之前就已经创建并初始化，在调用func方法时，他被当做参数传入，所以这个a是实参。<br>而func(int a)中的a只有在func被调用时它的生命周期才开始，而在func调用结束之后，它也随之被JVM释放掉，，所以这个a是形参。</p>
 <h2 id="main方法"><a href="#main方法" class="headerlink" title="main方法"></a>main方法</h2><pre><code>/**
 * Java中的main()方法详解
 */
@@ -3328,7 +2811,7 @@ public class HelloWorld {
 </blockquote>
 <p>三、main()方法中可以throw Exception<br>因此main()方法中可以抛出异常，main()方法上也可以声明抛出异常。</p>
 <p>四、main()方法中字符串参数数组作用<br>main()方法中字符串参数数组作用是接收命令行输入参数的，命令行的参数之间用空格隔开。</p>
-<h3 id="jdk1-8新特性学习"><a href="#jdk1-8新特性学习" class="headerlink" title="jdk1.8新特性学习"></a>jdk1.8新特性学习</h3><h4 id="新特性列表"><a href="#新特性列表" class="headerlink" title="新特性列表"></a>新特性列表</h4><p>以下是Java8中的引入的部分新特性。关于Java8新特性更详细的介绍可参考<a href="http://www.oracle.com/technetwork/java/javase/8-whats-new-2157071.html" target="_blank" rel="noopener">这里</a>。</p>
+<h2 id="jdk1-8新特性学习"><a href="#jdk1-8新特性学习" class="headerlink" title="jdk1.8新特性学习"></a>jdk1.8新特性学习</h2><h4 id="新特性列表"><a href="#新特性列表" class="headerlink" title="新特性列表"></a>新特性列表</h4><p>以下是Java8中的引入的部分新特性。关于Java8新特性更详细的介绍可参考<a href="http://www.oracle.com/technetwork/java/javase/8-whats-new-2157071.html" target="_blank" rel="noopener">这里</a>。</p>
 <ul>
 <li>接口默认方法和静态方法</li>
 <li>Lambda 表达式</li>
@@ -3353,7 +2836,35 @@ public class HelloWorld {
 </ul>
 </li>
 </ul>
-<h4 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h4><h3 id="时间复杂度-amp-amp-空间复杂度"><a href="#时间复杂度-amp-amp-空间复杂度" class="headerlink" title="时间复杂度&amp;&amp;空间复杂度"></a>时间复杂度&amp;&amp;空间复杂度</h3><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><h3 id="Gc"><a href="#Gc" class="headerlink" title="Gc"></a>Gc</h3><h3 id="各种树"><a href="#各种树" class="headerlink" title="各种树"></a>各种树</h3><script>
+<h4 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h4><h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><h3 id="JVM的内存管理结构"><a href="#JVM的内存管理结构" class="headerlink" title="JVM的内存管理结构:"></a><strong>JVM的内存管理结构:</strong></h3><p><img src="https://gitee.com/fly_tom/use/raw/master/jc40.png" alt=""></p>
+<blockquote>
+<p><strong>JVM内存分为线程私有区和线程共享区</strong> </p>
+</blockquote>
+<h4 id="线程私有区"><a href="#线程私有区" class="headerlink" title="线程私有区"></a><strong>线程私有区</strong></h4><ol>
+<li><p><strong>程序计数器</strong><br>当同时进行的线程数超过CPU数或其内核数时，就要通过时间片轮询分派CPU的时间资源，不免发生线<br>程切换。这时，每个线程就需要一个属于自己的计数器来记录下一条要运行的指令。如果执行的是JAVA<br>方法，计数器记录正在执行的java字节码地址，如果执行的是native方法，则计数器为空。</p>
+</li>
+<li><p><strong>虚拟机栈</strong><br>线程私有的，与线程在同一时间创建。管理JAVA方法执行的内存模型。每个方法执行时都会创建一个桢<br>栈来存储方法的的变量表、操作数栈、动态链接方法、返回值、返回地址等信息。栈的大小决定了方法<br>调用的可达深度（递归多少层次，或嵌套调用多少层其他方法，-Xss参数可以设置虚拟机栈大小）。栈<br>的大小可以是固定的，或者是动态扩展的。如果请求的栈深度大于最大可用深度，则抛出<br>stackOverflowError；如果栈是可动态扩展的，但没有内存空间支持扩展，则抛出<br>OutofMemoryError。</p>
+<p>使用jclasslib工具可以查看class类文件的结构。下图为栈帧结构图： </p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/jc41.png" alt=""></p>
+</li>
+<li><p><strong>本地方法栈</strong><br>与虚拟机栈作用相似。但它不是为Java方法服务的，而是<strong>本地方法native</strong>（C语言）。由于规范对这块没有强<br>制要求，不同虚拟机实现方法不同 </p>
+</li>
+</ol>
+<h4 id="线程共享区"><a href="#线程共享区" class="headerlink" title="线程共享区"></a><strong>线程共享区</strong></h4><ol>
+<li><p>方法区<br>线程共享的，用于存放被虚拟机加载的类的元数据信息，如常量、静态变量和即时编译器编译后的代<br>码。若要分代，算是永久代（老年代），以前类大多“static”的，很少被卸载或收集，现回收废弃常量和<br>无用的类。其中运行时常量池存放编译生成的各种常量。（如果hotspot虚拟机确定一个类的定义信息<br>不会被使用，也会将其回收。回收的基本条件至少有：所有该类的实例被回收，而且装载该类的<br>ClassLoader被回收）</p>
+</li>
+<li><p>堆存放对象实例和数组，是垃圾回收的主要区域，分为新生代和老年代。刚创建的对象在新生代的Eden<br>区中，经过GC后进入新生代的S0区中，再经过GC进入新生代的S1区中，15次GC后仍存在就进入老年<br>代。这是按照一种回收机制进行划分的，不是固定的。若堆的空间不够实例分配，则<br>OutOfMemoryError。 </p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/jc42.png" alt=""></p>
+</li>
+</ol>
+<h3 id="堆的结构"><a href="#堆的结构" class="headerlink" title="堆的结构"></a>堆的结构</h3><h3 id="堆和栈的区别"><a href="#堆和栈的区别" class="headerlink" title="堆和栈的区别"></a>堆和栈的区别</h3><p>栈是运行时单位，代表着逻辑，内含<strong>基本数据类型</strong>和<strong>堆中对象引用</strong>，所在<strong>区域连续</strong>，没有碎片；堆是存<br>储单位，代表着数据，可被多个栈共享（<strong>包括成员中基本数据类型、引用和引用对象</strong>），所在区域不连<br>续，会有碎片。</p>
+<ol>
+<li>功能不同<br>栈内存用来存储<strong>局部变量</strong>和<strong>方法调用</strong>，而堆内存用来存储Java中的<strong>对象</strong>。<strong>无论是成员变量，局部变量，</strong><br><strong>还是类变量，它们指向的对象都存储在堆内存中。</strong></li>
+<li>共享性不同<br>栈内存是<strong>线程私有</strong>的。<br>堆内存是所有<strong>线程共有</strong>的。</li>
+<li>异常错误不同<br>如果栈内存或者堆内存不足都会抛出异常。<br>栈空间不足：java.lang.StackOverFlowError。<br>堆空间不足：java.lang.OutOfMemoryError。</li>
+<li>空间大小<br><strong>栈的空间大小远远小于堆的</strong> </li>
+</ol>
+<h3 id="时间复杂度-amp-amp-空间复杂度"><a href="#时间复杂度-amp-amp-空间复杂度" class="headerlink" title="时间复杂度&amp;&amp;空间复杂度"></a>时间复杂度&amp;&amp;空间复杂度</h3><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><h3 id="各种树"><a href="#各种树" class="headerlink" title="各种树"></a>各种树</h3><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }

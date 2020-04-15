@@ -448,9 +448,9 @@
 
 <span class="token punctuation">}</span> </code></pre>
 <p>上面代码等价于的配置文件：</p>
-<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Person<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 
-    &lt;property name ="name" value="i am name"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">></span></span> 
+<pre class=" language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>Person<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span> 
+    &lt;property name ="name" value="i am name"&gt;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">&gt;</span></span> 
 </code></pre>
 <p>我们知道配置文件中的 value 的取值可以是：</p>
 <ul>
@@ -697,7 +697,7 @@ StopWatch stopWatch <span class="token operator">=</span> <span class="token key
 stopWatch<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
 <span class="token comment" spellcheck="true">// 声明 IOC 容器 </span>
 ConfigurableApplicationContext context <span class="token operator">=</span> null<span class="token punctuation">;</span> 
-Collection<span class="token operator">&lt;</span>SpringBootExceptionReporter<span class="token operator">></span> exceptionReporters <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+Collection<span class="token operator">&lt;</span>SpringBootExceptionReporter<span class="token operator">&gt;</span> exceptionReporters <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
 <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">configureHeadlessProperty</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
 <span class="token comment" spellcheck="true">// 从类路径下找到 META/INF/Spring.factories 获取 SpringApplicationRunListeners </span>
 SpringApplicationRunListeners listeners <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getRunListeners</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span><span class="token punctuation">;</span> 
