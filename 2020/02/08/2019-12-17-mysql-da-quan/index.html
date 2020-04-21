@@ -346,7 +346,7 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        19k
+                        19.1k
                     </div>
                     
 
@@ -724,7 +724,7 @@
 <p>关于存储引擎MyISAM和InnoDB的其他参考资料如下：</p>
 <p><em><a href="http://blog.csdn.net/lc0817/article/details/52757194" target="_blank" rel="noopener">http://blog.csdn.net/lc0817/article/details/52757194</a></em></p>
 <p><em><a href="https://www.cnblogs.com/kevingrace/p/5685355.html" target="_blank" rel="noopener">https://www.cnblogs.com/kevingrace/p/5685355.html</a></em></p>
-<h2 id="五、优化"><a href="#五、优化" class="headerlink" title="五、优化"></a>五、优化</h2><hr>
+<h3 id="4-MyISAM与InnoDB两种存储引擎在磁盘中的格式"><a href="#4-MyISAM与InnoDB两种存储引擎在磁盘中的格式" class="headerlink" title="4. MyISAM与InnoDB两种存储引擎在磁盘中的格式"></a>4. MyISAM与InnoDB两种存储引擎在磁盘中的格式</h3><h2 id="五、优化"><a href="#五、优化" class="headerlink" title="五、优化"></a>五、优化</h2><hr>
 <h3 id="1-查询语句不同元素（where、jion、limit、group-by、having等等）执行先后顺序"><a href="#1-查询语句不同元素（where、jion、limit、group-by、having等等）执行先后顺序" class="headerlink" title="1.查询语句不同元素（where、jion、limit、group by、having等等）执行先后顺序?"></a>1.查询语句不同元素（where、jion、limit、group by、having等等）执行先后顺序?</h3><p><strong>1.查询中用到的关键词主要包含六个，并且他们的顺序依次为 select–from–where–group by–having–order by</strong></p>
 <p>其中select和from是必须的，其他关键词是可选的，这六个关键词的执行顺序 与sql语句的书写顺序并不是一样的，而是按照下面的顺序来执行</p>
 <ul>
@@ -833,7 +833,7 @@
 select id from t where datediff(day,createdate,’2005-11-30′) = 0    
 -–‘2005-11-30’    --生成的id</code></pre>
 <p>应改为:</p>
-<pre class=" language-mysql"><code class="language-mysql">select id from t where name like 'abc%'select id from t where createdate &gt;= '2005-11-30' and createdate &lt; '2005-12-1'</code></pre>
+<pre class=" language-mysql"><code class="language-mysql">select id from t where name like 'abc%'select id from t where createdate >= '2005-11-30' and createdate < '2005-12-1'</code></pre>
 <ol start="10">
 <li><p>不要在 where 子句中的“=”左边进行函数、算术运算或其他表达式运算，否则系统将可能无法正确使用索引。</p>
 </li>
@@ -925,7 +925,7 @@ select id from t where datediff(day,createdate,’2005-11-30′) = 0
 <p>乐观锁（给表加一个版本号字段） 这个并不是乐观锁的定义，给表加版本号，是数据库实现乐观锁的一种方式。</p>
 <pre class=" language-mysql"><code class="language-mysql">SELECT data AS old_data, version AS old_version FROM …;
 //根据获取的数据进行业务操作，得到new_data和new_version
-UPDATE SET data = new_data, version = new_version WHERE version = old_versionif (updated row &gt; 0) 
+UPDATE SET data = new_data, version = new_version WHERE version = old_versionif (updated row > 0) 
 {// 乐观锁获取成功，操作完成} else {// 乐观锁获取失败，回滚并重试}</code></pre>
 <p><strong>注意：</strong> </p>
 <p>乐观锁在不发生取锁失败的情况下开销比悲观锁小，但是一旦发生失败回滚开销则比较大，因此适合用在取锁失败概率比较小的场景，可以提升系统并发性能<br>乐观锁还适用于一些比较特殊的场景，例如在业务操作过程中无法和数据库保持连接等悲观锁无法适用的地方。</p>

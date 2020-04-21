@@ -545,7 +545,7 @@ b874c56bec49        mysql               "docker-entrypoint.sh"   4 seconds ago  
 ad10e4bc5c6a0f61cbad43898de71d366117d120e39db651844c0e73863b9434
 [root@localhost ~]# docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-ad10e4bc5c6a        mysql               "docker-entrypoint.sh"   4 seconds ago       Up 2 seconds        0.0.0.0:3306-&gt;3306/tcp   mysql02</code></pre>
+ad10e4bc5c6a        mysql               "docker-entrypoint.sh"   4 seconds ago       Up 2 seconds        0.0.0.0:3306->3306/tcp   mysql02</code></pre>
 <p>几个其他的高级操作</p>
 <pre class=" language-shell"><code class="language-shell">docker run --name mysql03 -v /conf/mysql:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
 把主机的/conf/mysql文件夹挂载到 mysqldocker容器的/etc/mysql/conf.d文件夹里面
@@ -564,7 +564,7 @@ docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag --
 FROM centos
 
 #维护人的信息
-MAINTAINER The CentOS Project &lt;303323496@qq.com&gt;
+MAINTAINER The CentOS Project <303323496@qq.com>
 
 #安装httpd软件包
 RUN yum -y update
