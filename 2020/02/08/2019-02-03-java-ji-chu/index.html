@@ -343,14 +343,14 @@ Java语言概述请描述一下javajava是一个面向对象的编程语言，�
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        36.2k
+                        36.5k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        136 分
+                        137 分
                     </div>
                     
                 
@@ -1156,24 +1156,25 @@ public static void main(String[] args) {
 <span class="token punctuation">}</span>  </code></pre>
 <p>运行结果：<br>父类–静态变量<br>父类–静态初始化块<br>子类–静态变量<br>子类–静态初始化块<br>父类–变量<br>父类–初始化块<br>父类–构造器<br>子类–变量<br>子类–初始化块<br>子类–构造器</p>
 <h2 id="equals-hashcode-String-StringBuffer-StringBuilder"><a href="#equals-hashcode-String-StringBuffer-StringBuilder" class="headerlink" title="== | equals | hashcode |String StringBuffer StringBuilder"></a>== | equals | hashcode |String StringBuffer StringBuilder</h2><h3 id="和-equals"><a href="#和-equals" class="headerlink" title="== 和 equals"></a>== 和 equals</h3><p>缓存池</p>
-<pre><code>public class Main_1 {
- public static void main(String[] args) {
-    Integer a = 1;
-    Integer b = 2;
-    Integer c = 3;
-    Integer d = 3;
-    Integer e = 321;
-    Integer f = 321;
-    Long g = 3L;
-    System.out.println(c == d);//true，缓存池
-    System.out.println(e == f);//false，不在缓存池
-    System.out.println(c == (a + b));//true
-    System.out.println(c.equals(a + b));//true
-    System.out.println(g == (a + b));//true
-    System.out.println(g.equals(a + b));//false
-    System.out.println(g.equals(a + h));//true
- }
-}</code></pre><p><strong>基本类型对应的缓冲池如下：</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main_1</span> <span class="token punctuation">{</span>
+ <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Integer a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    Integer b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    Integer c <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    Integer d <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    Integer e <span class="token operator">=</span> <span class="token number">321</span><span class="token punctuation">;</span>
+    Integer f <span class="token operator">=</span> <span class="token number">321</span><span class="token punctuation">;</span>
+    Long g <span class="token operator">=</span> 3L<span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>c <span class="token operator">==</span> d<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//true，缓存池</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>e <span class="token operator">==</span> f<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//false，不在缓存池</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token punctuation">(</span>a <span class="token operator">+</span> b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//true</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>c<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>a <span class="token operator">+</span> b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//true</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>g <span class="token operator">==</span> <span class="token punctuation">(</span>a <span class="token operator">+</span> b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//true</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>a <span class="token operator">+</span> b<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//false</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>g<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>a <span class="token operator">+</span> h<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//true</span>
+ <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p><strong>基本类型对应的缓冲池如下：</strong></p>
 <ul>
 <li>boolean values true and false</li>
 <li>all byte values</li>
@@ -1190,54 +1191,58 @@ public static void main(String[] args) {
 <li><p>对于引用类型，== 判断两个变量是否引用同一个对象，而 equals() 判断引用的对象是否等价。</p>
 </li>
 </ul>
-<pre><code>Integer x = new Integer(1);
-Integer y = new Integer(1);
-System.out.println(x.equals(y)); // true
-System.out.println(x == y);      // false</code></pre><ul>
-<li>== 是java提供的等于比较运算符,用来比较两个变量指向的内存地址是否相同.</li>
+<pre class=" language-java"><code class="language-java">Integer x <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Integer y <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>x<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// true</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>x <span class="token operator">==</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment" spellcheck="true">// false</span></code></pre>
+<ul>
+<li><code>==</code> 是<code>java</code>提供的等于比较运算符,用来比较两个变量指向的内存地址是否相同.</li>
 <li>所以用”==”判断两个引用数据类型是否相等的时候，<strong>实际上是在判断两个引用是否指向同一个对象</strong></li>
-<li>而equals()是Object提供的一个方法.Object中equals()方法的默认实现就是返回两个对象==的比较结果.但是equals()可以被重写,所以我们在具体使用的时候需要关注equals()方法有没有被重写.</li>
+<li>而<code>equals()</code>是<code>Object</code>提供的一个方法<code>Object</code>中<code>equals()</code>方法的默认实现就是返回两个对象<code>==</code>的比较结果.但是<code>equals()</code>可以被重写,所以我们在具体使用的时候需要关注<code>equals()</code>方法有没有被重写.</li>
+<li><strong>重写equals方法时，方法的参数为Object类型，如果不是那就变成了重载，没有效果</strong></li>
 </ul>
-<pre><code>public boolean equals(Object anObject) {
-    if (this == anObject) {
-        return true;
-    }
-    if (anObject instanceof String) {
-        String anotherString = (String)anObject;
-        int n = value.length;
-        if (n == anotherString.value.length) {
-            char v1[] = value;
-            char v2[] = anotherString.value;
-            int i = 0;
-            while (n-- != 0) {
-                if (v1[i] != v2[i])
-                    return false;
-                i++;
-            }
-            return true;
-        }
-    }
-    return false;
-}
-</code></pre><blockquote>
-<p>当调用 String 类型数据的 equals() 方法时，首先会判断两个字符串的引用是否相等，也就是说两个字符串引用是否指向同一个对象，是则返回true。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">equals</span><span class="token punctuation">(</span>Object anObject<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">this</span> <span class="token operator">==</span> anObject<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>anObject <span class="token keyword">instanceof</span> <span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        String anotherString <span class="token operator">=</span> <span class="token punctuation">(</span>String<span class="token punctuation">)</span>anObject<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> n <span class="token operator">=</span> value<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">==</span> anotherString<span class="token punctuation">.</span>value<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">char</span> v1<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> value<span class="token punctuation">;</span>
+            <span class="token keyword">char</span> v2<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> anotherString<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+            <span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token keyword">while</span> <span class="token punctuation">(</span>n<span class="token operator">--</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>v1<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> v2<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+                    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                i<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p><strong>当调用 String 类型数据的 equals() 方法时，首先会判断两个字符串的引用是否相等，也就是说两个字符串引用是否指向同一个对象，是则返回true。</strong></p>
 </blockquote>
 <blockquote>
-<p>如果不是指向同一个对象，则把两个字符串中的字符挨个进行比较。由于 s1 和 s3 字符串都是 “hello”，是可以匹配成功的，所以最终返回 true。</p>
+<p><strong>如果不是指向同一个对象，则把两个字符串中的字符挨个进行比较。由于 s1 和 s3 字符串都是 “hello”，是可以匹配成功的，所以最终返回 true。</strong></p>
 </blockquote>
 <p><strong>两个对象值相同(x.equals(y) == true)，但却可有不同的hash code，这句话对不对?</strong></p>
 <p><strong>因为hashCode()方法和equals()方法都可以通过自定义类重写</strong>，是可以做到equals相同，但是hashCode不同的</p>
 <p>但是，在Object类的equals()方法中有这么一段话</p>
 <p>翻译如下：</p>
-<p>通常来讲，在重写这个方法的时候，也需要对hashCode方法进行重写，<br>以此来保证这两个方法的一致性——<br>当equals返回true的时候，这两个对象一定有相同的hashcode.</p>
-<h3 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode()"></a>hashCode()</h3><pre><code>public native int hashCode();</code></pre><p>Java中的类都有一个hashCode方法，这个方法用来生成hashCode值，这个值是根据一定的规则将与对象相关的信息（比如对象的存储地址，对象的字段等）生成的，这个值的作用是为了提高集合类的性能，例如HashSet、HashMap以及HashTable。</p>
+<p><strong>通常来讲，在重写这个方法的时候，也需要对hashCode方法进行重写，<br>以此来保证这两个方法的一致性——当equals返回true的时候，这两个对象一定有相同的hashcode.</strong></p>
+<h3 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode()"></a>hashCode()</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">native</span> <span class="token keyword">int</span> <span class="token function">hashCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>Java中的类都有一个<code>hashCode</code>方法，这个方法用来生成<code>hashCode</code>值，这个值是根据一定的规则将与对象相关的信息（比如对象的存储地址，对象的字段等）生成的，这个值的作用是为了提高集合类的性能，例如<code>HashSet</code>、<code>HashMap</code>以及<code>HashTable</code>。</p>
 <p><strong>哈希算法也称为散列算法，是将数据依特定算法直接指定到一个地址上。</strong></p>
 <p>我们可以调用对象的hashCode方法来生成hashCode值，因为两个不同的对象可能会有相同的hashCode值，所有不能通过hashCode值来判断两个对象是否相等，但是可以直接根据hashcode值判断两个对象不等，如果两个对象的hashcode值不等，则必定是两个不同的对象。如果要判断两个对象是否真正相等，必须通过equals方法。</p>
 <h3 id="hashCode-amp-amp-equals"><a href="#hashCode-amp-amp-equals" class="headerlink" title="hashCode() &amp;&amp; equals()"></a>hashCode() &amp;&amp; equals()</h3><p>重写 equals 方法的同时也需要重写 hashCode 方法，有没有想过为什么？</p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/jc32.png" alt="image"></p>
 <p>假如只重写equals而不重写hashcode，那么Student类的hashcode方法就是Object默认的hashcode方法，由于默认的hashcode方法是根据对象的内存地址经哈希算法得来的，显然此时s1!=s2,故两者的hashcode不一定相等。</p>
-<p>然而重写了equals，且s1.equals(s2)返回true，根据hashcode的规则，两个对象相等其哈希值一定相等，所以矛盾就产生了，因此重写equals一定要重写hashcode，而且从Student类重写后的hashcode方法中可以看出，重写后返回的新的哈希值与Student的两个属性有关。</p>
-<p>以下是关于hashcode的一些规定：</p>
+<p>然而重写了equals，且s1.equals(s2)返回true，根据hashcode的规则，两个对象相等其哈希值一定相等，所以矛盾就产生了，<strong>因此重写equals一定要重写hashcode</strong>，而且从Student类重写后的hashcode方法中可以看出，重写后返回的新的哈希值与Student的两个属性有关。</p>
+<p><strong>以下是关于hashcode的一些规定：</strong></p>
 <ul>
 <li>两个对象相等，hashcode一定相等</li>
 <li>两个对象不等，hashcode不一定不等</li>
@@ -1246,36 +1251,43 @@ System.out.println(x == y);      // false</code></pre><ul>
 </ul>
 <p><a href="https://www.cnblogs.com/skywang12345/p/3324958.html" target="_blank" rel="noopener">https://www.cnblogs.com/skywang12345/p/3324958.html</a></p>
 <h3 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="toString()"></a>toString()</h3><p>默认返回 <code>ToStringExample@4554617c</code> 这种形式，其中 @ 后面的数值为散列码的无符号十六进制表示。</p>
-<pre><code>public class ToStringExample {
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ToStringExample</span> <span class="token punctuation">{</span>
 
-    private int number;
+    <span class="token keyword">private</span> <span class="token keyword">int</span> number<span class="token punctuation">;</span>
 
-    public ToStringExample(int number) {
-        this.number = number;
-    }
-}
-ToStringExample example = new ToStringExample(123);
-System.out.println(example.toString());
-ToStringExample@4554617c</code></pre><h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><p><strong>String 被声明为 final，因此它不可被继承。</strong></p>
-<pre><code>首先String不属于8中基本类型，String是一个对象
+    <span class="token keyword">public</span> <span class="token function">ToStringExample</span><span class="token punctuation">(</span><span class="token keyword">int</span> number<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>number <span class="token operator">=</span> number<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+ToStringExample example <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ToStringExample</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>example<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ToStringExample<span class="token annotation punctuation">@4554617c</span></code></pre>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><p><strong>String 被声明为 final，因此它不可被继承。</strong></p>
+<ul>
+<li>首先String不属于8中基本类型，String是一个对象</li>
+</ul>
+<ul>
+<li>String 由于使用final 修饰存储在常量区（不是new出来的）</li>
+</ul>
+<ul>
+<li>new出来的存储在对象存储在堆中，栈中存放的为引用地址。</li>
+</ul>
+<p>在 Java 8 中，String 内部使用 <strong>char 数组</strong>存储数据。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">String</span>
+    <span class="token keyword">implements</span> <span class="token class-name">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>Serializable</span><span class="token punctuation">,</span> Comparable<span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">,</span> CharSequence <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/** The value is used for character storage. */</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">char</span> value<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>在 Java 9 之后，String 类的实现改用 <strong>byte 数组</strong>存储字符串，同时使用 <code>coder</code> 来标识使用了哪种编码。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">class</span> <span class="token class-name">String</span>
+    <span class="token keyword">implements</span> <span class="token class-name">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span>Serializable</span><span class="token punctuation">,</span> Comparable<span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">,</span> CharSequence <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">/** The value is used for character storage. */</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> value<span class="token punctuation">;</span>
 
-String 由于使用final 修饰存储在常量区（不是new出来的）
-
-new出来的存储在对象存储在堆中，栈中存放的为引用地址。
-</code></pre><p>在 Java 8 中，String 内部使用 char 数组存储数据。</p>
-<pre><code>public final class String
-    implements java.io.Serializable, Comparable&lt;String&gt;, CharSequence {
-    /** The value is used for character storage. */
-    private final char value[];
-}</code></pre><p>在 Java 9 之后，String 类的实现改用 byte 数组存储字符串，同时使用 <code>coder</code> 来标识使用了哪种编码。</p>
-<pre><code>public final class String
-    implements java.io.Serializable, Comparable&lt;String&gt;, CharSequence {
-    /** The value is used for character storage. */
-    private final byte[] value;
-
-    /** The identifier of the encoding used to encode the bytes in {@code value}. */
-    private final byte coder;
-}</code></pre><p><strong>String 类的常用方法都有那些？</strong></p>
+    <span class="token comment" spellcheck="true">/** The identifier of the encoding used to encode the bytes in {@code value}. */</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">byte</span> coder<span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p><strong>String 类的常用方法都有那些？</strong></p>
 <ul>
 <li>indexOf()：返回指定字符的索引</li>
 <li>charAt()：返回指定索引处的字符。</li>
@@ -1303,15 +1315,17 @@ new出来的存储在对象存储在堆中，栈中存放的为引用地址。
 <h4 id="String-Pool"><a href="#String-Pool" class="headerlink" title="String Pool"></a>String Pool</h4><p>字符串常量池（String Pool）保存着所有字符串字面量（literal strings），这些字面量在编译时期就确定。不仅如此，还可以使用 String 的 intern() 方法在运行过程中将字符串添加到 String Pool 中。</p>
 <p>当一个字符串调用 intern() 方法时，如果 String Pool 中已经存在一个字符串和该字符串值相等（使用 equals() 方法进行确定），那么就会返回 String Pool 中字符串的引用；否则，就会在 String Pool 中添加一个新的字符串，并返回这个新字符串的引用。</p>
 <p>下面示例中，s1 和 s2 采用 new String() 的方式新建了两个不同字符串，而 s3 和 s4 是通过 s1.intern() 方法取得一个字符串引用。intern() 首先把 s1 引用的字符串放到 String Pool 中，然后返回这个字符串引用。因此 s3 和 s4 引用的是同一个字符串。</p>
-<pre><code>1String s1 = new String("aaa");
-2String s2 = new String("aaa");
-3System.out.println(s1 == s2);           // false
-4String s3 = s1.intern();
-5String s4 = s1.intern();
-6System.out.println(s3 == s4);           // true</code></pre><p>如果是采用 “bbb” 这种字面量的形式创建字符串，会自动地将字符串放入 String Pool 中。</p>
-<pre><code>1String s5 = "bbb";
-2String s6 = "bbb";
-3System.out.println(s5 == s6);  // true</code></pre><p>在 Java 7 之前，String Pool 被放在运行时常量池中，它属于永久代。而在 Java 7，String Pool 被移到堆中。这是因为永久代的空间有限，在大量使用字符串的场景下会导致 OutOfMemoryError 错误。</p>
+<pre class=" language-java"><code class="language-java">String s1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"aaa"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+String s2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"aaa"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s1 <span class="token operator">==</span> s2<span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment" spellcheck="true">// false</span>
+String s3 <span class="token operator">=</span> s1<span class="token punctuation">.</span><span class="token function">intern</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+String s4 <span class="token operator">=</span> s1<span class="token punctuation">.</span><span class="token function">intern</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s3 <span class="token operator">==</span> s4<span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment" spellcheck="true">// true</span></code></pre>
+<p>如果是采用 “bbb” 这种字面量的形式创建字符串，会自动地将字符串放入 String Pool 中。</p>
+<pre class=" language-java"><code class="language-java">String s5 <span class="token operator">=</span> <span class="token string">"bbb"</span><span class="token punctuation">;</span>
+String s6 <span class="token operator">=</span> <span class="token string">"bbb"</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s5 <span class="token operator">==</span> s6<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// true</span></code></pre>
+<p>在 Java 7 之前，String Pool 被放在运行时常量池中，它属于永久代。而在 Java 7，String Pool 被移到堆中。这是因为永久代的空间有限，在大量使用字符串的场景下会导致 OutOfMemoryError 错误。</p>
 <ul>
 <li><p>StackOverflow : What is String interning?</p>
 </li>
@@ -1326,32 +1340,34 @@ new出来的存储在对象存储在堆中，栈中存放的为引用地址。
 </li>
 </ul>
 <p>创建一个测试类，其 main 方法中使用这种方式来创建字符串对象。</p>
-<pre><code>public class NewStringTest {
-    public static void main(String[] args) {
-        String s = new String("abc");
-    }
-}</code></pre><p>使用 javap -verbose 进行反编译，得到以下内容：</p>
-<pre><code>// ...
-Constant pool:
-// ...
-   #2 = Class              #18            // java/lang/String
-   #3 = String             #19            // abc
-// ...
-  #18 = Utf8               java/lang/String
-  #19 = Utf8               abc
-// ...
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">NewStringTest</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        String s <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"abc"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>使用 javap -verbose 进行反编译，得到以下内容：</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// ...</span>
+Constant pool<span class="token operator">:</span>
+<span class="token comment" spellcheck="true">// ...</span>
+   #<span class="token number">2</span> <span class="token operator">=</span> Class              #<span class="token number">18</span>            <span class="token comment" spellcheck="true">// java/lang/String</span>
+   #<span class="token number">3</span> <span class="token operator">=</span> String             #<span class="token number">19</span>            <span class="token comment" spellcheck="true">// abc</span>
+<span class="token comment" spellcheck="true">// ...</span>
+  #<span class="token number">18</span> <span class="token operator">=</span> Utf8               java<span class="token operator">/</span>lang<span class="token operator">/</span>String
+  #<span class="token number">19</span> <span class="token operator">=</span> Utf8               abc
+<span class="token comment" spellcheck="true">// ...</span>
 
-  public static void main(java.lang.String[]);
-    descriptor: ([Ljava/lang/String;)V
-    flags: ACC_PUBLIC, ACC_STATIC
-    Code:
-      stack=3, locals=2, args_size=1
-         0: new           #2                  // class java/lang/String
-         3: dup
-         4: ldc           #3                  // String abc
-         6: invokespecial #4                  // Method java/lang/String."&lt;init&gt;":(Ljava/lang/String;)V
-         9: astore_1
-// ...</code></pre><p>在 Constant Pool 中，#19 存储这字符串字面量 “abc”，#3 是 String Pool 的字符串对象，它指向 #19 这个字符串字面量。在 main 方法中，0: 行使用 new #2 在堆中创建一个字符串对象，并且使用 ldc #3 将 String Pool 中的字符串对象作为 String 构造函数的参数。</p>
+  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    descriptor<span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">[</span>Ljava<span class="token operator">/</span>lang<span class="token operator">/</span>String<span class="token punctuation">;</span><span class="token punctuation">)</span>V
+    flags<span class="token operator">:</span> ACC_PUBLIC<span class="token punctuation">,</span> ACC_STATIC
+    Code<span class="token operator">:</span>
+      stack<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">,</span> locals<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">,</span> args_size<span class="token operator">=</span><span class="token number">1</span>
+         <span class="token number">0</span><span class="token operator">:</span> <span class="token keyword">new</span>           #<span class="token number">2</span>                  <span class="token comment" spellcheck="true">// class java/lang/String</span>
+         <span class="token number">3</span><span class="token operator">:</span> dup
+         <span class="token number">4</span><span class="token operator">:</span> ldc           #<span class="token number">3</span>                  <span class="token comment" spellcheck="true">// String abc</span>
+         <span class="token number">6</span><span class="token operator">:</span> invokespecial #<span class="token number">4</span>                  <span class="token comment" spellcheck="true">// Method java/lang/String."&lt;init>":(Ljava/lang/String;)V</span>
+         <span class="token number">9</span><span class="token operator">:</span> astore_1
+<span class="token comment" spellcheck="true">// ...</span></code></pre>
+<p>在 Constant Pool 中，#19 存储这字符串字面量 “abc”，#3 是 String Pool 的字符串对象，它指向 #19 这个字符串字面量。在 main 方法中，0: 行使用 new #2 在堆中创建一个字符串对象，并且使用 ldc #3 将 String Pool 中的字符串对象作为 String 构造函数的参数。</p>
 <p>以下是 String 构造函数的源码，可以看到，在将一个字符串对象作为另一个字符串对象的构造函数参数时，并不会完全复制 value 数组内容，而是都会指向同一个 value 数组。</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token function">String</span><span class="token punctuation">(</span>String original<span class="token punctuation">)</span><span class="token punctuation">{</span>
     <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> original<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
@@ -1413,77 +1429,80 @@ Constant pool:
 <li>需要特殊考虑String，以及Integer、Double等几个基本类型包装类，它们都是immutable类型，因为没有提供自身修改的函数，每次操作都是新创建一个对象，所以要特殊对待。因为最后的操作不会修改实参，可以认为是和基本数据类型相似，为值传递。</li>
 </ul>
 <p>以下代码中 Dog dog 的 dog 是一个指针，存储的是对象的地址。在将一个参数传入一个方法时，本质上是将对象的地址以值的方式传递到形参中。因此在方法中使指针引用其它对象，那么这两个指针此时指向的是完全不同的对象，在一方改变其所指向对象的内容时对另一方没有影响。</p>
-<pre><code>public class Dog {
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Dog</span> <span class="token punctuation">{</span>
 
-     String name;
+     String name<span class="token punctuation">;</span>
 
-     Dog(String name) {
-         this.name = name;
-     }
+     <span class="token function">Dog</span><span class="token punctuation">(</span>String name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
 
-     String getName() {
-        return this.name;
-    }
+     String <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    void setName(String name) {
-        this.name = name;
-    }
+    <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span>String name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    String getObjectAddress() {
-        return super.toString();
-    }
-}
- public class PassByValueExample {
-     public static void main(String[] args) {
-         Dog dog = new Dog("A");
-         System.out.println(dog.getObjectAddress()); // Dog@4554617c
-         func(dog);
-         System.out.println(dog.getObjectAddress()); // Dog@4554617c
-         System.out.println(dog.getName());          // A
-     }
+    String <span class="token function">getObjectAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+ <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PassByValueExample</span> <span class="token punctuation">{</span>
+     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         Dog dog <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Dog</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>dog<span class="token punctuation">.</span><span class="token function">getObjectAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Dog@4554617c</span>
+         <span class="token function">func</span><span class="token punctuation">(</span>dog<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>dog<span class="token punctuation">.</span><span class="token function">getObjectAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Dog@4554617c</span>
+         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>dog<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment" spellcheck="true">// A</span>
+     <span class="token punctuation">}</span>
 
-    private static void func(Dog dog) {
-        System.out.println(dog.getObjectAddress()); // Dog@4554617c
-        dog = new Dog("B");
-        System.out.println(dog.getObjectAddress()); // Dog@74a14482
-        System.out.println(dog.getName());          // B
-    }
-}</code></pre><p>如果在方法中改变对象的字段值会改变原对象该字段值，因为改变的是同一个地址指向的内容。</p>
-<pre><code> class PassByValueExample {
-     public static void main(String[] args) {
-         Dog dog = new Dog("A");
-         func(dog);
-         System.out.println(dog.getName());          // B
-     }
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span>Dog dog<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>dog<span class="token punctuation">.</span><span class="token function">getObjectAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Dog@4554617c</span>
+        dog <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Dog</span><span class="token punctuation">(</span><span class="token string">"B"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>dog<span class="token punctuation">.</span><span class="token function">getObjectAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Dog@74a14482</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>dog<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment" spellcheck="true">// B</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>如果在方法中改变对象的字段值会改变原对象该字段值，因为改变的是同一个地址指向的内容。</p>
+<pre class=" language-java"><code class="language-java"> <span class="token keyword">class</span> <span class="token class-name">PassByValueExample</span> <span class="token punctuation">{</span>
+     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         Dog dog <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Dog</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token function">func</span><span class="token punctuation">(</span>dog<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>dog<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment" spellcheck="true">// B</span>
+     <span class="token punctuation">}</span>
 
-     private static void func(Dog dog) {
-         dog.setName("B");
-    }
-}</code></pre><p>StackOverflow: Is Java “pass-by-reference” or “pass-by-value”?</p>
+     <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span>Dog dog<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         dog<span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span><span class="token string">"B"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>StackOverflow: Is Java “pass-by-reference” or “pass-by-value”?</p>
 <h2 id="Object-通用方法"><a href="#Object-通用方法" class="headerlink" title="Object 通用方法"></a>Object 通用方法</h2><hr>
 <p>经典：</p>
 <p><a href="https://fangjian0423.github.io/2016/03/12/java-Object-method/" target="_blank" rel="noopener">https://fangjian0423.github.io/2016/03/12/java-Object-method/</a></p>
-<h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><pre><code> public native int hashCode()
+<h3 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h3><pre class=" language-java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">native</span> <span class="token keyword">int</span> <span class="token function">hashCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
- public boolean equals(Object obj)
+ <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">equals</span><span class="token punctuation">(</span>Object obj<span class="token punctuation">)</span>
 
- protected native Object clone() throws CloneNotSupportedException
+ <span class="token keyword">protected</span> <span class="token keyword">native</span> Object <span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> CloneNotSupportedException
 
- public String toString()
+ <span class="token keyword">public</span> String <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
- public final native Class&lt;?&gt; getClass()
+ <span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">native</span> Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> <span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-protected void finalize() throws Throwable {}
+<span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">finalize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> Throwable <span class="token punctuation">{</span><span class="token punctuation">}</span>
 
-public final native void notify()
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">native</span> <span class="token keyword">void</span> <span class="token function">notify</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-public final native void notifyAll()
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">native</span> <span class="token keyword">void</span> <span class="token function">notifyAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-public final native void wait(long timeout) throws InterruptedException
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">native</span> <span class="token keyword">void</span> <span class="token function">wait</span><span class="token punctuation">(</span><span class="token keyword">long</span> timeout<span class="token punctuation">)</span> <span class="token keyword">throws</span> InterruptedException
 
-public final void wait(long timeout, int nanos) throws InterruptedException
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">wait</span><span class="token punctuation">(</span><span class="token keyword">long</span> timeout<span class="token punctuation">,</span> <span class="token keyword">int</span> nanos<span class="token punctuation">)</span> <span class="token keyword">throws</span> InterruptedException
 
-public final void wait() throws InterruptedException</code></pre><ul>
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> InterruptedException</code></pre>
+<ul>
 <li><p>getClass方法</p>
 </li>
 <li><p>返回当前运行时对象的Class对象</p>
@@ -1536,142 +1555,148 @@ public final void wait() throws InterruptedException</code></pre><ul>
 <p>简单地讲，一个Native Method就是一个java调用非java代码的接口。一个Native Method是这样一个java的方法：该方法的实现由非java语言实现，比如C。这个特征并非java所特有，很多其它的编程语言都有这一机制，比如在C＋＋中，你可以用extern “C”告知C＋＋编译器去调用一个C的函数。</p>
 <h2 id="clone"><a href="#clone" class="headerlink" title="clone()"></a>clone()</h2><p><strong>1. cloneable</strong></p>
 <p>clone() 是 Object 的 protected 方法，它不是 public，一个类不显式去重写 clone()，其它类就不能直接去调用该类实例的 clone() 方法。</p>
-<pre><code>public class CloneExample {
-    private int a;
-    private int b;
-}
-CloneExample e1 = new CloneExample();
-// CloneExample e2 = e1.clone(); // 'clone()' has protected access in 'java.lang.Object'</code></pre><p>重写 clone() 得到以下实现：</p>
-<pre><code>public class CloneExample {
-    private int a;
-    private int b;
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CloneExample</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> a<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> b<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+CloneExample e1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CloneExample</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// CloneExample e2 = e1.clone(); // 'clone()' has protected access in 'java.lang.Object'</span></code></pre>
+<p>重写 clone() 得到以下实现：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CloneExample</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> a<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> b<span class="token punctuation">;</span>
 
-    @Override
-    public CloneExample clone() throws CloneNotSupportedException {
-        return (CloneExample)super.clone();
-    }
-}
-CloneExample e1 = new CloneExample();
-try {
-    CloneExample e2 = e1.clone();
-} catch (CloneNotSupportedException e) {
-    e.printStackTrace();
-}
-java.lang.CloneNotSupportedException: CloneExample</code></pre><p>以上抛出了 CloneNotSupportedException，这是因为 CloneExample 没有实现 Cloneable 接口。</p>
-<p>应该注意的是，clone() 方法并不是 Cloneable 接口的方法，而是 Object 的一个 protected 方法。Cloneable 接口只是规定，如果一个类没有实现 Cloneable 接口又调用了 clone() 方法，就会抛出 CloneNotSupportedException。</p>
-<pre><code>public class CloneExample implements Cloneable {
-    private int a;
-    private int b;
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> CloneExample <span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> CloneNotSupportedException <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>CloneExample<span class="token punctuation">)</span><span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+CloneExample e1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CloneExample</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">try</span> <span class="token punctuation">{</span>
+    CloneExample e2 <span class="token operator">=</span> e1<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">CloneNotSupportedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>CloneNotSupportedException<span class="token operator">:</span> CloneExample</code></pre>
+<p>以上抛出了 CloneNotSupportedException，这是因为 CloneExample 没有实现 Cloneable 接口。</p>
+<p>应该注意的是，<strong>clone() 方法并不是 Cloneable 接口的方法，而是 Object 的一个 protected 方法。</strong>Cloneable 接口只是规定，<strong>如果一个类没有实现 Cloneable 接口又调用了 clone() 方法，就会抛出 CloneNotSupportedException。</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CloneExample</span> <span class="token keyword">implements</span> <span class="token class-name">Cloneable</span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> a<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">int</span> b<span class="token punctuation">;</span>
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
-}</code></pre><p><strong>2. 浅拷贝</strong></p>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> Object <span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> CloneNotSupportedException <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p><strong>2. 浅拷贝</strong></p>
 <p>拷贝对象和原始对象的引用类型引用同一个对象。</p>
-<pre><code>public class ShallowCloneExample implements Cloneable {
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ShallowCloneExample</span> <span class="token keyword">implements</span> <span class="token class-name">Cloneable</span> <span class="token punctuation">{</span>
 
-    private int[] arr;
+    <span class="token keyword">private</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr<span class="token punctuation">;</span>
 
-    public ShallowCloneExample() {
-        arr = new int[10];
-        for (int i = 0; i &lt; arr.length; i++) {
-            arr[i] = i;
-        }
-    }
+    <span class="token keyword">public</span> <span class="token function">ShallowCloneExample</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arr<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    public void set(int index, int value) {
-        arr[index] = value;
-    }
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">set</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">,</span> <span class="token keyword">int</span> value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        arr<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> value<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public int get(int index) {
-        return arr[index];
-    }
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> arr<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    @Override
-    protected ShallowCloneExample clone() throws CloneNotSupportedException {
-        return (ShallowCloneExample) super.clone();
-    }
-}
-ShallowCloneExample e1 = new ShallowCloneExample();
-ShallowCloneExample e2 = null;
-try {
-    e2 = e1.clone();
-} catch (CloneNotSupportedException e) {
-    e.printStackTrace();
-}
-e1.set(2, 222);
-System.out.println(e2.get(2)); // 222</code></pre><p><strong>3. 深拷贝</strong></p>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> ShallowCloneExample <span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> CloneNotSupportedException <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>ShallowCloneExample<span class="token punctuation">)</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+ShallowCloneExample e1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ShallowCloneExample</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ShallowCloneExample e2 <span class="token operator">=</span> null<span class="token punctuation">;</span>
+<span class="token keyword">try</span> <span class="token punctuation">{</span>
+    e2 <span class="token operator">=</span> e1<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">CloneNotSupportedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+e1<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">222</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>e2<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 222</span></code></pre>
+<p><strong>3. 深拷贝</strong></p>
 <p>拷贝对象和原始对象的引用类型引用不同对象。</p>
-<pre><code>public class DeepCloneExample implements Cloneable {
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DeepCloneExample</span> <span class="token keyword">implements</span> <span class="token class-name">Cloneable</span> <span class="token punctuation">{</span>
 
-    private int[] arr;
+    <span class="token keyword">private</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr<span class="token punctuation">;</span>
 
-    public DeepCloneExample() {
-        arr = new int[10];
-        for (int i = 0; i &lt; arr.length; i++) {
-            arr[i] = i;
-        }
-    }
+    <span class="token keyword">public</span> <span class="token function">DeepCloneExample</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arr<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    public void set(int index, int value) {
-        arr[index] = value;
-    }
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">set</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">,</span> <span class="token keyword">int</span> value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        arr<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> value<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public int get(int index) {
-        return arr[index];
-    }
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> arr<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    @Override
-    protected DeepCloneExample clone() throws CloneNotSupportedException {
-        DeepCloneExample result = (DeepCloneExample) super.clone();
-        result.arr = new int[arr.length];
-        for (int i = 0; i &lt; arr.length; i++) {
-            result.arr[i] = arr[i];
-        }
-        return result;
-    }
-}
-DeepCloneExample e1 = new DeepCloneExample();
-DeepCloneExample e2 = null;
-try {
-    e2 = e1.clone();
-} catch (CloneNotSupportedException e) {
-    e.printStackTrace();
-}
-e1.set(2, 222);
-System.out.println(e2.get(2)); // 2</code></pre><p><strong>4. clone() 的替代方案</strong></p>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> DeepCloneExample <span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> CloneNotSupportedException <span class="token punctuation">{</span>
+        DeepCloneExample result <span class="token operator">=</span> <span class="token punctuation">(</span>DeepCloneExample<span class="token punctuation">)</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        result<span class="token punctuation">.</span>arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>arr<span class="token punctuation">.</span>length<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arr<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            result<span class="token punctuation">.</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+DeepCloneExample e1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DeepCloneExample</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+DeepCloneExample e2 <span class="token operator">=</span> null<span class="token punctuation">;</span>
+<span class="token keyword">try</span> <span class="token punctuation">{</span>
+    e2 <span class="token operator">=</span> e1<span class="token punctuation">.</span><span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">CloneNotSupportedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+e1<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">222</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>e2<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 2</span></code></pre>
+<p><strong>4. clone() 的替代方案</strong></p>
 <p>使用 clone() 方法来拷贝一个对象即复杂又有风险，它会抛出异常，并且还需要类型转换。Effective Java 书上讲到，最好不要去使用 clone()，可以使用拷贝构造函数或者拷贝工厂来拷贝一个对象。</p>
-<pre><code>public class CloneConstructorExample {
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CloneConstructorExample</span> <span class="token punctuation">{</span>
 
-    private int[] arr;
+    <span class="token keyword">private</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr<span class="token punctuation">;</span>
 
-    public CloneConstructorExample() {
-        arr = new int[10];
-        for (int i = 0; i &lt; arr.length; i++) {
-            arr[i] = i;
-        }
-    }
+    <span class="token keyword">public</span> <span class="token function">CloneConstructorExample</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arr<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> i<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    public CloneConstructorExample(CloneConstructorExample original) {
-        arr = new int[original.arr.length];
-        for (int i = 0; i &lt; original.arr.length; i++) {
-            arr[i] = original.arr[i];
-        }
-    }
+    <span class="token keyword">public</span> <span class="token function">CloneConstructorExample</span><span class="token punctuation">(</span>CloneConstructorExample original<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        arr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>original<span class="token punctuation">.</span>arr<span class="token punctuation">.</span>length<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> original<span class="token punctuation">.</span>arr<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> original<span class="token punctuation">.</span>arr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-    public void set(int index, int value) {
-        arr[index] = value;
-    }
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">set</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">,</span> <span class="token keyword">int</span> value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        arr<span class="token punctuation">[</span>index<span class="token punctuation">]</span> <span class="token operator">=</span> value<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public int get(int index) {
-        return arr[index];
-    }
-}
-CloneConstructorExample e1 = new CloneConstructorExample();
-CloneConstructorExample e2 = new CloneConstructorExample(e1);
-e1.set(2, 222);
-System.out.println(e2.get(2)); // 2</code></pre><h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>运行时异常：</p>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token keyword">int</span> index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> arr<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+CloneConstructorExample e1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CloneConstructorExample</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+CloneConstructorExample e2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CloneConstructorExample</span><span class="token punctuation">(</span>e1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+e1<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">222</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>e2<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 2</span></code></pre>
+<h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>运行时异常：</p>
 <pre><code>NullPointerException 空指针异常
 ArithmeticException 算术异常，比如除数为零
 ClassCastException 类型转换异常
@@ -1810,10 +1835,11 @@ NegativeArraySizeException 为数组分配的空间是负数异常</code></pre><
 <li><p>使用过程中注意事项有哪些？</p>
 <ul>
 <li>类的实例包含本身的实例，以及所有直接或间接子类的实例</li>
-<li>instanceof左边显式声明的类型与右边操作元必须是同种类或存在继承关系，也就是说需要位于同一个继承树，否则会编译错误<pre><code>//比如下面就会编译错误
-String s = null;
-s instanceof null
-s instanceof Integer</code></pre></li>
+<li>instanceof左边显式声明的类型与右边操作元必须是同种类或存在继承关系，也就是说需要位于同一个继承树，否则会编译错误<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//比如下面就会编译错误</span>
+String s <span class="token operator">=</span> null<span class="token punctuation">;</span>
+s <span class="token keyword">instanceof</span> <span class="token class-name">null</span>
+s <span class="token keyword">instanceof</span> <span class="token class-name">Integer</span></code></pre>
+</li>
 </ul>
 </li>
 </ul>
@@ -1823,61 +1849,67 @@ s instanceof Integer</code></pre></li>
 <li><p>实例变量：每创建一个实例就会产生一个实例变量，它与该实例同生共死。</p>
 </li>
 </ul>
-<pre><code> public class A {
-     private int x;         // 实例变量
-     private static int y;  // 静态变量
+<pre class=" language-java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">A</span> <span class="token punctuation">{</span>
+     <span class="token keyword">private</span> <span class="token keyword">int</span> x<span class="token punctuation">;</span>         <span class="token comment" spellcheck="true">// 实例变量</span>
+     <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">int</span> y<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 静态变量</span>
 
-     public static void main(String[] args) {
-         // int x = A.x;  // Non-static field 'x' cannot be referenced from a static context
-         A a = new A();
-         int x = a.x;
-         int y = A.y;
-    }
-}</code></pre><h4 id="2-静态方法"><a href="#2-静态方法" class="headerlink" title="2. 静态方法"></a><strong>2. 静态方法</strong></h4><p>静态方法在类加载的时候就存在了，它不依赖于任何实例，不能被重写。<strong>所以静态方法必须有实现，也就是说它不能是抽象方法（abstract）。</strong></p>
-<pre><code>public abstract class A {
-    public static void func1(){
-    }
-    // public abstract static void func2();  // Illegal combination of modifiers: 'abstract' and 'static'
-}</code></pre><p>只能访问所属类的静态字段和静态方法，方法中不能有 this 和 super 关键字。</p>
-<pre><code> public class A {
-     private static int x;
-     private int y;
+     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         <span class="token comment" spellcheck="true">// int x = A.x;  // Non-static field 'x' cannot be referenced from a static context</span>
+         A a <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token keyword">int</span> x <span class="token operator">=</span> a<span class="token punctuation">.</span>x<span class="token punctuation">;</span>
+         <span class="token keyword">int</span> y <span class="token operator">=</span> A<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h4 id="2-静态方法"><a href="#2-静态方法" class="headerlink" title="2. 静态方法"></a><strong>2. 静态方法</strong></h4><p>静态方法在类加载的时候就存在了，它不依赖于任何实例，不能被重写。<strong>所以静态方法必须有实现，也就是说它不能是抽象方法（abstract）。</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">A</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">// public abstract static void func2();  // Illegal combination of modifiers: 'abstract' and 'static'</span>
+<span class="token punctuation">}</span></code></pre>
+<p>只能访问所属类的静态字段和静态方法，方法中不能有 this 和 super 关键字。</p>
+<pre class=" language-java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">A</span> <span class="token punctuation">{</span>
+     <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">int</span> x<span class="token punctuation">;</span>
+     <span class="token keyword">private</span> <span class="token keyword">int</span> y<span class="token punctuation">;</span>
 
-     public static void func1(){
-         int a = x;
-         // int b = y;  // Non-static field 'y' cannot be referenced from a static context
-         // int b = this.y;     // 'A.this' cannot be referenced from a static context
-     }
-}</code></pre><h4 id="3-静态语句块"><a href="#3-静态语句块" class="headerlink" title="3. 静态语句块"></a><strong>3. 静态语句块</strong></h4><p><strong>静态语句块在类初始化时运行一次。</strong></p>
-<pre><code>public class A {
-    static {
-        System.out.println("123");
-    }
+     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">func1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+         <span class="token keyword">int</span> a <span class="token operator">=</span> x<span class="token punctuation">;</span>
+         <span class="token comment" spellcheck="true">// int b = y;  // Non-static field 'y' cannot be referenced from a static context</span>
+         <span class="token comment" spellcheck="true">// int b = this.y;     // 'A.this' cannot be referenced from a static context</span>
+     <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h4 id="3-静态语句块"><a href="#3-静态语句块" class="headerlink" title="3. 静态语句块"></a><strong>3. 静态语句块</strong></h4><p><strong>静态语句块在类初始化时运行一次。</strong></p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">A</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"123"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    public static void main(String[] args) {
-        A a1 = new A();
-        A a2 = new A();
-    }
-}</code></pre><h4 id="4-静态内部类"><a href="#4-静态内部类" class="headerlink" title="4. 静态内部类"></a><strong>4. 静态内部类</strong></h4><p><strong>非静态内部类依赖于外部类的实例，而静态内部类不需要。</strong></p>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        A a1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        A a2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h4 id="4-静态内部类"><a href="#4-静态内部类" class="headerlink" title="4. 静态内部类"></a><strong>4. 静态内部类</strong></h4><p><strong>非静态内部类依赖于外部类的实例，而静态内部类不需要。</strong></p>
 <p>当一个内部类没有使用static修饰的时候，是不能直接使用内部类创建对象，须要先使用外部类对象.new内部类对象及(外部类对象.new 内部类（）)</p>
 <p>而静态内部类只需要<code>new OuterClass.InnerClass();</code></p>
-<pre><code> public class OuterClass {
-     class InnerClass {
-     }
+<pre class=" language-java"><code class="language-java"> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OuterClass</span> <span class="token punctuation">{</span>
+     <span class="token keyword">class</span> <span class="token class-name">InnerClass</span> <span class="token punctuation">{</span>
+     <span class="token punctuation">}</span>
 
-     static class StaticInnerClass {
-     }
+     <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">StaticInnerClass</span> <span class="token punctuation">{</span>
+     <span class="token punctuation">}</span>
 
-     public static void main(String[] args) {
-         // InnerClass innerClass = new InnerClass(); // 'OuterClass.this' cannot be referenced from a static context
-        OuterClass outerClass = new OuterClass();
-        InnerClass innerClass = outerClass.new InnerClass();
-        StaticInnerClass staticInnerClass = new StaticInnerClass();
-    }
-}
-</code></pre><p>静态内部类不能访问外部类的非静态的变量和方法。</p>
+     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         <span class="token comment" spellcheck="true">// InnerClass innerClass = new InnerClass(); // 'OuterClass.this' cannot be referenced from a static context</span>
+        OuterClass outerClass <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">OuterClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        InnerClass innerClass <span class="token operator">=</span> outerClass<span class="token punctuation">.</span><span class="token keyword">new</span> <span class="token class-name">InnerClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        StaticInnerClass staticInnerClass <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StaticInnerClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>静态内部类不能访问外部类的非静态的变量和方法。</p>
 <h4 id="5-静态导包"><a href="#5-静态导包" class="headerlink" title="5. 静态导包"></a><strong>5. 静态导包</strong></h4><p>在使用静态变量和方法时不用再指明 ClassName，从而简化代码，但可读性大大降低。</p>
-<pre><code>import static com.xxx.ClassName.*</code></pre><h4 id="6-初始化顺序"><a href="#6-初始化顺序" class="headerlink" title="6. 初始化顺序"></a><strong>6. 初始化顺序</strong></h4><p>存在继承的情况下，初始化顺序为：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">import</span> <span class="token keyword">static</span> com<span class="token punctuation">.</span>xxx<span class="token punctuation">.</span>ClassName<span class="token punctuation">.</span>*</code></pre>
+<h4 id="6-初始化顺序"><a href="#6-初始化顺序" class="headerlink" title="6. 初始化顺序"></a><strong>6. 初始化顺序</strong></h4><p>存在继承的情况下，初始化顺序为：</p>
 <ul>
 <li><p>父类（静态变量、静态语句块）</p>
 </li>
@@ -1923,26 +1955,29 @@ s instanceof Integer</code></pre></li>
 <h3 id="System-currentTimeMillis"><a href="#System-currentTimeMillis" class="headerlink" title="System.currentTimeMillis()"></a>System.currentTimeMillis()</h3><p>System位于java.lang包下，有很多可以获取到系统底层的东西：</p>
 <p>System类本意就代表系统，系统级的很多属性和控制方法都放置在该类的内部。该类位于java.lang包。</p>
 <p>currentTimeMillis方法</p>
-<pre><code>public static long currentTimeMillis()</code></pre><p>该方法的作用是返回当前的计算机时间，时间的表达格式为当前计算机时间和GMT时间(格林威治时间)1970年1月1号0时0分0秒所差的毫秒数。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">long</span> <span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>该方法的作用是返回当前的计算机时间，时间的表达格式为当前计算机时间和GMT时间(格林威治时间)1970年1月1号0时0分0秒所差的毫秒数。</p>
 <p>可以直接把这个方法强制转换成date类型。</p>
 <p>代码如下：</p>
-<pre><code>long currentTime = System.currentTimeMillis();
+<pre class=" language-java"><code class="language-java"><span class="token keyword">long</span> currentTime <span class="token operator">=</span> System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-SimpleDateFormat formatter = new SimpleDateFormat("yyyy年-MM月dd日-HH时mm分ss秒");
+SimpleDateFormat formatter <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SimpleDateFormat</span><span class="token punctuation">(</span><span class="token string">"yyyy年-MM月dd日-HH时mm分ss秒"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-Date date = new Date(currentTime);
+Date date <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>currentTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-System.out.println(formatter.format(date));</code></pre><p>运行结果如下：</p>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>formatter<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>date<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>运行结果如下：</p>
 <pre><code>当前时间:2017年-12月19日-10时14分28秒</code></pre><p>另：</p>
 <p>可获得当前的系统和用户属性：</p>
-<pre><code>String osName = System.getProperty(“os.name”);
+<pre class=" language-java"><code class="language-java">String osName <span class="token operator">=</span> System<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span>“os<span class="token punctuation">.</span>name”<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-String user = System.getProperty(“user.name”);
+String user <span class="token operator">=</span> System<span class="token punctuation">.</span><span class="token function">getProperty</span><span class="token punctuation">(</span>“user<span class="token punctuation">.</span>name”<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-System.out.println(“当前操作系统是：” + osName);
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>“当前操作系统是：” <span class="token operator">+</span> osName<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-System.out.println(“当前用户是：” + user);
-</code></pre><p>System.getProperty 这个方法可以得到很多系统的属性。</p>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>“当前用户是：” <span class="token operator">+</span> user<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>System.getProperty 这个方法可以得到很多系统的属性。</p>
 <h3 id="heap和stack有什么区别"><a href="#heap和stack有什么区别" class="headerlink" title="heap和stack有什么区别"></a>heap和stack有什么区别</h3><p>heap: 堆</p>
 <p>stack: 栈</p>
 <ul>
@@ -2012,7 +2047,9 @@ System.out.println(“当前用户是：” + user);
 </ul>
 <h3 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h3><p>Java集合框架图。<br><img src="https://gitee.com/fly_tom/use/raw/master/jc14.png" alt=""></p>
 <p>1) 首先查看jdk中Collection类的源码后:</p>
-<pre><code>public interface Collection&lt;E&gt; extends Iterable&lt;E&gt; {</code></pre><p>通过查看可以发现Collection是一个接口类，其继承了java迭代接口Iterable</p>
+<pre><code>public interface Collection&lt;E&gt; extends Iterable&lt;E&gt; {
+
+}</code></pre><p>通过查看可以发现Collection是一个接口类，其继承了java迭代接口Iterable</p>
 <p><strong>Collection接口中的方法如下:</strong><br><img src="https://gitee.com/fly_tom/use/raw/master/jc13.png" alt=""></p>
 <h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><h4 id="List-三个子类的区别"><a href="#List-三个子类的区别" class="headerlink" title="List 三个子类的区别"></a>List 三个子类的区别</h4><p>ArrayList：底层使用object[]数组实现，内存地址都是连续的便于索引，查询快；在新增的时候需要申请一块连续的内存空间，所以增删比较慢。</p>
 <p>LinkedList: 底层是基于链表实现，链表内存是散乱的，在储存自身内存地址的<br>同时，还储存着下一个元素的内存地址，所以查询慢，增删快。</p>
@@ -2190,6 +2227,12 @@ System.out.println(“当前用户是：” + user);
 <p><strong>Map接口不是继承Collection接口；Map接口用于维护键／值对（key/value pairs），他的实现类有:</strong><br><img src="https://gitee.com/fly_tom/use/raw/master/jc36.png" alt=""></p>
 <h4 id="Map-常用方法"><a href="#Map-常用方法" class="headerlink" title="Map 常用方法"></a>Map 常用方法</h4><p><img src="https://gitee.com/fly_tom/use/raw/master/jc16.png" alt=""></p>
 <h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><p><strong>底层是哈希表数据结构，线程是不同步的，可以存入null键，null值。要保证键的唯一性，需要覆盖hashCode方法，和equals方法。</strong></p>
+<p>查询时间复杂度：HashMap的本质可以认为是一个数组，数组的每个索引被称为桶，每个桶里放着一个单链表，一个节点连着一个节点。很明显通过下标来检索数组元素时间复杂度为O(1)，而且遍历链表的时间复杂度是O(n)，所以在链表长度尽可能短的前提下，HashMap的查询复杂度接近O(1)</p>
+<ul>
+<li>数组：存储区间连续，占用内存严重，寻址容易，插入删除困难；</li>
+<li>链表：存储区间离散，占用内存比较宽松，寻址困难，插入删除容易；</li>
+<li>Hashmap综合应用了这两种数据结构，实现了寻址容易，插入删除也容易。</li>
+</ul>
 <h5 id="HashMap的底层实现"><a href="#HashMap的底层实现" class="headerlink" title="HashMap的底层实现"></a>HashMap的底层实现</h5><blockquote>
 <p><strong>JDK1.8之前</strong></p>
 </blockquote>
@@ -2203,8 +2246,15 @@ System.out.println(“当前用户是：” + user);
 </blockquote>
 <p>相比于之前的版本， JDK1.8之后在解决哈希冲突时有了较大的变化，当链表长度大于阈值（<strong>默认为8</strong>）时，<strong>将链表转化为红黑树</strong>，<strong>以减少搜索时间</strong>。<br><img src="https://gitee.com/fly_tom/use/raw/master/jc35.jpeg" alt=""></p>
 <h4 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h4><p>! 从Hashtable的命名规范就可以看出，t没有大写，并不是我写错了</p>
-<p>数组+链表组成的，数组是 HashMap 的主体，链表则是主要为了解决哈希冲突而存在的，不可以存入null键null值。该集合是线程同步的。</p>
+<p>数组+链表组成的，数组是 HashMap 的主体，链表则是主要为了解决哈希冲突而存在的，不可以存入null键null值。<strong>该集合是线程同步的。</strong></p>
 <p><strong>它是遗留类，不应该去使用它。现在可以使用 ConcurrentHashMap 来支持线程安全，并且 ConcurrentHashMap 的效率会更高，因为 ConcurrentHashMap 引入了分段锁。</strong></p>
+<p><strong>HashMap 和Hashtable的区别</strong></p>
+<ul>
+<li>HashMap是线程不安全的，效率高</li>
+<li>Hashtable是线程安全的，效率低 </li>
+<li>HashMap可以存储null键和null值</li>
+<li>Hashtable不可以存储null键和null值</li>
+</ul>
 <h4 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h4><p>底层是二叉树数据结构。线程不同步。可以用于给map集合中的键进行排序。</p>
 <h4 id="LinkedHashMap："><a href="#LinkedHashMap：" class="headerlink" title="LinkedHashMap："></a>LinkedHashMap：</h4><p>该子类基于哈希表又融入了链表。可以Map集合进行增删提高效率。</p>
 <p>LinkedHashMap是一个根据某种规则有序的hashmap。根据名字，我们也可以看出这个集合是有hash散列的功能的同时也有顺序。hashmap是无法根据某种顺序来访问数据的，例如放入集合的元素先后的顺序。list都有这个功能，可以根据放入集合的先后来访问具体的数据。</p>
@@ -2261,12 +2311,7 @@ System.out.println(“当前用户是：” + user);
 <p>Map类型：ConcurrentMap</p>
 <p>Set类型：ConcurrentSkipListSet、CopyOnWriteArraySet</p>
 <p>List类型：CopyOnWriteArrayList</p>
-<h4 id="CopyOnWrite容器"><a href="#CopyOnWrite容器" class="headerlink" title="CopyOnWrite容器"></a>CopyOnWrite容器</h4><font size="3">
-
-<p>　　CopyOnWrite容器即写时复制的容器。通俗的理解是当我们往一个容器添加元素的时候，不直接往当前容器添加，而是先将当前容器进行Copy，复制出一个新的容器，然后新的容器里添加元素，添加完元素之后，再将原容器的引用指向新的容器。这样做的好处是我们可以对CopyOnWrite容器进行并发的读，而不需要加锁，因为当前容器不会添加任何元素。所以CopyOnWrite容器也是一种读写分离的思想，读和写不同的容器。<br>　　<br>　　CopyOnWrite容器有很多优点，但是同时也存在两个问题，即内存占用问题和数据一致性问题。所以在开发的时候需要注意一下。</p>
-</font>
-
-
+<h4 id="CopyOnWrite容器"><a href="#CopyOnWrite容器" class="headerlink" title="CopyOnWrite容器"></a>CopyOnWrite容器</h4><p>　　CopyOnWrite容器即写时复制的容器。通俗的理解是当我们往一个容器添加元素的时候，不直接往当前容器添加，而是先将当前容器进行Copy，复制出一个新的容器，然后新的容器里添加元素，添加完元素之后，再将原容器的引用指向新的容器。这样做的好处是我们可以对CopyOnWrite容器进行并发的读，而不需要加锁，因为当前容器不会添加任何元素。所以CopyOnWrite容器也是一种读写分离的思想，读和写不同的容器。<br>　　<br>　　CopyOnWrite容器有很多优点，但是同时也存在两个问题，即内存占用问题和数据一致性问题。所以在开发的时候需要注意一下。</p>
 <h3 id="集合面试问题"><a href="#集合面试问题" class="headerlink" title="集合面试问题"></a>集合面试问题</h3><h4 id="Collection-和-Collections的区别"><a href="#Collection-和-Collections的区别" class="headerlink" title="Collection 和 Collections的区别"></a>Collection 和 Collections的区别</h4><hr>
 <p>Collection是接口，是List和Set的父接口</p>
 <p>Collections是工具类，提供了排序，混淆等等很多实用方法</p>
