@@ -7,9 +7,8 @@
     <meta name="keywords" content="java多线程基础, Tom Blog">
     <meta name="description" content="关于线程的文章并发面试题https://www.javazhiyin.com/32391.html
 
-单核 CPU 和多核 CPU来思考一个问题吧。假如 CPU 只有一个，核数也只有一个，多线程还会有优势吗？
-闭上眼，让思维旋转跳跃会。
-来">
+java锁文章
+Java 内存模型Java 内存模型试图屏蔽各种硬件和操作系统的内存访问差异，以实现让 Java 程序在各种平台下都能达到">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -346,14 +345,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        20.8k
+                        21.8k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        76 分
+                        80 分
                     </div>
                     
                 
@@ -371,6 +370,26 @@
             <div id="articleContent">
                 <h2 id="关于线程的文章"><a href="#关于线程的文章" class="headerlink" title="关于线程的文章"></a>关于线程的文章</h2><p>并发面试题<br><a href="https://www.javazhiyin.com/32391.html" target="_blank" rel="noopener">https://www.javazhiyin.com/32391.html</a></p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/jc33.png" alt=""></p>
+<p><strong>java锁文章</strong></p>
+<h2 id="Java-内存模型"><a href="#Java-内存模型" class="headerlink" title="Java 内存模型"></a>Java 内存模型</h2><p>Java 内存模型试图屏蔽各种硬件和操作系统的内存访问差异，以实现让 Java 程序在各种平台下都能达到一致的内存访问效果。</p>
+<h2 id="主内存与工作内存"><a href="#主内存与工作内存" class="headerlink" title="主内存与工作内存"></a>主内存与工作内存</h2><p>处理器上的寄存器的读写的速度比内存快几个数量级，为了解决这种速度矛盾，在它们之间加入了高速缓存。</p>
+<p>加入高速缓存带来了一个新的问题：缓存一致性。如果多个缓存共享同一块主内存区域，那么多个缓存的数据可能会不一致，需要一些协议来解决这个问题。</p>
+<p><a href="https://camo.githubusercontent.com/7e289aaee2d8533d8870f92659a8984be81eb432/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f39343263613064322d396435632d343561342d383963622d3566643839623631393133662e706e67" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/7e289aaee2d8533d8870f92659a8984be81eb432/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f39343263613064322d396435632d343561342d383963622d3566643839623631393133662e706e67" alt="img"></a></p>
+<p>所有的变量都存储在主内存中，每个线程还有自己的工作内存，工作内存存储在高速缓存或者寄存器中，保存了该线程使用的变量的主内存副本拷贝。</p>
+<p>线程只能直接操作工作内存中的变量，不同线程之间的变量值传递需要通过主内存来完成。</p>
+<p><a href="https://camo.githubusercontent.com/fce232dcfc7411192b429ae86765aa9bef029427/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f31353835313535352d356162632d343937642d616433342d6566656431306634336136622e706e67" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/fce232dcfc7411192b429ae86765aa9bef029427/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f31353835313535352d356162632d343937642d616433342d6566656431306634336136622e706e67" alt="img"></a></p>
+<h2 id="内存间交互操作"><a href="#内存间交互操作" class="headerlink" title="内存间交互操作"></a>内存间交互操作</h2><p>Java 内存模型定义了 8 个操作来完成主内存和工作内存的交互操作。</p>
+<p><a href="https://camo.githubusercontent.com/42696b8f0b2cfbf78024f9cd0d806e0e6decb5fe/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f38623765626261642d393630342d343337352d383465332d6634313230393964313730632e706e67" target="_blank" rel="noopener"><img src="https://camo.githubusercontent.com/42696b8f0b2cfbf78024f9cd0d806e0e6decb5fe/68747470733a2f2f63732d6e6f7465732d313235363130393739362e636f732e61702d6775616e677a686f752e6d7971636c6f75642e636f6d2f38623765626261642d393630342d343337352d383465332d6634313230393964313730632e706e67" alt="img"></a></p>
+<ul>
+<li>read：把一个变量的值从主内存传输到工作内存中</li>
+<li>load：在 read 之后执行，把 read 得到的值放入工作内存的变量副本中</li>
+<li>use：把工作内存中一个变量的值传递给执行引擎</li>
+<li>assign：把一个从执行引擎接收到的值赋给工作内存的变量</li>
+<li>store：把工作内存的一个变量的值传送到主内存中</li>
+<li>write：在 store 之后执行，把 store 得到的值放入主内存的变量中</li>
+<li>lock：作用于主内存的变量</li>
+<li>unlock</li>
+</ul>
 <h2 id="单核-CPU-和多核-CPU"><a href="#单核-CPU-和多核-CPU" class="headerlink" title="单核 CPU 和多核 CPU"></a>单核 CPU 和多核 CPU</h2><p>来思考一个问题吧。假如 CPU 只有一个，核数也只有一个，多线程还会有优势吗？</p>
 <p>闭上眼，让思维旋转跳跃会。</p>
 <p>来看答案吧。</p>
@@ -505,11 +524,7 @@
 <h3 id="创建线程的方式"><a href="#创建线程的方式" class="headerlink" title="创建线程的方式"></a>创建线程的方式</h3><blockquote>
 <p>扩充：每次程序启动最少会启动两个线程执行，一个数main线程，一个是垃圾收集线程.</p>
 </blockquote>
-<p>　　在java中如果要创建线程的话，一般有三种方式：<strong>1）继承Thread类；2）实现Runnable接口；3）Callable方式</strong> ; 4）线程池方式
-　　</p>
-<blockquote>
-<p>其实前两种面试说出即可</p>
-</blockquote>
+<p>　　在java中如果要创建线程的话，一般有三种方式：<strong>1）继承Thread类；2）实现Runnable接口；3）Callable方式</strong> ; </p>
 <p><strong>继承Thread类创建</strong></p>
 <p>继承Thread创建并启动多线程有三个步骤：</p>
 <ol>
@@ -609,7 +624,7 @@ class Callss implements Callable&lt;Integer&gt; {
 <ul>
 <li>Runnable没有返回值；Callable可以返回执行结果，是个泛型，和Future、FutureTask配合可以用来获取异步执行的结果</li>
 <li>Callable接口的call()方法允许抛出异常；Runnable的run()方法异常只能在内部消化，不能往上继续抛</li>
-<li>实现Callable接口的线程可以调用Future.cancel取消执行，Runnable方式不支持</li>
+<li>实现Callable接口的线程可以调用<strong>Future.cancel取消执行</strong>，Runnable方式不支持</li>
 </ul>
 <p>注：Callalbe接口支持返回执行结果，需要调用FutureTask.get()得到，此方法会<strong>阻塞主进程</strong>的继续往下执行，如果不调用不会阻塞。</p>
 <p><strong>一个线程的对象只能执行一次start()方法</strong></p>
@@ -688,7 +703,7 @@ class Callss implements Callable&lt;Integer&gt; {
 <span class="token keyword">public</span> <span class="token keyword">long</span> <span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> tid<span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<h4 id="8-线程让步——yield"><a href="#8-线程让步——yield" class="headerlink" title="8.  线程让步——yield():"></a>8.  线程让步——yield():</h4><p>线程让步：暂停当前正在执行的线程对象，并执行其他线程。</p>
+<h4 id="8-yield"><a href="#8-yield" class="headerlink" title="8.  yield():"></a>8.  yield():</h4><p>线程让步：暂停当前正在执行的线程对象，并执行其他线程。</p>
 <p>（1）调用yield()方法让当前线程交出CPU权限，让CPU去执行其他线程。</p>
 <p>（2）yield()方法和sleep()方法类似，不会释放锁，但yield()方法不能控制具体交出CPU的时间,不能由用户指定暂停多长时间。</p>
 <p>（3）yield()方法只能让拥有相同优先级的线程获取CPU执行的机会。</p>
@@ -708,13 +723,54 @@ class Callss implements Callable&lt;Integer&gt; {
     <span class="token function">checkAccess</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token function">resume0</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span></code></pre>
-<h4 id="11-线程加入——join"><a href="#11-线程加入——join" class="headerlink" title="11. 线程加入——join():"></a>11. 线程加入——join():</h4><blockquote>
-<p>假如在main线程中，调用thread.join方法，则main方法会等待thread线程执行完毕或者等待一定的时间。如果调用的是无参join方法，则等待thread执行完毕，如果调用的是指定了时间参数的join方法，则等待一定的时间。 </p>
-</blockquote>
-<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 源码</span>
+<h4 id="11-join"><a href="#11-join" class="headerlink" title="11. join():"></a>11. join():</h4><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 源码</span>
 <span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> InterruptedException <span class="token punctuation">{</span>
     <span class="token function">join</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">//join()等同于join(0)</span>
 <span class="token punctuation">}</span></code></pre>
+<p>在线程中调用另一个线程的 join() 方法，会将当前线程挂起，而不是忙等待，直到目标线程结束。</p>
+<p>对于以下代码，虽然 b 线程先启动，但是因为在 b 线程中调用了 a 线程的 join() 方法，b 线程会等待 a 线程结束才继续执行，因此最后能够保证 a 线程的输出先于 b 线程的输出。</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">JoinExample</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">class</span> <span class="token class-name">A</span> <span class="token keyword">extends</span> <span class="token class-name">Thread</span> <span class="token punctuation">{</span>
+        <span class="token annotation punctuation">@Override</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> <span class="token keyword">class</span> <span class="token class-name">B</span> <span class="token keyword">extends</span> <span class="token class-name">Thread</span> <span class="token punctuation">{</span>
+
+        <span class="token keyword">private</span> A a<span class="token punctuation">;</span>
+
+        <span class="token function">B</span><span class="token punctuation">(</span>A a<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span>a <span class="token operator">=</span> a<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        <span class="token annotation punctuation">@Override</span>
+        <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                a<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">InterruptedException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"B"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        A a <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        B b <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">B</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        b<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        a<span class="token punctuation">.</span><span class="token function">start</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    JoinExample example <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JoinExample</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    example<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// 结果</span>
+A
+B</code></pre>
 <h4 id="12-wait"><a href="#12-wait" class="headerlink" title="12. wait() :"></a>12. wait() :</h4><p>调用该方法的线程进入WATTING状态，只有等待另外线程的通知或中断才会返回，调用wait()方法后，会释放对象的锁。</p>
 <ul>
 <li>wait(long):超时等待最多long毫秒，如果没有通知就超时返回。</li>
@@ -984,9 +1040,21 @@ System.out.println("是否停止2？=" + Thread.interrupted());//false
         <span class="token punctuation">}</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span></code></pre>
+<h3 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h3><p>多个线程不管以何种方式访问某个类，并且在主调代码中不需要进行同步，都能表现正确的行为。</p>
+<p>线程安全有以下几种实现方式：</p>
+<h4 id="不可变"><a href="#不可变" class="headerlink" title="不可变"></a>不可变</h4><p>不可变（Immutable）的对象一定是线程安全的，不需要再采取任何的线程安全保障措施。只要一个不可变的对象被正确地构建出来，永远也不会看到它在多个线程之中处于不一致的状态。多线程环境下，应当尽量使对象成为不可变，来满足线程安全。</p>
+<p>不可变的类型：</p>
+<ul>
+<li>final 关键字修饰的基本数据类型</li>
+<li>String</li>
+<li>枚举类型</li>
+<li>Number 部分子类，如 Long 和 Double 等数值包装类型，BigInteger 和 BigDecimal 等大数据类型。但同为 Number 的原子类 AtomicInteger 和 AtomicLong 则是可变的。</li>
+</ul>
+<p>对于集合类型，可以使用 Collections.unmodifiableXXX() 方法来获取一个不可变的集合。</p>
 <h3 id="Synchronized-amp-Volatile-amp-ThreadLocal"><a href="#Synchronized-amp-Volatile-amp-ThreadLocal" class="headerlink" title="Synchronized &amp; Volatile &amp; ThreadLocal"></a>Synchronized &amp; Volatile &amp; ThreadLocal</h3><h4 id="Synchronized"><a href="#Synchronized" class="headerlink" title="Synchronized"></a>Synchronized</h4><p>造成线程安全问题的主要诱因有两点，一是存在共享数据(也称临界资源)，二是存在多条线程共同操作共享数据。因此为了解决这个问题，我们可能需要这样一个方案，当存在多个线程操作共享数据时，需要保证同一时刻有且只有一个线程在操作共享数据，其他线程必须等到该线程处理完数据后再进行，这种方式有个高尚的名称叫互斥锁，即能达到互斥访问目的的锁，也就是说当一个共享数据被当前正在访问的线程加上互斥锁后，在同一个时刻，其他线程只能处于等待的状态，直到当前线程处理完毕释放该锁。在 Java 中，关键字 synchronized可以保证在同一个时刻，只有一个线程可以执行某个方法或者某个代码块(主要是对方法或者代码块中存在共享数据的操作)，同时我们还应该注意到synchronized另外一个重要的作用，synchronized可保证一个线程的变化(主要是共享数据的变化)被其他线程所看到（保证可见性，完全可以替代Volatile功能），这点确实也是很重要的。</p>
 <p><strong>java的内置锁：</strong> 每个java对象都可以用做一个实现同步的锁，这些锁成为内置锁。线程进入同步代码块或方法的时候会自动获得该锁，在退出同步代码块或方法时会释放该锁。获得内置锁的唯一途径就是进入这个锁的保护的同步代码块或方法。</p>
-<p>java内置锁是一个互斥锁，这就是意味着最多只有一个线程能够获得该锁，当线程A尝试去获得线程B持有的内置锁时，线程A必须等待或者阻塞，知道线程B释放这个锁，如果B线程不释放这个锁，那么A线程将永远等待下去。</p>
+<p>java内置锁是一个<strong>互斥锁</strong>，这就是意味着最多只有一个线程能够获得该锁，当线程A尝试去获得线程B持有的内置锁时，线程A必须等待或者阻塞，知道线程B释放这个锁，如果B线程不释放这个锁，那么A线程将永远等待下去。</p>
+<p><strong>隐式锁</strong>：加锁和解锁的过程都有jvm帮助我们完成（<strong>Lock为显示锁</strong>）</p>
 <p><strong>java的对象锁和类锁：</strong> java的对象锁和类锁在锁的概念上基本上和内置锁是一致的，但是，两个锁实际是有很大的区别的，对象锁是用于对象实例方法，或者一个对象实例上的，类锁是用于类的静态方法或者一个类的class对象上的。我们知道，类的对象实例可以有很多个，但是每个类只有一个class对象，所以不同对象实例的对象锁是互不干扰的，但是每个类只有一个类锁。但是有一点必须注意的是，其实类锁只是一个概念上的东西，并不是真实存在的，它只是用来帮助我们理解锁定实例方法和静态方法的区别的</p>
 <h5 id="synchronized的三种应用方式"><a href="#synchronized的三种应用方式" class="headerlink" title="synchronized的三种应用方式"></a>synchronized的三种应用方式</h5><p>synchronized关键字最主要有以下3种应用方式</p>
 <ul>
@@ -1552,13 +1620,15 @@ try {
 <p>CAS是英文单词Compare And Swap的缩写，翻译过来就是比较并替换。</p>
 <p>CAS机制当中使用了3个基本操作数：内存地址V，旧的预期值A，要修改的新值B。</p>
 <p>更新一个变量的时候，只有当变量的预期值A和内存地址V当中的实际值相同时，才会将内存地址V对应的值修改为B。</p>
-<p>从思想上来说，Synchronized属于悲观锁，悲观地认为程序中的并发情况严重，所以严防死守。CAS属于乐观锁，乐观地认为程序中的并发情况不那么严重，所以让线程不断去尝试更新。</p>
+<p>从思想上来说，<strong>Synchronized属于悲观锁</strong>，悲观地认为程序中的并发情况严重，所以严防死守。<strong>CAS属于乐观锁</strong>，乐观地认为程序中的并发情况不那么严重，所以让线程不断去尝试更新。</p>
+<h4 id="ABA问题以及解决方案"><a href="#ABA问题以及解决方案" class="headerlink" title="ABA问题以及解决方案"></a>ABA问题以及解决方案</h4><p>因为CAS需要在操作值的时候检查下值有没有发生变化，如果没有发生变化则更新，但是如果一个值原来是A，变成了B，又变成了A，那么使用CAS进行检查时会发现它的值没有发生变化，但是实际上却变化了。ABA问题的解决思路就是使用版本号。在变量前面追加上版本号，每次变量更新的时候把版本号加一，那么A－B－A 就会变成1A-2B－3A。 从Java1.5开始JDK的atomic包里提供了一个类AtomicStampedReference来解决ABA问题。这个类的compareAndSet方法作用是首先检查当前引用是否等于预期引用，并且当前标志是否等于预期标志，如果全部相等，则以原子方式将该引用和该标志的值设置为给定的更新值。</p>
 <h4 id="CAS的缺点："><a href="#CAS的缺点：" class="headerlink" title="CAS的缺点："></a>CAS的缺点：</h4><ol>
 <li><p>CPU开销较大<br> 在并发量比较高的情况下，如果许多线程反复尝试更新某一个变量，却又一直更新不成功，循环往复，会给CPU带来很大的压力。</p>
 </li>
-<li><p>不能保证代码块的原子性<br> CAS机制所保证的只是一个变量的原子性操作，而不能保证整个代码块的原子性。比如需要保证3个变量共同进行原子性的更新，就不得不使用Synchronized了。</p>
+<li><p>不能保证代码块的原子性<br> <strong>只能保证一个共享变量的原子操作</strong>，而不能保证整个代码块的原子性。比如需要保证3个变量共同进行原子性的更新，就不得不使用Synchronized了。</p>
 </li>
 </ol>
+<h3 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a>AQS</h3><p><a href="https://tech.meituan.com/2019/12/05/aqs-theory-and-apply.html" target="_blank" rel="noopener">https://tech.meituan.com/2019/12/05/aqs-theory-and-apply.html</a></p>
 <h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><h4 id="多线程中的虚假唤醒"><a href="#多线程中的虚假唤醒" class="headerlink" title="多线程中的虚假唤醒"></a>多线程中的虚假唤醒</h4><p><strong>虚假唤醒</strong>： 两个线程以上会造成虚假唤醒的情况。虚假唤醒（spurious wakeup）是一个表象，即在多处理器的系统下发出wait的程序有可能在没有notify唤醒的情形下苏醒继续执行。以运行在linux的hotspot虚拟机上的java程序为例，wait方法在jvm执行时实质是调用了底层pthread_cond_wait/pthread_cond_timedwait函数，挂起等待条件变量来达到线程间同步通信的效果，而底层wait函数在设计之初为了不减慢条件变量操作的效率并没有去保证每次唤醒都是由notify触发，而是把这个任务交由上层应用去实现，即使用者需要定义一个循环去判断是否条件真能满足程序继续运行的需求，当然这样的实现也可以避免因为设计缺陷导致程序异常唤醒的问题。</p>
 <p><strong>解决</strong>： 所以为了避免这种情况，只好用while循环避免虚假唤醒。（因为if只判断一次，不能避免虚假唤醒）</p>
 <p>下面是使用Lock锁完成消费者和生产者案例，里面使用了while循环避免了虚假唤醒。</p>

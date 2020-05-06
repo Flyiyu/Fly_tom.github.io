@@ -346,7 +346,7 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        7.1k
+                        7.2k
                     </div>
                     
 
@@ -385,8 +385,8 @@
 <h3 id="Spring-Boot-的主要优点："><a href="#Spring-Boot-的主要优点：" class="headerlink" title="Spring Boot 的主要优点："></a>Spring Boot 的主要优点：</h3><ul>
 <li>为所有 Spring 开发者更快的入门</li>
 <li>开箱即用，提供各种默认配置来简化项目配置</li>
-<li>内嵌式容器简化 Web 项目</li>
-<li>没有冗余代码生成和 XML 配置的要求</li>
+<li>内嵌式容器Tomcat<code></code>Jetty`简化 Web 项目</li>
+<li>简化 XML 配置</li>
 </ul>
 <p>嵌入式<code>Tomcat</code>、<code>Jetty</code>、 <code>Undertow</code>容器（无需部署war文件）。</p>
 <p>提供的<code>starters</code> 简化构建配置</p>
@@ -409,6 +409,8 @@
 <h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><blockquote>
 <p> 简而言之，我们可以说<code>Spring Boot</code>只是<code>Spring</code>本身的扩展，使开发，测试和部署更加方便。</p>
 </blockquote>
+<h3 id="Spring-和-SpringMVC"><a href="#Spring-和-SpringMVC" class="headerlink" title="Spring 和 SpringMVC"></a><strong>Spring 和 SpringMVC</strong></h3><p>Spring是一个一站式的轻量级的java开发框架，核心是控制反转（IOC）和面向切面（AOP），针对于开发的WEB层(springMvc)、业务层(Ioc)、持久层(jdbcTemplate)等都提供了多种配置解决方案；</p>
+<p>SpringMVC是Spring基础之上的一个MVC框架，主要处理web开发的路径映射和视图渲染，属于Spring框架中WEB层开发的一部分；</p>
 <h3 id="SpringBoot-和-SpringMVC-区别"><a href="#SpringBoot-和-SpringMVC-区别" class="headerlink" title="SpringBoot 和 SpringMVC 区别"></a>SpringBoot 和 SpringMVC 区别</h3><p>SpringBoot 是一个快速开发的框架,能够快速的整合第三方框架，简化 XML 配置，全部采用注解形式，内<br>嵌 Tomcat 容器,帮助开发者能够实现快速开发。SpringMVC 是一个封装了 Servlet API 的 MVC 框架，就像<br>其它的 MVC 框架，比如 Struts 一样负责处理 web 请求。SpringBoot 的 Web 组件默认集成的是 SpringMVC<br>框架。SpringMVC 通常被叫做控制层框架。</p>
 <h3 id="SpringBoot-和-SpringCloud-区别"><a href="#SpringBoot-和-SpringCloud-区别" class="headerlink" title="SpringBoot 和 SpringCloud 区别"></a>SpringBoot 和 SpringCloud 区别</h3><p>SpringCloud 依赖于 SpringBoot 组件，或者说 Spring Cloud 构建于 Spring Boot 之上。它为微服务中涉及的<br>配置管理、服务治理、断路器、智能路由、控制总线、全局锁、决策竞选、分布式会话和集群状态管理通<br>常我们使用 SpringMVC 编写 http 协议接口，同时使用 SpringCloud 作为一套完整的微服务解决框架。</p>
 <h2 id="Spring-Boot-的核心：约定优于配置"><a href="#Spring-Boot-的核心：约定优于配置" class="headerlink" title="Spring Boot 的核心：约定优于配置"></a>Spring Boot 的核心：约定优于配置</h2><p>那么什么是约定优于配置呢？</p>

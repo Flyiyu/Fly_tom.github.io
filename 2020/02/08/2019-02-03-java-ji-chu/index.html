@@ -425,6 +425,7 @@ Java语言概述请描述一下javajava是一个面向对象的编程语言，�
 <li>新生代：存活对象少、垃圾多</li>
 <li>老年代：存活对象多、垃圾少</li>
 </ul>
+<h3 id="实例对象是怎样存储的？"><a href="#实例对象是怎样存储的？" class="headerlink" title="实例对象是怎样存储的？"></a>实例对象是怎样存储的？</h3><p><strong>对象的实例存储在堆空间，对象的元数据存储在方法区，对象的引用存储在栈中。</strong></p>
 <h2 id="基础知识点"><a href="#基础知识点" class="headerlink" title="基础知识点"></a>基础知识点</h2><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><hr>
 <p>String是类类型，不是基本类型。</p>
 <p>基本类型 有八种：整型 （4种）字符型 （1种）浮点型 （2种）布尔型（1种）</p>
@@ -2069,28 +2070,6 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 <h4 id="CopyOnWriteArrayList"><a href="#CopyOnWriteArrayList" class="headerlink" title="CopyOnWriteArrayList"></a>CopyOnWriteArrayList</h4><h5 id="1-读写分离"><a href="#1-读写分离" class="headerlink" title="1. 读写分离"></a>1. 读写分离</h5><p>写操作在一个复制的数组上进行，读操作还是在原始数组中进行，读写分离，互不影响。</p>
 <p>写操作需要加锁，防止并发写入时导致写入数据丢失。</p>
 <p>写操作结束之后需要把原始数组指向新的复制数组。</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">add</span><span class="token punctuation">(</span>E e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">final</span> ReentrantLock lock <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span>lock<span class="token punctuation">;</span>
-    lock<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">try</span> <span class="token punctuation">{</span>
-        Object<span class="token punctuation">[</span><span class="token punctuation">]</span> elements <span class="token operator">=</span> <span class="token function">getArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span> len <span class="token operator">=</span> elements<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
-        Object<span class="token punctuation">[</span><span class="token punctuation">]</span> newElements <span class="token operator">=</span> Arrays<span class="token punctuation">.</span><span class="token function">copyOf</span><span class="token punctuation">(</span>elements<span class="token punctuation">,</span> len <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        newElements<span class="token punctuation">[</span>len<span class="token punctuation">]</span> <span class="token operator">=</span> e<span class="token punctuation">;</span>
-        <span class="token function">setArray</span><span class="token punctuation">(</span>newElements<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
-        lock<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">setArray</span><span class="token punctuation">(</span>Object<span class="token punctuation">[</span><span class="token punctuation">]</span> a<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    array <span class="token operator">=</span> a<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token annotation punctuation">@SuppressWarnings</span><span class="token punctuation">(</span><span class="token string">"unchecked"</span><span class="token punctuation">)</span>
-<span class="token keyword">private</span> E <span class="token function">get</span><span class="token punctuation">(</span>Object<span class="token punctuation">[</span><span class="token punctuation">]</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token punctuation">(</span>E<span class="token punctuation">)</span> a<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span></code></pre>
 <h5 id="2-适用场景"><a href="#2-适用场景" class="headerlink" title="2. 适用场景"></a>2. 适用场景</h5><p>CopyOnWriteArrayList 在写操作的同时允许读操作，大大提高了读操作的性能，因此很适合读多写少的应用场景。</p>
 <p>但是 CopyOnWriteArrayList 有其缺陷：</p>
 <p>内存占用：在写操作时需要复制一个新的数组，使得内存占用为原来的两倍左右；</p>
