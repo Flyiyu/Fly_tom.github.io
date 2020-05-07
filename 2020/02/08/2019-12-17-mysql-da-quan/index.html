@@ -666,10 +666,7 @@
 <p><strong>不可重复读：</strong> 事务 A 多次读取同一数据，事务 B 在事务A多次读取的过程中，对数据作了更新并提交，导致事务A多次读取同一数据时，结果因此本事务先后两次读到的数据结果会不一致。</p>
 <p><strong>可重复读：</strong> 在同一个事务里，SELECT的结果是事务开始时时间点的状态，因此，同样的SELECT操作读到的结果会是一致的。但是，会有幻读现象</p>
 <p><strong>串行化：</strong> 最高的隔离级别，在这个隔离级别下，不会产生任何异常。并发的事务，就像事务是在一个个按照顺序执行一样</p>
-<p>l 未提交读（READ UNCOMMITED）脏读</p>
-<p>l 已提交读 （READ COMMITED）不可重复读</p>
-<p>l 可重复读（REPEATABLE READ）</p>
-<p>l 可串行化（SERIALIZABLE）</p>
+<p> <img src="https://gitee.com/fly_tom/use/raw/master/mysql5.png" alt=""></p>
 <p><strong>MySQL 支持 4 种事务隔离级别.</strong></p>
 <p>事务的隔离级别要得到底层数据库引擎的支持, 而不是应用程序或者框架的支持.</p>
 <p><strong>Oracle 支持的 2 种事务隔离级别：</strong> <strong>READ_COMMITED , SERIALIZABLE</strong></p>

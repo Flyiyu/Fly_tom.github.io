@@ -343,14 +343,14 @@ Java语言概述请描述一下javajava是一个面向对象的编程语言，�
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        36.5k
+                        36.7k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        137 分
+                        138 分
                     </div>
                     
                 
@@ -2079,6 +2079,14 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 </blockquote>
 <p>Vector 的数据结构和使用方法与ArrayList差不多。最大的不同就是Vector是线程安全的。几乎所有的对数据操作的方法都被synchronized关键字修饰。synchronized是线程同步的，当一个线程已经获得Vector对象的锁时，其他线程必须等待直到该锁被释放。从这里就可以得知Vector的性能要比ArrayList低。<br>若想要一个高性能，又是线程安全的ArrayList，可以使用Collections.synchronizedList(list);方法或者使用CopyOnWriteArrayList集合</p>
 <h4 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h4><p>基于双向循环链表实现的非线程安全的集合。查询元素慢，插入，删除中间元素快。</p>
+<p>使用 Node 存储链表节点信息。</p>
+<pre><code>private static class Node&lt;E&gt; {
+    E item;
+    Node&lt;E&gt; next;
+    Node&lt;E&gt; prev;
+}</code></pre><p>每个链表存储了 first 和 last 指针：</p>
+<pre><code>transient Node&lt;E&gt; first;
+transient Node&lt;E&gt; last;</code></pre><p><img src="https://gitee.com/fly_tom/use/raw/master/jc60.png" alt=""></p>
 <p><strong>数组是将元素在内存中连续存储的；它的优点：</strong>因为数据是<strong>连续存储</strong>的，<strong>内存地址连续</strong>，所以在查找数据的时候<strong>效率比较高</strong>；<strong>它的缺点</strong>：在存储之前，我们需要申请一块<strong>连续的内存空间</strong>，并且在编译的时候就必须确定好它的空间的大小。在运行的时候空间的大小是无法随着你的需要进行增加和减少而改变的，当数据量比较大的时候，有可能会出现越界的情况，数据比较小的时候，又有可能会浪费掉内存空间。在改变数据个数时，增加、插入、删除数据效率比较低链表是动态申请内存空间，不需要像数组需要提前申请好内存的大小，<strong>链表只需在用的时候申请就可以</strong>，根据需<br>要来<strong>动态申请或者删除内存空间</strong>，对于数据增加和删除以及插入比数组灵活。还有就是链表中数据在内存中可以在任意的位置，通过应用来关联数据（就是通过存在元素的指针来联系）</p>
 <h5 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h5><p>Stack 是栈，它继承于Vector。它的特性是：先进后出(FILO, First In Last Out)。</p>
 <h4 id="几种集合的区别"><a href="#几种集合的区别" class="headerlink" title="几种集合的区别"></a>几种集合的区别</h4><p>ArrayList查询快，写数据慢；LinkedList查询慢，写数据快<br>ArrayList查询快是因为底层是由数组实现，new的内存地址是连续的，通过下标定位数据快。写数据慢是因为复制数组耗时。LinkedList底层是双向循环链表，查询数据依次遍历慢。写数据只需修改指针引用。<br>ArrayList和LinkedList都不是线程安全的，小并发量的情况下可以使用Vector，若并发量很多，且读多写少可以考虑使用CopyOnWriteArrayList。</p>
@@ -2212,6 +2220,31 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 <li>链表：存储区间离散，占用内存比较宽松，寻址困难，插入删除容易；</li>
 <li>Hashmap综合应用了这两种数据结构，实现了寻址容易，插入删除也容易。</li>
 </ul>
+<p><strong>和扩容相关的参数主要有：capacity、size、threshold 和 load_factor。</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>capacity</td>
+<td>table 的容量大小，默认为 16。需要注意的是 capacity 必须保证为 2 的 n 次方。</td>
+</tr>
+<tr>
+<td>size</td>
+<td>键值对数量。</td>
+</tr>
+<tr>
+<td>threshold</td>
+<td>size 的临界值，当 size 大于等于 threshold 就必须进行扩容操作。</td>
+</tr>
+<tr>
+<td>loadFactor</td>
+<td>装载因子，table 能够使用的比例，threshold = (int)(capacity* loadFactor)。</td>
+</tr>
+</tbody></table>
 <h5 id="HashMap的底层实现"><a href="#HashMap的底层实现" class="headerlink" title="HashMap的底层实现"></a>HashMap的底层实现</h5><blockquote>
 <p><strong>JDK1.8之前</strong></p>
 </blockquote>
@@ -2397,6 +2430,15 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 <span class="token punctuation">}</span></code></pre>
 <h3 id="Pattern类"><a href="#Pattern类" class="headerlink" title="Pattern类"></a>Pattern类</h3><p><img src="https://gitee.com/fly_tom/use/raw/master/jc12.png" alt=""></p>
 <h2 id="io流"><a href="#io流" class="headerlink" title="io流"></a>io流</h2><p>Java中使用IO(输入输出）来读取和写入，读写设备上的数据、硬盘文件、内存、键盘……，根据数据的走向可分为输入流和输出流，这个走向是以内存为基准的，即往内存中读数据是输入流，从内存中往外写是输出流。</p>
+<p><strong>Java 的 I/O 大概可以分成以下几类：</strong></p>
+<ul>
+<li>磁盘操作：File</li>
+<li>字节操作：InputStream 和 OutputStream</li>
+<li>字符操作：Reader 和 Writer</li>
+<li>对象操作：Serializable</li>
+<li>网络操作：Socket</li>
+<li>新的输入/输出：NIO</li>
+</ul>
 <h4 id="IO-介绍"><a href="#IO-介绍" class="headerlink" title="IO 介绍"></a>IO 介绍</h4><p>我们通常所说的 BIO 是相对于 NIO 来说的，BIO 也就是 Java 开始之初推出的 IO 操作模块，BIO 是 BlockingIO 的缩写，顾名思义就是阻塞 IO 的意思。</p>
 <p><strong>根据处理的数据类型可分为字节流和字符流</strong></p>
 <p>  1.字节流可以处理所有数据类型的数据，在java中以Stream结尾</p>
