@@ -343,14 +343,14 @@ Java语言概述请描述一下javajava是一个面向对象的编程语言，�
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        36.7k
+                        34.6k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        138 分
+                        131 分
                     </div>
                     
                 
@@ -401,31 +401,9 @@ Java语言概述请描述一下javajava是一个面向对象的编程语言，�
 <li>利用反射，调用Class类的或者是Constructor类的newInstance（）方法</li>
 <li>用反序列化，调用ObjectInputStream类的readObject（）方法</li>
 </ul>
-<h3 id="JVM的垃圾回收机制"><a href="#JVM的垃圾回收机制" class="headerlink" title="JVM的垃圾回收机制"></a>JVM的垃圾回收机制</h3><p>GC是垃圾收集的意思（Gabage Collection）,内存处理是编程人员容易出现问题的地方，忘记或者错误的内存回收会导致程序或系统的不稳定甚至崩溃，Java提供的GC功能可以自动监测对象是否超过作用域从而达到自动回收内存的目的，Java语言没有提供释放已分配内存的显示操作方法。垃圾回收主要针对的是堆内存(heap)，</p>
-<h4 id="什么时候触发我们的GC机制"><a href="#什么时候触发我们的GC机制" class="headerlink" title="什么时候触发我们的GC机制"></a>什么时候触发我们的GC机制</h4><p>　　① 在程序空闲的时候。<br>　　② 手动调用system.gc()。不推荐，因为调用的时候开销很大会严重影响程序运行，更有甚者程序直接挂掉；如果你想跑路就大胆尝试吧！<br>　　③Java堆内存不足时,GC会被调用。当应用线程在运行,并在运行过程中创建新对象,若这时内存空间不足,JVM就会强制地调用GC线程,以便回收内存用于新的分配。若GC一次之后仍不能满足内存分配的要求,JVM会再进行两次GC作进一步的尝试,若仍无法满足要求,则 JVM将报“out of memory”（内存泄露）这是灰常严重的情况，这时Java应用将停止。<br>　　出现内存泄露的集中情况：<br>　　①静态集合类像HashMap、Vector等<br>　　②各种连接，数据库连接，网络连接，IO连接等没有显示调用close关闭，不被GC回收导致内存泄露。<br>　　③监听器的使用，在释放对象的同时没有相应删除监听器的时候也可能导致内存泄露。</p>
-<p>　　顺便提一下 Minor GC、Full GC、OOM什么时候触发：<br>　　创建对象是新生代的Eden空间调用Minor GC；当升到老年代的对象大于老年代剩余空间Full GC；GC与非GC时间耗时超过了GCTimeRatio的限制引发OOM。</p>
-<p><strong>JVM的内存管理结构:</strong></p>
-<p><img src="https://gitee.com/fly_tom/use/raw/master/jc40.png" alt=""></p>
-<h4 id="如何判断对象是否需要回收？"><a href="#如何判断对象是否需要回收？" class="headerlink" title="如何判断对象是否需要回收？"></a>如何判断对象是否需要回收？</h4><p>有两种（采用第二种方式）</p>
-<p>​    1 引用计数法(但是并没有采用)</p>
-<p>为每一个创建的对象分配一个引用计数器，用来存储该对象被引用的个数。当该个数为零，意味着没有人再使用这个对象，可以认为“对象死亡”。但是，这种方案存在严重的问题，就是无法检测“循环引用”：当两个对象互相引用，即时它俩都不被外界任何东西引用，它俩的计数都不为零，因此永远不会被回收。而实际上对于开发者而言，这两个对象已经完全没有用处了。</p>
-<p>​    2、<strong>可达性分析</strong>（采用）</p>
-<p>这种方案是目前主流语言里采用的对象存活性判断方案。基本思路是把所有引用的对象想象成一棵树，从树的根结点 GC Roots 出发，持续遍历找出所有连接的树枝对象，这些对象则被称为“可达”对象，或称“存活”对象。其余的对象则被视为“死亡”的“不可达”对象，或称“垃圾”。</p>
-<h4 id="有哪些方式来回收这些垃圾呢？"><a href="#有哪些方式来回收这些垃圾呢？" class="headerlink" title="有哪些方式来回收这些垃圾呢？"></a>有哪些方式来回收这些垃圾呢？</h4><p>通过java的分代回收机制，堆中的对象主要分为三种</p>
-<ul>
-<li><p>刚刚创建的对象。在代码运行时会持续不断地创造新的对象，这些新创建的对象会被统一放在一起。因为有很多局部变量等在新创建后很快会变成不可达的对象，快速死去，因此这块区域的特点是存活对象少，垃圾多。形象点描述这块区域为：新生代；</p>
-</li>
-<li><p>存活了一段时间的对象。这些对象早早就被创建了，而且一直活了下来。我们把这些存活时间较长的对象放在一起，它们的特点是存活对象多，垃圾少。形象点描述这块区域为：老年代；</p>
-</li>
-<li><p>永久存在的对象。比如一些静态文件，这些对象的特点是不需要垃圾回收，永远存活。形象点描述这块区域为：永久代。（不过在 Java 8 里已经把永久代删除了，把这块内存空间给了元空间，后续文章再讲解。）</p>
-</li>
-</ul>
-<p>也就是说，常规的 Java 堆至少包括了 新生代 和 老年代 两块内存区域，而且这两块区域有很明显的特征：</p>
-<ul>
-<li>新生代：存活对象少、垃圾多</li>
-<li>老年代：存活对象多、垃圾少</li>
-</ul>
-<h3 id="实例对象是怎样存储的？"><a href="#实例对象是怎样存储的？" class="headerlink" title="实例对象是怎样存储的？"></a>实例对象是怎样存储的？</h3><p><strong>对象的实例存储在堆空间，对象的元数据存储在方法区，对象的引用存储在栈中。</strong></p>
+<h3 id="实例对象是怎样存储的？"><a href="#实例对象是怎样存储的？" class="headerlink" title="实例对象是怎样存储的？"></a>实例对象是怎样存储的？</h3><blockquote>
+<p><strong>对象的实例存储在堆空间，对象的元数据存储在方法区，对象的引用存储在栈中。</strong></p>
+</blockquote>
 <h2 id="基础知识点"><a href="#基础知识点" class="headerlink" title="基础知识点"></a>基础知识点</h2><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><hr>
 <p>String是类类型，不是基本类型。</p>
 <p>基本类型 有八种：整型 （4种）字符型 （1种）浮点型 （2种）布尔型（1种）</p>
@@ -540,111 +518,114 @@ switch (is) {
 <pre><code> for (int is = 0; is &lt; 100; is++) {
      System.out.println("好好学习！");
  }</code></pre><h3 id="break-amp-amp-continue"><a href="#break-amp-amp-continue" class="headerlink" title="break &amp;&amp; continue"></a>break &amp;&amp; continue</h3><pre><code>continue 作用：跳过循环体中剩余的语句而执行下一次循环
-break语句终止某个循环，程序跳转到循环块外的下一条语句</code></pre><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><pre><code>public static void main(String[] args) {
-    //声明数组
-    String [] arr;
-    int arr1[];
+break语句终止某个循环，程序跳转到循环块外的下一条语句</code></pre><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//声明数组</span>
+    String <span class="token punctuation">[</span><span class="token punctuation">]</span> arr<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> arr1<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-    //初始化数组
-    int arr2[]=new int[]{1,2,3,4,5};
-    arr2[5] = 12
-    String[] array1={"马超","马云","关羽","刘备","张飞"};
-    String[] array2=new String[]{"黄渤","张艺兴","孙红雷","小猪","牙哥","黄磊"};
+    <span class="token comment" spellcheck="true">//初始化数组</span>
+    <span class="token keyword">int</span> arr2<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    arr2<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">12</span>
+    String<span class="token punctuation">[</span><span class="token punctuation">]</span> array1<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">"马超"</span><span class="token punctuation">,</span><span class="token string">"马云"</span><span class="token punctuation">,</span><span class="token string">"关羽"</span><span class="token punctuation">,</span><span class="token string">"刘备"</span><span class="token punctuation">,</span><span class="token string">"张飞"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    String<span class="token punctuation">[</span><span class="token punctuation">]</span> array2<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token string">"黄渤"</span><span class="token punctuation">,</span><span class="token string">"张艺兴"</span><span class="token punctuation">,</span><span class="token string">"孙红雷"</span><span class="token punctuation">,</span><span class="token string">"小猪"</span><span class="token punctuation">,</span><span class="token string">"牙哥"</span><span class="token punctuation">,</span><span class="token string">"黄磊"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
 
-    String[] array=new String[5];
-
-
-    //查看数组的长度
-    int length=array1.length;
-    System.out.println("length：  "+array1.length);
-
-    //输出数组
-//      System.out.println(array1);     //结果：[Ljava.lang.String;@32f22097
-    System.out.println("arr2:  "+Arrays.toString(arr2));
-
-    //遍历数组
-    for (int i = 0; i &lt; array1.length; i++) {
-//          System.out.println(array1[i]);
-    }
-    //int数组转成string数组
-    int[]  array3={1,2,3,4,5,6,7,8,9,0};
-    String arrStrings=Arrays.toString(array3);
-//      System.out.println(arrStrings);
-
-    //从array中创建arraylist
-    ArrayList&lt;String&gt; arrayList=new ArrayList&lt;String&gt;(Arrays.asList(array1));
-    System.out.println(arrayList);
-
-    //数组中是否包含某一个值
-    String a="马超";
-    if (Arrays.asList(array1).contains(a)) {
-        System.out.println("马超在这里");
-    }
-
-    //将数组转成set集合
-    Set&lt;String&gt; set=new HashSet&lt;String&gt;(Arrays.asList(array2));
-    System.out.println(set);
-
-    //将数组转成list集合
-    List&lt;String&gt; list=new ArrayList&lt;String&gt;();
-    for (int i = 0; i &lt; array2.length; i++) {
-        list.add(array2[i]);
-    }
-    String[] arrStrings2={"1","2","3"};
-    List&lt;String &gt; list2=java.util.Arrays.asList(arrStrings2);
-    System.out.println(list2);
+    String<span class="token punctuation">[</span><span class="token punctuation">]</span> array<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
 
-    //Arrays.fill()填充数组
-    int[] arr3=new int[5];
-    Arrays.fill(arr3, 10);  //将数组全部填充10
-    for (int i = 0; i &lt; arr3.length; i++) {
-        System.out.println(arr3[i]);
-    }
+    <span class="token comment" spellcheck="true">//查看数组的长度</span>
+    <span class="token keyword">int</span> length<span class="token operator">=</span>array1<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"length：  "</span><span class="token operator">+</span>array1<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    //数组排序
-    int[] arr4 = {3, 7, 2, 1, 9};
-    Arrays.sort(arr4);
-    for (int i = 0; i &lt; arr4.length; i++) {
-        System.out.println(arr4[i]);
-    }
+    <span class="token comment" spellcheck="true">//输出数组</span>
+    <span class="token comment" spellcheck="true">// System.out.println(array1);     </span>
+    <span class="token comment" spellcheck="true">//结果：[Ljava.lang.String;@32f22097</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"arr2:  "</span><span class="token operator">+</span>Arrays<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span>arr2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    int[] arr5 = {3, 7, 2, 1, 9,3,45,7,8,8,3,2,65,34,5};
-    Arrays.sort(arr5, 1, 4);  //从第几个到第几个之间的进行排序
-    for (int i = 0; i &lt; arr5.length; i++) {
-        System.out.println(arr5[i]);
-    }
+    <span class="token comment" spellcheck="true">//遍历数组</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> array1<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//   System.out.println(array1[i]);</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//int数组转成string数组</span>
+    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span>  array3<span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    String arrStrings<span class="token operator">=</span>Arrays<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span>array3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// System.out.println(arrStrings);</span>
+
+    <span class="token comment" spellcheck="true">//从array中创建arraylist</span>
+    ArrayList<span class="token operator">&lt;</span>String<span class="token operator">></span> arrayList<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">(</span>Arrays<span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span>array1<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>arrayList<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//数组中是否包含某一个值</span>
+    String a<span class="token operator">=</span><span class="token string">"马超"</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>Arrays<span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span>array1<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"马超在这里"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//将数组转成set集合</span>
+    Set<span class="token operator">&lt;</span>String<span class="token operator">></span> set<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">(</span>Arrays<span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span>array2<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>set<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//将数组转成list集合</span>
+    List<span class="token operator">&lt;</span>String<span class="token operator">></span> list<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> array2<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>array2<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    String<span class="token punctuation">[</span><span class="token punctuation">]</span> arrStrings2<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">"1"</span><span class="token punctuation">,</span><span class="token string">"2"</span><span class="token punctuation">,</span><span class="token string">"3"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    List<span class="token operator">&lt;</span>String <span class="token operator">></span> list2<span class="token operator">=</span>java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Arrays<span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span>arrStrings2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>list2<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
 
-    //复制数组
-    int[] arr6 = {3, 7, 2, 1};
-    int[] arr7=Arrays.copyOf(arr6, 10);  //指定新数组的长度
+    <span class="token comment" spellcheck="true">//Arrays.fill()填充数组</span>
+    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr3<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    Arrays<span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span>arr3<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//将数组全部填充10</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arr3<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>arr3<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    int[] arr8=Arrays.copyOfRange(arr6, 1, 3); //只复制从索引[1]到索引[3]之间的元素（不包括索引[3]的元素）
-    for (int i = 0; i &lt; arr8.length; i++) {
-        System.out.println(arr8[i]);
-    }
+    <span class="token comment" spellcheck="true">//数组排序</span>
+    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr4 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    Arrays<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>arr4<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arr4<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>arr4<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    //比较两个数组
-    int[] arr9 = {1, 2, 3, 4,5,6,7,8,9,0};
-    boolean arr10=Arrays.equals(arr6, arr9);
-    System.out.println(arr10);
+    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr5 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">45</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">65</span><span class="token punctuation">,</span><span class="token number">34</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    Arrays<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span>arr5<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//从第几个到第几个之间的进行排序</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arr5<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>arr5<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 
-    //去重复
-    //利用set的特性
-    int[] arr11 = {1, 2, 3, 4,5,6,7,8,9,0,3,2,4,5,6,7,4,32,2,1,1,4,6,3};
-    Set&lt;Integer&gt; set2=new HashSet&lt;Integer&gt;();
-    for (int i = 0; i &lt; arr11.length; i++) {
-        set2.add(arr11[i]);
-    }
-        System.out.println(set2);
-    int[] arr12 = new int[set2.size()];
-    int j=0;
-    for (Integer i:set2) {
-        arr12[j++]=i;
-    }
-    System.out.println(Arrays.toString(arr12));
-}</code></pre><h3 id="OOP-继承-封装-多态-抽象"><a href="#OOP-继承-封装-多态-抽象" class="headerlink" title="OOP 继承 封装 多态 抽象"></a>OOP 继承 封装 多态 抽象</h3><p><strong>笔试回答即可</strong></p>
+
+    <span class="token comment" spellcheck="true">//复制数组</span>
+    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr6 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr7<span class="token operator">=</span>Arrays<span class="token punctuation">.</span><span class="token function">copyOf</span><span class="token punctuation">(</span>arr6<span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">//指定新数组的长度</span>
+    <span class="token comment" spellcheck="true">//只复制从索引[1]到索引[3]之间的元素（不包括索引[3]的元素）</span>
+    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr8<span class="token operator">=</span>Arrays<span class="token punctuation">.</span><span class="token function">copyOfRange</span><span class="token punctuation">(</span>arr6<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arr8<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>arr8<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">//比较两个数组</span>
+    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr9 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">boolean</span> arr10<span class="token operator">=</span>Arrays<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>arr6<span class="token punctuation">,</span> arr9<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>arr10<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">//去重复</span>
+    <span class="token comment" spellcheck="true">//利用set的特性</span>
+    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr11 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">32</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+    Set<span class="token operator">&lt;</span>Integer<span class="token operator">></span> set2<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token operator">&lt;</span>Integer<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> arr11<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        set2<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>arr11<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>set2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> arr12 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>set2<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> j<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>Integer i<span class="token operator">:</span>set2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        arr12<span class="token punctuation">[</span>j<span class="token operator">++</span><span class="token punctuation">]</span><span class="token operator">=</span>i<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>Arrays<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span>arr12<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="OOP-继承-封装-多态-抽象"><a href="#OOP-继承-封装-多态-抽象" class="headerlink" title="OOP 继承 封装 多态 抽象"></a>OOP 继承 封装 多态 抽象</h3><p><strong>笔试回答即可</strong></p>
 <p>多态</p>
 <blockquote>
 <p>多态是指程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定，主要体现在编译时的多态性（重载），运行时的多态性（重写）</p>
@@ -2902,35 +2883,7 @@ public class HelloWorld {
 </ul>
 </li>
 </ul>
-<h4 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h4><h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><h3 id="JVM的内存管理结构"><a href="#JVM的内存管理结构" class="headerlink" title="JVM的内存管理结构:"></a><strong>JVM的内存管理结构:</strong></h3><p><img src="https://gitee.com/fly_tom/use/raw/master/jc40.png" alt=""></p>
-<blockquote>
-<p><strong>JVM内存分为线程私有区和线程共享区</strong> </p>
-</blockquote>
-<h4 id="线程私有区"><a href="#线程私有区" class="headerlink" title="线程私有区"></a><strong>线程私有区</strong></h4><ol>
-<li><p><strong>程序计数器</strong><br>当同时进行的线程数超过CPU数或其内核数时，就要通过时间片轮询分派CPU的时间资源，不免发生线<br>程切换。这时，每个线程就需要一个属于自己的计数器来记录下一条要运行的指令。如果执行的是JAVA<br>方法，计数器记录正在执行的java字节码地址，如果执行的是native方法，则计数器为空。</p>
-</li>
-<li><p><strong>虚拟机栈</strong><br>线程私有的，与线程在同一时间创建。管理JAVA方法执行的内存模型。每个方法执行时都会创建一个桢<br>栈来存储方法的的变量表、操作数栈、动态链接方法、返回值、返回地址等信息。栈的大小决定了方法<br>调用的可达深度（递归多少层次，或嵌套调用多少层其他方法，-Xss参数可以设置虚拟机栈大小）。栈<br>的大小可以是固定的，或者是动态扩展的。如果请求的栈深度大于最大可用深度，则抛出<br>stackOverflowError；如果栈是可动态扩展的，但没有内存空间支持扩展，则抛出<br>OutofMemoryError。</p>
-<p>使用jclasslib工具可以查看class类文件的结构。下图为栈帧结构图： </p>
-<p><img src="https://gitee.com/fly_tom/use/raw/master/jc41.png" alt=""></p>
-</li>
-<li><p><strong>本地方法栈</strong><br>与虚拟机栈作用相似。但它不是为Java方法服务的，而是<strong>本地方法native</strong>（C语言）。由于规范对这块没有强<br>制要求，不同虚拟机实现方法不同 </p>
-</li>
-</ol>
-<h4 id="线程共享区"><a href="#线程共享区" class="headerlink" title="线程共享区"></a><strong>线程共享区</strong></h4><ol>
-<li><p>方法区<br>线程共享的，用于存放被虚拟机加载的类的元数据信息，如常量、静态变量和即时编译器编译后的代<br>码。若要分代，算是永久代（老年代），以前类大多“static”的，很少被卸载或收集，现回收废弃常量和<br>无用的类。其中运行时常量池存放编译生成的各种常量。（如果hotspot虚拟机确定一个类的定义信息<br>不会被使用，也会将其回收。回收的基本条件至少有：所有该类的实例被回收，而且装载该类的<br>ClassLoader被回收）</p>
-</li>
-<li><p>堆存放对象实例和数组，是垃圾回收的主要区域，分为新生代和老年代。刚创建的对象在新生代的Eden<br>区中，经过GC后进入新生代的S0区中，再经过GC进入新生代的S1区中，15次GC后仍存在就进入老年<br>代。这是按照一种回收机制进行划分的，不是固定的。若堆的空间不够实例分配，则<br>OutOfMemoryError。 </p>
-<p><img src="https://gitee.com/fly_tom/use/raw/master/jc42.png" alt=""></p>
-</li>
-</ol>
-<h3 id="堆的结构"><a href="#堆的结构" class="headerlink" title="堆的结构"></a>堆的结构</h3><h3 id="堆和栈的区别"><a href="#堆和栈的区别" class="headerlink" title="堆和栈的区别"></a>堆和栈的区别</h3><p>栈是运行时单位，代表着逻辑，内含<strong>基本数据类型</strong>和<strong>堆中对象引用</strong>，所在<strong>区域连续</strong>，没有碎片；堆是存<br>储单位，代表着数据，可被多个栈共享（<strong>包括成员中基本数据类型、引用和引用对象</strong>），所在区域不连<br>续，会有碎片。</p>
-<ol>
-<li>功能不同<br>栈内存用来存储<strong>局部变量</strong>和<strong>方法调用</strong>，而堆内存用来存储Java中的<strong>对象</strong>。<strong>无论是成员变量，局部变量，</strong><br><strong>还是类变量，它们指向的对象都存储在堆内存中。</strong></li>
-<li>共享性不同<br>栈内存是<strong>线程私有</strong>的。<br>堆内存是所有<strong>线程共有</strong>的。</li>
-<li>异常错误不同<br>如果栈内存或者堆内存不足都会抛出异常。<br>栈空间不足：java.lang.StackOverFlowError。<br>堆空间不足：java.lang.OutOfMemoryError。</li>
-<li>空间大小<br><strong>栈的空间大小远远小于堆的</strong> </li>
-</ol>
-<h3 id="时间复杂度-amp-amp-空间复杂度"><a href="#时间复杂度-amp-amp-空间复杂度" class="headerlink" title="时间复杂度&amp;&amp;空间复杂度"></a>时间复杂度&amp;&amp;空间复杂度</h3><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><h3 id="各种树"><a href="#各种树" class="headerlink" title="各种树"></a>各种树</h3><script>
+<h4 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h4><h3 id="时间复杂度-amp-amp-空间复杂度"><a href="#时间复杂度-amp-amp-空间复杂度" class="headerlink" title="时间复杂度&amp;&amp;空间复杂度"></a>时间复杂度&amp;&amp;空间复杂度</h3><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><h3 id="各种树"><a href="#各种树" class="headerlink" title="各种树"></a>各种树</h3><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
