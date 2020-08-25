@@ -1095,8 +1095,7 @@ System.out.println("是否停止2？=" + Thread.interrupted());//false
 <h6 id="synchronized作用于静态方法"><a href="#synchronized作用于静态方法" class="headerlink" title="synchronized作用于静态方法"></a>synchronized作用于静态方法</h6><p>当synchronized作用于静态方法时，其锁就是当前类的class对象锁。由于静态成员不专属于任何一个实例对象，是类成员，因此通过class对象锁可以控制静态 成员的并发操作。需要注意的是如果一个线程A调用一个实例对象的非static synchronized方法，而线程B需要调用这个实例对象所属类的静态 synchronized方法，是允许的，不会发生互斥现象，因为访问静态 synchronized 方法占用的锁是当前类的class对象，而访问非静态 synchronized 方法占用的锁是当前实例对象锁</p>
 <h4 id="Volatile"><a href="#Volatile" class="headerlink" title="Volatile"></a>Volatile</h4><ul>
 <li>内存可见性</li>
-<li>留意复合类操作</li>
-<li>解决num++操作的原子性问题</li>
+<li>留意复合类操作：num++操作的原子性问题</li>
 <li>禁止指令重排序</li>
 </ul>
 <h5 id="内存可见性"><a href="#内存可见性" class="headerlink" title="内存可见性"></a>内存可见性</h5><p>　　volatile是Java提供的一种轻量级的同步机制，在并发编程中，它也扮演着比较重要的角色。同synchronized相比（synchronized通常称为重量级锁），volatile更轻量级，相比使用synchronized所带来的庞大开销，倘若能恰当的合理的使用volatile，自然是美事一桩。</p>
@@ -1174,7 +1173,7 @@ ThreadB threadLocal.get() = 2</code></pre><h5 id="ThreadLocal内存泄露"><a hr
 <p><strong>内存溢出 out of memory：</strong> 没内存可以分配给新的对象了。</p>
 <p>我们知道，线程<code>Thread对象</code>中，每个线程对象内部都有一个的<code>ThreadLocalMap</code>对象。如果这个对象存储了多个大对象，则可能早出<code>内存溢出OOM</code>。为了防止这种情况发生，在ThreadLocal的源码中，有对应的策略，即调用 get（）、set（）、remove（） 方法，均会清除 ThreadLocal内部的 内存。</p>
 <p><strong>ThreadLocal的内部是ThreadLocalMap</strong>。<strong>ThreadLocalMap内部是由一个Entry数组组成</strong>。Entry类的构造函数为 Entry（弱引用的ThreadLocal对象， Object value对象）。<strong>因为Entry的key是一个弱引用的ThreadLocal对象</strong>，<strong>所以在 垃圾回收 之前，将会清除此Entry对象的key</strong>。那么， ThreadLocalMap 中就会出现 key 为 null 的 Entry，就没有办法访问这些 key 为 null 的 Entry 的 value。这些 value 被Entry对象引用，所以value所占内存不会被释放。<strong>若在指定的线程任务里面，调用ThreadLocal对象的get（）、set（）、remove（）方法，可以避免出现内存泄露。</strong></p>
-<h3 id="juc"><a href="#juc" class="headerlink" title="juc"></a>juc</h3><p><img src="https://gitee.com/fly_tom/use/raw/master/thread2.png" alt=""></p>
+<h2 id="juc"><a href="#juc" class="headerlink" title="juc"></a>juc</h2><p><img src="https://gitee.com/fly_tom/use/raw/master/thread2.png" alt=""></p>
 <h4 id="Java-JUC简介"><a href="#Java-JUC简介" class="headerlink" title="Java JUC简介"></a>Java JUC简介</h4><blockquote>
 <p>在 Java 5.0 提供了 java.util.concurrent （简称JUC ）包，在此包中增加了在并发编程中很常用的实用工具类，用于定义类似于线程的自定义子系统，包括线程池、异步 IO 和轻量级任务框架。提供可调的、灵活的线程池。还提供了设计用于多线程上下文中的 Collection 实现等。</p>
 </blockquote>
@@ -1524,7 +1523,7 @@ try {
 <p><strong>什么是死锁呢？</strong></p>
 <p>    它的一个比较官方的定义就是：死锁是指两个或两个以上的进程在执行过程中，由于<strong>竞争资源</strong>或者由于彼此通信而造成的一种阻塞的现象，若无外力作用，它们都将无法推进下去。此时称系统处于死锁状态或系统产生了死锁，<strong>这些永远在互相等待的进程称为死锁进程</strong></p>
 <p><strong>死锁有哪些形成的原因</strong></p>
-<p>一般来说，要出现死锁问题需要满足以下条件：</p>
+<p>一般来说，产生死锁问题有以下条件：</p>
 <p>互斥条件：一个资源每次只能被一个线程使用。</p>
 <p>请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。</p>
 <p>不剥夺条件：进程已获得的资源，在未使用完之前，不能强行剥夺。</p>

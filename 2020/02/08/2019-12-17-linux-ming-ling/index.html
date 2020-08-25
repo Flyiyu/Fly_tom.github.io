@@ -4,12 +4,11 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Linux解压缩命令, Tom Blog">
-    <meta name="description" content="linux中的一些小技巧提高工作效率
-解压及压缩命令tar压缩命令tar -cvf examples.tar files|dir
-#说明：
--c, --create  create a new archive 创建一个归档文件
--v, --">
+    <meta name="keywords" content="Linux基础命令, Tom Blog">
+    <meta name="description" content="基础命令cd ：切换目录
+用法：cdcd ../ 切换到上级目录cd /   切换到根目录cd ~  （或只有cd ）切换到当前用户主目录(home底下以用户名命名的文件夹) /root目录
+mkdir 创建目录
+mkdir 目录名  -p">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Linux解压缩命令 | Tom Blog</title>
+    <title>Linux基础命令 | Tom Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -201,13 +200,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Linux解压缩命令
+                        Linux基础命令
                     </div>
                 </div>
             </div>
@@ -350,14 +349,14 @@
                     
                     <div class="info-break-policy">
                         <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        3.9k
+                        4.8k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        15 分
+                        18 分
                     </div>
                     
                 
@@ -373,7 +372,30 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>linux中的一些小技巧提高工作效率</p>
+                <h3 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h3><p>cd ：切换目录</p>
+<p>用法：cd<br>cd ../ 切换到上级目录<br>cd /   切换到根目录<br>cd ~  （或只有cd ）切换到当前用户主目录(home底下以用户名命名的文件夹) /root目录</p>
+<p>mkdir 创建目录</p>
+<p><em>mkdir 目录名  -p   递归创建目录</em></p>
+<p><strong>2.rmdir 删除空目录</strong></p>
+<p>用法：rmdir 目录名<br>也可用：rm -rf 目录名</p>
+<p><strong>3.ls 查看目录或文件信息</strong><br>主要选项：<br>-l 列出目录或者文件的详细信息。比如权限、修改时间等等<br>-a 列出当前目录下所有文件，包括隐藏文件（已点开头的都是隐藏文件）</p>
+<p><strong>4.vi 文本编辑器</strong></p>
+<p>键入i 进入编辑状态<br>退出编辑按ESC键<br>不保存退出： :q!<br>保存退出：   :wq<br>输入/，进入搜索<br>输入:set nu，显示每一行的行数<br>按键盘G，可以直接定位到最末尾</p>
+<p><strong>5.cp 复制</strong><br>用法：cp ［选项］文件名或目录  目标地址<br>-R 拷贝目录及目录下所有目录和文件<br>cp a.txt  b.txt   将a文件复制，且另命名为b文件（目录名）</p>
+<p><strong>6.mv 移动</strong></p>
+<p>用法：mv 文件名或目录  目标目录<br>mv a.txt ../    将a文件移动到上级目录（将一个文件移动到另一个目录没有重命名）<br>mv a.txt  ../b.txt   将a文件移动到上一级并改名为b文件（将一个文件移动到另一个目录并重命名）</p>
+<p><strong>7.rm 删除文件或目录</strong><br>-f 强制删除<br>-r 删除目录<br>常用：rm -rf 文件或目录</p>
+<p><strong>8.find 查找文件</strong><br>用法：find [路径] [选项]<br>常用选项有：<br>find  . -name *.log    在当前目录查找以.log结尾的文件<br>find  / -name  log   在根目录查找log命名的目录</p>
+<p><strong>9.grep 过滤</strong><br>在指定文件中查找字符（串）并打印该行<br>用法：grep  字符串 文件名<br>grep band file  在file文件中找寻band字符串</p>
+<p><strong>10.cat 显示文本文件内容</strong><br>用法：cat 文件名   cat 文件名字</p>
+<p><strong>11.head 查看前几行</strong></p>
+<p>用法： head -n 5  文件名</p>
+<p><strong>12.tail 从指定点开始将文件写到标准输出</strong><br>tail -n 5  文件名  查看后几行<br>tail -f error.log  不断刷新，看到最新内容</p>
+<p><strong>13.ps 查看进程（动态）</strong><br>-ef  显示所有运行进程，并显示启动进程的命令</p>
+<p><strong>14.netstat 查看网络状况 （net status的简写）</strong><br>netstat -apn 查看所有端口<br>an，按一定顺序排列输出<br>p，表示显示哪个进程在调用</p>
+<p><strong>15.| 管道符 （竖线，英文输入法状态下shift+键盘上的的|\）</strong><br>在命令之间建立管道，将前面命令的输出作为后面命令的输入<br>通过命令查找tomcat进程：ps -ef | grep tomcat<br>通过命令查找到占用此端口的进程编号：netstat -apn|grep 8080</p>
+<p><strong>16.echo 打印文件内容或编辑文件内容</strong><br>常用选项有：<br>-n 不换行输出<br>-e 可以使用转义字符（\n回车，\t tab键）<br>示例：<br>echo “I am studying linux”&gt;&gt;xujun.txt 追加文件尾部内容<br>echo $?  假如返回值为0的时候，表示上一次命令成功。假如是1到255的话，则是失败<br>echo -e “wo\tshi\tshei”&gt; xujun.txt</p>
+<p><strong>17.touch 创建一个空白文件，假如当前目录有同样的文件，则会更新文件的时间戳</strong><br>-a 修改access（访问）时间<br>-m 修改modify（修改）时间这两个参数了解即可</p>
 <h3 id="解压及压缩命令"><a href="#解压及压缩命令" class="headerlink" title="解压及压缩命令"></a>解压及压缩命令</h3><h4 id="tar压缩命令"><a href="#tar压缩命令" class="headerlink" title="tar压缩命令"></a>tar压缩命令</h4><pre><code>tar -cvf examples.tar files|dir
 #说明：
 -c, --create  create a new archive 创建一个归档文件
