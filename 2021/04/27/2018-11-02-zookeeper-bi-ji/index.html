@@ -1,0 +1,937 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Zookeeper笔记, Tom Blog">
+    <meta name="description" content="一、ZooKeeper 基本概念1、ZooKeeper 是什么？Zookeeper官网地址： http://zookeeper.apache.org/
+Zookeeper官网文档地址：http://zookeeper.apache.org/">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Zookeeper笔记 | Tom Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Tom Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Tom Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        Zookeeper笔记
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Zookeeper笔记/">
+                                <span class="chip bg-color">Zookeeper笔记</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Zookeeper/" class="post-category">
+                                Zookeeper
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-04-27
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.9k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        10 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="一、ZooKeeper-基本概念"><a href="#一、ZooKeeper-基本概念" class="headerlink" title="一、ZooKeeper 基本概念"></a><strong>一、ZooKeeper 基本概念</strong></h2><h3 id="1、ZooKeeper-是什么？"><a href="#1、ZooKeeper-是什么？" class="headerlink" title="1、ZooKeeper 是什么？"></a><strong><em>1、ZooKeeper 是什么？</em></strong></h3><p>Zookeeper官网地址： <a href="http://zookeeper.apache.org/" target="_blank" rel="noopener">http://zookeeper.apache.org/</a></p>
+<p>Zookeeper官网文档地址：<a href="http://zookeeper.apache.org/doc/trunk/index.html" target="_blank" rel="noopener">http://zookeeper.apache.org/doc/trunk/index.html</a></p>
+<p>ZooKeeper 是Hadoop下的一个子项目，它是一个针对大型分布式系统的可靠协调系统；它提供的功能包括：配置维护、名字服务、分布式同步、组服务等； 它的目标就是封装好复杂易出错的关键服务，将简单易用的接口和性能高效、功能稳定的系统提供给用户。</p>
+<p>Zookeeper一个最常用的使用场景就是用于担任服务生产者和服务消费者的注册中心，服务生产者将自己提供的服务注册到Zookeeper中心，服务的消费者在进行服务调用的时候先到Zookeeper中查找服务，获取到服务生产者的详细信息之后，再去调用服务生产者的内容与数据，简单示例图如下：</p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/zookeeper1.png" alt="dubbo"></p>
+<h3 id="2、ZooKeeper设计目标："><a href="#2、ZooKeeper设计目标：" class="headerlink" title="2、ZooKeeper设计目标："></a><strong><em>2、ZooKeeper设计目标：</em></strong></h3><p>ZooKeeper允许分布式进程通过共享的层次结构命名空间进行相互协调，这与标准文件系统类似。 名称空间由ZooKeeper中的数据寄存器组成 - 称为znode，这些类似于文件和目录。 与为存储设计的典型文件系统不同，ZooKeeper数据保存在内存中，这意味着ZooKeeper可以实现高吞吐量和低延迟。</p>
+<p>Zookeeper层次结构命名空间示意图如下：</p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/zookeeper2.jpg" alt="dubbo"></p>
+<p>通过这种树图结构的数据模型，很容易的查找到具体的某一个服务。</p>
+<h3 id="3、ZooKeeper主要特点"><a href="#3、ZooKeeper主要特点" class="headerlink" title="3、ZooKeeper主要特点"></a><strong><em>3、ZooKeeper主要特点</em></strong></h3><p>1)、最终一致性：为客户端展示同一视图，这是 ZooKeeper 最重要的性能。</p>
+<p>2)、可靠性：如果消息被一台服务器接受，那么它将被所有的服务器接受。</p>
+<p>3)、实时性：ZooKeeper 不能保证两个客户端同时得到刚更新的数据，如果</p>
+<p>  需要最新数据，应该在读数据之前调用sync()接口。</p>
+<p>4)、等待无关（wait-free）：慢的或者失效的 client 不干预快速的client的请求。</p>
+<p>5)、原子性：更新只能成功或者失败，没有中间其它状态。</p>
+<p>6)、顺序性：对于所有Server，同一消息发布顺序一致。</p>
+<h2 id="二、ZooKeeper-基本原理"><a href="#二、ZooKeeper-基本原理" class="headerlink" title="二、ZooKeeper 基本原理"></a><strong>二、ZooKeeper 基本原理</strong></h2><h3 id="1、ZooKeeper-系统架构"><a href="#1、ZooKeeper-系统架构" class="headerlink" title="1、ZooKeeper 系统架构"></a><strong><em>1、ZooKeeper 系统架构</em></strong></h3><p>首先看一下 ZooKeeper 的架构图。</p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/zookeeper3.jpg" alt="dubbo"></p>
+<p>ZooKeeper 的架构图中我们需要了解和掌握的主要有：</p>
+<p>（1）ZooKeeper分为<strong><em>服务器端（Server）</em></strong> 和<strong><em>客户端（Client）</em></strong>，客户端可以连接到整个 ZooKeeper服务的任意服务器上（除非 leaderServes 参数被显式设置， leader 不允许接受客户端连接）。</p>
+<p>（2）客户端使用并维护一个 TCP 连接，通过这个连接发送请求、接受响应、获取观察的事件以及发送心跳。如果这个 TCP 连接中断，客户端将自动尝试连接到另外的 ZooKeeper服务器。客户端第一次连接到 ZooKeeper服务时，接受这个连接的 ZooKeeper服务器会为这个客户端建立一个会话。当这个客户端连接到另外的服务器时，这个会话会被新的服务器重新建立。</p>
+<p>（3）上图中每一个Server代表一个安装Zookeeper服务的机器，即是整个提供Zookeeper服务的集群（或者是由伪集群组成）；</p>
+<p>（4）组成ZooKeeper服务的服务器必须彼此了解。 它们维护一个内存中的状态图像，以及持久存储中的事务日志和快照， 只要大多数服务器可用，ZooKeeper服务就可用；</p>
+<p>（5）ZooKeeper 启动时，将从实例中选举一个 leader，Leader 负责处理数据更新等操作，一个更新操作成功的标志是当且仅当大多数Server在内存中成功修改数据。每个Server 在内存中存储了一份数据。</p>
+<p>（6）Zookeeper是可以集群复制的，集群间通过Zab协议（Zookeeper Atomic Broadcast）来保持数据的一致性；</p>
+<p>（7）Zab协议包含两个阶段：<strong><em>leader election阶段</em></strong>和<strong><em>Atomic Brodcast阶段</em></strong>。</p>
+<ul>
+<li><p>a) 集群中将选举出一个leader，其他的机器则称为follower，所有的写操作都被传送给leader，并通过brodcast将所有的更新告诉给follower。</p>
+</li>
+<li><p>b) 当leader崩溃或者leader失去大多数的follower时，需要重新选举出一个新的leader，让所有的服务器都恢复到一个正确的状态。</p>
+</li>
+<li><p>c) 当leader被选举出来，且大多数服务器完成了 和leader的状态同步后，leadder election 的过程就结束了，就将会进入到Atomic brodcast的过程。</p>
+</li>
+<li><p>d) Atomic Brodcast同步leader和follower之间的信息，保证leader和follower具有形同的系统状态。</p>
+</li>
+</ul>
+<h3 id="2、Zookeeper-角色"><a href="#2、Zookeeper-角色" class="headerlink" title="2、Zookeeper 角色"></a><strong><em>2、Zookeeper 角色</em></strong></h3><p>启动 Zookeeper 服务器集群环境后，多个 Zookeeper 服务器在工作前会选举出一个 Leader。选举出 leader 前，所有 server 不区分角色，都需要平等参与投票（ obServer 除外，不参与投票）；</p>
+<p>选主过程完成后，存在以下几种角色：</p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/zookeeper4.jpg" alt="dubbo"></p>
+<p><strong><em>思考：</em></strong></p>
+<p>1、为什么需要server?</p>
+<p>①ZooKeeper 需保证高可用和强一致性;<br>②为了支持更多的客户端，需要增加更多的Server;<br>③Follower增多会导致投票阶段延迟增大，影响性能。</p>
+<p>２、在Zookeeper 中ObServer 起到什么作用？</p>
+<p>①ObServer 不参与投票过程，只同步 leader的状态 ;</p>
+<p>②Observers 接受客户端的连接，并将写请求转发给 leader节点 ; </p>
+<p>③加入更多ObServer 节点，提高伸缩性，同时还不影响吞吐率。</p>
+<p>３、为什么在Zookeeper中Server 数目一般为奇数？</p>
+<p>我们知道在Zookeeper中 Leader 选举算法采用了Zab协议。Zab核心思想是当多数 Server 写成功，则任务数据写成功。 </p>
+<p>①如果有3个Server，则最多允许1个Server 挂掉。 </p>
+<p>②如果有4个Server，则同样最多允许1个Server挂掉。 既然3个或者4个Server，同样最多允许1个Server挂掉，那么它们的可靠性是一样的，所以选择奇数个ZooKeeper Server即可，这里选择3个Server。</p>
+<h3 id="3、ZooKeeper-写数据流程"><a href="#3、ZooKeeper-写数据流程" class="headerlink" title="3、ZooKeeper 写数据流程"></a><strong><em>3、ZooKeeper 写数据流程</em></strong></h3><p>ZooKeeper 写数据的流程图如下所示。</p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/zookeeper5.jpg" alt="dubbo"></p>
+<p>ZooKeeper 的写数据流程主要分为以下几步：</p>
+<ul>
+<li><p>a)、比如 Client 向 ZooKeeper 的 Server1 上写数据，发送一个写请求。</p>
+</li>
+<li><p>b)、如果Server1不是Leader，那么Server1 会把接受到的请求进一步转发给Leader，因为每个ZooKeeper的Server里面有一个是Leader。这个Leader 会将写请求广播给各个Server，比如Server1和Server2， 各个Server写成功后就会通知Leader。</p>
+</li>
+<li><p>c)、当Leader收到大多数 Server 数据写成功了，那么就说明数据写成功了。如果这里三个节点的话，只要有两个节点数据写成功了，那么就认为数据写成功了。写成功之后，Leader会告诉Server1数据写成功了。</p>
+</li>
+<li><p>d)、Server1会进一步通知 Client 数据写成功了，这时就认为整个写操作成功。</p>
+</li>
+</ul>
+<h3 id="4、ZooKeeper-组件"><a href="#4、ZooKeeper-组件" class="headerlink" title="4、ZooKeeper 组件"></a><strong><em>4、ZooKeeper 组件</em></strong></h3><p>ZooKeeper组件显示了ZooKeeper服务的高级组件。 除了请求处理器，组成ZooKeeper服务的每个服务器复制其自己的每个组件的副本。</p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/zookeeper6.jpg" alt="dubbo"></p>
+<p><strong>Replicated Database</strong>是包含整个数据树的内存数据库。 更新操作会记录到磁盘里以进行可恢复性，并且写操作将在放到内存数据库之前序列化到磁盘。</p>
+<p>每个ZooKeeper服务器服务客户端。 客户端连接到一个服务器以提交irequest。 读取请求从每个服务器数据库的本地副本服务。 更改服务状态（写入请求）的请求由协议进行处理。</p>
+<p>作为协议协议的一部分，来自客户端的所有写请求被转发到单个服务器，称为leader。 其余的ZooKeeper服务器（称为followers）从领导者接收消息提议并同意消息传递。 消息层负责在失败时替换领导者，并与leader同步followers。</p>
+<h2 id="三、ZooKeeper-应用场景总结"><a href="#三、ZooKeeper-应用场景总结" class="headerlink" title="三、ZooKeeper 应用场景总结"></a><strong>三、ZooKeeper 应用场景总结</strong></h2><h3 id="1、统一命名服务"><a href="#1、统一命名服务" class="headerlink" title="1、统一命名服务"></a><strong>1、统一命名服务</strong></h3><p>统一命名服务的命名结构图如下所示：</p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/zookeeper2.jpg" alt="dubbo"><br>　<br>1、在分布式环境下，经常需要对应用/服务进行统一命名，便于识别不同服务。<br>　 a）类似于域名与ip之间对应关系，ip不容易记住，而域名容易记住。<br>　 b）通过名称来获取资源或服务的地址，提供者等信息。<br>　<br>2、按照层次结构组织服务/应用名称。<br>　 a）可将服务名称以及地址信息写到ZooKeeper上，客户端通过ZooKeeper获取可用服务列表类。</p>
+<h3 id="2、配置管理"><a href="#2、配置管理" class="headerlink" title="2、配置管理"></a><strong>2、配置管理</strong></h3><p>配置管理结构图如下所示：</p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/zookeeper8.jpg" alt="dubbo"></p>
+<p>1、分布式环境下，配置文件管理和同步是一个常见问题。<br>　 a）一个集群中，所有节点的配置信息是一致的，比如 Hadoop 集群。<br>　 b）对配置文件修改后，希望能够快速同步到各个节点上。<br>　　<br>2、配置管理可交由ZooKeeper实现。<br>　 a）可将配置信息写入ZooKeeper上的一个Znode。<br>　 b）各个节点监听这个Znode。<br>　 c）一旦Znode中的数据被修改，ZooKeeper将通知各个节点。</p>
+<h3 id="3、集群管理"><a href="#3、集群管理" class="headerlink" title="3、集群管理"></a><strong>3、集群管理</strong></h3><p>集群管理结构图如下所示：</p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/zookeeper9.jpg" alt="dubbo"></p>
+<p>1、分布式环境中，实时掌握每个节点的状态是必要的。<br>　　a）可根据节点实时状态做出一些调整。<br>　　<br>2、可交由ZooKeeper实现。<br>　　a）可将节点信息写入ZooKeeper上的一个Znode。<br>　　b）监听这个Znode可获取它的实时状态变化。<br>　　<br>3、典型应用<br>　　a）HBase中Master状态监控与选举。</p>
+<h3 id="4、分布式通知与协调"><a href="#4、分布式通知与协调" class="headerlink" title="4、分布式通知与协调"></a><strong>4、分布式通知与协调</strong></h3><p>1、分布式环境中，经常存在一个服务需要知道它所管理的子服务的状态。<br>　　a）NameNode需知道各个Datanode的状态。<br>　　b）JobTracker需知道各个TaskTracker的状态。<br>　　<br>2、心跳检测机制可通过ZooKeeper来实现。</p>
+<p>3、信息推送可由ZooKeeper来实现，ZooKeeper相当于一个发布/订阅系统。</p>
+<h3 id="5、分布式锁"><a href="#5、分布式锁" class="headerlink" title="5、分布式锁"></a><strong>5、分布式锁</strong></h3><p>处于不同节点上不同的服务，它们可能需要顺序的访问一些资源，这里需要一把分布式的锁。</p>
+<p>分布式锁具有以下特性：</p>
+<p>1、ZooKeeper是强一致的。比如各个节点上运行一个ZooKeeper客户端，它们同时创建相同的Znode，但是只有一个客户端创建成功。</p>
+<p>2、实现锁的独占性。创建Znode成功的那个客户端才能得到锁，其它客户端只能等待。当前客户端用完这个锁后，会删除这个Znode，其它客户端再尝试创建Znode，获取分布式锁。</p>
+<p>3、控制锁的时序。各个客户端在某个Znode下创建临时Znode，这个类型必须为CreateMode.EPHEMERAL_SEQUENTIAL，这样该Znode可掌握全局访问时序。</p>
+<h3 id="6、分布式队列"><a href="#6、分布式队列" class="headerlink" title="6、分布式队列"></a>6、分布式队列</h3><p>分布式队列分为两种：</p>
+<p>1、当一个队列的成员都聚齐时，这个队列才可用，否则一直等待所有成员到达，这种是同步队列。<br>　　a）一个job由多个task组成，只有所有任务完成后，job才运行完成。<br>　　b）可为job创建一个/job目录，然后在该目录下，为每个完成的task创建一个临时的Znode，一旦临时节点数目达到task总数，则表明job运行完成。<br>　　<br>2、队列按照FIFO方式进行入队和出队操作，例如实现生产者和消费者模型。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '33e35f8a39d17339ae45',
+        clientSecret: 'c2daf8c102c345db91ff32aa45b2a692c7bdee25',
+        repo: 'Fly_tom.github.io',
+        owner: 'Flyiyu',
+        admin: "Flyiyu",
+        id: '2021-04-27T22-56-26',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2021/04/27/2019-01-23-mybatis/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Mybatis笔记">
+                        
+                        <span class="card-title">Mybatis笔记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Mybatis简介
+MyBatis 本是apache的一个开源项目iBatis, MyBatis 是一个高级映射的优秀的持久层orm框架。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis可以使用简
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-27
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Mybatis/" class="post-category">
+                                    Mybatis
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Mybatis/">
+                        <span class="chip bg-color">Mybatis</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2018/12/17/2018-09-06-markdown-intro/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="一份简明的 Markdown 笔记与教程">
+                        
+                        <span class="card-title">一份简明的 Markdown 笔记与教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            背景优点
+专注于文字内容；
+
+纯文本，易读易写，可以方便地纳入版本控制；
+
+语法简单，没有什么学习成本，能轻松在码字的同时做出美观大方的排版。
+
+
+使用场景
+各类代码托管平台
+  主流的代码托管平台，如 GitHub、GitLab、BitB
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-12-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            wblearn
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Markdown/">
+                        <span class="chip bg-color">Markdown</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align"
+        style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="https://flytom.top" target="_blank">FlyTom</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "6";
+                    var startDate = "28";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: ""
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

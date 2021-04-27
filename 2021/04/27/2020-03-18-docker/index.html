@@ -1,0 +1,1079 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Docker笔记, Tom Blog">
+    <meta name="description" content="Docker1、简介
+Docker是一个开源的应用容器引擎；是一个轻量级容器技术；
+由于不同的机器有不同的操作系统，以及不同的库和组件，在将一个应用部署到多台机器上需要进行大量的环境配置操作。
+Docker 主要解决环境配置问题，它是一种虚">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Docker笔记 | Tom Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Tom Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Tom Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        Docker笔记
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Docker笔记/">
+                                <span class="chip bg-color">Docker笔记</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Docker/" class="post-category">
+                                Docker
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-04-27
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.4k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        9 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h2><p><img src="https://gitee.com/fly_tom/use/raw/master/docker2.png" alt="docker"></p>
+<p><strong>Docker</strong>是一个开源的应用容器引擎；是一个轻量级容器技术；</p>
+<p>由于不同的机器有不同的操作系统，以及不同的库和组件，在将一个应用部署到多台机器上需要进行大量的环境配置操作。</p>
+<p><strong>Docker 主要解决环境配置问题</strong>，它是一种虚拟化技术，对进程进行隔离，被隔离的进程独立于宿主操作系统和其它隔离的进程。使用 Docker 可以不修改应用程序代码，不需要开发人员学习特定环境下的技术，就能够将现有的应用程序部署在其它机器上。</p>
+<p>Docker支持将软件编译成一个镜像；然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像；</p>
+<p>运行中的这个镜像称为容器，容器启动是非常快速的。</p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/docker3.png" alt="docker"></p>
+<h2 id="2、核心概念"><a href="#2、核心概念" class="headerlink" title="2、核心概念"></a>2、核心概念</h2><p>docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；</p>
+<p>docker客户端(Client)：连接docker主机进行操作；</p>
+<p>docker仓库(Registry)：用来保存各种打包好的软件镜像；</p>
+<p>docker镜像(Images)：软件打包好的镜像；放在docker仓库中；</p>
+<p>docker容器(Container)：镜像启动后的实例称为一个容器；容器是独立运行的一个或一组应用</p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/docker4.png" alt="docker"></p>
+<p>使用Docker的步骤：</p>
+<p>1）、安装Docker</p>
+<p>2）、去Docker仓库找到这个软件对应的镜像；</p>
+<p>3）、使用Docker运行这个镜像，这个镜像就会生成一个Docker容器；</p>
+<p>4）、对容器的启动停止就是对软件的启动停止；</p>
+<h2 id="3、安装Docker"><a href="#3、安装Docker" class="headerlink" title="3、安装Docker"></a>3、安装Docker</h2><h4 id="1）、在linux虚拟机上安装docker"><a href="#1）、在linux虚拟机上安装docker" class="headerlink" title="1）、在linux虚拟机上安装docker"></a>1）、在linux虚拟机上安装docker</h4><p>​    1）、设置好网络以后使用命令重启虚拟机的网络</p>
+<pre class=" language-shell"><code class="language-shell">service network restart</code></pre>
+<p>步骤：</p>
+<p>查看官网即可</p>
+<h2 id="4、Docker常用命令-amp-操作"><a href="#4、Docker常用命令-amp-操作" class="headerlink" title="4、Docker常用命令&amp;操作"></a>4、Docker常用命令&amp;操作</h2><p><img src="https://gitee.com/fly_tom/use/raw/master/docker1.png" alt="docker"></p>
+<h3 id="0）、docker命令"><a href="#0）、docker命令" class="headerlink" title="0）、docker命令"></a>0）、docker命令</h3><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>启动docker服务</td>
+<td>systemctl start docker</td>
+<td></td>
+</tr>
+<tr>
+<td>设置开机启动</td>
+<td>systemctl enable docker</td>
+<td></td>
+</tr>
+<tr>
+<td>停止docker服务</td>
+<td>systemctl enable docker</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="1）、镜像操作"><a href="#1）、镜像操作" class="headerlink" title="1）、镜像操作"></a>1）、镜像操作</h3><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>检索</td>
+<td>docker  search 关键字  eg：docker  search redis</td>
+<td>我们经常去docker  hub上检索镜像的详细信息，如镜像的TAG。</td>
+</tr>
+<tr>
+<td>拉取</td>
+<td>docker pull 镜像名:tag</td>
+<td>:tag是可选的，tag表示标签，多为软件的版本，默认是latest</td>
+</tr>
+<tr>
+<td>列表</td>
+<td>docker images</td>
+<td>查看所有本地镜像</td>
+</tr>
+<tr>
+<td>删除镜像</td>
+<td>docker rmi image-id</td>
+<td>删除指定的本地镜像，要先删除容器</td>
+</tr>
+</tbody></table>
+<p><a href="https://hub.docker.com/" target="_blank" rel="noopener">https://hub.docker.com/</a></p>
+<h3 id="2）、容器操作"><a href="#2）、容器操作" class="headerlink" title="2）、容器操作"></a>2）、容器操作</h3><p>软件镜像（QQ安装程序）—-运行镜像—-产生一个容器（正在运行的软件，运行的QQ）；</p>
+<p>步骤：</p>
+<pre class=" language-shell"><code class="language-shell">1、搜索镜像
+[root@localhost ~]# docker search tomcat
+2、拉取镜像
+[root@localhost ~]# docker pull tomcat
+3、根据镜像启动容器
+docker run --name mytomcat -d tomcat:latest
+4、docker ps  
+查看运行中的容器
+5、 停止运行中的容器
+docker stop  容器的id
+6、查看所有的容器
+docker ps -a
+7、启动容器
+docker start 容器id
+8、删除一个容器
+ docker rm 容器id
+9、启动一个做了端口映射的tomcat
+[root@localhost ~]# docker run -d -p 8888:8080 tomcat
+-d：后台运行
+-p: 将主机的端口映射到容器的一个端口    主机端口:容器内部的端口
+
+10、为了演示简单关闭了linux的防火墙
+service firewalld status ；查看防火墙状态
+service firewalld stop：关闭防火墙
+11、查看容器的日志
+docker logs container-name/container-id
+12、进入正在运行的容器并以命令行交互
+    1. docker exec container-id /bin/bash
+    2. docker attach container-id
+    两种的区别：
+        attach: 直接进入容器启动命令的终端，不会启动新的进程
+        exec: 是在容器中打开新的终端，并且可以启动新的进程
+13、查看容器中运行的进程信息
+docker top
+14、查看 docker 容器变化
+docker diff coniner-id
+
+更多命令参看
+https://docs.docker.com/engine/reference/commandline/docker/
+可以参考每一个镜像的文档
+</code></pre>
+<h3 id="3）、数据卷"><a href="#3）、数据卷" class="headerlink" title="3）、数据卷"></a>3）、数据卷</h3><blockquote>
+<p>有点类似我们Redis里面的rdb和aof文件</p>
+</blockquote>
+<p>作用：</p>
+<p>​    容器的持久化、父子容器的继承、信息共享</p>
+<pre class=" language-shell"><code class="language-shell">docker run -v es2:/usr/share/elasticsearch/config -p 9200:9200 -p 9300:9300 es7.0:1.0</code></pre>
+<p>-v绑定数据卷 </p>
+<p>esvolume 数据卷，需要创建</p>
+<pre class=" language-shell"><code class="language-shell">docker volume create edc-nginx-vol // 创建一个自定义容器卷
+ocker volume ls // 查看所有容器卷
+docker volume inspect edc-nginx-vol // 查看指定容器卷详情信息
+docker stop edc-nginx // 暂停容器实例
+docker rm edc-nginx // 移除容器实例
+docker volume rm edc-nginx-vol // 删除自定义数据卷
+/var/lib/docker/volumes/headESVolume/_data 容器卷的宿主机目录
+                  headESVolume 自定义数据卷名称</code></pre>
+<h3 id="4）、docker-commit"><a href="#4）、docker-commit" class="headerlink" title="4）、docker  commit"></a>4）、docker  commit</h3><p>docker commit主要是用于提交一个container的文件或者配置的变化为一个新的image。</p>
+<p>docker commit和docker export, docker add类似都可以输出image，但是最好的生成image的方法还是使用Dockerfile</p>
+<p>注意：docker commit不会将你挂载的volumes一起打包到image中。</p>
+<pre class=" language-shell"><code class="language-shell">docker commit -m=“提交的描述信息” -a=“作者” 容器ID 要创建的目标镜像名:[标签名]</code></pre>
+<h4 id="慎用-docker-commit"><a href="#慎用-docker-commit" class="headerlink" title="慎用 docker commit"></a><strong>慎用 docker commit</strong></h4><p>使用 <code>docker commit</code> 命令虽然可以比较直观的帮助理解镜像分层存储的概念，但是实际环境中并不会这样使用。</p>
+<p>首先，如果仔细观察之前的 <code>docker diff webserver</code> 的结果，你会发现除了真正想要修改的 <code>/usr/share/nginx/html/index.html</code> 文件外，由于命令的执行，还有很多文件被改动或添加了。这还仅仅是最简单的操作，如果是安装软件包、编译构建，那会有大量的无关内容被添加进来，如果不小心清理，将会导致镜像极为臃肿。</p>
+<p>此外，使用 <code>docker commit</code> 意味着所有对镜像的操作都是黑箱操作，生成的镜像也被称为 <strong>黑箱镜像</strong>，换句话说，就是除了制作镜像的人知道执行过什么命令、怎么生成的镜像，别人根本无从得知。而且，即使是这个制作镜像的人，过一段时间后也无法记清具体在操作的。虽然 <code>docker diff</code> 或许可以告诉得到一些线索，但是远远不到可以确保生成一致镜像的地步。这种黑箱镜像的维护工作是非常痛苦的。</p>
+<p>而且，<strong>镜像所使用的分层存储，除当前层外，之前的每一层都是不会发生改变的，换句话说，任何修改的结果仅仅是在当前层进行标记、添加、修改，而不会改动上一层</strong>。如果使用 <code>docker commit</code> 制作镜像，以及后期修改的话，每一次修改都会让镜像更加臃肿一次，所删除的上一层的东西并不会丢失，会一直如影随形的跟着这个镜像，即使根本无法访问到。这会让镜像更加臃肿。</p>
+<p><em>Union FS 是有最大层数限制的，比如 AUFS，曾经是最大不得超过 42 层，现在是不得超过 127 层。就是commit最多127次。</em></p>
+<h3 id="5）、安装MySQL示例"><a href="#5）、安装MySQL示例" class="headerlink" title="5）、安装MySQL示例"></a>5）、安装MySQL示例</h3><pre class=" language-shell"><code class="language-shell">docker pull mysql</code></pre>
+<p>错误的启动</p>
+<pre class=" language-shell"><code class="language-shell">[root@localhost ~]# docker run --name mysql01 -d mysql
+42f09819908bb72dd99ae19e792e0a5d03c48638421fa64cce5f8ba0f40f5846
+
+mysql退出了
+[root@localhost ~]# docker ps -a
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                           PORTS               NAMES
+42f09819908b        mysql               "docker-entrypoint.sh"   34 seconds ago      Exited (1) 33 seconds ago                            mysql01
+
+//错误日志
+[root@localhost ~]# docker logs 42f09819908b
+error: database is uninitialized and password option is not specified 
+  You need to specify one of MYSQL_ROOT_PASSWORD, MYSQL_ALLOW_EMPTY_PASSWORD and MYSQL_RANDOM_ROOT_PASSWORD；这个三个参数必须指定一个</code></pre>
+<p>正确的启动</p>
+<pre class=" language-shell"><code class="language-shell">[root@localhost ~]# docker run --name mysql01 -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+b874c56bec49fb43024b3805ab51e9097da779f2f572c22c695305dedd684c5f
+[root@localhost ~]# docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
+b874c56bec49        mysql               "docker-entrypoint.sh"   4 seconds ago       Up 3 seconds        3306/tcp            mysql01</code></pre>
+<p>做了端口映射</p>
+<pre class=" language-shell"><code class="language-shell">[root@localhost ~]# docker run -p 3306:3306 --name mysql02 -e MYSQL_ROOT_PASSWORD=123456 -d mysql
+ad10e4bc5c6a0f61cbad43898de71d366117d120e39db651844c0e73863b9434
+[root@localhost ~]# docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+ad10e4bc5c6a        mysql               "docker-entrypoint.sh"   4 seconds ago       Up 2 seconds        0.0.0.0:3306->3306/tcp   mysql02</code></pre>
+<p>几个其他的高级操作</p>
+<pre class=" language-shell"><code class="language-shell">docker run --name mysql03 -v /conf/mysql:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag
+把主机的/conf/mysql文件夹挂载到 mysqldocker容器的/etc/mysql/conf.d文件夹里面
+改mysql的配置文件就只需要把mysql配置文件放在自定义的文件夹下（/conf/mysql）
+
+docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+指定mysql的一些配置参数</code></pre>
+<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><ol>
+<li><blockquote>
+<p>在运行容器的时候，一定要指定拉取下来的镜像版本号，不然启动的时候，回去重新拉取latest版本的</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="5、docker-file"><a href="#5、docker-file" class="headerlink" title="5、docker file"></a>5、docker file</h2><h4 id="关于docker-file"><a href="#关于docker-file" class="headerlink" title="关于docker file"></a>关于docker file</h4><p>在Docker中创建镜像最常用的方式，就是使用Dockerfile。Dockerfile是一个Docker镜像的描述文件，我们可以理解成火箭发射的A、B、C、D…的步骤。Dockerfile其内部<strong>包含了一条条的指令</strong>，<strong>每一条指令构建一层，因此每一条指令的内容，就是描述该层应当如何构建</strong>。</p>
+<pre class=" language-shell"><code class="language-shell">#基于centos镜像
+FROM centos
+
+#维护人的信息
+MAINTAINER The CentOS Project <303323496@qq.com>
+
+#安装httpd软件包
+RUN yum -y update
+RUN yum -y install httpd
+
+#开启80端口
+EXPOSE 80
+
+#复制网站首页文件至镜像中web站点下
+ADD index.html /var/www/html/index.html
+
+#复制该脚本至镜像中，并修改其权限
+ADD run.sh /run.sh
+RUN chmod 775 /run.sh
+
+#当启动容器时执行的脚本文件
+CMD ["/run.sh"]</code></pre>
+<blockquote>
+<p>有了Dockerfile，就可以创建镜像了：</p>
+</blockquote>
+<pre class=" language-shell"><code class="language-shell">docker build -t tomcat:v1 .</code></pre>
+<blockquote>
+<p>最后，可以通过以下命令创建容器：</p>
+</blockquote>
+<pre class=" language-shell"><code class="language-shell">docker run -itd --name=tomcate -p 8080:8080 -v /app/webapps/:/usr/local/apache-tomcat-8.0.46/webapps/ tomcat:v1</code></pre>
+<h4 id="Dockerfile常用指令"><a href="#Dockerfile常用指令" class="headerlink" title="Dockerfile常用指令"></a>Dockerfile常用指令</h4><p><img src="https://gitee.com/fly_tom/use/raw/master/docker5.png" alt="docker"></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/docker6.png" alt="docker"></p>
+<h2 id="6、docker-compose"><a href="#6、docker-compose" class="headerlink" title="6、docker compose"></a>6、docker compose</h2><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '33e35f8a39d17339ae45',
+        clientSecret: 'c2daf8c102c345db91ff32aa45b2a692c7bdee25',
+        repo: 'Fly_tom.github.io',
+        owner: 'Flyiyu',
+        admin: "Flyiyu",
+        id: '2021-04-27T22-56-26',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2021/04/27/2020-03-19-sso-cas/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="CAS-SSO">
+                        
+                        <span class="card-title">CAS-SSO</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            SSO
+单点登录(Single sign on)，英文名称缩写SSO，SSO的意思就是在多系统的环境中，登录单方系统，就可以在不用再次登录的情况下访问相关受信任的系统。也就是说只要登录一次单体系统就可以
+
+sso 简绍
+单点登录角色单点登录
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-27
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/SSO/" class="post-category">
+                                    SSO
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/CAS-SSO/">
+                        <span class="chip bg-color">CAS-SSO</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/04/27/2020-03-09-springboot-an-li/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="SpringBoot 入门案例">
+                        
+                        <span class="card-title">SpringBoot 入门案例</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            一、Spring Boot 入门案例1、Spring Boot 简介
+简化Spring应用开发的一个框架；
+整个Spring技术栈的一个大整合；
+J2EE开发的一站式解决方案；
+
+2、微服务2014，martin fowler
+微服务：架构
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Spring系列/" class="post-category">
+                                    Spring系列
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/SpringBoot/">
+                        <span class="chip bg-color">SpringBoot</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align"
+        style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="https://flytom.top" target="_blank">FlyTom</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "6";
+                    var startDate = "28";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: ""
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

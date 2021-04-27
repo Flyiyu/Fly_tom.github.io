@@ -1,0 +1,922 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Git, Tom Blog">
+    <meta name="description" content="Git的使用git的基本工作流程：
+
+git clone：将远程的Master分支代码克隆到本地仓库
+git checkout：切出分支出来开发
+git add：将文件加入库跟踪区
+git commit：将库跟踪区改变的代码提交到本地代码库">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Git | Tom Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Tom Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Tom Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        Git
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Git-Hexo/">
+                                <span class="chip bg-color">Git Hexo</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Git-Hexo/" class="post-category">
+                                Git Hexo
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-04-27
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        1.6k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        5 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="Git的使用"><a href="#Git的使用" class="headerlink" title="Git的使用"></a>Git的使用</h2><h2 id="git的基本工作流程："><a href="#git的基本工作流程：" class="headerlink" title="git的基本工作流程："></a>git的基本工作流程：</h2><p><a href="http://img2.tbcdn.cn/L1/461/1/ac6d9422c3f843017b2441b212f39ebc00697e4c" target="_blank" rel="noopener"><img src="http://img2.tbcdn.cn/L1/461/1/ac6d9422c3f843017b2441b212f39ebc00697e4c" alt="git_status"></a></p>
+<ul>
+<li>git clone：将远程的Master分支代码克隆到本地仓库</li>
+<li>git checkout：切出分支出来开发</li>
+<li>git add：将文件加入库跟踪区</li>
+<li>git commit：将库跟踪区改变的代码提交到本地代码库中</li>
+<li>git push： 将本地仓库中的代码提交到远程仓库</li>
+</ul>
+<h3 id="git-分支"><a href="#git-分支" class="headerlink" title="git 分支"></a>git 分支</h3><ul>
+<li>主分支<ul>
+<li>master分支：存放随时可供生产环境中的部署的代码</li>
+<li>develop分支：存放当前最新开发成果的分支，当代码足够稳定时可以合并到master分支上去。</li>
+</ul>
+</li>
+<li>辅助分支<ul>
+<li>feature分支：开发新功能使用，最终合并到develop分支或抛弃掉</li>
+<li>release分支：做小的缺陷修正、准备发布版本所需的各项说明信息</li>
+<li>hotfix分支：代码的紧急修复工作</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Git与提交有关的三个命令对应的操作，Add命令是把文件从IDE的工作目录添加到本地仓库的stage区，Commit命令把stage区的暂存文件提交到当前分支的仓库，并清空stage区。Push命令把本地仓库的提交同步到远程仓库。</p>
+</li>
+<li><p>获取更新有两个命令：Fetch和Pull，Fetch是从远程仓库下载文件到本地的origin/master，然后可以手动对比修改决定是否合并到本地的master库。Push则是直接下载并合并。</p>
+</li>
+<li><p>创建分支</p>
+<p><img src="https://img-blog.csdn.net/20160912171844429" alt="图片"></p>
+<p>选择New Branch并输入一个分支的名称</p>
+<p>   <img src="https://img-blog.csdn.net/20160912171858663" alt="图片2"></p>
+</li>
+</ul>
+<h2 id="分支合并"><a href="#分支合并" class="headerlink" title="分支合并"></a>分支合并</h2><p>现在我们要把 dev-100 分支上的代码合并到 master 主分支上<br>先切换到 master 分支<br><img src="http://img12345.5-project.com/blog/20181102172230.png" alt="img"></p>
+<p>合并 dev-100 分支到 master 分支之前，建议先对 master 代码进行 pull 更新操作，然后再执行 Merge into Current</p>
+<p><img src="http://img12345.5-project.com/blog/20181102172650.png" alt="img"></p>
+<pre><code>【new branch】新建分支
+【local branches】本地分支
+【master】表示当前是主分支
+【remote branches】远程仓库分支。我在这里配置了两个远程仓库，所以这里显示2个。</code></pre><p>如果没有冲突，dev-100 中的代码就会被合并到 master 分支上了，合并成功后，需要 <code>push</code> 才能推送到远程仓库,一般情况下只需要将分支提交到本地仓库，不需要将分支提交远程仓库。如果将所有的分支都提交到远程仓库，会让远程仓库杂乱无章。<br><img src="http://img12345.5-project.com/blog/20181102171807.png" alt="img"></p>
+<h2 id="取消分支合并"><a href="#取消分支合并" class="headerlink" title="取消分支合并"></a>取消分支合并</h2><p>合并完成后，但是由于一些问题，我们想要取消本次合并，右键 git，选择 Reset HEAD<br><img src="http://img12345.5-project.com/blog/20181102173946.png" alt="img"><br><img src="http://img12345.5-project.com/blog/20181102174125.png" alt="img"></p>
+<p>HEAD^ 是还原到上一个版本，HEAD^^ 是还原到上上一个版本。<br>Reset Type 有三种：</p>
+<ul>
+<li>mixed 默认方式，只保留源码，回退commit和index信息</li>
+<li>soft 回退到某个版本，只回退了commit的信息，不会恢复到index file一级。如果还要提交，直接commit</li>
+<li>hard 彻底回退，本地源码也会变成上一个版本内容</li>
+</ul>
+<p>一般使用默认的 mixed 或者粗暴的 hard 方式。<br>我们这里是取消合并，所以选择 <strong>Hard</strong> 方式，并且是<strong>HEAD^</strong>还原到上一个版本，回退后恢复了原来 master 的代码。<br><img src="http://img12345.5-project.com/blog/20181102171518.png" alt="img"></p>
+<h2 id="解决合并冲突问题"><a href="#解决合并冲突问题" class="headerlink" title="解决合并冲突问题"></a>解决合并冲突问题</h2><p>接下来演示合并冲突，此时是在 master 分支，我们修改文件，并 commit 以及 push 到远程仓库。<br><img src="http://img12345.5-project.com/blog/20181102174704.png" alt="img"></p>
+<p>此时再把 dev-100 分支合并到 master 分支就会提示冲突。<br><img src="http://img12345.5-project.com/blog/20181102175031.png" alt="img"></p>
+<p>双击冲突文件，处理冲突。<br><img src="http://img12345.5-project.com/blog/20181102175217.png" alt="img"><br>处理完成后，点击 apply 即可，如果有多个冲突文件，都按照这种方式处理，这是我们处理完冲突之后的代码。<br><img src="http://img12345.5-project.com/2018110315412022049329.png" alt="img"></p>
+<p>dev-100 分支已经被成功合并到 master 了，就可以删除了。可以直接删除远程 dev-100 分支，删除时 IDEA 会提示是否同时删除本地的 dev-100 分支，勾选即可。</p>
+<p>现在我们把分支合并的结果 push 到远程仓库。</p>
+<h2 id="代码暂存之git-stash"><a href="#代码暂存之git-stash" class="headerlink" title="代码暂存之git stash"></a>代码暂存之git stash</h2><p>编号 100 的需求完成之后，现在我们又接到一个新的需求，正在 dev-101 分支进行开发，开发还未完成。<br><img src="http://img12345.5-project.com/blog/20181102180114.png" alt="img"></p>
+<p>突然线上出现 bug，需要我们紧急进行修改，于是我们要基于最新的 master 分支新建一个 bug 分支 bug-12，需要先切换到 master 分支，但是当前分支的代码没有commit， 如果直接切换到 master 分支的话，dev-101 分支上的新增代码就会跑到 master 分支，而代码又不能此时 commit ，于是就轮到 stash 出场了。<br><img src="http://img12345.5-project.com/blog/20181102180427.png" alt="img"><br>Stash 会保存当前工作进度，会把暂存区和工作区的改动保存起来。<br><img src="http://img12345.5-project.com/20181103154120204424605.png" alt="img"><br>添加备注，选择 <strong>CREATE STASH</strong>。你会发现当前工作区内的代码被恢复成了原样。<br><img src="http://img12345.5-project.com/2018110315412022049329.png" alt="img"></p>
+<h2 id="代码暂存还原"><a href="#代码暂存还原" class="headerlink" title="代码暂存还原"></a>代码暂存还原</h2><p>此刻切换到 master 分支，并创建 bug-12 分支进行修复 bug，修复完成后合并到 master 分支并 push 到远程仓库，上文已经演示如何合并，在此不再赘述。</p>
+<p>将 bug-12 与 master 合并完成之后，现在要接着写 dev-101 需求代码，首先先切换到 dev-101 分支；<br>但是之前的代码已经被我们放到了 git 的 stash 当中，我们现在要把代码还原到工作区当中。<br>选择 Unstash Changes<br><img src="http://img12345.5-project.com/20181103154120268155941.png" alt="img"><br><img src="http://img12345.5-project.com/20181103154120276883579.png" alt="img"><br>选择之前保存的，同时勾选 Pop stash（还原完成后，会自动删除这个 stash），确定后，工作区之前写的代码就又回来了。<br><img src="http://img12345.5-project.com/blog/20181102180114.png" alt="img"></p>
+<h2 id="github搜索技巧"><a href="#github搜索技巧" class="headerlink" title="github搜索技巧"></a>github搜索技巧</h2><p>in:name 爬虫 //搜索名字中带有”爬虫”的<br>in:readme 爬虫 //搜索readme中带有”爬虫”的<br>in:description 爬虫 //搜索描述中带有”爬虫”的<br>stars:&gt;1000 //搜索stars&gt;1000的<br>forks:&gt;1000 //搜索forks&gt;1000的<br>pushed:&gt;2019-09-01 //搜索最近更新于2019年9月1日之后的<br>language:Python //搜索Python的项目</p>
+<p>in:name example 名字中有“example”<br>in:readme example readme中有“example”<br>in:description example 描述中有“example”</p>
+<p>stars:&gt;1000 star&gt;1000<br>forks:&gt;1000 fork&gt;1000<br>pushed:&gt;2019-09-01 2019年9月1日后有更新的</p>
+<p>language:java 用Java编写的项目  </p>
+<h2 id="Hexo-博客发布流程"><a href="#Hexo-博客发布流程" class="headerlink" title="Hexo 博客发布流程"></a>Hexo 博客发布流程</h2><ol>
+<li>清除缓存<blockquote>
+<p>hexo clean</p>
+</blockquote>
+</li>
+<li>生成静态文件<blockquote>
+<p>hexo g</p>
+</blockquote>
+</li>
+<li>启动本地服务器 （可省略）<blockquote>
+<p>hexo s</p>
+</blockquote>
+</li>
+<li>部署到远程站点<blockquote>
+<p>hexo d</p>
+</blockquote>
+</li>
+</ol>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '33e35f8a39d17339ae45',
+        clientSecret: 'c2daf8c102c345db91ff32aa45b2a692c7bdee25',
+        repo: 'Fly_tom.github.io',
+        owner: 'Flyiyu',
+        admin: "Flyiyu",
+        id: '2021-04-27T22-56-26',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2021/04/27/2019-04-11-quartz/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="quartz">
+                        
+                        <span class="card-title">quartz</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+一、什么是Quartz?Quartz是一个完全由Java编写的开源作业调度框架，为在Java应用程序中进行作业调度提供了简单却强大的机制。Quartz允许开发人员根据时间间隔来调度作业。它实现了作业和触发器的多对多的关系，还能把多个作业与
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-27
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/quartz/" class="post-category">
+                                    quartz
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/quartz/">
+                        <span class="chip bg-color">quartz</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/04/27/2019-04-11-elasticsearch/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Elasticsearch笔记">
+                        
+                        <span class="card-title">Elasticsearch笔记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Elasticsearch简介
+https://my.oschina.net/happyBKs/blog/1798778
+背景随着业务复杂度的提升以及微服务的兴起，传统单一项目会被按照业务规则进行垂直拆分，另外为了防止单点故障我们也会将重要
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Elasticsearch/" class="post-category">
+                                    Elasticsearch
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align"
+        style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="https://flytom.top" target="_blank">FlyTom</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "6";
+                    var startDate = "28";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: ""
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
