@@ -374,6 +374,7 @@
 </blockquote>
 <p>一台master主机可以拥有多台slave从机。而一台slave从机又可以拥有多个slave从机。如此下去，形成强大的多级服务器集群架构（高扩展）。可以避免Redis单点故障，实现容灾恢复效果（高可用）。</p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/redis5.png" alt=""></p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/redis12.png" alt=""></p>
 <h5 id="复制原理"><a href="#复制原理" class="headerlink" title="复制原理"></a>复制原理</h5><blockquote>
 <p>redis复制过程可分为三个阶段：</p>
 </blockquote>
@@ -396,7 +397,8 @@
 <p>没有哨兵机制的时候，主从复制结构部署存在的问题是什么？也可以说redis主节点发生故障如何解决？</p>
 <pre><code>如果主节点down调，主从切换需要人工介入
 
-为了实现redis故障转移的自动化。自动发现，自动转移。不需要人工参与。</code></pre><h4 id="1、Sentinel（哨兵）进程的作用："><a href="#1、Sentinel（哨兵）进程的作用：" class="headerlink" title="1、Sentinel（哨兵）进程的作用："></a>1、Sentinel（哨兵）进程的作用：</h4><p>  1】、监控(Monitoring): 哨兵(sentinel) 会不断地检查你的Master和Slave是否运作正常。</p>
+为了实现redis故障转移的自动化。自动发现，自动转移。不需要人工参与。</code></pre><p><img src="https://gitee.com/fly_tom/use/raw/master/redis13.png" alt=""></p>
+<h4 id="1、Sentinel（哨兵）进程的作用："><a href="#1、Sentinel（哨兵）进程的作用：" class="headerlink" title="1、Sentinel（哨兵）进程的作用："></a>1、Sentinel（哨兵）进程的作用：</h4><p>  1】、监控(Monitoring): 哨兵(sentinel) 会不断地检查你的Master和Slave是否运作正常。</p>
 <p>  2】、提醒(Notification)：当被监控的某个Redis节点出现问题时, 哨兵(sentinel) 可以通过 API 向管理员或者其他应用程序发送通知。</p>
 <p>  3】、自动故障迁移(Automatic failover)：当一个Master不能正常工作时，哨兵(sentinel) 会开始一次自动故障迁移操作，它会将失效Master的其中一个Slave升级为新的Master, 并让失效Master的其他Slave改为复制新的Master；当客户端试图连接失效的Master时，集群也会向客户端返回新Master的地址，使得集群可以使用现在的Master替换失效Master。Master和Slave服务器切换后，Master的redis.conf、Slave的redis.conf和sentinel.conf的配置文件的内容都会发生相应的改变，即，Master主服务器的redis.conf配置文件中会多一行slaveof的配置，sentinel.conf的监控目标会随之调换。</p>
 <h4 id="2、Sentinel（哨兵）进程的工作方式："><a href="#2、Sentinel（哨兵）进程的工作方式：" class="headerlink" title="2、Sentinel（哨兵）进程的工作方式："></a>2、Sentinel（哨兵）进程的工作方式：</h4><p> 1】、每个Sentinel（哨兵）进程以每秒钟一次的频率向整个集群中的Master主服务器，Slave从服务器以及其他Sentinel（哨兵）进程发送一个 PING 命令。</p>
@@ -407,7 +409,7 @@
 <p> 6】、当Master主服务器被 Sentinel（哨兵）进程标记为客观下线（ODOWN）时，Sentinel（哨兵）进程向下线的 Master主服务器的所有 Slave从服务器发送 INFO 命令的频率会从 10 秒一次改为每秒一次。</p>
 <p> 7】、若没有足够数量的 Sentinel（哨兵）进程同意 Master主服务器下线， Master主服务器的客观下线状态就会被移除。若 Master主服务器重新向 Sentinel（哨兵）进程发送 PING 命令返回有效回复，Master主服务器的主观下线状态就会被移除。</p>
 <h3 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h3><p>以上三者的关系</p>
-<p>主从往往是为了读写分离、backup 等目的， 哨兵可以检测主从健康， 主挂了可以把从提升为主， 集群往往是为了数据 sharding， 解决单台机器资源的上限的问题==</p>
+<p>主从往往是为了读写分离、backup 等目的， 哨兵可以检测主从健康， 主挂了可以把从提升为主， 集群往往是为了数据 sharding， 解决单台机器资源的上限的问题==<br><img src="https://gitee.com/fly_tom/use/raw/master/redis14.png" alt=""></p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/redis3.png" alt="redis3"></p>
 <p>在这个图中，每一个蓝色的圈都代表着一个redis的服务器节点。它们任何两个节点之间都是相互连通的。客户端可以与任何一个节点相连接，然后就可以访问集群中的任何一个节点。对其进行存取和其他操作。</p>
 <p>　　那么redis是怎么做到的呢？首先，在redis的每一个节点上，都有这么两个东西，一个是插槽（slot）可以理解为是一个可以存储两个数值的一个变量这个变量的取值范围是：0-16383。还有一个就是cluster我个人把这个cluster理解为是一个集群管理的插件。当我们的存取的key到达的时候，redis会根据crc16的算法得出一个结果，然后把结果对 16384 求余数，这样每个 key 都会对应一个编号在 0-16383 之间的哈希槽，通过这个值，去找到对应的插槽所对应的节点，然后直接自动跳转到这个对应的节点上进行存取操作。</p>

@@ -1,0 +1,1040 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="redission, Tom Blog">
+    <meta name="description" content="几个概念什么是分布式锁？分布式锁又可以解决哪些问题呢？
+在我们的系统还没有使用分布式架构的时候，我们可以用同步锁或者Lock锁，来保证多线程并发的时候，同一时间只有一个线程修改共享变量或者执行代码块，但是当我们现在大部分系统都是分布式集群部">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>redission | Tom Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+    
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Tom Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Tom Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			Contact
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        redission
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Redis/" class="post-category">
+                                Redis
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-06-03
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        5k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        18 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h3 id="几个概念"><a href="#几个概念" class="headerlink" title="几个概念"></a>几个概念</h3><p><strong>什么是分布式锁？分布式锁又可以解决哪些问题呢？</strong></p>
+<p>在我们的系统还没有使用分布式架构的时候，我们可以用同步锁或者Lock锁，来保证多线程并发的时候，同一时间只有一个线程修改共享变量或者执行代码块，但是当我们现在大部分系统都是分布式集群部署的，单纯的同步锁和Lock锁只能保证单个实例上的数据一致性，多实例就失去了作用。</p>
+<p>这个时候就需要使用分布式锁来保证共享资源的原子性，比如我们电商系统里面的扣减库存，当单量小的时候问题不大，如果单量很大，同一时间多个实例都在并发处理扣减库存的业务的时候，就可能存在超卖的问题。</p>
+<p><strong>分布式</strong>：简单来说就是将业务进行拆分，部署到不同的机器来协调处理。比如用户在网上买东西，大致分为：订单系统、库存系统、支付系统、、、、这些系统共同来完成用户买东西这个业务操作。</p>
+<p><strong>集群</strong>：同一个业务，通过部署多个实例来完成，保证应用的高可用，如果其中某个实例挂了，业务仍然可以正常进行，通常集群和分布式配合使用。来保证系统的高可用、高性能。</p>
+<p><strong>分布式事务</strong>：按照传统的系统架构，下单、扣库存等等，这一系列的操作都是一在一个应用一个数据库中完成的，也就是说保证了事务的ACID特性。如果在分布式应用中就会涉及到跨应用、跨库。这样就涉及到了分布式事务，就要考虑怎么保证这一系列的操作要么都成功要么都失败。保证数据的一致性。</p>
+<p><strong>分布式锁</strong>：因为资源有限，要通过互斥来保持一致性，引入分布式事务锁。</p>
+<h3 id="分布式锁作用"><a href="#分布式锁作用" class="headerlink" title="分布式锁作用"></a>分布式锁作用</h3><blockquote>
+<p>我们在单机服务器，出现资源的竞争，一般使用synchronized 就可以解决，但是在分布式的服务器上，synchronized 就无法解决这个问题，这就需要一个分布式事务锁。</p>
+</blockquote>
+<h4 id="常见的分布式事务锁"><a href="#常见的分布式事务锁" class="headerlink" title="常见的分布式事务锁"></a>常见的分布式事务锁</h4><p>  1、数据库级别的锁</p>
+<p>  乐观锁，基于加入版本号实现</p>
+<p>  悲观锁，基于数据库的 for update 实现</p>
+<p>  2、Redis ，基于 SETNX、EXPIRE 实现</p>
+<p>  3、Zookeeper，基于InterProcessMutex 实现</p>
+<p>  4、Redisson，lcok、tryLock（背后原理也是Redis）</p>
+<p>Redis实现的分布式锁，最为复杂，但是性能确是最佳的，所以在对性能要求更高的系统里，我们都选择使用Redis来实现分布式锁。利用Redis实现分布式锁，一般都是使用SETNX实现</p>
+<h4 id="分布式要解决的问题"><a href="#分布式要解决的问题" class="headerlink" title="分布式要解决的问题"></a>分布式要解决的问题</h4><p>当我们在设计分布式锁的时候，我们应该考虑分布式锁至少要满足的一些条件，同时考虑如何高效的设计分布式锁，这里我认为以下几点是必须要考虑的。</p>
+<p>1、互斥<br>在分布式高并发的条件下，我们最需要保证，同一时刻只能有一个线程获得锁，这是最基本的一点。</p>
+<p>2、防止死锁<br>在分布式高并发的条件下，比如有个线程获得锁的同时，还没有来得及去释放锁，就因为系统故障或者其它原因使它无法执行释放锁的命令,导致其它线程都无法获得锁，造成死锁。</p>
+<p>所以分布式非常有必要设置锁的有效时间，确保系统出现故障后，在一定时间内能够主动去释放锁，避免造成死锁的情况。</p>
+<p>3、性能<br>对于访问量大的共享资源，需要考虑减少锁等待的时间，避免导致大量线程阻塞。</p>
+<p>所以在锁的设计时，需要考虑两点。</p>
+<p>1、锁的颗粒度要尽量小。比如你要通过锁来减库存，那这个锁的名称你可以设置成是商品的ID,而不是任取名称。这样这个锁只对当前商品有效,锁的颗粒度小。</p>
+<p>2、锁的范围尽量要小。比如只要锁2行代码就可以解决问题的，那就不要去锁10行代码了。</p>
+<p>4、重入<br>我们知道ReentrantLock是可重入锁，那它的特点就是：同一个线程可以重复拿到同一个资源的锁。重入锁非常有利于资源的高效利用。</p>
+<h4 id="redis-原始分布式锁实现"><a href="#redis-原始分布式锁实现" class="headerlink" title="redis 原始分布式锁实现"></a>redis 原始分布式锁实现</h4><p>** 加锁**<br>redis 分布式锁背景首先是基于setnx 实现，setnx 当key 不存在时才会创建value ,并且返回1 ，否则key 值存在，创建value 失败，返回0；基于这个属性，我们可以满足分布式做的互斥性。但是还会存在一个问题，比如客户端上锁后，还未释放锁，异常宕机或者hang 住了。这时候其他客户端就始终无法获取锁，造成业务不可用情况；</p>
+<p>解决方案就是在给锁的key 设置过期时间，及expire key score ； 需要注意的是，要保证setNx 操作和expire 两个操作是原子性的，否则setNx 设置后，expire 还未执行，同样无法解决上述问题。redis 想要保证两个操作是原子性，可以通过lua 脚本来实现；实现方法如下</p>
+<pre class=" language-java"><code class="language-java">  <span class="token keyword">private</span> <span class="token keyword">boolean</span> <span class="token function">doTryLock</span><span class="token punctuation">(</span>String lockKey<span class="token punctuation">,</span> <span class="token keyword">int</span> lockSeconds<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    RedisScript<span class="token operator">&lt;</span>Boolean<span class="token operator">></span> SETNX_AND_EXPIRE_SCRIPT<span class="token punctuation">;</span>
+    StringBuilder sb <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"if (redis.call('setnx', KEYS[1], ARGV[1]) == 1) then\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\tredis.call('expire', KEYS[1], tonumber(ARGV[2]))\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\treturn true\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"else\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\treturn false\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sb<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"end"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    SETNX_AND_EXPIRE_SCRIPT <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RedisScriptImpl</span><span class="token operator">&lt;</span>Boolean<span class="token operator">></span><span class="token punctuation">(</span>sb<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Boolean<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> stringRedisTemplate
+        <span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span>SETNX_AND_EXPIRE_SCRIPT<span class="token punctuation">,</span> Collections<span class="token punctuation">.</span><span class="token function">singletonList</span><span class="token punctuation">(</span>lockKey<span class="token punctuation">)</span><span class="token punctuation">,</span> lockValue<span class="token punctuation">,</span>
+            String<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>lockSeconds<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</code></pre>
+<p><strong>释放锁</strong><br>锁的释放要遵循解铃还须系铃人，不可以出现a 把b 的锁给释放，这样的话锁就失去了意义；redis 释放锁首先判断释放锁的线程是否是加锁的线程，如果是允许删除，不是则无法删除key。集成实现下图所示</p>
+<pre class=" language-java"><code class="language-java">  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">unlock</span><span class="token punctuation">(</span>String lockKey<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    RedisScript<span class="token operator">&lt;</span>Boolean<span class="token operator">></span> DEL_IF_GET_EQUALS<span class="token punctuation">;</span>
+    StringBuilder sbr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sbr<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"if (redis.call('get', KEYS[1]) == ARGV[1]) then\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sbr<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\tredis.call('del', KEYS[1])\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sbr<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\treturn true\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sbr<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"else\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sbr<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"\treturn false\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    sbr<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"end"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    DEL_IF_GET_EQUALS <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RedisScriptImpl</span><span class="token operator">&lt;</span>Boolean<span class="token operator">></span><span class="token punctuation">(</span>sbr<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> Boolean<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// 忽略结果</span>
+    stringRedisTemplate<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span>DEL_IF_GET_EQUALS<span class="token punctuation">,</span> Collections<span class="token punctuation">.</span><span class="token function">singletonList</span><span class="token punctuation">(</span>lockKey<span class="token punctuation">)</span><span class="token punctuation">,</span> lockValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span></code></pre>
+<p>redis 分布式锁存在的问题<br>上面的redis 分布式锁解决方案近乎完美，但是需要考虑的一种情况，就是锁续期的问题，比如我们锁的超时时间设置3s ,但是业务逻辑复杂还是其他原因导致在3s 内导致锁被释放了，这样其他的客户端同样拿到了锁，这样就没有做到锁的互斥性，同样出现并发问题。</p>
+<p>解决问题的思路：</p>
+<p>延长锁过期时间（治标不治本）</p>
+<p>为锁添加守护线程，进行续期（推荐，redisson watch dog 实现）</p>
+<p>基于redis 订阅 pub/sub 实现</p>
+<blockquote>
+<p>基于redis 原始分布式锁的一些不便，可以考虑引入redisson 来解决这些问题；比如watch dog 就可以解决锁续期的问题；</p>
+</blockquote>
+<h4 id="Redisson原理分析"><a href="#Redisson原理分析" class="headerlink" title="Redisson原理分析"></a>Redisson原理分析</h4><p><strong>redisson 是什么</strong><br>redisson 是基于redis 基础上实现的java 驻内存数据网格，Redisson还采用了基于NIO的Netty框架，不仅能作为Redis底层驱动客户端，具备提供对Redis各种组态形式的连接功能，对Redis命令能以同步发送、异步形式发送、异步流形式发送或管道形式发送的功能，LUA脚本执行处理，以及处理返回结果的功能等等</p>
+<p>大体流程</p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/redisson.png" alt=""></p>
+<p>Redisson集群模式获取锁的实现就是，在不同节点上获取锁，每个节点上获取锁都有超时时间，如果获取锁超时就认为这个节点不可用，当成功获取锁的个数超过Redis节点的半数，且获取锁消耗的时间还没超过锁过期时间，则认为获取锁成功。获取锁成功后重新计算锁释放时间，由原来的锁释放时间减去获取锁消耗的时间，如果最终获取锁失败，已经获取锁成功的节点也会释放锁。</p>
+<h3 id="Redisson使用"><a href="#Redisson使用" class="headerlink" title="Redisson使用"></a>Redisson使用</h3><p>redisson的lock()、tryLock()方法 底层 其实是发送一段lua脚本到一台服务器：</p>
+<ol>
+<li><p>锁互斥</p>
+<p>假如客户端A已经拿到了 myLock，现在 有一客户端（未知） 想进入：</p>
+<p>1、第一个if判断会执行“exists myLock”，发现myLock这个锁key已经存在了。</p>
+<p>2、第二个if判断，判断一下，myLock锁key的hash数据结构中， 如果是客户端A重新请求，证明当前是同一个客户端同一个线程重新进入，所以可从入标志+1，重新刷新生存时间（可重入）；否则进入下一个if。</p>
+<p>3、第三个if判断，客户端B 会获取到pttl myLock返回的一个数字，这个数字代表了myLock这个锁key的剩余生存时间。比如还剩15000毫秒的生存时间。</p>
+<p>此时客户端B会进入一个while循环，不停的尝试加锁。</p>
+</li>
+<li><p>watch dog 看门狗自动延期机制<br>官方介绍：</p>
+<blockquote>
+<p>lockWatchdogTimeout（监控锁的看门狗超时，单位：毫秒）    默认值：30000<br> 监控锁的看门狗超时时间单位为毫秒。该参数只适用于分布式锁的加锁请求中未明确使用leaseTimeout参数的情况。(如果设置了leaseTimeout那就会自动失效了呀~)<br>看门狗有什么用呢？</p>
+</blockquote>
+<p>假如客户端A在超时时间内还没执行完毕怎么办呢？redisson于是提供了这个看门狗，如果还没执行完毕，监听到这个客户端A的线程还持有锁，就去续期，默认是  LockWatchdogTimeout/ 3 即 10 秒监听一次，如果还持有，就不断的延长锁的有效期（重新给锁设置过期时间，30s）</p>
+</li>
+<li><p>释放锁机制<br>lock.unlock()，就可以释放分布式锁。就是每次都对myLock数据结构中的那个加锁次数减1。</p>
+<p>如果发现加锁次数是0了，说明这个客户端已经不再持有锁了，此时就会用：“del myLock”命令，从redis里删除这个key。</p>
+<p>为了安全，会先校验是否持有锁再释放，防止</p>
+<p>业务执行还没执行完，锁到期了。（此时没占用锁，再unlock就会报错）</p>
+<p>主线程异常退出、或者假死</p>
+</li>
+</ol>
+<p><strong>redisson watchdog 是什么？</strong><br>通过redission 加锁源码阅读，了解到一个概念就是watch dog (俗称看门狗)；他的作用，就是解决redis 原生分布式锁的锁续期的问题；首先需要注意的问题，就是watch dog 只有在不设置leaseTime  ，或者leaseTime 为-1 时，才会有效，否则锁的强制过期时间是我们设置的leaseTime ；watch dog 默认锁的时间是30s ,他会每隔 lockWatchdogTimeout/3 (例如默认是10秒跑一次) 秒就会检查锁是否存在，如果存在则进行续期；</p>
+<p><strong>Redisson中RLock的实现原理</strong></p>
+<p>Redisson中RLock的实现是基本参照了Redis的red lock算法进行实现，不过在原始的red lock算法下进行了改良，主要包括下面的特性：</p>
+<ul>
+<li>互斥</li>
+<li>无死锁</li>
+<li>可重入，类似于ReentrantLock，同一个线程可以重复获取同一个资源的锁（一般使用计数器实现），锁的重入特性一般情况下有利于提高资源的利用率</li>
+<li>续期，这个是一个比较前卫解决思路，也就是如果一个客户端对资源X永久锁定，那么并不是直接对KEY生存周期设置为-1，而是通过一个守护线程每隔固定周期延长KEY的过期时间，这样就能实现在守护线程不被杀掉的前提下，避免客户端崩溃导致锁无法释放长期占用资源的问题</li>
+<li>锁状态变更订阅，依赖于org.redisson.pubsub.LockPubSub，用于订阅和通知锁释放事件</li>
+<li>不是完全参考red lock算法的实现，数据类型选用了HASH，配合Lua脚本完成多个命令的原子性</li>
+</ul>
+<p>续期或者说延长KEY的过期时间在Redisson使用watch dog实现，理解为用于续期的守护线程，底层依赖于Netty的时间轮HashedWheelTimer和任务io.netty.util.Timeout实现，俗称看门狗</p>
+<h4 id="具体的代码实现："><a href="#具体的代码实现：" class="headerlink" title="具体的代码实现："></a>具体的代码实现：</h4><p>引入依赖</p>
+<pre class=" language-java"><code class="language-java"><span class="token operator">&lt;</span>dependency<span class="token operator">></span>
+    <span class="token operator">&lt;</span>groupId<span class="token operator">></span>org<span class="token punctuation">.</span>redisson<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">></span>
+    <span class="token operator">&lt;</span>artifactId<span class="token operator">></span>redisson<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">></span>
+    <span class="token operator">&lt;</span>version<span class="token operator">></span><span class="token number">3.13</span><span class="token punctuation">.</span><span class="token number">1</span><span class="token operator">&lt;</span><span class="token operator">/</span>version<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">></span></code></pre>
+<p>Redisson配置文件：</p>
+<pre class=" language-java"><code class="language-java"><span class="token annotation punctuation">@Bean</span>
+<span class="token keyword">public</span> RedissonClient <span class="token function">redissonClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Config config <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Config</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    config<span class="token punctuation">.</span><span class="token function">useClusterServers</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">setScanInterval</span><span class="token punctuation">(</span><span class="token number">3000</span><span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// 集群状态扫描间隔时间，单位是毫秒</span>
+            <span class="token punctuation">.</span><span class="token function">addNodeAddress</span><span class="token punctuation">(</span><span class="token string">"redis://192.168.0.1:6379).setPassword("</span><span class="token number">666</span>"<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">addNodeAddress</span><span class="token punctuation">(</span><span class="token string">"redis://192.168.0.2:6379"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setPassword</span><span class="token punctuation">(</span><span class="token string">"666"</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">addNodeAddress</span><span class="token punctuation">(</span><span class="token string">"redis://192.168.0.3:6379"</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">setPassword</span><span class="token punctuation">(</span><span class="token string">"666"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> Redisson<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>config<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>获取锁操作：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">long</span> waitTimeout <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+<span class="token keyword">long</span> leaseTime <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+RLock lock1 <span class="token operator">=</span> redissonClient1<span class="token punctuation">.</span><span class="token function">getLock</span><span class="token punctuation">(</span><span class="token string">"lock1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+RLock lock2 <span class="token operator">=</span> redissonClient2<span class="token punctuation">.</span><span class="token function">getLock</span><span class="token punctuation">(</span><span class="token string">"lock2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+RLock lock3 <span class="token operator">=</span> redissonClient3<span class="token punctuation">.</span><span class="token function">getLock</span><span class="token punctuation">(</span><span class="token string">"lock3"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+RedissonRedLock redLock <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RedissonRedLock</span><span class="token punctuation">(</span>lock1<span class="token punctuation">,</span> lock2<span class="token punctuation">,</span> lock3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+redLock<span class="token punctuation">.</span><span class="token function">trylock</span><span class="token punctuation">(</span>waitTimeout<span class="token punctuation">,</span>leaseTime<span class="token punctuation">,</span>TimeUnit<span class="token punctuation">.</span>SECONDS<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">try</span><span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//...</span>
+<span class="token punctuation">}</span><span class="token keyword">finally</span><span class="token punctuation">{</span>
+    redLock<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="Redisson主从架构节点问题"><a href="#Redisson主从架构节点问题" class="headerlink" title="Redisson主从架构节点问题"></a>Redisson主从架构节点问题</h3><p>由于redis实现的分布式锁，在向redis中存锁的时候，是马上返回结果告诉程序加锁成功的，此时可能锁还没有被同步到从节点，或者集群中其他节点。</p>
+<p>由此来看，在高并发场景下如下问题：</p>
+<ul>
+<li>会出现在其他请求加锁的时候，连接的redis可能还没有同步到第一次加的锁，造成锁失效。</li>
+<li>当加锁完成了，还未同步到从节点或者集群中其他节点的时候，当前节点挂掉了。</li>
+</ul>
+<p>zookeeper在存放数据的时候，也会同步给其他节点，但是至少同步了半数节点之后才会返回数据操作结果，这点很重要。</p>
+<p>所以这么看下来，redis和zookper的区别在于：</p>
+<ul>
+<li>redis满足了CAP理论的AP（高可用和分区容忍性）</li>
+<li>zookeeper满足了CAP理论的CP（一致性和分区容忍性）</li>
+</ul>
+<p>Redisson琐最大的缺点就是它加锁时只作用在一个Redis节点上，即使Redis通过sentinel(哨兵)保证高可用，如果这个master节点由于某些原因发生了主从切换，那么就会出现锁丢失的情况:</p>
+<ul>
+<li>在Redis的master节点上拿到了锁;</li>
+<li>但是这个加锁的key还没有同步到slave节点;</li>
+<li>master故障，发生故障转移，slave节点升级为master节点;</li>
+<li>导致锁丢失。</li>
+</ul>
+<p>正因为如此，Redis作者antirez基于分布式环境下提出了一种更高级的分布式锁的实现方式:Redlock。</p>
+<p><img src="https://gitee.com/fly_tom/use/raw/master/redisson2.png" alt=""></p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// 多个实例---redlock的思想</span>
+RLock lock1 <span class="token operator">=</span> redissonInstance1<span class="token punctuation">.</span><span class="token function">getLock</span><span class="token punctuation">(</span><span class="token string">"lock1"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+RLock lock2 <span class="token operator">=</span> redissonInstance2<span class="token punctuation">.</span><span class="token function">getLock</span><span class="token punctuation">(</span><span class="token string">"lock2"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+RLock lock3 <span class="token operator">=</span> redissonInstance3<span class="token punctuation">.</span><span class="token function">getLock</span><span class="token punctuation">(</span><span class="token string">"lock3"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// RedLock</span>
+RedissonRedLock lock <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">RedissonRedLock</span><span class="token punctuation">(</span>lock1<span class="token punctuation">,</span> lock2<span class="token punctuation">,</span> lock3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 同时加锁：lock1 lock2 lock3</span>
+<span class="token comment" spellcheck="true">// 红锁在大部分节点上加锁成功就算成功。</span>
+lock<span class="token punctuation">.</span><span class="token function">lock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+lock<span class="token punctuation">.</span><span class="token function">unlock</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h3 id="Redis分布式锁的缺点"><a href="#Redis分布式锁的缺点" class="headerlink" title="Redis分布式锁的缺点"></a>Redis分布式锁的缺点</h3><p>redis的多节点分为三种：主从模式、哨兵模式和集群模式</p>
+<p>不管是那种模式，都存在节点间的数据同步，也都会有某个节点挂掉的情况，所以才引出了redis实现分布式锁在多节点下可能会出现的问题。</p>
+<p><strong>Redis复制是异步的。</strong></p>
+<p>客户端1 对某个master节点写入了redisson锁，此时会异步复制给对应的 slave节点。但是这个过程中一旦发生 master节点宕机，主备切换，slave节点从变为了 master节点。</p>
+<p>这时客户端2 来尝试加锁的时候，在新的master节点上也能加锁，此时就会导致多个客户端对同一个分布式锁完成了加锁。</p>
+<p>这时系统在业务语义上一定会出现问题，导致各种脏数据的产生。</p>
+<p>缺陷在哨兵模式或者主从模式下，如果 master实例宕机的时候，可能导致多个客户端同时完成加锁。</p>
+<p>上面描述的集群模式下的问题，由于节点之间是采用异步通信的方式。如果刚刚在 Master 节点上加了锁，但是数据还没被同步到 Salve。这时 Master 节点挂了，它上面的锁就没了，等新的 Master 出来后（主从模式的手动切换或者哨兵模式的一次 failover 的过程），就可以再次获取同样的锁，出现一把锁被拿到了两次的场景。</p>
+<p><strong>Redlock算法</strong><br>作者认为，我们应该使用多个Redis,这些节点是完全独立的，不需要使用复制或者任何协调数据的系统，多个redis系统获取锁的过程就变成了如下步骤：</p>
+<ol>
+<li><p>获取当前 Unix 时间，以毫秒为单位。</p>
+</li>
+<li><p>依次尝试从 N 个实例，使用相同的 key 和随机值获取锁。在步骤 2，当向 Redis 设置锁时，客户端应该设置一个网络连接和响应超时时间，这个超时时间应该小于锁的失效时间。例如你的锁自动失效时间为 10 秒，则超时时间应该在 5-50 毫秒之间。这样可以避免服务器端 Redis 已经挂掉的情况下，客户端还在死死地等待响应结果。如果服务器端没有在规定时间内响应，客户端应该尽快尝试另外一个 Redis 实例。</p>
+</li>
+<li><p>客户端使用当前时间减去开始获取锁时间（步骤 1 记录的时间）就得到获取锁使用的时间。当且仅当从大多数（这里是 3 个节点）的 Redis 节点都取到锁，并且使用的时间小于锁失效时间时，锁才算获取成功。</p>
+</li>
+<li><p>如果取到了锁，key 的真正有效时间等于有效时间减去获取锁所使用的时间（步骤 3 计算的结果）。</p>
+</li>
+<li><p>如果因为某些原因，获取锁失败（没有在至少 N/2+1 个Redis实例取到锁或者取锁时间已经超过了有效时间），客户端应该在所有的 Redis 实例上进行解锁（即便某些 Redis 实例根本就没有加锁成功）。</p>
+</li>
+</ol>
+<p><strong>RedLock算法思想</strong>，意思是不能只在一个redis实例上创建锁，应该是在多个redis实例上创建锁，n / 2 + 1，必须在大多数redis节点上都成功创建锁，才能算这个整体的RedLock加锁成功，避免说仅仅在一个redis实例上加锁而带来的问题。</p>
+<p>通过上面的步骤我们可以知道，只要大多数的节点可以正常工作，就可以保证 Redlock 的正常工作。这样就可以解决前面单点 Redis 的情况下我们讨论的节点挂掉，由于异步通信，导致锁失效的问题。</p>
+<p>但是，还是不能解决故障重启后带来的锁的安全性的问题。你想一下下面这个场景：</p>
+<p>我们一共有 A、B、C 这三个节点。</p>
+<ul>
+<li>客户端 1 在 A，B 上加锁成功。C 上加锁失败。</li>
+<li>这时节点 B 崩溃重启了，但是由于持久化策略导致客户端 1 在 B 上的锁没有持久化下来。</li>
+<li>客户端 2 发起申请同一把锁的操作，在 B，C 上加锁成功。</li>
+<li>这个时候就又出现同一把锁，同时被客户端 1 和客户端 2 所持有了。</li>
+</ul>
+<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><p>redisson中整合了很多其他jdk juc包中的功能，如读写锁</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '33e35f8a39d17339ae45',
+        clientSecret: 'c2daf8c102c345db91ff32aa45b2a692c7bdee25',
+        repo: 'Fly_tom.github.io',
+        owner: 'Flyiyu',
+        admin: "Flyiyu",
+        id: '2021-06-03T19-15-18',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2021/06/03/2021-06-03-redisson/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="redission">
+                        
+                        <span class="card-title">redission</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            几个概念什么是分布式锁？分布式锁又可以解决哪些问题呢？
+在我们的系统还没有使用分布式架构的时候，我们可以用同步锁或者Lock锁，来保证多线程并发的时候，同一时间只有一个线程修改共享变量或者执行代码块，但是当我们现在大部分系统都是分布式集群部
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-03
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Redis/" class="post-category">
+                                    Redis
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/04/27/2021-03-31-mysql-zheng-li/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="mysql问题整理">
+                        
+                        <span class="card-title">mysql问题整理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            MySQL order by limit 分页数据重复问题
+https://www.jianshu.com/p/544c319fd838
+
+
+        document.querySelectorAll('.github-emoji'
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-27
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/SQL/" class="post-category">
+                                    SQL
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/SQL/">
+                        <span class="chip bg-color">SQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align"
+        style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2019</span>
+            <a href="https://flytom.top" target="_blank">FlyTom</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "6";
+                    var startDate = "28";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i["DaoVoiceObject"] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            a.charset = "utf-8";
+            m.parentNode.insertBefore(a, m)
+        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
+            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
+        daovoice('init', {
+            app_id: ""
+        });
+        daovoice('update');
+    </script>
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
