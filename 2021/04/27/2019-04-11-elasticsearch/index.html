@@ -4,10 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Elasticsearch笔记, Tom Blog">
-    <meta name="description" content="Elasticsearch简介
-https://my.oschina.net/happyBKs/blog/1798778
-背景随着业务复杂度的提升以及微服务的兴起，传统单一项目会被按照业务规则进行垂直拆分，另外为了防止单点故障我们也会将重要">
+    <meta name="keywords" content="Elasticsearch">
+    <meta name="description" content>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,6 +13,9 @@ https://my.oschina.net/happyBKs/blog/1798778
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
     <title>Elasticsearch笔记 | Tom Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
@@ -26,15 +27,17 @@ https://my.oschina.net/happyBKs/blog/1798778
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
 
-    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-    
+    <script src="/libs/jquery/jquery.min.js"></script>
+
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
 
 
 <body>
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper head-container">
+        <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
@@ -110,6 +113,7 @@ https://my.oschina.net/happyBKs/blog/1798778
   </li>
 </ul>
 
+
 <div id="mobile-nav" class="side-nav sidenav">
 
     <div class="mobile-head bg-color">
@@ -178,7 +182,7 @@ https://my.oschina.net/happyBKs/blog/1798778
 			
 			    <i class="fa-fw fas fa-comments"></i>
 			
-			Contact
+			留言板
 		</a>
           
         </li>
@@ -204,9 +208,7 @@ https://my.oschina.net/happyBKs/blog/1798778
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <div class="description center-align post-title">
-                        Elasticsearch笔记
-                    </div>
+                    <h1 class="description center-align post-title">Elasticsearch笔记</h1>
                 </div>
             </div>
         </div>
@@ -244,12 +246,12 @@ https://my.oschina.net/happyBKs/blog/1798778
     }
 
     .toc-widget {
+        width: 345px;
         padding-left: 20px;
     }
 
     .toc-widget .toc-title {
-        margin: 35px 0 15px 0;
-        padding-left: 17px;
+        padding: 35px 0 15px 17px;
         font-size: 1.5rem;
         font-weight: bold;
         line-height: 1.5rem;
@@ -258,6 +260,11 @@ https://my.oschina.net/happyBKs/blog/1798778
     .toc-widget ol {
         padding: 0;
         list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
     }
 
     #toc-content ol {
@@ -277,14 +284,14 @@ https://my.oschina.net/happyBKs/blog/1798778
     #toc-content .toc-link::before {
         background-color: transparent;
         max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
     }
 
     #toc-content .is-active-link {
         color: #42b983;
-    }
-
-    #toc-content .is-active-link::before {
-        background-color: #42b983;
     }
 
     #floating-toc-btn {
@@ -335,36 +342,28 @@ https://my.oschina.net/happyBKs/blog/1798778
             </div>
 
             <div class="post-info">
+                
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2021-04-27
                 </div>
+                
 
                 
-                    
-                    <div class="info-break-policy">
-                        <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        8.7k
-                    </div>
-                    
 
-                    
-                    <div class="info-break-policy">
-                        <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        31 分
-                    </div>
-                    
                 
-				
-				
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
-                    </div>
-				
+
+                
+
+                
             </div>
         </div>
         <hr class="clearfix">
+
+        
+
+        
+
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="Elasticsearch简介"><a href="#Elasticsearch简介" class="headerlink" title="Elasticsearch简介"></a>Elasticsearch简介</h2><p><img src="https://gitee.com/fly_tom/use/raw/master/es8.jpg" alt="image"></p>
@@ -423,7 +422,7 @@ Elasticsearch -> Indices -> Types -> Documents -> Fields
 索引相当于数据库，类型相当于表，文档相当于行，字段（Fields）相当于表的列（字段）。
 
 </code></pre>
-<h2 id="es的几个概念："><a href="#es的几个概念：" class="headerlink" title="es的几个概念："></a>es的几个概念：</h2><p><strong>（1） 接近实时（NRT）</strong><br>Elasticsearch是一个接近实时的搜索平台。这意味着，从索引一个文档直到这个文档能够被搜索到有一个轻微的延迟（通常是1秒）。</p>
+<h3 id="es的几个概念："><a href="#es的几个概念：" class="headerlink" title="es的几个概念："></a>es的几个概念：</h3><p><strong>（1） 接近实时（NRT）</strong><br>Elasticsearch是一个接近实时的搜索平台。这意味着，从索引一个文档直到这个文档能够被搜索到有一个轻微的延迟（通常是1秒）。</p>
 <p><strong>（2） 集群（cluster）</strong><br>一个集群就是由一个或多个节点组织在一起，它们共同持有你整个的数据，并一起提供索引和搜索功能。一个集群由一个唯一的名字标识，这个名字默认就是“elasticsearch”。这个名字是重要的，因为一个节点只能通过指定某个集群的名字，来加入这个集群。在产品环境中显式地设定这个名字是一个好习惯，但是使用默认值来进行测试/开发也是不错的。</p>
 <p><strong>（3） 节点（node）</strong><br>一个节点是你集群中的一个服务器，作为集群的一部分，它存储你的数据，参与集群的索引和搜索功能。和集群类似，一个节点也是由一个名字来标识的，默认情况下，这个名字是一个随机的漫威漫画角色的名字，这个名字会在启动的时候赋予节点。这个名字对于管理工作来说挺重要的，因为在这个管理过程中，你会去确定网络中的哪些服务器对应于Elasticsearch集群中的哪些节点。</p>
 <p>一个节点可以通过配置集群名称的方式来加入一个指定的集群。默认情况下，每个节点都会被安排加入到一个叫做“elasticsearch”的集群中，这意味着，如果你在你的网络中启动了若干个节点，并假定它们能够相互发现彼此，它们将会自动地形成并加入到一个叫做“elasticsearch”的集群中。</p>
@@ -442,8 +441,8 @@ Elasticsearch -> Indices -> Types -> Documents -> Fields
 <p>默认情况下，<strong>Elasticsearch中的每个索引被分片5个主分片和1个复制</strong>，这意味着，如果你的集群中至少有两个节点，你的索引将会有5个主分片和另外5个复制分片（1个完全拷贝），这样的话每个索引总共就有10个分片。一个索引的多个分片可以存放在集群中的一台主机上，也可以存放在多台主机上，这取决于你的集群机器数量。主分片和复制分片的具体位置是由ES内在的策略所决定的。</p>
 <p><strong>Mapping 映射</strong></p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/es10.png" alt="image"></p>
-<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p><a href="https://www.cnblogs.com/shoufeng/p/10692113.html" target="_blank" rel="noopener">https://www.cnblogs.com/shoufeng/p/10692113.html</a></p>
-<h3 id="1-核心数据类型"><a href="#1-核心数据类型" class="headerlink" title="1 核心数据类型"></a>1 核心数据类型</h3><ul>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p><a href="https://www.cnblogs.com/shoufeng/p/10692113.html" target="_blank" rel="noopener">https://www.cnblogs.com/shoufeng/p/10692113.html</a></p>
+<h4 id="1-核心数据类型"><a href="#1-核心数据类型" class="headerlink" title="1 核心数据类型"></a>1 核心数据类型</h4><ul>
 <li><p>字符串类型 - string(不再支持), 用text或keyword类型来代替string</p>
 </li>
 <li><p>文本类型 - text 当一个字段需要用于全文搜索(会被分词), 比如产品名称、产品描述信息, 就应该使用text类型.</p>
@@ -554,24 +553,24 @@ Elasticsearch -> Indices -> Types -> Documents -> Fields
 </tbody></table>
 </li>
 </ul>
-<h3 id="2-复杂数据类型"><a href="#2-复杂数据类型" class="headerlink" title="2 复杂数据类型"></a>2 复杂数据类型</h3><ul>
+<h4 id="2-复杂数据类型"><a href="#2-复杂数据类型" class="headerlink" title="2 复杂数据类型"></a>2 复杂数据类型</h4><ul>
 <li>数组类型 - array</li>
 <li>对象类型 - object</li>
 <li>嵌套类型 - nested</li>
 </ul>
-<h3 id="3-地理数据类型"><a href="#3-地理数据类型" class="headerlink" title="3 地理数据类型"></a>3 地理数据类型</h3><ul>
+<h4 id="3-地理数据类型"><a href="#3-地理数据类型" class="headerlink" title="3 地理数据类型"></a>3 地理数据类型</h4><ul>
 <li>地理点类型 - geo point</li>
 <li>地理形状类型 - geo_shape</li>
 </ul>
-<h3 id="4-专门数据类型"><a href="#4-专门数据类型" class="headerlink" title="4 专门数据类型"></a>4 专门数据类型</h3><ul>
+<h4 id="4-专门数据类型"><a href="#4-专门数据类型" class="headerlink" title="4 专门数据类型"></a>4 专门数据类型</h4><ul>
 <li>IP类型</li>
 <li>计数数据类型 - token_count</li>
 </ul>
-<h2 id="es锁机制"><a href="#es锁机制" class="headerlink" title="es锁机制"></a>es锁机制</h2><h3 id="悲观锁并发控制"><a href="#悲观锁并发控制" class="headerlink" title="悲观锁并发控制"></a>悲观锁并发控制</h3><p>优点：方便<br>缺点：并发能力低每次只有一个</p>
-<h3 id="乐观锁并发控制"><a href="#乐观锁并发控制" class="headerlink" title="乐观锁并发控制"></a>乐观锁并发控制</h3><p>es采用乐观锁</p>
+<h3 id="es锁机制"><a href="#es锁机制" class="headerlink" title="es锁机制"></a>es锁机制</h3><h4 id="悲观锁并发控制"><a href="#悲观锁并发控制" class="headerlink" title="悲观锁并发控制"></a>悲观锁并发控制</h4><p>优点：方便<br>缺点：并发能力低每次只有一个</p>
+<h4 id="乐观锁并发控制"><a href="#乐观锁并发控制" class="headerlink" title="乐观锁并发控制"></a>乐观锁并发控制</h4><p>es采用乐观锁</p>
 <p>乐观锁不会加锁，会采用一个版本号</p>
 <p>优点：并发能力高<br>缺点：每次操作都要比对版本号</p>
-<h2 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h2><p>倒排索引（Inverted Index）也叫反向索引，有反向索引必有正向索引。通俗地来讲，正向索引是通过key找value，反向索引则是通过value找key。</p>
+<h3 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h3><p>倒排索引（Inverted Index）也叫反向索引，有反向索引必有正向索引。通俗地来讲，正向索引是通过key找value，反向索引则是通过value找key。</p>
 <p>在创建索引之前，会对文档中的字符串进行分词。ES中字符串有两种类型，keyword和text。</p>
 <ul>
 <li>keyword类型的字符串不会被分词，搜索时全匹配查询</li>
@@ -615,9 +614,9 @@ Elasticsearch -> Indices -> Types -> Documents -> Fields
 </li>
 <li>坏处为需要写入新文档时,必须重新构建倒排索引文件,然后替换老文件后,新文档才<br>能被检索,导致文档实时性差<br><img src="https://gitee.com/fly_tom/use/raw/master/es25.png" alt="image"></li>
 </ul>
-<h3 id="新文档搜索实时性"><a href="#新文档搜索实时性" class="headerlink" title="新文档搜索实时性"></a>新文档搜索实时性</h3><p><img src="https://gitee.com/fly_tom/use/raw/master/es26.png" alt="image"><br>当有一个新的文档，构建倒排索引文件，对两个新旧索引进行同时查询，最后再进行一个汇总</p>
+<h4 id="新文档搜索实时性"><a href="#新文档搜索实时性" class="headerlink" title="新文档搜索实时性"></a>新文档搜索实时性</h4><p><img src="https://gitee.com/fly_tom/use/raw/master/es26.png" alt="image"><br>当有一个新的文档，构建倒排索引文件，对两个新旧索引进行同时查询，最后再进行一个汇总</p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/es27.png" alt="image"></p>
-<h2 id="Search运行机制"><a href="#Search运行机制" class="headerlink" title="Search运行机制"></a>Search运行机制</h2><ul>
+<h3 id="Search运行机制"><a href="#Search运行机制" class="headerlink" title="Search运行机制"></a>Search运行机制</h3><ul>
 <li>Search执行的时候实际分为两个步骤运行<ul>
 <li>Query阶段</li>
 <li>Fetch阶段<br>称为：Query-Then-Fetch<br><img src="https://gitee.com/fly_tom/use/raw/master/es28.png" alt="image"><br><img src="https://gitee.com/fly_tom/use/raw/master/es29.png" alt="image"></li>
@@ -700,9 +699,9 @@ DELETE，对应DELETE操作，从服务器删除资源，调用delete语句。</
   }
 }</code></pre>
 <p>定义后my_index这个索引下不能自动新增字段，但是在user.social_networks下可以自动新增子字段</p>
-<h2 id="分片"><a href="#分片" class="headerlink" title="分片"></a>分片</h2><p><img src="https://gitee.com/fly_tom/use/raw/master/es6.png" alt="image"><br><img src="https://gitee.com/fly_tom/use/raw/master/es7.png" alt="image"></p>
-<h3 id="脑裂"><a href="#脑裂" class="headerlink" title="脑裂"></a>脑裂</h3><p><img src="https://gitee.com/fly_tom/use/raw/master/es19.png" alt="image"></p>
-<h2 id="文档分布式存储"><a href="#文档分布式存储" class="headerlink" title="文档分布式存储"></a>文档分布式存储</h2><p><strong>存储一个document是如何选择存储在哪个分片上面</strong></p>
+<h3 id="分片"><a href="#分片" class="headerlink" title="分片"></a>分片</h3><p><img src="https://gitee.com/fly_tom/use/raw/master/es6.png" alt="image"><br><img src="https://gitee.com/fly_tom/use/raw/master/es7.png" alt="image"></p>
+<h4 id="脑裂"><a href="#脑裂" class="headerlink" title="脑裂"></a>脑裂</h4><p><img src="https://gitee.com/fly_tom/use/raw/master/es19.png" alt="image"></p>
+<h3 id="文档分布式存储"><a href="#文档分布式存储" class="headerlink" title="文档分布式存储"></a>文档分布式存储</h3><p><strong>存储一个document是如何选择存储在哪个分片上面</strong></p>
 <p><a href="https://www.cnblogs.com/wangshouchang/p/8049492.html" target="_blank" rel="noopener">https://www.cnblogs.com/wangshouchang/p/8049492.html</a></p>
 <p>.shard = hash(routing) % number_of_primary_shards</p>
 <p>下面将对这个公式每个字段进行分析</p>
@@ -714,9 +713,9 @@ DELETE，对应DELETE操作，从服务器删除资源，调用delete语句。</
 </ul>
 <p>该算法与主分片数相关，这也就是主分片一旦创建就无法修改的原因</p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/es21.png" alt="image"><br><img src="https://gitee.com/fly_tom/use/raw/master/es22.png" alt="image"><br><img src="https://gitee.com/fly_tom/use/raw/master/es23.png" alt="image"><br><img src="https://gitee.com/fly_tom/use/raw/master/es24.png" alt="image"></p>
-<h3 id="深度分页问题"><a href="#深度分页问题" class="headerlink" title="深度分页问题"></a>深度分页问题</h3><p>深度分页是分布式存储系统必然会面临的一个问题<br><img src="https://gitee.com/fly_tom/use/raw/master/es30.png" alt="image"></p>
+<h4 id="深度分页问题"><a href="#深度分页问题" class="headerlink" title="深度分页问题"></a>深度分页问题</h4><p>深度分页是分布式存储系统必然会面临的一个问题<br><img src="https://gitee.com/fly_tom/use/raw/master/es30.png" alt="image"></p>
 <p>分页方式的应用场景<br><img src="https://gitee.com/fly_tom/use/raw/master/es31.png" alt="image"></p>
-<h2 id="ES聚合"><a href="#ES聚合" class="headerlink" title="ES聚合"></a>ES聚合</h2><p>es将聚合分析主要分为4类：</p>
+<h3 id="ES聚合"><a href="#ES聚合" class="headerlink" title="ES聚合"></a>ES聚合</h3><p>es将聚合分析主要分为4类：</p>
 <ul>
 <li>Bucket 分桶类型，类似sql中的GROUP BY的语法<ul>
 <li>Terms</li>
@@ -743,7 +742,7 @@ DELETE，对应DELETE操作，从服务器删除资源，调用delete语句。</
 <li>Pipeline管道分析类型，基于上一级的聚合分析结果进行再分析</li>
 <li>Matrix矩阵分析类型</li>
 </ul>
-<h2 id="日志监控平台–平台架构ELK"><a href="#日志监控平台–平台架构ELK" class="headerlink" title="日志监控平台–平台架构ELK"></a>日志监控平台–平台架构ELK</h2><p>ElasticSearch是有其自己的套件的，简称ELK，即ElasticSearch，Logstash以及Kibana。ElasticSearch负责存储，Logstash负责收集数据来源，Kibana负责可视化数据，分工明确。</p>
+<h3 id="日志监控平台–平台架构ELK"><a href="#日志监控平台–平台架构ELK" class="headerlink" title="日志监控平台–平台架构ELK"></a>日志监控平台–平台架构ELK</h3><p>ElasticSearch是有其自己的套件的，简称ELK，即ElasticSearch，Logstash以及Kibana。ElasticSearch负责存储，Logstash负责收集数据来源，Kibana负责可视化数据，分工明确。</p>
 <p>　　下面，我给大家用一个图来说明日志监控平台的架构，如下图所示：</p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/es9.png" alt="image"></p>
 <p>　　通过上图，我们可以清晰的看到日志平台整个流向过程。首先，多个独立的Agent，这里就是图左边的三个LogStash节点，他们负责收集不同来源的数据，由一个Indexer负责进行汇总和分析数据，在这个当中有一个中间过程，这里我们使用了Broker，用Redis来实现这部分功能，其作用充当一个缓冲区，之后由ElasticSearch负责存储和搜索数据，最后由前段的Kibana可视化我们收集的数据。</p>
@@ -765,7 +764,7 @@ DELETE，对应DELETE操作，从服务器删除资源，调用delete语句。</
 <p>Packetbeat： 网络数据（收集网络流量数据）<br>Metricbeat： 指标 （收集系统、进程和文件系统级别的 CPU 和内存使用情况等数据）<br>Filebeat： 日志文件（收集文件数据）<br>Winlogbeat： windows事件日志（收集 Windows 事件日志数据）<br>Auditbeat：审计数据 （收集审计日志）<br>Heartbeat：运行时间监控 （收集系统运行时的数据）<br>关于x-pack工具：</p>
 <p>x-pack对Elastic Stack提供了安全、警报、监控、报表、图表于一身的扩展包，是收费的</p>
 <p>** Kibana索引用来存储数据，千万不要删除了它。它是将es数据通过kibana进行web展示的关键。这个配置后，在es的web界面里就会看到这个.kibana索引 **</p>
-<h2 id="提高-Elasticsearch-的高可用性"><a href="#提高-Elasticsearch-的高可用性" class="headerlink" title="提高 Elasticsearch 的高可用性"></a>提高 Elasticsearch 的高可用性</h2><p>这时集群的作用就体现出来了。假如 Elasticsearch<br>只放在一台服务器上，即单机运行，假如这台主机突然断网了或者被攻击了，那么整个 Elasticsearch 的服务就不可用了。但如果改成<br>Elasticsearch 集群的话，有一台主机宕机了，还有其他的主机可以支撑，这样就仍然可以保证服务是可用的。</p>
+<h3 id="提高-Elasticsearch-的高可用性"><a href="#提高-Elasticsearch-的高可用性" class="headerlink" title="提高 Elasticsearch 的高可用性"></a>提高 Elasticsearch 的高可用性</h3><p>这时集群的作用就体现出来了。假如 Elasticsearch<br>只放在一台服务器上，即单机运行，假如这台主机突然断网了或者被攻击了，那么整个 Elasticsearch 的服务就不可用了。但如果改成<br>Elasticsearch 集群的话，有一台主机宕机了，还有其他的主机可以支撑，这样就仍然可以保证服务是可用的。</p>
 <p>那假如一台主机宕机了，那么不就无法访问这台主机的数据了吗？那假如我要访问的数据正好存在这台主机上，那不就获取不到了吗？难道其他的主机里面也存了一份一模一样的数据？那这岂不是很浪费吗？</p>
 <p>为了解答这个问题，这里就引出了 Elasticsearch<br>的信息存储机制了。首先解答上面的问题，一台主机宕机了，这台主机里面存的数据依然是可以被访问到的，因为在其他的主机上也有备份，但备份的时候也不是整台主机备份，是分片备份的，那这里就又引出了一个概念——<strong>分片(Shard)</strong>。</p>
 <p>分片，英文叫做 Shard，顾名思义，分片就是对数据切分成了多个部分。我们知道 Elasticsearch<br>中一个索引（Index）相当于是一个数据库，如存某网站的用户信息，我们就建一个名为 user<br>的索引。但索引存储的时候并不是整个存一起的，它是被分片存储的，Elasticsearch<br><strong>默认会把一个索引分成五个分片</strong>，当然这个数字是可以自定义的。分片是数据的容器，数据保存在分片内，分片又被分配到集群内的各个节点里。当你的集群规模扩大或者缩小时，<br>Elasticsearch 会自动的在各节点中迁移分片，使得数据仍然均匀分布在集群里，所以相当于一份数据被分成了多份并保存在不同的主机上。</p>
@@ -823,15 +822,26 @@ DELETE，对应DELETE操作，从服务器删除资源，调用delete语句。</
             document.body.appendChild(img);
           });
       </script>
+                
             </div>
             <hr/>
 
             
 
-            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
-    
+
     
     <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
     <script src="/libs/share/js/social-share.min.js"></script>
@@ -841,10 +851,9 @@ DELETE，对应DELETE操作，从服务器删除资源，调用delete语句。</
 
 </div>
 
-
+                </div>
+            </div>
             
-
-
         </div>
     </div>
 
@@ -853,6 +862,10 @@ DELETE，对应DELETE操作，从服务器删除资源，调用delete语句。</
 <link rel="stylesheet" href="/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
@@ -870,6 +883,11 @@ DELETE，对应DELETE操作，从服务器删除资源，调用delete语句。</
 
     gitalk.render('gitalk-container');
 </script>
+
+    
+
+    
+
     
 
     
@@ -901,14 +919,7 @@ DELETE，对应DELETE操作，从服务器删除资源，调用delete语句。</
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Git的使用git的基本工作流程：git commit到远程
-
-
-
-git clone：将远程的Master分支代码克隆到本地仓库
-git checkout：切出分支出来开发
-git add：将文件加入库跟踪区
-git commit：将库跟
+                            
                         
                     </div>
                     <div class="publish-info">
@@ -957,7 +968,7 @@ git commit：将库跟
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            何为Dubbo&nbsp; &nbsp; &nbsp;&nbsp;Dubbo是一个分布式服务框架，其前身是阿里巴巴开源项目Dubbo，致力于提供高性能和透明化的RPC远程服务调用方案，以及SOA服务治理方案。Dubbo采用全spring配置
+                            
                         
                     </div>
                     <div class="publish-info">
@@ -996,19 +1007,16 @@ git commit：将库跟
 
 
 <!-- 代码块功能依赖 -->
-
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
-
 
 <!-- 代码语言 -->
 
 <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
 
-    
+
 <!-- 代码块复制 -->
 
 <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
 
 
 <!-- 代码块收缩 -->
@@ -1016,16 +1024,9 @@ git commit：将库跟
 <script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
-<!-- 代码块折行 -->
-
-<style type="text/css">
-code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
-</style>
-
-
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget">
+        <div class="toc-widget card" style="background-color: white;">
             <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
             <div id="toc-content"></div>
         </div>
@@ -1048,7 +1049,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            // headingsOffset: -205,
+            collapseDepth: Number('0'),
             headingSelector: 'h2, h3, h4'
         });
 
@@ -1105,10 +1106,10 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
         let $mainContent = $('#main-content');
         $('#floating-toc-btn .btn-floating').click(function () {
             if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).slideUp(500);
+                $tocAside.removeClass(expandedClass).hide();
                 $mainContent.removeClass('l9');
             } else {
-                $tocAside.addClass(expandedClass).slideDown(500);
+                $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
             fixPostCardWidth('artDetail', 'prenext-posts');
@@ -1123,70 +1124,51 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
+
     <footer class="page-footer bg-color">
-    <div class="container row center-align"
-        style="margin-bottom: 15px !important;">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2021</span>
+            
             <span id="year">2019</span>
-            <a href="https://flytom.top" target="_blank">FlyTom</a>
+            <a href="/about" target="_blank">FlyTom</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
-
             
-            <span id="sitetime">载入运行时间...</span>
-            <script>
-                function siteTime() {
-                    var seconds = 1000;
-                    var minutes = seconds * 60;
-                    var hours = minutes * 60;
-                    var days = hours * 24;
-                    var years = days * 365;
-                    var today = new Date();
-                    var startYear = "2019";
-                    var startMonth = "6";
-                    var startDate = "28";
-                    var startHour = "0";
-                    var startMinute = "0";
-                    var startSecond = "0";
-                    var todayYear = today.getFullYear();
-                    var todayMonth = today.getMonth() + 1;
-                    var todayDate = today.getDate();
-                    var todayHour = today.getHours();
-                    var todayMinute = today.getMinutes();
-                    var todaySecond = today.getSeconds();
-                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
-                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-                    var diff = t2 - t1;
-                    var diffYears = Math.floor(diff / years);
-                    var diffDays = Math.floor((diff / days) - diffYears * 365);
-                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
-                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
-                        minutes);
-                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
-                        diffMinutes * minutes) / seconds);
-                    if (startYear == todayYear) {
-                        document.getElementById("year").innerHTML = todayYear;
-                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
-                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
-                    } else {
-                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
-                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
-                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
-                    }
-                }
-                setInterval(siteTime, 1000);
-            </script>
+            
+            
+            
+            
+            <br>
             
             <br>
             
         </div>
+        <div class="col s12 m4 l4 social-link ">
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
     </div>
 </footer>
 
 <div class="progress-bar"></div>
+
 
     <!-- 搜索遮罩框 -->
 <div id="searchModal" class="modal">
@@ -1200,12 +1182,98 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     </div>
 </div>
 
-<script src="/js/search.js"></script>
 <script type="text/javascript">
 $(function () {
-    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
 });
 </script>
+
     <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
     <a class="btn-floating btn-large waves-effect waves-light" href="#!">
@@ -1221,11 +1289,7 @@ $(function () {
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
     <script src="/js/matery.js"></script>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-
-
     <!-- Baidu Analytics -->
-
 
     <!-- Baidu Push -->
 
@@ -1245,38 +1309,18 @@ $(function () {
 
     
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
-    
 
     
 
     
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i["DaoVoiceObject"] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            a.charset = "utf-8";
-            m.parentNode.insertBefore(a, m)
-        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
-            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
-        daovoice('init', {
-            app_id: ""
-        });
-        daovoice('update');
-    </script>
+
+	
     
 
     
 
     
 
-    
-    
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     

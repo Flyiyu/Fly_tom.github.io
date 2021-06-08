@@ -4,11 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Docker笔记, Tom Blog">
-    <meta name="description" content="Docker1、简介
-Docker是一个开源的应用容器引擎；是一个轻量级容器技术；
-由于不同的机器有不同的操作系统，以及不同的库和组件，在将一个应用部署到多台机器上需要进行大量的环境配置操作。
-Docker 主要解决环境配置问题，它是一种虚">
+    <meta name="keywords" content="Docker笔记">
+    <meta name="description" content>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,6 +13,9 @@ Docker 主要解决环境配置问题，它是一种虚">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
     <title>Docker笔记 | Tom Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
@@ -27,15 +27,17 @@ Docker 主要解决环境配置问题，它是一种虚">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
 
-    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-    
+    <script src="/libs/jquery/jquery.min.js"></script>
+
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
 
 
 <body>
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper head-container">
+        <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
@@ -111,6 +113,7 @@ Docker 主要解决环境配置问题，它是一种虚">
   </li>
 </ul>
 
+
 <div id="mobile-nav" class="side-nav sidenav">
 
     <div class="mobile-head bg-color">
@@ -179,7 +182,7 @@ Docker 主要解决环境配置问题，它是一种虚">
 			
 			    <i class="fa-fw fas fa-comments"></i>
 			
-			Contact
+			留言板
 		</a>
           
         </li>
@@ -205,9 +208,7 @@ Docker 主要解决环境配置问题，它是一种虚">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <div class="description center-align post-title">
-                        Docker笔记
-                    </div>
+                    <h1 class="description center-align post-title">Docker笔记</h1>
                 </div>
             </div>
         </div>
@@ -245,12 +246,12 @@ Docker 主要解决环境配置问题，它是一种虚">
     }
 
     .toc-widget {
+        width: 345px;
         padding-left: 20px;
     }
 
     .toc-widget .toc-title {
-        margin: 35px 0 15px 0;
-        padding-left: 17px;
+        padding: 35px 0 15px 17px;
         font-size: 1.5rem;
         font-weight: bold;
         line-height: 1.5rem;
@@ -259,6 +260,11 @@ Docker 主要解决环境配置问题，它是一种虚">
     .toc-widget ol {
         padding: 0;
         list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
     }
 
     #toc-content ol {
@@ -278,14 +284,14 @@ Docker 主要解决环境配置问题，它是一种虚">
     #toc-content .toc-link::before {
         background-color: transparent;
         max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
     }
 
     #toc-content .is-active-link {
         color: #42b983;
-    }
-
-    #toc-content .is-active-link::before {
-        background-color: #42b983;
     }
 
     #floating-toc-btn {
@@ -340,46 +346,38 @@ Docker 主要解决环境配置问题，它是一种虚">
             </div>
 
             <div class="post-info">
+                
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2021-04-27
                 </div>
+                
 
                 
-                    
-                    <div class="info-break-policy">
-                        <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        2.4k
-                    </div>
-                    
 
-                    
-                    <div class="info-break-policy">
-                        <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        9 分
-                    </div>
-                    
                 
-				
-				
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
-                    </div>
-				
+
+                
+
+                
             </div>
         </div>
         <hr class="clearfix">
+
+        
+
+        
+
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h2><p><img src="https://gitee.com/fly_tom/use/raw/master/docker2.png" alt="docker"></p>
+                <h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><h3 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h3><p><img src="https://gitee.com/fly_tom/use/raw/master/docker2.png" alt="docker"></p>
 <p><strong>Docker</strong>是一个开源的应用容器引擎；是一个轻量级容器技术；</p>
 <p>由于不同的机器有不同的操作系统，以及不同的库和组件，在将一个应用部署到多台机器上需要进行大量的环境配置操作。</p>
 <p><strong>Docker 主要解决环境配置问题</strong>，它是一种虚拟化技术，对进程进行隔离，被隔离的进程独立于宿主操作系统和其它隔离的进程。使用 Docker 可以不修改应用程序代码，不需要开发人员学习特定环境下的技术，就能够将现有的应用程序部署在其它机器上。</p>
 <p>Docker支持将软件编译成一个镜像；然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像；</p>
 <p>运行中的这个镜像称为容器，容器启动是非常快速的。</p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/docker3.png" alt="docker"></p>
-<h2 id="2、核心概念"><a href="#2、核心概念" class="headerlink" title="2、核心概念"></a>2、核心概念</h2><p>docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；</p>
+<h3 id="2、核心概念"><a href="#2、核心概念" class="headerlink" title="2、核心概念"></a>2、核心概念</h3><p>docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；</p>
 <p>docker客户端(Client)：连接docker主机进行操作；</p>
 <p>docker仓库(Registry)：用来保存各种打包好的软件镜像；</p>
 <p>docker镜像(Images)：软件打包好的镜像；放在docker仓库中；</p>
@@ -390,12 +388,12 @@ Docker 主要解决环境配置问题，它是一种虚">
 <p>2）、去Docker仓库找到这个软件对应的镜像；</p>
 <p>3）、使用Docker运行这个镜像，这个镜像就会生成一个Docker容器；</p>
 <p>4）、对容器的启动停止就是对软件的启动停止；</p>
-<h2 id="3、安装Docker"><a href="#3、安装Docker" class="headerlink" title="3、安装Docker"></a>3、安装Docker</h2><h4 id="1）、在linux虚拟机上安装docker"><a href="#1）、在linux虚拟机上安装docker" class="headerlink" title="1）、在linux虚拟机上安装docker"></a>1）、在linux虚拟机上安装docker</h4><p>​    1）、设置好网络以后使用命令重启虚拟机的网络</p>
+<h3 id="3、安装Docker"><a href="#3、安装Docker" class="headerlink" title="3、安装Docker"></a>3、安装Docker</h3><h5 id="1）、在linux虚拟机上安装docker"><a href="#1）、在linux虚拟机上安装docker" class="headerlink" title="1）、在linux虚拟机上安装docker"></a>1）、在linux虚拟机上安装docker</h5><p>​    1）、设置好网络以后使用命令重启虚拟机的网络</p>
 <pre class=" language-shell"><code class="language-shell">service network restart</code></pre>
 <p>步骤：</p>
 <p>查看官网即可</p>
-<h2 id="4、Docker常用命令-amp-操作"><a href="#4、Docker常用命令-amp-操作" class="headerlink" title="4、Docker常用命令&amp;操作"></a>4、Docker常用命令&amp;操作</h2><p><img src="https://gitee.com/fly_tom/use/raw/master/docker1.png" alt="docker"></p>
-<h3 id="0）、docker命令"><a href="#0）、docker命令" class="headerlink" title="0）、docker命令"></a>0）、docker命令</h3><table>
+<h3 id="4、Docker常用命令-amp-操作"><a href="#4、Docker常用命令-amp-操作" class="headerlink" title="4、Docker常用命令&amp;操作"></a>4、Docker常用命令&amp;操作</h3><p><img src="https://gitee.com/fly_tom/use/raw/master/docker1.png" alt="docker"></p>
+<h4 id="0）、docker命令"><a href="#0）、docker命令" class="headerlink" title="0）、docker命令"></a>0）、docker命令</h4><table>
 <thead>
 <tr>
 <th>操作</th>
@@ -424,7 +422,7 @@ Docker 主要解决环境配置问题，它是一种虚">
 <td></td>
 </tr>
 </tbody></table>
-<h3 id="1）、镜像操作"><a href="#1）、镜像操作" class="headerlink" title="1）、镜像操作"></a>1）、镜像操作</h3><table>
+<h4 id="1）、镜像操作"><a href="#1）、镜像操作" class="headerlink" title="1）、镜像操作"></a>1）、镜像操作</h4><table>
 <thead>
 <tr>
 <th>操作</th>
@@ -454,7 +452,7 @@ Docker 主要解决环境配置问题，它是一种虚">
 </tr>
 </tbody></table>
 <p><a href="https://hub.docker.com/" target="_blank" rel="noopener">https://hub.docker.com/</a></p>
-<h3 id="2）、容器操作"><a href="#2）、容器操作" class="headerlink" title="2）、容器操作"></a>2）、容器操作</h3><p>软件镜像（QQ安装程序）—-运行镜像—-产生一个容器（正在运行的软件，运行的QQ）；</p>
+<h4 id="2）、容器操作"><a href="#2）、容器操作" class="headerlink" title="2）、容器操作"></a>2）、容器操作</h4><p>软件镜像（QQ安装程序）—-运行镜像—-产生一个容器（正在运行的软件，运行的QQ）；</p>
 <p>步骤：</p>
 <pre class=" language-shell"><code class="language-shell">1、搜索镜像
 [root@localhost ~]# docker search tomcat
@@ -497,7 +495,7 @@ docker diff coniner-id
 https://docs.docker.com/engine/reference/commandline/docker/
 可以参考每一个镜像的文档
 </code></pre>
-<h3 id="3）、数据卷"><a href="#3）、数据卷" class="headerlink" title="3）、数据卷"></a>3）、数据卷</h3><blockquote>
+<h4 id="3）、数据卷"><a href="#3）、数据卷" class="headerlink" title="3）、数据卷"></a>3）、数据卷</h4><blockquote>
 <p>有点类似我们Redis里面的rdb和aof文件</p>
 </blockquote>
 <p>作用：</p>
@@ -513,16 +511,16 @@ docker rm edc-nginx // 移除容器实例
 docker volume rm edc-nginx-vol // 删除自定义数据卷
 /var/lib/docker/volumes/headESVolume/_data 容器卷的宿主机目录
                   headESVolume 自定义数据卷名称</code></pre>
-<h3 id="4）、docker-commit"><a href="#4）、docker-commit" class="headerlink" title="4）、docker  commit"></a>4）、docker  commit</h3><p>docker commit主要是用于提交一个container的文件或者配置的变化为一个新的image。</p>
+<h4 id="4）、docker-commit"><a href="#4）、docker-commit" class="headerlink" title="4）、docker  commit"></a>4）、docker  commit</h4><p>docker commit主要是用于提交一个container的文件或者配置的变化为一个新的image。</p>
 <p>docker commit和docker export, docker add类似都可以输出image，但是最好的生成image的方法还是使用Dockerfile</p>
 <p>注意：docker commit不会将你挂载的volumes一起打包到image中。</p>
 <pre class=" language-shell"><code class="language-shell">docker commit -m=“提交的描述信息” -a=“作者” 容器ID 要创建的目标镜像名:[标签名]</code></pre>
-<h4 id="慎用-docker-commit"><a href="#慎用-docker-commit" class="headerlink" title="慎用 docker commit"></a><strong>慎用 docker commit</strong></h4><p>使用 <code>docker commit</code> 命令虽然可以比较直观的帮助理解镜像分层存储的概念，但是实际环境中并不会这样使用。</p>
+<h5 id="慎用-docker-commit"><a href="#慎用-docker-commit" class="headerlink" title="慎用 docker commit"></a><strong>慎用 docker commit</strong></h5><p>使用 <code>docker commit</code> 命令虽然可以比较直观的帮助理解镜像分层存储的概念，但是实际环境中并不会这样使用。</p>
 <p>首先，如果仔细观察之前的 <code>docker diff webserver</code> 的结果，你会发现除了真正想要修改的 <code>/usr/share/nginx/html/index.html</code> 文件外，由于命令的执行，还有很多文件被改动或添加了。这还仅仅是最简单的操作，如果是安装软件包、编译构建，那会有大量的无关内容被添加进来，如果不小心清理，将会导致镜像极为臃肿。</p>
 <p>此外，使用 <code>docker commit</code> 意味着所有对镜像的操作都是黑箱操作，生成的镜像也被称为 <strong>黑箱镜像</strong>，换句话说，就是除了制作镜像的人知道执行过什么命令、怎么生成的镜像，别人根本无从得知。而且，即使是这个制作镜像的人，过一段时间后也无法记清具体在操作的。虽然 <code>docker diff</code> 或许可以告诉得到一些线索，但是远远不到可以确保生成一致镜像的地步。这种黑箱镜像的维护工作是非常痛苦的。</p>
 <p>而且，<strong>镜像所使用的分层存储，除当前层外，之前的每一层都是不会发生改变的，换句话说，任何修改的结果仅仅是在当前层进行标记、添加、修改，而不会改动上一层</strong>。如果使用 <code>docker commit</code> 制作镜像，以及后期修改的话，每一次修改都会让镜像更加臃肿一次，所删除的上一层的东西并不会丢失，会一直如影随形的跟着这个镜像，即使根本无法访问到。这会让镜像更加臃肿。</p>
 <p><em>Union FS 是有最大层数限制的，比如 AUFS，曾经是最大不得超过 42 层，现在是不得超过 127 层。就是commit最多127次。</em></p>
-<h3 id="5）、安装MySQL示例"><a href="#5）、安装MySQL示例" class="headerlink" title="5）、安装MySQL示例"></a>5）、安装MySQL示例</h3><pre class=" language-shell"><code class="language-shell">docker pull mysql</code></pre>
+<h4 id="5）、安装MySQL示例"><a href="#5）、安装MySQL示例" class="headerlink" title="5）、安装MySQL示例"></a>5）、安装MySQL示例</h4><pre class=" language-shell"><code class="language-shell">docker pull mysql</code></pre>
 <p>错误的启动</p>
 <pre class=" language-shell"><code class="language-shell">[root@localhost ~]# docker run --name mysql01 -d mysql
 42f09819908bb72dd99ae19e792e0a5d03c48638421fa64cce5f8ba0f40f5846
@@ -555,13 +553,13 @@ ad10e4bc5c6a        mysql               "docker-entrypoint.sh"   4 seconds ago  
 
 docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 指定mysql的一些配置参数</code></pre>
-<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><ol>
+<h4 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h4><ol>
 <li><blockquote>
 <p>在运行容器的时候，一定要指定拉取下来的镜像版本号，不然启动的时候，回去重新拉取latest版本的</p>
 </blockquote>
 </li>
 </ol>
-<h2 id="5、docker-file"><a href="#5、docker-file" class="headerlink" title="5、docker file"></a>5、docker file</h2><h4 id="关于docker-file"><a href="#关于docker-file" class="headerlink" title="关于docker file"></a>关于docker file</h4><p>在Docker中创建镜像最常用的方式，就是使用Dockerfile。Dockerfile是一个Docker镜像的描述文件，我们可以理解成火箭发射的A、B、C、D…的步骤。Dockerfile其内部<strong>包含了一条条的指令</strong>，<strong>每一条指令构建一层，因此每一条指令的内容，就是描述该层应当如何构建</strong>。</p>
+<h3 id="5、docker-file"><a href="#5、docker-file" class="headerlink" title="5、docker file"></a>5、docker file</h3><h5 id="关于docker-file"><a href="#关于docker-file" class="headerlink" title="关于docker file"></a>关于docker file</h5><p>在Docker中创建镜像最常用的方式，就是使用Dockerfile。Dockerfile是一个Docker镜像的描述文件，我们可以理解成火箭发射的A、B、C、D…的步骤。Dockerfile其内部<strong>包含了一条条的指令</strong>，<strong>每一条指令构建一层，因此每一条指令的内容，就是描述该层应当如何构建</strong>。</p>
 <pre class=" language-shell"><code class="language-shell">#基于centos镜像
 FROM centos
 
@@ -592,9 +590,9 @@ CMD ["/run.sh"]</code></pre>
 <p>最后，可以通过以下命令创建容器：</p>
 </blockquote>
 <pre class=" language-shell"><code class="language-shell">docker run -itd --name=tomcate -p 8080:8080 -v /app/webapps/:/usr/local/apache-tomcat-8.0.46/webapps/ tomcat:v1</code></pre>
-<h4 id="Dockerfile常用指令"><a href="#Dockerfile常用指令" class="headerlink" title="Dockerfile常用指令"></a>Dockerfile常用指令</h4><p><img src="https://gitee.com/fly_tom/use/raw/master/docker5.png" alt="docker"></p>
+<h5 id="Dockerfile常用指令"><a href="#Dockerfile常用指令" class="headerlink" title="Dockerfile常用指令"></a>Dockerfile常用指令</h5><p><img src="https://gitee.com/fly_tom/use/raw/master/docker5.png" alt="docker"></p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/docker6.png" alt="docker"></p>
-<h2 id="6、docker-compose"><a href="#6、docker-compose" class="headerlink" title="6、docker compose"></a>6、docker compose</h2><script>
+<h3 id="6、docker-compose"><a href="#6、docker-compose" class="headerlink" title="6、docker compose"></a>6、docker compose</h3><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -613,15 +611,30 @@ CMD ["/run.sh"]</code></pre>
             document.body.appendChild(img);
           });
       </script>
+                
             </div>
             <hr/>
 
             
 
-            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Docker笔记/">
+                                    <span class="chip bg-color">Docker笔记</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
-    
+
     
     <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
     <script src="/libs/share/js/social-share.min.js"></script>
@@ -631,10 +644,9 @@ CMD ["/run.sh"]</code></pre>
 
 </div>
 
-
+                </div>
+            </div>
             
-
-
         </div>
     </div>
 
@@ -643,6 +655,10 @@ CMD ["/run.sh"]</code></pre>
 <link rel="stylesheet" href="/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
@@ -660,6 +676,11 @@ CMD ["/run.sh"]</code></pre>
 
     gitalk.render('gitalk-container');
 </script>
+
+    
+
+    
+
     
 
     
@@ -691,11 +712,7 @@ CMD ["/run.sh"]</code></pre>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            SSO
-单点登录(Single sign on)，英文名称缩写SSO，SSO的意思就是在多系统的环境中，登录单方系统，就可以在不用再次登录的情况下访问相关受信任的系统。也就是说只要登录一次单体系统就可以
-
-sso 简绍
-单点登录角色单点登录
+                            
                         
                     </div>
                     <div class="publish-info">
@@ -744,13 +761,7 @@ sso 简绍
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            一、Spring Boot 入门案例1、Spring Boot 简介
-简化Spring应用开发的一个框架；
-整个Spring技术栈的一个大整合；
-J2EE开发的一站式解决方案；
-
-2、微服务2014，martin fowler
-微服务：架构
+                            
                         
                     </div>
                     <div class="publish-info">
@@ -789,19 +800,16 @@ J2EE开发的一站式解决方案；
 
 
 <!-- 代码块功能依赖 -->
-
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
-
 
 <!-- 代码语言 -->
 
 <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
 
-    
+
 <!-- 代码块复制 -->
 
 <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
 
 
 <!-- 代码块收缩 -->
@@ -809,16 +817,9 @@ J2EE开发的一站式解决方案；
 <script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
-<!-- 代码块折行 -->
-
-<style type="text/css">
-code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
-</style>
-
-
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget">
+        <div class="toc-widget card" style="background-color: white;">
             <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
             <div id="toc-content"></div>
         </div>
@@ -841,7 +842,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            // headingsOffset: -205,
+            collapseDepth: Number('0'),
             headingSelector: 'h2, h3, h4'
         });
 
@@ -898,10 +899,10 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
         let $mainContent = $('#main-content');
         $('#floating-toc-btn .btn-floating').click(function () {
             if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).slideUp(500);
+                $tocAside.removeClass(expandedClass).hide();
                 $mainContent.removeClass('l9');
             } else {
-                $tocAside.addClass(expandedClass).slideDown(500);
+                $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
             fixPostCardWidth('artDetail', 'prenext-posts');
@@ -916,70 +917,51 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
+
     <footer class="page-footer bg-color">
-    <div class="container row center-align"
-        style="margin-bottom: 15px !important;">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2021</span>
+            
             <span id="year">2019</span>
-            <a href="https://flytom.top" target="_blank">FlyTom</a>
+            <a href="/about" target="_blank">FlyTom</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
-
             
-            <span id="sitetime">载入运行时间...</span>
-            <script>
-                function siteTime() {
-                    var seconds = 1000;
-                    var minutes = seconds * 60;
-                    var hours = minutes * 60;
-                    var days = hours * 24;
-                    var years = days * 365;
-                    var today = new Date();
-                    var startYear = "2019";
-                    var startMonth = "6";
-                    var startDate = "28";
-                    var startHour = "0";
-                    var startMinute = "0";
-                    var startSecond = "0";
-                    var todayYear = today.getFullYear();
-                    var todayMonth = today.getMonth() + 1;
-                    var todayDate = today.getDate();
-                    var todayHour = today.getHours();
-                    var todayMinute = today.getMinutes();
-                    var todaySecond = today.getSeconds();
-                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
-                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-                    var diff = t2 - t1;
-                    var diffYears = Math.floor(diff / years);
-                    var diffDays = Math.floor((diff / days) - diffYears * 365);
-                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
-                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
-                        minutes);
-                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
-                        diffMinutes * minutes) / seconds);
-                    if (startYear == todayYear) {
-                        document.getElementById("year").innerHTML = todayYear;
-                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
-                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
-                    } else {
-                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
-                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
-                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
-                    }
-                }
-                setInterval(siteTime, 1000);
-            </script>
+            
+            
+            
+            
+            <br>
             
             <br>
             
         </div>
+        <div class="col s12 m4 l4 social-link ">
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
     </div>
 </footer>
 
 <div class="progress-bar"></div>
+
 
     <!-- 搜索遮罩框 -->
 <div id="searchModal" class="modal">
@@ -993,12 +975,98 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     </div>
 </div>
 
-<script src="/js/search.js"></script>
 <script type="text/javascript">
 $(function () {
-    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
 });
 </script>
+
     <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
     <a class="btn-floating btn-large waves-effect waves-light" href="#!">
@@ -1014,11 +1082,7 @@ $(function () {
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
     <script src="/js/matery.js"></script>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-
-
     <!-- Baidu Analytics -->
-
 
     <!-- Baidu Push -->
 
@@ -1038,38 +1102,18 @@ $(function () {
 
     
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
-    
 
     
 
     
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i["DaoVoiceObject"] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            a.charset = "utf-8";
-            m.parentNode.insertBefore(a, m)
-        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
-            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
-        daovoice('init', {
-            app_id: ""
-        });
-        daovoice('update');
-    </script>
+
+	
     
 
     
 
     
 
-    
-    
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     

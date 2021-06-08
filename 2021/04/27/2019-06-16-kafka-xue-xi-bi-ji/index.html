@@ -4,9 +4,8 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="kafka学习笔记, Tom Blog">
-    <meta name="description" content="kafka学习笔记：知识点整理优秀网站：https://www.cnblogs.com/qcloud1001/p/8984590.html
-https://www.cnblogs.com/lfs2640666960/p/11380298.h">
+    <meta name="keywords" content="kafka学习笔记">
+    <meta name="description" content>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,6 +13,9 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
     <title>kafka学习笔记 | Tom Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
@@ -25,15 +27,17 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
 
-    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-    
+    <script src="/libs/jquery/jquery.min.js"></script>
+
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
 
 
 <body>
     <header class="navbar-fixed">
     <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper head-container">
+        <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
@@ -109,6 +113,7 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
   </li>
 </ul>
 
+
 <div id="mobile-nav" class="side-nav sidenav">
 
     <div class="mobile-head bg-color">
@@ -177,7 +182,7 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
 			
 			    <i class="fa-fw fas fa-comments"></i>
 			
-			Contact
+			留言板
 		</a>
           
         </li>
@@ -203,9 +208,7 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <div class="description center-align post-title">
-                        kafka学习笔记
-                    </div>
+                    <h1 class="description center-align post-title">kafka学习笔记</h1>
                 </div>
             </div>
         </div>
@@ -243,12 +246,12 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
     }
 
     .toc-widget {
+        width: 345px;
         padding-left: 20px;
     }
 
     .toc-widget .toc-title {
-        margin: 35px 0 15px 0;
-        padding-left: 17px;
+        padding: 35px 0 15px 17px;
         font-size: 1.5rem;
         font-weight: bold;
         line-height: 1.5rem;
@@ -257,6 +260,11 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
     .toc-widget ol {
         padding: 0;
         list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
     }
 
     #toc-content ol {
@@ -276,14 +284,14 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
     #toc-content .toc-link::before {
         background-color: transparent;
         max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
     }
 
     #toc-content .is-active-link {
         color: #42b983;
-    }
-
-    #toc-content .is-active-link::before {
-        background-color: #42b983;
     }
 
     #floating-toc-btn {
@@ -334,51 +342,44 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
             </div>
 
             <div class="post-info">
+                
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
                     2021-04-27
                 </div>
+                
 
                 
-                    
-                    <div class="info-break-policy">
-                        <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        9.5k
-                    </div>
-                    
 
-                    
-                    <div class="info-break-policy">
-                        <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        35 分
-                    </div>
-                    
                 
-				
-				
-                    <div id="busuanzi_container_page_pv" class="info-break-policy">
-                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
-                        <span id="busuanzi_value_page_pv"></span>
-                    </div>
-				
+
+                
+
+                
             </div>
         </div>
         <hr class="clearfix">
+
+        
+
+        
+
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="kafka学习笔记：知识点整理"><a href="#kafka学习笔记：知识点整理" class="headerlink" title="kafka学习笔记：知识点整理"></a>kafka学习笔记：知识点整理</h2><h3 id="优秀网站："><a href="#优秀网站：" class="headerlink" title="优秀网站："></a>优秀网站：</h3><p><a href="https://www.cnblogs.com/qcloud1001/p/8984590.html" target="_blank" rel="noopener">https://www.cnblogs.com/qcloud1001/p/8984590.html</a></p>
+                <h2 id="kafka笔记"><a href="#kafka笔记" class="headerlink" title="kafka笔记"></a>kafka笔记</h2><p>网站：<br><a href="https://www.cnblogs.com/qcloud1001/p/8984590.html" target="_blank" rel="noopener">https://www.cnblogs.com/qcloud1001/p/8984590.html</a></p>
 <p><a href="https://www.cnblogs.com/lfs2640666960/p/11380298.html" target="_blank" rel="noopener">https://www.cnblogs.com/lfs2640666960/p/11380298.html</a></p>
-<h2 id="一、为什么需要消息系统"><a href="#一、为什么需要消息系统" class="headerlink" title="一、为什么需要消息系统"></a><strong>一、为什么需要消息系统</strong></h2><p><strong>1.解耦：</strong><br>允许你独立的扩展或修改两边的处理过程，只要确保它们遵守同样的接口约束。<br><strong>2.冗余：</strong><br>　　消息队列把数据进行持久化直到它们已经被完全处理，通过这一方式规避了数据丢失风险。许多消息队列所采用的”插入-获取-删除”范式中，在把一个消息从队列中删除之前，需要你的处理系统明确的指出该消息已经被处理完毕，从而确保你的数据被安全的保存直到你使用完毕。<br><strong>3.扩展性：</strong><br>　　因为消息队列解耦了你的处理过程，所以增大消息入队和处理的频率是很容易的，只要另外增加处理过程即可。<br><strong>4.灵活性 &amp; 峰值处理能力：</strong><br>　　在访问量剧增的情况下，应用仍然需要继续发挥作用，但是这样的突发流量并不常见。如果为以能处理这类峰值访问为标准来投入资源随时待命无疑是巨大的浪费。使用消息队列能够使关键组件顶住突发的访问压力，而不会因为突发的超负荷的请求而完全崩溃。<br><strong>5.可恢复性：</strong><br>　　系统的一部分组件失效时，不会影响到整个系统。消息队列降低了进程间的耦合度，所以即使一个处理消息的进程挂掉，加入队列中的消息仍然可以在系统恢复后被处理。<br><strong>6.顺序保证：</strong><br>　　在大多使用场景下，数据处理的顺序都很重要。大部分消息队列本来就是排序的，并且能保证数据会按照特定的顺序来处理。（Kafka 保证一个 Partition 内的消息的有序性）<br><strong>7.缓冲：</strong><br>　　有助于控制和优化数据流经过系统的速度，解决生产消息和消费消息的处理速度不一致的情况。<br><strong>8.异步通信：</strong><br>　　很多时候，用户不想也不需要立即处理消息。消息队列提供了异步处理机制，允许用户把一个消息放入队列，但并不立即处理它。想向队列中放入多少消息就放多少，然后在需要的时候再去处理它们。</p>
-<h2 id="二、kafka-架构"><a href="#二、kafka-架构" class="headerlink" title="二、kafka 架构"></a><strong>二、kafka 架构</strong></h2><p>Kafka架构</p>
+<h3 id="一、为什么需要消息系统"><a href="#一、为什么需要消息系统" class="headerlink" title="一、为什么需要消息系统"></a>一、为什么需要消息系统</h3><p><strong>1.解耦：</strong><br>允许你独立的扩展或修改两边的处理过程，只要确保它们遵守同样的接口约束。<br><strong>2.冗余：</strong><br>　　消息队列把数据进行持久化直到它们已经被完全处理，通过这一方式规避了数据丢失风险。许多消息队列所采用的”插入-获取-删除”范式中，在把一个消息从队列中删除之前，需要你的处理系统明确的指出该消息已经被处理完毕，从而确保你的数据被安全的保存直到你使用完毕。<br><strong>3.扩展性：</strong><br>　　因为消息队列解耦了你的处理过程，所以增大消息入队和处理的频率是很容易的，只要另外增加处理过程即可。<br><strong>4.灵活性 &amp; 峰值处理能力：</strong><br>　　在访问量剧增的情况下，应用仍然需要继续发挥作用，但是这样的突发流量并不常见。如果为以能处理这类峰值访问为标准来投入资源随时待命无疑是巨大的浪费。使用消息队列能够使关键组件顶住突发的访问压力，而不会因为突发的超负荷的请求而完全崩溃。<br><strong>5.可恢复性：</strong><br>　　系统的一部分组件失效时，不会影响到整个系统。消息队列降低了进程间的耦合度，所以即使一个处理消息的进程挂掉，加入队列中的消息仍然可以在系统恢复后被处理。<br><strong>6.顺序保证：</strong><br>　　在大多使用场景下，数据处理的顺序都很重要。大部分消息队列本来就是排序的，并且能保证数据会按照特定的顺序来处理。（Kafka 保证一个 Partition 内的消息的有序性）<br><strong>7.缓冲：</strong><br>　　有助于控制和优化数据流经过系统的速度，解决生产消息和消费消息的处理速度不一致的情况。<br><strong>8.异步通信：</strong><br>　　很多时候，用户不想也不需要立即处理消息。消息队列提供了异步处理机制，允许用户把一个消息放入队列，但并不立即处理它。想向队列中放入多少消息就放多少，然后在需要的时候再去处理它们。</p>
+<h3 id="二、kafka-架构"><a href="#二、kafka-架构" class="headerlink" title="二、kafka 架构"></a>二、kafka 架构</h3><hr>
+<p>Kafka架构</p>
 <p>它的架构包括以下组件：</p>
 <p>主题（Topic）：是特定类型的消息流。消息是字节的有效负载（Payload），话题是消息的分类名或种子（Feed）名。</p>
 <p>生产者（Producer）：是能够发布消息到话题的任何对象。</p>
 <p>服务代理（Broker）：已发布的消息保存在一组服务器中，它们被称为代理（Broker）或Kafka集群。</p>
 <p>消费者（Consumer）：可以订阅一个或多个话题，并从Broker拉数据，从而消费这些已发布的消息。</p>
-<h3 id="2-1-拓扑结构"><a href="#2-1-拓扑结构" class="headerlink" title="2.1 拓扑结构"></a>2.1 拓扑结构</h3><p>如下图：</p>
+<h4 id="2-1-拓扑结构"><a href="#2-1-拓扑结构" class="headerlink" title="2.1 拓扑结构"></a>2.1 拓扑结构</h4><p>如下图：</p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/ka1.png" alt="image"></p>
 <p>图.1</p>
-<h3 id="2-2-相关概念"><a href="#2-2-相关概念" class="headerlink" title="2.2 相关概念"></a>2.2 相关概念</h3><ul>
+<h4 id="2-2-相关概念"><a href="#2-2-相关概念" class="headerlink" title="2.2 相关概念"></a>2.2 相关概念</h4><ul>
 <li><p>KafkaConsumer和KafkaProducer不同，后者是线程安全的，因此我们鼓励用户在多个线程中共享一个KafkaProducer实例，这样通常都要比每个线程维护一个KafkaProducer实例效率要高。但对于KafkaConsumer而言，它不是线程安全的</p>
 </li>
 <li><p><strong>Topic</strong>：Topic在逻辑上可以被认为是一个queue。每条消费都必须指定它的topic，可以简单理解为必须指明把这条消息放进哪个queue里。</p>
@@ -430,20 +431,21 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
 <li><p>Zookeeper：kafka集群依赖zookeeper来保存集群的的元信息，来保证系统的可用性。</p>
 </li>
 </ul>
-<h3 id="2-3-zookeeper-节点"><a href="#2-3-zookeeper-节点" class="headerlink" title="2.3 zookeeper 节点"></a>2.3 zookeeper 节点</h3><p>kafka 在 zookeeper 中的存储结构如下图所示：</p>
+<h4 id="2-3-zookeeper-节点"><a href="#2-3-zookeeper-节点" class="headerlink" title="2.3 zookeeper 节点"></a>2.3 zookeeper 节点</h4><p>kafka 在 zookeeper 中的存储结构如下图所示：</p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/ka2.png" alt="image"></p>
-<h2 id="三、producer-发布消息"><a href="#三、producer-发布消息" class="headerlink" title="三、producer 发布消息"></a><strong>三、producer 发布消息</strong></h2><h3 id="3-1-写入方式"><a href="#3-1-写入方式" class="headerlink" title="3.1 写入方式"></a>3.1 写入方式</h3><p>producer 采用 push 模式将消息发布到 broker，每条消息都被 append 到 patition 中，属于顺序写磁盘（顺序写磁盘效率比随机写内存要高，保障 kafka 吞吐率）。<br><img src="https://gitee.com/fly_tom/use/raw/master/ka8.png" alt="image"></p>
+<h3 id="三、producer-发布消息"><a href="#三、producer-发布消息" class="headerlink" title="三、producer 发布消息"></a>三、producer 发布消息</h3><hr>
+<h4 id="3-1-写入方式"><a href="#3-1-写入方式" class="headerlink" title="3.1 写入方式"></a>3.1 写入方式</h4><p>producer 采用 push 模式将消息发布到 broker，每条消息都被 append 到 patition 中，属于顺序写磁盘（顺序写磁盘效率比随机写内存要高，保障 kafka 吞吐率）。<br><img src="https://gitee.com/fly_tom/use/raw/master/ka8.png" alt="image"></p>
 <blockquote>
 <p>需要注意的一点是，消息写入leader后，follower是主动的去leader进行同步的！producer采用push模式将数据发布到broker，每条消息追加到分区中，顺序写入磁盘，所以保证同一分区内的数据是有序的</p>
 </blockquote>
-<h3 id="3-2-消息路由"><a href="#3-2-消息路由" class="headerlink" title="3.2 消息路由"></a>3.2 消息路由</h3><p>producer 发送消息到 broker 时，会根据分区算法选择将其存储到哪一个 partition。其路由机制为：</p>
+<h4 id="3-2-消息路由"><a href="#3-2-消息路由" class="headerlink" title="3.2 消息路由"></a>3.2 消息路由</h4><p>producer 发送消息到 broker 时，会根据分区算法选择将其存储到哪一个 partition。其路由机制为：</p>
 <p>1. 指定了 patition，则直接使用；<br>2. 未指定 patition 但指定 key，通过对 key 的 value 进行hash 选出一个 patition<br>3. patition 和 key 都未指定，使用轮询选出一个 patition。</p>
-<h3 id="3-3-写入流程"><a href="#3-3-写入流程" class="headerlink" title="3.3 写入流程"></a>3.3 写入流程</h3><p> producer 写入消息序列图如下所示：</p>
+<h4 id="3-3-写入流程"><a href="#3-3-写入流程" class="headerlink" title="3.3 写入流程"></a>3.3 写入流程</h4><p> producer 写入消息序列图如下所示：</p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/ka3.png" alt="image"></p>
 <p>图.3</p>
 <p>流程说明：</p>
 <p>1. producer 先从 zookeeper 的 “/brokers/…/state” 节点找到该 partition 的 leader<br>2. producer 将消息发送给该 leader<br>3. leader 将消息写入本地 log<br>4. followers 从 leader pull 消息，写入本地 log 后 leader 发送 ACK<br>5. leader 收到所有 ISR 中的 replica 的 ACK 后，增加 HW（high watermark，最后 commit 的 offset） 并向 producer 发送 ACK</p>
-<h3 id="3-4-producer-delivery-guarantee"><a href="#3-4-producer-delivery-guarantee" class="headerlink" title="3.4 producer delivery guarantee"></a>3.4 producer delivery guarantee</h3><p> 一般情况下存在三种情况：</p>
+<h4 id="3-4-producer-delivery-guarantee"><a href="#3-4-producer-delivery-guarantee" class="headerlink" title="3.4 producer delivery guarantee"></a>3.4 producer delivery guarantee</h4><p> 一般情况下存在三种情况：</p>
 <p>1. At most once 消息可能会丢，但绝不会重复传输<br>2. At least one 消息绝不会丢，但可能会重复传输<br>3. Exactly once 每条消息肯定会被传输一次且仅传输一次</p>
 <p>当 producer 向 broker 发送消息时，一旦这条消息被 commit，由于 replication 的存在，它就不会丢。但是如果 producer 发送数据给 broker 后，遇到网络问题而造成通信中断，那 Producer 就无法判断该条消息是否已经 commit。虽然 Kafka 无法确定网络故障期间发生了什么，但是 producer 可以生成一种类似于主键的东西，发生故障时幂等性的重试多次，这样就做到了 Exactly once，但目前还并未实现。所以目前默认情况下一条消息从 producer 到 broker 是确保了 At least once，可通过设置 producer 异步发送实现At most once。</p>
 <p>保证消息不丢失是一个消息队列中间件的基本保证，那producer在向kafka写入消息的时候，怎么保证消息不丢失呢？那就是通过ACK应答机制！在生产者向队列写入数据的时候可以设置参数来确定是否确认kafka接收到数据，这个参数可设置的值为0、1、all。</p>
@@ -456,63 +458,68 @@ https://www.cnblogs.com/lfs2640666960/p/11380298.h">
 <li><p>all代表producer往集群发送数据需要所有的follower都完成从leader的同步才会发送下一条，确保leader发送成功和所有的副本都完成备份。安全性最高，但是效率最低。</p>
 </li>
 </ul>
-<h2 id="四、broker-保存消息"><a href="#四、broker-保存消息" class="headerlink" title="四、broker 保存消息"></a><strong>四、broker 保存消息</strong></h2><blockquote>
+<h3 id="四、broker-保存消息"><a href="#四、broker-保存消息" class="headerlink" title="四、broker 保存消息"></a>四、broker 保存消息</h3><hr>
+<blockquote>
 <p>　Producer将数据写入kafka后，集群就需要对数据进行保存了！kafka将数据保存在磁盘，可能在我们的一般的认知里，写入磁盘是比较耗时的操作，不适合这种高并发的组件。Kafka初始会单独开辟一块磁盘空间，顺序写入数据（效率比随机写入高）。</p>
 </blockquote>
-<h3 id="4-1-存储方式"><a href="#4-1-存储方式" class="headerlink" title="4.1 存储方式"></a>4.1 存储方式</h3><p>物理上把 topic 分成一个或多个 patition（对应 server.properties 中的 num.partitions=3 配置），每个 patition 物理上对应一个文件夹（该文件夹存储该 patition 的所有消息和索引文件），如下：</p>
+<h4 id="4-1-存储方式"><a href="#4-1-存储方式" class="headerlink" title="4.1 存储方式"></a>4.1 存储方式</h4><p>物理上把 topic 分成一个或多个 patition（对应 server.properties 中的 num.partitions=3 配置），每个 patition 物理上对应一个文件夹（该文件夹存储该 patition 的所有消息和索引文件），如下：</p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/ka4.png" alt="image"></p>
 <p>Partition在服务器上的表现形式就是一个一个的文件夹，每个partition的文件夹下面会有多组segment文件，每组segment文件又包含.index文件、.log文件、.timeindex文件（早期版本中没有）三个文件， log文件就实际是存储message的地方，而index和timeindex文件为索引文件，用于检索消息。</p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/ka9.png" alt="image"></p>
 <p>　如上图，这个partition有三组segment文件，每个log文件的大小是一样的，但是存储的message数量是不一定相等的（每条的message大小不一致）。文件的命名是以该segment最小offset来命名的，如000.index存储offset为0~368795的消息，kafka就是利用分段+索引的方式来解决查找效率的问题。</p>
-<h3 id="4-2-存储策略"><a href="#4-2-存储策略" class="headerlink" title="4.2 存储策略"></a>4.2 存储策略</h3><p>无论消息是否被消费，kafka 都会保留所有消息。有两种策略可以删除旧数据：</p>
+<h4 id="4-2-存储策略"><a href="#4-2-存储策略" class="headerlink" title="4.2 存储策略"></a>4.2 存储策略</h4><p>无论消息是否被消费，kafka 都会保留所有消息。有两种策略可以删除旧数据：</p>
 <p>1. 基于时间：log.retention.hours=168<br>2. 基于大小：log.retention.bytes=1073741824</p>
 <p>需要注意的是，因为Kafka读取特定消息的时间复杂度为O(1)，即与文件大小无关，所以这里删除过期文件与提高 Kafka 性能无关。</p>
-<h3 id="4-3-topic-创建与删除"><a href="#4-3-topic-创建与删除" class="headerlink" title="4.3 topic 创建与删除"></a>4.3 topic 创建与删除</h3><h4 id="4-3-1-创建-topic"><a href="#4-3-1-创建-topic" class="headerlink" title="4.3.1 创建 topic"></a>4.3.1 创建 topic</h4><p>创建 topic 的序列图如下所示：</p>
+<h4 id="4-3-topic-创建与删除"><a href="#4-3-topic-创建与删除" class="headerlink" title="4.3 topic 创建与删除"></a>4.3 topic 创建与删除</h4><h5 id="4-3-1-创建-topic"><a href="#4-3-1-创建-topic" class="headerlink" title="4.3.1 创建 topic"></a>4.3.1 创建 topic</h5><p>创建 topic 的序列图如下所示：</p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/ka5.png" alt="image"></p>
 <p>图.5</p>
 <p>流程说明：</p>
 <p>1. controller 在 ZooKeeper 的 /brokers/topics 节点上注册 watcher，当 topic 被创建，则 controller 会通过 watch 得到该 topic 的 partition/replica 分配。<br>2. controller从 /brokers/ids 读取当前所有可用的 broker 列表，对于 set_p 中的每一个 partition：<br>    2.1 从分配给该 partition 的所有 replica（称为AR）中任选一个可用的 broker 作为新的 leader，并将AR设置为新的 ISR<br>    2.2 将新的 leader 和 ISR 写入 /brokers/topics/[topic]/partitions/[partition]/state<br>3. controller 通过 RPC 向相关的 broker 发送 LeaderAndISRRequest。</p>
-<h4 id="4-3-2-删除-topic"><a href="#4-3-2-删除-topic" class="headerlink" title="4.3.2 删除 topic"></a>4.3.2 删除 topic</h4><p>删除 topic 的序列图如下所示：</p>
+<h5 id="4-3-2-删除-topic"><a href="#4-3-2-删除-topic" class="headerlink" title="4.3.2 删除 topic"></a>4.3.2 删除 topic</h5><p>删除 topic 的序列图如下所示：</p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/ka6.png" alt="image"></p>
 <p>图.6</p>
 <p>流程说明：</p>
 <p>1. controller 在 zooKeeper 的 /brokers/topics 节点上注册 watcher，当 topic 被删除，则 controller 会通过 watch 得到该 topic 的 partition/replica 分配。<br>2. 若 delete.topic.enable=false，结束；否则 controller 注册在 /admin/delete_topics 上的 watch 被 fire，controller 通过回调向对应的 broker 发送 StopReplicaRequest。</p>
-<h2 id="五、kafka-HA"><a href="#五、kafka-HA" class="headerlink" title="五、kafka HA"></a><strong>五、kafka HA</strong></h2><h3 id="5-1-replication"><a href="#5-1-replication" class="headerlink" title="5.1 replication"></a>5.1 replication</h3><p>如图.1所示，同一个 partition 可能会有多个 replica（对应 server.properties 配置中的 default.replication.factor=N）。没有 replica 的情况下，一旦 broker 宕机，其上所有 patition 的数据都不可被消费，同时 producer 也不能再将数据存于其上的 patition。引入replication 之后，同一个 partition 可能会有多个 replica，而这时需要在这些 replica 之间选出一个 leader，producer 和 consumer 只与这个 leader 交互，其它 replica 作为 follower 从 leader 中复制数据。</p>
+<h3 id="五、kafka-HA"><a href="#五、kafka-HA" class="headerlink" title="五、kafka HA"></a>五、kafka HA</h3><hr>
+<h4 id="5-1-replication"><a href="#5-1-replication" class="headerlink" title="5.1 replication"></a>5.1 replication</h4><p>如图.1所示，同一个 partition 可能会有多个 replica（对应 server.properties 配置中的 default.replication.factor=N）。没有 replica 的情况下，一旦 broker 宕机，其上所有 patition 的数据都不可被消费，同时 producer 也不能再将数据存于其上的 patition。引入replication 之后，同一个 partition 可能会有多个 replica，而这时需要在这些 replica 之间选出一个 leader，producer 和 consumer 只与这个 leader 交互，其它 replica 作为 follower 从 leader 中复制数据。</p>
 <p>Kafka 分配 Replica 的算法如下：</p>
 <p>1. 将所有 broker（假设共 n 个 broker）和待分配的 partition 排序<br>2. 将第 i 个 partition 分配到第（i mod n）个 broker 上<br>3. 将第 i 个 partition 的第 j 个 replica 分配到第（(i + j) mode n）个 broker上</p>
-<h3 id="5-2-选举"><a href="#5-2-选举" class="headerlink" title="5.2 选举"></a>5.2 选举</h3><p>当 partition 对应的 leader 宕机时，需要从 follower 中选举出新 leader。在选举新leader时，一个基本的原则是，新的 leader 必须拥有旧 leader commit 过的所有消息。</p>
+<h4 id="5-2-选举"><a href="#5-2-选举" class="headerlink" title="5.2 选举"></a>5.2 选举</h4><p>当 partition 对应的 leader 宕机时，需要从 follower 中选举出新 leader。在选举新leader时，一个基本的原则是，新的 leader 必须拥有旧 leader commit 过的所有消息。</p>
 <p>kafka 在 zookeeper 中（/brokers/…/state）动态维护了一个 ISR（in-sync replicas），ISR 里面的所有 replica 都跟上了 leader，只有 ISR 里面的成员才能选为 leader。对于 f+1 个 replica，一个 partition 可以在容忍 f 个 replica 失效的情况下保证消息不丢失。</p>
 <p>当所有 replica 都不工作时，有两种可行的方案：</p>
 <p>1. 等待 ISR 中的任一个 replica 活过来，并选它作为 leader。可保障数据不丢失，但时间可能相对较长。<br>2. 选择第一个活过来的 replica（不一定是 ISR 成员）作为 leader。无法保障数据不丢失，但相对不可用时间较短。</p>
 <p>kafka 0.8.* 使用第二种方式。</p>
 <p>kafka 通过 Controller 来选举 leader，流程请参考5.3节。</p>
-<h3 id="5-3-broker-failover"><a href="#5-3-broker-failover" class="headerlink" title="5.3 broker failover"></a>5.3 broker failover</h3><p>kafka broker failover 序列图如下所示：</p>
+<h4 id="5-3-broker-failover"><a href="#5-3-broker-failover" class="headerlink" title="5.3 broker failover"></a>5.3 broker failover</h4><p>kafka broker failover 序列图如下所示：</p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/ka7.png" alt="image"></p>
 <p>图.7</p>
 <p>流程说明： </p>
 <p>1. controller 在 zookeeper 的 /brokers/ids/[brokerId] 节点注册 Watcher，当 broker 宕机时 zookeeper 会 fire watch<br>2. controller 从 /brokers/ids 节点读取可用broker<br>3. controller决定set_p，该集合包含宕机 broker 上的所有 partition<br>4. 对 set_p 中的每一个 partition<br>    4.1 从/brokers/topics/[topic]/partitions/[partition]/state 节点读取 ISR<br>    4.2 决定新 leader（如4.3节所描述）<br>    4.3 将新 leader、ISR、controller_epoch 和 leader_epoch 等信息写入 state 节点<br>5. 通过 RPC 向相关 broker 发送 leaderAndISRRequest 命令</p>
-<h3 id="5-4-controller-failover"><a href="#5-4-controller-failover" class="headerlink" title="5.4 controller failover"></a>5.4 controller failover</h3><p> 当 controller 宕机时会触发 controller failover。每个 broker 都会在 zookeeper 的 “/controller” 节点注册 watcher，当 controller 宕机时 zookeeper 中的临时节点消失，所有存活的 broker 收到 fire 的通知，每个 broker 都尝试创建新的 controller path，只有一个竞选成功并当选为 controller。</p>
+<h4 id="5-4-controller-failover"><a href="#5-4-controller-failover" class="headerlink" title="5.4 controller failover"></a>5.4 controller failover</h4><p> 当 controller 宕机时会触发 controller failover。每个 broker 都会在 zookeeper 的 “/controller” 节点注册 watcher，当 controller 宕机时 zookeeper 中的临时节点消失，所有存活的 broker 收到 fire 的通知，每个 broker 都尝试创建新的 controller path，只有一个竞选成功并当选为 controller。</p>
 <p>当新的 controller 当选时，会触发 KafkaController.onControllerFailover 方法，在该方法中完成如下操作：</p>
 <p>1. 读取并增加 Controller Epoch。<br>2. 在 reassignedPartitions Patch(/admin/reassign_partitions) 上注册 watcher。<br>3. 在 preferredReplicaElection Path(/admin/preferred_replica_election) 上注册 watcher。<br>4. 通过 partitionStateMachine 在 broker Topics Patch(/brokers/topics) 上注册 watcher。<br>5. 若 delete.topic.enable=true（默认值是 false），则 partitionStateMachine 在 Delete Topic Patch(/admin/delete_topics) 上注册 watcher。<br>6. 通过 replicaStateMachine在 Broker Ids Patch(/brokers/ids)上注册Watch。<br>7. 初始化 ControllerContext 对象，设置当前所有 topic，“活”着的 broker 列表，所有 partition 的 leader 及 ISR等。<br>8. 启动 replicaStateMachine 和 partitionStateMachine。<br>9. 将 brokerState 状态设置为 RunningAsController。<br>10. 将每个 partition 的 Leadership 信息发送给所有“活”着的 broker。<br>11. 若 auto.leader.rebalance.enable=true（默认值是true），则启动 partition-rebalance 线程。<br>12. 若 delete.topic.enable=true 且Delete Topic Patch(/admin/delete_topics)中有值，则删除相应的Topic。</p>
-<h2 id="六-consumer-消费消息"><a href="#六-consumer-消费消息" class="headerlink" title="六. consumer 消费消息"></a><strong>六. consumer 消费消息</strong></h2><h3 id="6-2-consumer-group"><a href="#6-2-consumer-group" class="headerlink" title="6.2 consumer group"></a>6.2 consumer group</h3><p>如 2.2 节所说， kafka 的分配单位是 patition。每个 consumer 都属于一个 group，一个 partition 只能被同一个 group 内的一个 consumer 所消费（也就保障了一个消息只能被 group 内的一个 consuemr 所消费），但是多个 group 可以同时消费这个 partition。<br><strong>所以在实际的应用中，建议消费者组的consumer的数量与partition的数量一致！</strong></p>
+<h3 id="六-consumer-消费消息"><a href="#六-consumer-消费消息" class="headerlink" title="六. consumer 消费消息"></a>六. consumer 消费消息</h3><hr>
+<h4 id="6-2-consumer-group"><a href="#6-2-consumer-group" class="headerlink" title="6.2 consumer group"></a>6.2 consumer group</h4><p>如 2.2 节所说， kafka 的分配单位是 patition。每个 consumer 都属于一个 group，一个 partition 只能被同一个 group 内的一个 consumer 所消费（也就保障了一个消息只能被 group 内的一个 consuemr 所消费），但是多个 group 可以同时消费这个 partition。<br><strong>所以在实际的应用中，建议消费者组的consumer的数量与partition的数量一致！</strong></p>
 <p>kafka 的设计目标之一就是同时实现离线处理和实时处理，根据这一特性，可以使用 spark/Storm 这些实时处理系统对消息在线处理，同时使用 Hadoop 批处理系统进行离线处理，还可以将数据备份到另一个数据中心，只需要保证这三者属于不同的 consumer group。如下图所示：</p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/ka9.jpg" alt="image"></p>
-<h2 id="6-3-消费方式"><a href="#6-3-消费方式" class="headerlink" title="6.3 消费方式"></a><strong>6.3 消费方式</strong></h2><p>consumer 采用 pull 模式从 broker 中读取数据。</p>
+<h4 id="6-3-消费方式"><a href="#6-3-消费方式" class="headerlink" title="6.3 消费方式"></a>6.3 消费方式</h4><hr>
+<p>consumer 采用 pull 模式从 broker 中读取数据。</p>
 <p>push 模式很难适应消费速率不同的消费者，因为消息发送速率是由 broker 决定的。它的目标是尽可能以最快速度传递消息，但是这样很容易造成 consumer 来不及处理消息，典型的表现就是拒绝服务以及网络拥塞。而 pull 模式则可以根据 consumer 的消费能力以适当的速率消费消息。</p>
 <p>对于 Kafka 而言，pull 模式更合适，它可简化 broker 的设计，consumer 可自主控制消费消息的速率，同时 consumer 可以自己控制消费方式——即可批量消费也可逐条消费，同时还能选择不同的提交方式从而实现不同的传输语义。</p>
-<h3 id="6-4-consumer-delivery-guarantee"><a href="#6-4-consumer-delivery-guarantee" class="headerlink" title="6.4 consumer delivery guarantee"></a>6.4 consumer delivery guarantee</h3><p>如果将 consumer 设置为 autocommit，consumer 一旦读到数据立即自动 commit。如果只讨论这一读取消息的过程，那 Kafka 确保了 Exactly once。</p>
+<h4 id="6-4-consumer-delivery-guarantee"><a href="#6-4-consumer-delivery-guarantee" class="headerlink" title="6.4 consumer delivery guarantee"></a>6.4 consumer delivery guarantee</h4><p>如果将 consumer 设置为 autocommit，consumer 一旦读到数据立即自动 commit。如果只讨论这一读取消息的过程，那 Kafka 确保了 Exactly once。</p>
 <p>但实际使用中应用程序并非在 consumer 读取完数据就结束了，而是要进行进一步处理，而数据处理与 commit 的顺序在很大程度上决定了consumer delivery guarantee：</p>
 <p><strong>1.读完消息先 commit 再处理消息。</strong><br>    这种模式下，如果 consumer 在 commit 后还没来得及处理消息就 crash 了，下次重新开始工作后就无法读到刚刚已提交而未处理的消息，这就对应于 At most once  </p>
 <p><strong>2.读完消息先处理再 commit。</strong><br>    这种模式下，如果在处理完消息之后 commit 之前 consumer crash 了，下次重新开始工作时还会处理刚刚未 commit 的消息，实际上该消息已经被处理过了。这就对应于 At least once。  </p>
 <p><strong>3.如果一定要做到 Exactly once，就需要协调 offset 和实际操作的输出。</strong><br>    精典的做法是引入两阶段提交。如果能让 offset 和操作输入存在同一个地方，会更简洁和通用。这种方式可能更好，因为许多输出系统可能不支持两阶段提交。比如，consumer 拿到数据后可能把数据放到 HDFS，如果把最新的 offset 和数据本身一起写到 HDFS，那就可以保证数据的输出和 offset 的更新要么都完成，要么都不完成，间接实现 Exactly once。（目前就 high-level API而言，offset 是存于Zookeeper 中的，无法存于HDFS，而SimpleConsuemr API的 offset 是由自己去维护的，可以将之存于 HDFS 中）</p>
 <p>总之，Kafka 默认保证 At least once，并且允许通过设置 producer 异步提交来实现 At most once（见文章《kafka consumer防止数据丢失》）。而 Exactly once 要求与外部存储系统协作，幸运的是 kafka 提供的 offset 可以非常直接非常容易得使用这种方式。</p>
 <p>更多关于 kafka 传输语义的信息请参考《Message Delivery Semantics》。</p>
-<h3 id="6-5-consumer-rebalance（重新平衡）"><a href="#6-5-consumer-rebalance（重新平衡）" class="headerlink" title="6.5 consumer rebalance（重新平衡）"></a>6.5 consumer rebalance（重新平衡）</h3><p>当有 consumer 加入或退出、以及 partition 的改变（如 broker 加入或退出）时会触发 rebalance。consumer rebalance算法如下：</p>
+<h4 id="6-5-consumer-rebalance（重新平衡）"><a href="#6-5-consumer-rebalance（重新平衡）" class="headerlink" title="6.5 consumer rebalance（重新平衡）"></a>6.5 consumer rebalance（重新平衡）</h4><p>当有 consumer 加入或退出、以及 partition 的改变（如 broker 加入或退出）时会触发 rebalance。consumer rebalance算法如下：</p>
 <p>1. 将目标 topic 下的所有 partirtion 排序，存于PT<br>2. 对某 consumer group 下所有 consumer 排序，存于 CG，第 i 个consumer 记为 Ci<br>3. N=size(PT)/size(CG)，向上取整<br>4. 解除 Ci 对原来分配的 partition 的消费权（i从0开始）<br>5. 将第i*N到（i+1）*N-1个 partition 分配给 Ci</p>
 <p>在 0.8.*版本，每个 consumer 都只负责调整自己所消费的 partition，为了保证整个consumer group 的一致性，当一个 consumer 触发了 rebalance 时，该 consumer group 内的其它所有其它 consumer 也应该同时触发 rebalance。这会导致以下几个问题：</p>
 <p><strong>1.Herd effect</strong><br>　　任何 broker 或者 consumer 的增减都会触发所有的 consumer 的 rebalance<br><strong>2.Split Brain</strong><br>　　每个 consumer 分别单独通过 zookeeper 判断哪些 broker 和 consumer 宕机了，那么不同 consumer 在同一时刻从 zookeeper 看到的 view 就可能不一样，这是由 zookeeper 的特性决定的，这就会造成不正确的 reblance 尝试。<br><strong>3. 调整结果不可控</strong><br>　　所有的 consumer 都并不知道其它 consumer 的 rebalance 是否成功，这可能会导致 kafka 工作在一个不正确的状态。</p>
 <p>基于以上问题，kafka 设计者考虑在0.9.*版本开始使用中心 coordinator 来控制 consumer rebalance，然后又从简便性和验证要求两方面考虑，计划在 consumer 客户端实现分配方案。（见文章《Kafka Detailed Consumer Coordinator Design》和《Kafka Client-side Assignment Proposal》），此处不再赘述。</p>
-<h2 id="七、注意事项"><a href="#七、注意事项" class="headerlink" title="七、注意事项"></a><strong>七、注意事项</strong></h2><h3 id="7-1-producer-无法发送消息的问题"><a href="#7-1-producer-无法发送消息的问题" class="headerlink" title="7.1 producer 无法发送消息的问题"></a>7.1 producer 无法发送消息的问题</h3><p>最开始在本机搭建了kafka伪集群，本地 producer 客户端成功发布消息至 broker。随后在服务器上搭建了 kafka 集群，在本机连接该集群，producer 却无法发布消息到 broker（奇怪也没有抛错）。最开始怀疑是 iptables 没开放，于是开放端口，结果还不行（又开始是代码问题、版本问题等等，倒腾了很久）。最后没办法，一项一项查看 server.properties 配置，发现以下两个配置：</p>
+<h3 id="七、注意事项"><a href="#七、注意事项" class="headerlink" title="七、注意事项"></a>七、注意事项</h3><hr>
+<h4 id="7-1-producer-无法发送消息的问题"><a href="#7-1-producer-无法发送消息的问题" class="headerlink" title="7.1 producer 无法发送消息的问题"></a>7.1 producer 无法发送消息的问题</h4><p>最开始在本机搭建了kafka伪集群，本地 producer 客户端成功发布消息至 broker。随后在服务器上搭建了 kafka 集群，在本机连接该集群，producer 却无法发布消息到 broker（奇怪也没有抛错）。最开始怀疑是 iptables 没开放，于是开放端口，结果还不行（又开始是代码问题、版本问题等等，倒腾了很久）。最后没办法，一项一项查看 server.properties 配置，发现以下两个配置：</p>
 <pre><code>\# The address the socket server listens on. It will get the value returned from   
 \# java.net.InetAddress.getCanonicalHostName() if not configured.  
 \#   FORMAT:  
@@ -701,15 +708,26 @@ listeners=PLAINTEXT://:9092
             document.body.appendChild(img);
           });
       </script>
+                
             </div>
             <hr/>
 
             
 
-            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 <div id="article-share">
-    
+
     
     <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
     <script src="/libs/share/js/social-share.min.js"></script>
@@ -719,10 +737,9 @@ listeners=PLAINTEXT://:9092
 
 </div>
 
-
+                </div>
+            </div>
             
-
-
         </div>
     </div>
 
@@ -731,6 +748,10 @@ listeners=PLAINTEXT://:9092
 <link rel="stylesheet" href="/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
@@ -748,6 +769,11 @@ listeners=PLAINTEXT://:9092
 
     gitalk.render('gitalk-container');
 </script>
+
+    
+
+    
+
     
 
     
@@ -779,10 +805,7 @@ listeners=PLAINTEXT://:9092
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            介绍
-  Kafka是分布式发布-订阅消息系统，最初由LinkedIn公司开发，之后成为之后成为Apache基金会的一部分，由Scala和Java编写。Kafka是一种快速、可扩展的、设计内在就是分布式的，分区的和可复制的提交日志服务。
-
-
+                            
                         
                     </div>
                     <div class="publish-info">
@@ -831,7 +854,7 @@ listeners=PLAINTEXT://:9092
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            什么叫消息队列  消息（Message）是指在应用间传送的数据。消息可以非常简单，比如只包含文本字符串，也可以更复杂，可能包含嵌入对象。消息队列（Message Queue）是一种应用间的通信方式，消息发送后可以立即返回，由消息系统来确保消
+                            
                         
                     </div>
                     <div class="publish-info">
@@ -870,19 +893,16 @@ listeners=PLAINTEXT://:9092
 
 
 <!-- 代码块功能依赖 -->
-
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
-
 
 <!-- 代码语言 -->
 
 <script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
 
-    
+
 <!-- 代码块复制 -->
 
 <script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-<script type="text/javascript" src="/libs/codeBlock/clipboard.min.js"></script>
 
 
 <!-- 代码块收缩 -->
@@ -890,16 +910,9 @@ listeners=PLAINTEXT://:9092
 <script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
-<!-- 代码块折行 -->
-
-<style type="text/css">
-code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
-</style>
-
-
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget">
+        <div class="toc-widget card" style="background-color: white;">
             <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
             <div id="toc-content"></div>
         </div>
@@ -922,7 +935,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            // headingsOffset: -205,
+            collapseDepth: Number('0'),
             headingSelector: 'h2, h3, h4'
         });
 
@@ -979,10 +992,10 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
         let $mainContent = $('#main-content');
         $('#floating-toc-btn .btn-floating').click(function () {
             if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).slideUp(500);
+                $tocAside.removeClass(expandedClass).hide();
                 $mainContent.removeClass('l9');
             } else {
-                $tocAside.addClass(expandedClass).slideDown(500);
+                $tocAside.addClass(expandedClass).show();
                 $mainContent.addClass('l9');
             }
             fixPostCardWidth('artDetail', 'prenext-posts');
@@ -997,70 +1010,51 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
+
     <footer class="page-footer bg-color">
-    <div class="container row center-align"
-        style="margin-bottom: 15px !important;">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2021</span>
+            
             <span id="year">2019</span>
-            <a href="https://flytom.top" target="_blank">FlyTom</a>
+            <a href="/about" target="_blank">FlyTom</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>
-
             
-            <span id="sitetime">载入运行时间...</span>
-            <script>
-                function siteTime() {
-                    var seconds = 1000;
-                    var minutes = seconds * 60;
-                    var hours = minutes * 60;
-                    var days = hours * 24;
-                    var years = days * 365;
-                    var today = new Date();
-                    var startYear = "2019";
-                    var startMonth = "6";
-                    var startDate = "28";
-                    var startHour = "0";
-                    var startMinute = "0";
-                    var startSecond = "0";
-                    var todayYear = today.getFullYear();
-                    var todayMonth = today.getMonth() + 1;
-                    var todayDate = today.getDate();
-                    var todayHour = today.getHours();
-                    var todayMinute = today.getMinutes();
-                    var todaySecond = today.getSeconds();
-                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
-                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-                    var diff = t2 - t1;
-                    var diffYears = Math.floor(diff / years);
-                    var diffDays = Math.floor((diff / days) - diffYears * 365);
-                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
-                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
-                        minutes);
-                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
-                        diffMinutes * minutes) / seconds);
-                    if (startYear == todayYear) {
-                        document.getElementById("year").innerHTML = todayYear;
-                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
-                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
-                    } else {
-                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
-                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
-                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
-                    }
-                }
-                setInterval(siteTime, 1000);
-            </script>
+            
+            
+            
+            
+            <br>
             
             <br>
             
         </div>
+        <div class="col s12 m4 l4 social-link ">
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
     </div>
 </footer>
 
 <div class="progress-bar"></div>
+
 
     <!-- 搜索遮罩框 -->
 <div id="searchModal" class="modal">
@@ -1074,12 +1068,98 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     </div>
 </div>
 
-<script src="/js/search.js"></script>
 <script type="text/javascript">
 $(function () {
-    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
 });
 </script>
+
     <!-- 回到顶部按钮 -->
 <div id="backTop" class="top-scroll">
     <a class="btn-floating btn-large waves-effect waves-light" href="#!">
@@ -1095,11 +1175,7 @@ $(function () {
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
     <script src="/js/matery.js"></script>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-
-
     <!-- Baidu Analytics -->
-
 
     <!-- Baidu Push -->
 
@@ -1119,38 +1195,18 @@ $(function () {
 
     
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
-    
 
     
 
     
-    <script>
-        (function (i, s, o, g, r, a, m) {
-            i["DaoVoiceObject"] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o), m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            a.charset = "utf-8";
-            m.parentNode.insertBefore(a, m)
-        })(window, document, "script", ('https:' == document.location.protocol ? 'https:' : 'http:') +
-            "//widget.daovoice.io/widget/6984b559.js", "daovoice")
-        daovoice('init', {
-            app_id: ""
-        });
-        daovoice('update');
-    </script>
+
+	
     
 
     
 
     
 
-    
-    
     
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
