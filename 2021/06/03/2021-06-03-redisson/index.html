@@ -458,6 +458,7 @@
 </li>
 </ol>
 <p><strong>redisson watchdog 是什么？</strong><br>通过redission 加锁源码阅读，了解到一个概念就是watch dog (俗称看门狗)；他的作用，就是解决redis 原生分布式锁的锁续期的问题；首先需要注意的问题，就是watch dog 只有在不设置leaseTime  ，或者leaseTime 为-1 时，才会有效，否则锁的强制过期时间是我们设置的leaseTime ；watch dog 默认锁的时间是30s ,他会每隔 lockWatchdogTimeout/3 (例如默认是10秒跑一次) 秒就会检查锁是否存在，如果存在则进行续期；</p>
+<p>当服务器宕机后，因为锁的有效期是 30 秒，所以会在 30 秒内自动解锁。（30秒等于宕机之前的锁占用时间+后续锁占用的时间）</p>
 <p><strong>Redisson中RLock的实现原理</strong></p>
 <p>Redisson中RLock的实现是基本参照了Redis的red lock算法进行实现，不过在原始的red lock算法下进行了改良，主要包括下面的特性：</p>
 <ul>
@@ -647,44 +648,42 @@ lock<span class="token punctuation">.</span><span class="token function">unlock<
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/06/03/2021-06-03-redisson/">
+                <a href="/2021/06/07/2021-06-07-seata-fen-bu-shi-shi-wu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="redission">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="seata分布式事务">
                         
-                        <span class="card-title">redission</span>
+                        <span class="card-title">seata分布式事务</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            几个概念什么是分布式锁？分布式锁又可以解决哪些问题呢？
-在我们的系统还没有使用分布式架构的时候，我们可以用同步锁或者Lock锁，来保证多线程并发的时候，同一时间只有一个线程修改共享变量或者执行代码块，但是当我们现在大部分系统都是分布式集群部
+                            Seata 是什么?Seata 是一款由阿里开源的分布式事务解决方案，致力于提供高性能和简单易用的分布式事务服务。Seata 将为用户提供了 AT、TCC、SAGA 和 XA 事务模式，为用户打造一站式的分布式解决方案。
+seata配置中心
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-03
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-06-07
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Redis/" class="post-category">
-                                    Redis
+                            <a href="/categories/seata分布式事务/" class="post-category">
+                                    seata分布式事务
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
