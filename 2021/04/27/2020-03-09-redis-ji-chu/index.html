@@ -371,7 +371,8 @@
 <p>Redis 是一个基于内存的高性能key-value数据库。<br>定期通过异步操作把数据库数据flush到硬盘上进行保存。因为是纯内存操作，Redis的性能非常出色，每秒可以处理超过 10万次读写操作，是已知性能最快的Key-Value DB。<br>Redis的出色之处不仅仅是性能，Redis是支持保存多种数据结构，此外单个value的最大限制是512MB。 Redis是单进程单线程的.</p>
 <p>大家都知道了redis是基于key-value的no sql数据库，因此，先来了解一下关于key相关的知识点</p>
 <blockquote>
-<p>1、任何二进制的序列都可以作为key使用<br>2、Redis有统一的规则来设计key<br>3、对key-value允许的最大长度是512MB</p>
+<p>1、任何二进制的序列都可以作为key使用<br>2、Redis有统一的规则来设计key  </p>
+<p>3、对key-value允许的最大长度是512MB</p>
 </blockquote>
 <h4 id="Redis-为何这么快"><a href="#Redis-为何这么快" class="headerlink" title="Redis 为何这么快"></a>Redis 为何这么快</h4><p><strong>面试官：</strong>Redis 作为缓存大家都在用，那 Redis 一定很快咯？</p>
 <p><strong>我：</strong>当然了，官方提供的数据可以达到 100000+ 的 QPS（每秒内的查询次数），这个数据不比 Memcached 差！</p>
