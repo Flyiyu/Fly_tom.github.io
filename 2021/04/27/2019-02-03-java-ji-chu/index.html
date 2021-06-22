@@ -1423,18 +1423,11 @@ String b <span class="token operator">=</span> <span class="token string">"abc"<
 String c <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"xyz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 String d <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"xyz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 String e <span class="token operator">=</span> <span class="token string">"ab"</span> <span class="token operator">+</span> <span class="token string">"cd"</span><span class="token punctuation">;</span></code></pre>
-<p>   这个程序与上边的程序比较相似，我们分比来看一下：</p>
-<pre><code>   1、String a = “abc”；这一句由于缓冲池中没有abc这个字符串对象，所以会创建一个对象；
-
-   2、String b = “abc”；由于缓冲池中已经有了abc这个对象，所以不会再创建新的对象；
-
-   3、String c = new String(“xyz”)；由于没有xyz这个字符串对象，所以会首先创建一个xyz的对象，然后这个字符串对象由作为String的构造方法，在内存中（不是缓冲池中）又创建了一个新的字符串对象，所以一共创建了两个对象；
-
-   4、String d = new String(“xyz”)；缓冲池中已有该字符串对象，则缓冲池中不再创建该对象，然后会在内存中创建一个新的字符串对象，所以只创建了一个对象；
-
-   5、String e = ”ab” + ”cd”；由于常量的值在编译的时候就被确定了。所以这一句等价于String e = ”abcd”；所以创建了一个对象；
-
-   所以创建的对象的个数分别是：1,0,2,1,1。</code></pre><pre class=" language-java"><code class="language-java">String s1 <span class="token operator">=</span> <span class="token string">"a"</span><span class="token punctuation">;</span>
+<p>这个程序与上边的程序比较相似，我们分比来看一下：<br>1、String a = “abc”；这一句由于缓冲池中没有abc这个字符串对象，所以会创建一个对象；<br>2、String b = “abc”；由于缓冲池中已经有了abc这个对象，所以不会再创建新的对象；<br>3、String c = new String(“xyz”)；由于没有xyz这个字符串对象，所以会首先创建一个xyz的对象，然后这个字符串对象由作为String的构造方法，在内存中（不是缓冲池中）又创建了一个新的字符串对象，所以一共创建了两个对象；<br>4、String d = new String(“xyz”)；缓冲池中已有该字符串对象，则缓冲池中不再创建该对象，然后会在内存中创建一个新的字符串对象，所以只创建了一个对象；<br>5、String e = ”ab” + ”cd”；由于常量的值在编译的时候就被确定了。所以这一句等价于String e = ”abcd”；所以创建了一个对象；</p>
+<blockquote>
+<p>所以上面五个创建的对象的个数分别是：1,0,2,1,1。</p>
+</blockquote>
+<pre class=" language-java"><code class="language-java">String s1 <span class="token operator">=</span> <span class="token string">"a"</span><span class="token punctuation">;</span>
 String s2 <span class="token operator">=</span> <span class="token string">"b"</span><span class="token punctuation">;</span>
 String s3 <span class="token operator">=</span> <span class="token string">"ab"</span><span class="token punctuation">;</span>
 String s4 <span class="token operator">=</span> <span class="token string">"ab"</span><span class="token punctuation">;</span>
