@@ -407,6 +407,64 @@
 <h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><hr>
 <p>String是类类型，不是基本类型。</p>
 <p>基本类型 有八种：整型 （4种）字符型 （1种）浮点型 （2种）布尔型（1种）</p>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>类型</th>
+<th>位数 (8位一字节)</th>
+<th>取值范围(表示范围)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>byte</td>
+<td>整型</td>
+<td>8</td>
+<td>-2^7 ~ 2^7-1</td>
+</tr>
+<tr>
+<td>short</td>
+<td>整型</td>
+<td>16</td>
+<td>-2^15 ~ 2^15-1</td>
+</tr>
+<tr>
+<td>int</td>
+<td>整型</td>
+<td>32</td>
+<td>-2^31 ~ 2^31-1</td>
+</tr>
+<tr>
+<td>long</td>
+<td>整型</td>
+<td>64</td>
+<td>-2^63 ~ 2^63-1</td>
+</tr>
+<tr>
+<td>float</td>
+<td>浮点数</td>
+<td>32</td>
+<td>3.402823e+38 ~ 1.401298e-45</td>
+</tr>
+<tr>
+<td>double</td>
+<td>浮点数</td>
+<td>64</td>
+<td>1.797693e+308~ 4.9000000e-324</td>
+</tr>
+<tr>
+<td>char</td>
+<td>文本型</td>
+<td>16</td>
+<td>0 ~ 2^16-1</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>布尔值</td>
+<td>32/8</td>
+<td>true/false</td>
+</tr>
+</tbody></table>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/ms0002.jpg" alt=""></p>
 <p><img src="https://gitee.com/fly_tom/use/raw/master/ms0003.jpg" alt=""></p>
 <h3 id="基本数据类型-amp-amp-包装类型"><a href="#基本数据类型-amp-amp-包装类型" class="headerlink" title="基本数据类型 &amp;&amp; 包装类型"></a>基本数据类型 &amp;&amp; 包装类型</h3><table>
@@ -1302,7 +1360,7 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 ToStringExample<span class="token annotation punctuation">@4554617c</span></code></pre>
 <h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p><strong>String 被声明为 final，因此它不可被继承。</strong></p>
 <ul>
-<li>首先String不属于8中基本类型，String是一个对象</li>
+<li>首先String不属于8种基本类型，String是一个对象</li>
 </ul>
 <ul>
 <li>String 由于使用final 修饰存储在常量区（不是new出来的）</li>
@@ -1350,7 +1408,61 @@ ToStringExample<span class="token annotation punctuation">@4554617c</span></code
 <p><strong>4. 线程安全</strong></p>
 <p>String 不可变性天生具备线程安全，可以在多个线程中安全地使用。</p>
 <p>Program Creek : Why String is immutable in Java?</p>
-<h4 id="String-Pool"><a href="#String-Pool" class="headerlink" title="String Pool"></a>String Pool</h4><p>字符串常量池（String Pool）保存着所有字符串字面量（literal strings），这些字面量在编译时期就确定。不仅如此，还可以使用 String 的 intern() 方法在运行过程中将字符串添加到 String Pool 中。</p>
+<h4 id="String-Pool（缓冲池）"><a href="#String-Pool（缓冲池）" class="headerlink" title="String Pool（缓冲池）"></a>String Pool（缓冲池）</h4><pre class=" language-java"><code class="language-java">String a <span class="token operator">=</span> <span class="token string">"abc"</span><span class="token punctuation">;</span>
+String b <span class="token operator">=</span> <span class="token string">"abc"</span><span class="token punctuation">;</span>
+String c <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"xyz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<blockquote>
+<p>String a = “abc”;<br>       创建字符串的时候先查找字符串缓冲池中有没有相同的对象，如果有相同的对象就直接返回该对象的引用，如果没有相同的对象就在字符串缓冲池中创建该对象，然后将该对象的应用返回。对于这一步而言，缓冲池中没有abc这个字符串对象，所以首先创建一个字符串对象，然后将对象引用返回给a。</p>
+</blockquote>
+<blockquote>
+<p>String b = “abc”;<br>       这一句也是想要创建一个对象引用变量b使其指向abc这一对象。这时，首先查找字符串缓冲池，发现abc这个对象已经有了，这是就直接将这个对象的引用返回给b，此时a和b就共用了一个对象abc，不过不用担心，a改变了字符串而影响了b，因为字符串都是常量，一旦创建就没办法修改了，除非创建一个新的对象。</p>
+</blockquote>
+<p>对象创建</p>
+<pre class=" language-java"><code class="language-java">String a <span class="token operator">=</span> <span class="token string">"abc"</span><span class="token punctuation">;</span>
+String b <span class="token operator">=</span> <span class="token string">"abc"</span><span class="token punctuation">;</span>
+String c <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"xyz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+String d <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"xyz"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+String e <span class="token operator">=</span> <span class="token string">"ab"</span> <span class="token operator">+</span> <span class="token string">"cd"</span><span class="token punctuation">;</span></code></pre>
+<p>   这个程序与上边的程序比较相似，我们分比来看一下：</p>
+<pre><code>   1、String a = “abc”；这一句由于缓冲池中没有abc这个字符串对象，所以会创建一个对象；
+
+   2、String b = “abc”；由于缓冲池中已经有了abc这个对象，所以不会再创建新的对象；
+
+   3、String c = new String(“xyz”)；由于没有xyz这个字符串对象，所以会首先创建一个xyz的对象，然后这个字符串对象由作为String的构造方法，在内存中（不是缓冲池中）又创建了一个新的字符串对象，所以一共创建了两个对象；
+
+   4、String d = new String(“xyz”)；缓冲池中已有该字符串对象，则缓冲池中不再创建该对象，然后会在内存中创建一个新的字符串对象，所以只创建了一个对象；
+
+   5、String e = ”ab” + ”cd”；由于常量的值在编译的时候就被确定了。所以这一句等价于String e = ”abcd”；所以创建了一个对象；
+
+   所以创建的对象的个数分别是：1,0,2,1,1。</code></pre><pre class=" language-java"><code class="language-java">String s1 <span class="token operator">=</span> <span class="token string">"a"</span><span class="token punctuation">;</span>
+String s2 <span class="token operator">=</span> <span class="token string">"b"</span><span class="token punctuation">;</span>
+String s3 <span class="token operator">=</span> <span class="token string">"ab"</span><span class="token punctuation">;</span>
+String s4 <span class="token operator">=</span> <span class="token string">"ab"</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s3 <span class="token operator">==</span> s4<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// true</span>
+
+String s5 <span class="token operator">=</span> <span class="token string">"a"</span> <span class="token operator">+</span> <span class="token string">"b"</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s3 <span class="token operator">==</span> s5<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// true 为什么等于true，因为两者都是常量所以在编译阶段就已经能确定了</span>
+
+String s6 <span class="token operator">=</span> s1 <span class="token operator">+</span> s2<span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s3 <span class="token operator">==</span> s6<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// false s1 s2是一个变量，所以不能提前确定他的值，所以两者不相等</span>
+String s7 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"ab"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s3 <span class="token operator">==</span> s7<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// false</span>
+<span class="token keyword">final</span> String s8 <span class="token operator">=</span> <span class="token string">"a"</span><span class="token punctuation">;</span>
+<span class="token keyword">final</span> String s9 <span class="token operator">=</span> <span class="token string">"b"</span><span class="token punctuation">;</span>
+String s10 <span class="token operator">=</span> s8 <span class="token operator">+</span> s9<span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s3 <span class="token operator">==</span> s10<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// true</span>
+String as <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"ss"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+String ss <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"ss"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+String bs <span class="token operator">=</span> as<span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>as <span class="token operator">==</span> ss<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// false</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>as <span class="token operator">==</span> bs<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// true</span>
+
+<span class="token comment" spellcheck="true">// new Integer(123)每次都会创建一个对象</span>
+Integer x <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Integer y <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Integer</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>x <span class="token operator">==</span> y<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// false</span>
+</code></pre>
+<p>字符串常量池（String Pool）保存着所有字符串字面量（literal strings），这些字面量在编译时期就确定。不仅如此，还可以使用 String 的 intern() 方法在运行过程中将字符串添加到 String Pool 中。</p>
 <p>当一个字符串调用 intern() 方法时，如果 String Pool 中已经存在一个字符串和该字符串值相等（使用 equals() 方法进行确定），那么就会返回 String Pool 中字符串的引用；否则，就会在 String Pool 中添加一个新的字符串，并返回这个新字符串的引用。</p>
 <p>下面示例中，s1 和 s2 采用 new String() 的方式新建了两个不同字符串，而 s3 和 s4 是通过 s1.intern() 方法取得一个字符串引用。intern() 首先把 s1 引用的字符串放到 String Pool 中，然后返回这个字符串引用。因此 s3 和 s4 引用的是同一个字符串。</p>
 <pre class=" language-java"><code class="language-java">String s1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token string">"aaa"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
